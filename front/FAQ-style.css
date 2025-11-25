@@ -1,0 +1,111 @@
+/* --------- FAQ --------- */
+
+.faq-header h1 {
+font-size: clamp(1.8rem, 3vw, 2.3rem);
+margin-bottom: 0.6rem;
+}
+
+.faq-intro {
+max-width: 640px;
+color: #4b5563;
+margin-top: 0.3rem;
+}
+
+/* Titre de catégorie (compte, produits, etc.) */
+.faq-category-title {
+font-size: 1.1rem;
+margin: 2rem 0 0.8rem;
+color: #111827;
+}
+
+/* Bloc FAQ global */
+.faq-list {
+max-width: 800px;
+}
+
+/* Chaque question / réponse */
+.faq-item {
+background: #ffffff;
+border-radius: 0.75rem;
+padding: 0.8rem 1rem;
+margin-bottom: 0.6rem;
+border: 1px solid #e5e7eb;
+box-shadow: 0 6px 14px rgba(15, 23, 42, 0.04);
+}
+
+/* Le summary (question) */
+.faq-item > summary {
+list-style: none;
+cursor: pointer;
+font-weight: 500;
+display: flex;
+align-items: center;
+justify-content: space-between;
+gap: 0.6rem;
+}
+
+/* On enlève le triangle par défaut (selon navigateur) */
+.faq-item > summary::-webkit-details-marker {
+display: none;
+}
+
+/* Icône +/− maison avec pseudo-éléments */
+.faq-item > summary::after {
+content: "+";
+font-weight: 600;
+font-size: 1.1rem;
+color: #2563eb;
+}
+
+.faq-item[open] > summary::after {
+content: "−";
+}
+
+/* Corps de la réponse */
+.faq-body {
+margin-top: 0.5rem;
+padding-top: 0.5rem;
+border-top: 1px solid #e5e7eb;
+color: #4b5563;
+font-size: 0.95rem;
+}
+
+/* Bloc final "vous ne trouvez pas votre réponse ?" */
+.faq-contact-cta {
+padding-top: 0;
+}
+
+.faq-contact-box {
+background: #6d8edb;
+color: #f0f2f4;
+border-radius: 1rem;
+padding: 1.6rem 1.8rem;
+display: flex;
+justify-content: space-between;
+align-items: center;
+gap: 1rem;
+box-shadow: 0 20px 40px rgba(15, 23, 42, 0.6);
+}
+
+.faq-contact-box h2 {
+font-size: 1.2rem;
+margin-bottom: 0.4rem;
+}
+
+.faq-contact-box p {
+max-width: 520px;
+font-size: 0.95rem;
+}
+
+/* Responsive FAQ */
+@media (max-width: 768px) {
+.faq-contact-box {
+flex-direction: column;
+align-items: flex-start;
+}
+
+.faq-contact-box a {
+width: 100%;
+text-align: center;
+}
+}

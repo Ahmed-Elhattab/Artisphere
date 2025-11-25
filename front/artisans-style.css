@@ -1,0 +1,111 @@
+/* --------- Page artisans --------- */
+
+.artisans-header h1 {
+font-size: clamp(1.8rem, 3vw, 2.3rem);
+margin-bottom: 0.5rem;
+}
+
+.artisans-intro {
+max-width: 640px;
+color: #0564ea;
+margin-top: 0.2rem;
+}
+
+/* Barre de recherche + filtres */
+.artisans-filters {
+display: flex;
+flex-direction: column;
+gap: 0.7rem;
+margin-bottom: 1.4rem;
+}
+
+.artisans-search {
+width: 100%;
+padding: 0.55rem 0.85rem;
+border-radius: 999px;
+border: 1px solid #d1d5db;
+font-size: 0.9rem;
+outline: none;
+}
+
+.artisans-search:focus {
+border-color: #2563eb;
+box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.15);
+}
+
+.artisans-filter-pills {
+display: flex;
+flex-wrap: wrap;
+gap: 0.5rem;
+}
+
+/* Grille artisans */
+.artisans-grid {
+margin-top: 0.5rem;
+}
+
+/* Carte artisan */
+.artisan-card {
+display: flex;
+flex-direction: column;
+gap: 0.5rem;
+}
+
+.artisan-header {
+display: flex;
+align-items: center;
+gap: 0.7rem;
+}
+
+.artisan-avatar {
+width: 40px;
+height: 40px;
+border-radius: 999px;
+background: #dbeafe;
+color: #1d4ed8;
+display: flex;
+align-items: center;
+justify-content: center;
+font-weight: 600;
+font-size: 0.9rem;
+}
+
+.artisan-name {
+font-size: 1.02rem;
+}
+
+.artisan-location {
+font-size: 0.85rem;
+color: #6b7280;
+}
+
+.artisan-bio {
+font-size: 0.93rem;
+color: #4b5563;
+}
+
+.artisan-tags {
+display: flex;
+flex-wrap: wrap;
+gap: 0.35rem;
+margin-top: 0.2rem;
+}
+
+.artisan-tag {
+font-size: 0.78rem;
+padding: 0.15rem 0.6rem;
+border-radius: 999px;
+background: #eef2ff;
+color: #3730a3;
+}
+
+.artisan-btn {
+margin-top: 0.4rem;
+}
+
+/* Responsive artisans */
+@media (max-width: 768px) {
+.artisan-card {
+padding: 1rem 1.1rem;
+}
+}

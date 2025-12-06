@@ -1,7 +1,7 @@
 <?php
 
 
-class FAQ_controller extends Controller
+class FAQ_controller extends BaseController
 {
     public function index(): void
     {

@@ -1,7 +1,7 @@
 <?php
 
 
-class Controller
+class BaseController
 {
     /**
      * $view : nom du fichier vue sous app/view (ex : 'home.php', 'FAQ.html')

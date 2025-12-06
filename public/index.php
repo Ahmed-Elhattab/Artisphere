@@ -1,10 +1,14 @@
 <?php
+/*
+IMPORTANT : ce fichier ne sert que de routeur entre les différentes pages du site
+*/
+
 
 // Chemin de base du projet (dossier SITE)
 $root = dirname(__DIR__);
 
 // On charge les classes de base (core)
-require_once $root . '/app/core/controller.php';
+require_once $root . '/app/core/base_controller.php';
 require_once $root . '/app/core/database.php';
 
 // On récupère les paramètres d'URL

@@ -3,28 +3,23 @@
 IMPORTANT : ce fichier ne sert que de routeur entre les différentes pages du site
 */
 
-
-// Chemin de base du projet (dossier SITE)
 $root = dirname(__DIR__);
 
-// On charge les classes de base (core)
+// core
 require_once $root . '/app/core/base_controller.php';
 require_once $root . '/app/core/database.php';
 
-// On récupère les paramètres d'URL
-// ex : ?controller=FAQ&action=index → FAQ_controller::index()
-$controllerParam = $_GET['controller'] ?? 'index';   // par défaut : index_controller
-$action          = $_GET['action'] ?? 'index';       // par défaut : méthode index()
+// paramètres de l'URL
+$controllerParam = $_GET['controller'] ?? 'index';   // ex: index, FAQ…
+$action          = $_GET['action'] ?? 'index';       // ex: index, listePersonnes…
 
-// On construit le nom de la classe de contrôleur
-// "index"      → "index_controller"
-// "FAQ"        → "FAQ_controller"
-$controllerClass = $controllerParam . '_controller';
+// nom de la classe de contrôleur
+$controllerClass = $controllerParam . '_controller';     // ex: index_controller
 $controllerFile  = $root . '/app/controller/' . $controllerClass . '.php';
 
 if (!file_exists($controllerFile)) {
     http_response_code(404);
-    echo "Controller $controllerClass introuvable (fichier $controllerFile).";
+    echo "Controller $controllerClass introuvable.";
     exit;
 }
 
@@ -32,7 +27,7 @@ require_once $controllerFile;
 
 if (!class_exists($controllerClass)) {
     http_response_code(500);
-    echo "Classe $controllerClass introuvable dans $controllerFile.";
+    echo "Classe $controllerClass non trouvée dans $controllerFile.";
     exit;
 }
 
@@ -40,9 +35,9 @@ $controller = new $controllerClass();
 
 if (!method_exists($controller, $action)) {
     http_response_code(404);
-    echo "Action $action introuvable dans le contrôleur $controllerClass.";
+    echo "Action $action introuvable dans $controllerClass.";
     exit;
 }
 
-// On appelle l'action demandée
+// 🟢 Ici on appelle la bonne méthode du contrôleur
 $controller->$action();

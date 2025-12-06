@@ -1,0 +1,4 @@
+#Fichier qui indique quels autres fichiers github ne doit pas voir (=qui ne seront pas pousser sur le serveur)
+
+### dotenv ###
+.env

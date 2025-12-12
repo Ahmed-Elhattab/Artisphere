@@ -1,0 +1,405 @@
+.trait-vertical {
+    height: 70vh;           
+    width: 2px;              
+    background-color: black;
+    margin: 10px auto; 
+    margin-top : 110px;
+    
+}
+
+.conteneur-parent {
+    position: relative; 
+}
+
+.bouton-produit {
+position: absolute;
+top: 400px;            
+left: 200px;
+background-color: #887bb0 ;
+color : white;
+text-align: center;
+border-radius: 30px;
+padding: 1%;
+width: 20%;
+font-family : 'Verdana';
+}
+
+.bouton-produit:hover {
+    background-color: #27DAF5;
+    
+}
+
+.bouton-evenement {
+position: absolute;
+top: 400px;              
+left: 1000px;
+background-color: #887bb0 ;
+color : white;
+text-align: center;
+border-radius: 30px;
+padding: 1%;
+width: 20%;
+font-family : 'Verdana';
+}
+
+.bouton-evenement:hover {
+    background-color: #27DAF5;
+}
+
+.image-evenement {
+position: absolute;
+width: 200px;
+top: 193px;              
+left: 1050px;
+
+}
+
+.image-produit {
+position: absolute;
+width: 200px;
+top: 200px;              
+left: 250px;
+}
+
+.trait-vertical {
+width : 3px;
+border-radius: 30px;
+filter : grayscale(10%)
+}
+
+body{
+background-color: #daebf3;
+}
+
+.titre-produit {
+color: #6e6295 !important;
+position: absolute;
+top: 3rem ;              
+left: 40rem;
+}
+
+#page-produit .h2{
+color: #6e6295 !important;
+
+}
+
+#page-fiche-produit .bouton-enregistrer{
+position: absolute;
+background-color: #887bb0 ;
+color : white;
+text-align: center;
+border-radius: 30px;
+padding: 1%;
+width: 120px;
+height: 30px;
+line-height: 0px;
+font-family : 'Verdana';
+font-weight: bold;
+   position: absolute;
+    top: 41.5rem ;              
+    left: 53.5rem; 
+    cursor: pointer;
+}
+
+#page-fiche-evenement .bouton-enregistrer{
+position: absolute;
+background-color: #887bb0 ;
+color : white;
+text-align: center;
+border-radius: 30px;
+padding: 1%;
+width: 120px;
+height: 30px;
+line-height: 0px;
+font-family : 'Verdana';
+font-weight: bold;
+   position: absolute;
+    top: 41.5rem ;              
+    left: 53.5rem; 
+    cursor: pointer;
+}
+
+#page-fiche-produit .importimage{
+    opacity: 0; 
+    overflow: hidden;
+    position: absolute; 
+}
+
+#page-fiche-evenement .importimage{
+    opacity: 0; 
+    overflow: hidden;
+    position: absolute; 
+}
+
+#page-fiche-produit .Quantités{
+    border-radius: 30px;
+    background-color:rgba(136, 123, 176, 0.7);
+    font-family : 'Verdana';
+    font-weight: bold;
+    border: none;
+    padding: 1%;
+    width: 140px;
+    height: 10px; 
+    position: absolute;
+    top: 20.5rem ;              
+    left: 43.5rem;  
+}
+
+#page-fiche-evenement .Places{
+    border-radius: 30px;
+    background-color:rgba(136, 123, 176, 0.7);
+    font-family : 'Verdana';
+    font-weight: bold;
+    border: none;
+    padding: 1%;
+    width: 140px;
+    height: 10px; 
+    position: absolute;
+    top: 20.5rem ;              
+    left: 47.5rem;  
+}
+
+#page-fiche-evenement .Lieu{
+    border-radius: 30px;
+    background-color:rgba(136, 123, 176, 0.7);
+    font-family : 'Verdana';
+    font-weight: bold;
+    border: none;
+    padding: 1%;
+    width: 140px;
+    height: 10px; 
+    position: absolute;
+    top: 15.5rem ;              
+    left: 40rem;  
+}
+
+#page-fiche-produit .Matériaux{
+    border-radius: 30px;
+    background-color:rgba(136, 123, 176, 0.7);
+    font-family : 'Verdana';
+    font-weight: bold;
+    border: none;
+    padding: 1%;
+    width: 140px;
+    height: 10px;   
+    position: absolute;
+    top: 24.5rem ;              
+    left: 43.5rem;  
+}
+
+#page-fiche-produit .choixcategorie{
+    border-radius: 30px;
+    background-color:rgba(136, 123, 176, 0.7);
+    font-family : 'Verdana';
+    font-weight: bold;
+    border: none;
+    padding: 1%;
+    width: 300px;
+    height: 50px;   
+    position: absolute;
+    top: 15rem ;              
+    left: 43.5rem;
+}
+
+#page-fiche-evenement .choixcategorie{
+    border-radius: 30px;
+    background-color:rgba(136, 123, 176, 0.7);
+    font-family : 'Verdana';
+    font-weight: bold;
+    border: none;
+    padding: 1%;
+    width: 300px;
+    height: 50px;   
+    position: absolute;
+    top: 15rem ;              
+    left: 43.5rem;
+}
+
+#page-fiche-produit .para_catégorie{
+font-family : 'Verdana';
+color : rgba(136, 123, 176, 0.7);
+position: absolute;
+top: 16rem ;              
+left: 37rem; 
+}
+
+#page-fiche-evenement .para_catégorie{
+font-family : 'Verdana';
+color : rgba(136, 123, 176, 0.7);
+position: absolute;
+top: 16rem ;              
+left: 37rem; 
+}
+
+#page-fiche-produit .para_description{
+font-family : 'Verdana';
+color : rgba(136, 123, 176, 0.7);
+    position: absolute;
+    top: 28rem ;              
+    left: 37rem;
+
+}
+
+#page-fiche-evenement .para_descriptionV2{
+font-family : 'Verdana';
+color : rgba(136, 123, 176, 0.7);
+    position: absolute;
+    top: 23rem ;              
+    left: 37rem;
+
+}
+
+#page-fiche-produit .Description{
+    border-radius: 30px;
+    background-color:rgba(136, 123, 176, 0.7);
+    font-family : 'Verdana';
+    font-weight: bold;
+    border: none;
+    padding: 1%;
+    width: 370px;
+    height: 100px;   
+    position: absolute;
+    top: 31.5rem ;              
+    left: 36.5rem;  
+}
+
+#page-fiche-evenement .DescriptionV2{
+    border-radius: 30px;
+    background-color:rgba(136, 123, 176, 0.7);
+    font-family : 'Verdana';
+    font-weight: bold;
+    border: none;
+    padding: 1%;
+    width: 370px;
+    height: 100px;   
+    position: absolute;
+    top: 26.5rem ;              
+    left: 36.5rem;  
+}
+
+
+#page-fiche-produit .para_produit{
+font-family : 'Verdana';
+color : rgba(136, 123, 176, 0.7);
+position: absolute;
+top: 8rem ;              
+left: 48rem;
+}
+
+#page-fiche-evenement .para_produit{
+font-family : 'Verdana';
+color : rgba(136, 123, 176, 0.7);
+position: absolute;
+top: 8rem ;              
+left: 48rem;
+}
+
+#page-fiche-produit .catégorie{
+font-family : 'Verdana';
+color : rgba(136, 123, 176, 0.7);
+}
+
+#page-fiche-produit .para_matériaux{
+font-family : 'Verdana';
+color : rgba(136, 123, 176, 0.7);
+position: absolute;
+top: 24rem ;              
+left: 37rem; 
+}
+
+#page-fiche-produit .para_quantités{
+font-family : 'Verdana';
+color : rgba(136, 123, 176, 0.7);
+position: absolute;
+top: 21rem ;              
+left: 37rem; 
+}
+
+#page-fiche-evenement .para_places{
+font-family : 'Verdana';
+color : rgba(136, 123, 176, 0.7);
+position: absolute;
+top: 21rem ;              
+left: 37rem; 
+}
+
+#page-fiche-evenement .para_lieu{
+font-family : 'Verdana';
+color : rgba(136, 123, 176, 0.7);
+position: absolute;
+top: 16rem ;              
+left: 37rem; 
+}
+
+#page-fiche-produit .nom_produit{
+    border-radius: 30px;
+    background-color:rgba(136, 123, 176, 0.7);
+    font-family : 'Verdana';
+    font-weight: bold;
+    border: none;
+    padding: 1%;
+    width: 200px;
+    height: 20px;   
+    vertical-align: top;
+    text-align: auto;
+    position: absolute;
+    top: 10.5rem ;              
+    left: 45.5rem;
+} 
+
+#page-fiche-evenement .nom_produit{
+    border-radius: 30px;
+    background-color:rgba(136, 123, 176, 0.7);
+    font-family : 'Verdana';
+    font-weight: bold;
+    border: none;
+    padding: 1%;
+    width: 200px;
+    height: 20px;   
+    vertical-align: top;
+    text-align: auto;
+    position: absolute;
+    top: 10.5rem ;              
+    left: 45.5rem;
+} 
+
+#page-fiche-produit .bouton-enregistrer:hover {
+    background-color: #27DAF5;
+}
+
+
+#page-fiche-produit .imagerond {
+    width: 80px;
+    height: 80px;
+    background-color: #e249c0;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    color: white;
+    font-size: 20px;
+    user-select: none;
+       position: absolute;
+    top: 9.0rem ;              
+    left: 38.5rem; 
+}
+
+
+#page-fiche-evenement .imagerond {
+    width: 80px;
+    height: 80px;
+    background-color: #e249c0;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    color: white;
+    font-size: 20px;
+    user-select: none;
+       position: absolute;
+    top: 9.0rem ;              
+    left: 38.5rem; 
+}
+

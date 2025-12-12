@@ -4,27 +4,9 @@
 <meta charset="UTF-8">
 <title>Artisphere – FAQ</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="css/FAQ.style.css">
+<link rel="stylesheet" href="css/FAQ-style.css">
 </head>
 <body>
-
-<header class="site-header">
-<div class="container header-inner">
-<a href="index.html" class="logo">
-<span class="logo-mark">Artisphere</span>
-</a>
-
-<nav class="main-nav">
-<ul>
-<li><a href="index.html">Accueil</a></li>
-<li><a href="evenements.html">Événements</a></li>
-<li><a href="artisans.html">Artisans</a></li>
-<li><a href="faq.html" class="active">FAQ</a></li>
-<li><a href="contact.html" class="btn-primary">Contact</a></li>
-</ul>
-</nav>
-</div>
-</header>
 
 <main>
 
@@ -171,13 +153,6 @@ Tu peux aussi préciser si tu es artisan ou client pour que l’on t’oriente m
 </section>
 
 </main>
-
-<footer class="site-footer">
-<div class="container footer-inner">
-<p>© 2025 Artisphere – Plateforme de promotion d’artisans.</p>
-<a href="#">CGU</a> · <a href="#">Mentions légales</a>
-</div>
-</footer>
 
 <script src="js/app.js"></script>
 </body>

@@ -1,31 +1,45 @@
-<h2>Bienvenue sur la page d’accueil</h2>
+<head>
+<meta charset="UTF-8">
+<title>Artisphere – FAQ</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="css/home.css">
+</head>
 
-<?php if (!empty($dbMessage)): ?>
-    <p><?= htmlspecialchars($dbMessage, ENT_QUOTES, 'UTF-8') ?></p>
-<?php endif; ?>
+<section class="home-hero">
+  <div class="home-hero__left">
+    <p class="home-hero__text">
+      Découvrez le talent des artisans et créateurs passionnés près de chez vous.<br>
+      Ici, chaque pièce raconte une histoire, chaque artisan partage son savoir-faire.
+    </p>
 
-<?php if (!empty($personnes)): ?>
-    <h3>Liste des personnes</h3>
-    <table>
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Nom</th>
-                <th>Prénom</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php foreach ($personnes as $p): ?>
-                <tr>
-                    <td><?= htmlspecialchars($p['id_personne'], ENT_QUOTES, 'UTF-8') ?></td>
-                    <td><?= htmlspecialchars($p['nom'], ENT_QUOTES, 'UTF-8') ?></td>
-                    <td><?= htmlspecialchars($p['prenom'], ENT_QUOTES, 'UTF-8') ?></td>
-                </tr>
-            <?php endforeach; ?>
-        </tbody>
-    </table>
-<?php else: ?>
-    <p>Aucune personne à afficher.</p>
-<?php endif; ?>
+    <div class="home-pill">LES PRODUITS TENDANCES</div>
 
-<p>Contenu de ta page d’accueil ici.</p>
+    <div class="home-products">
+      <?php for ($i=0; $i<6; $i++): ?>
+        <article class="product-card">
+          <img src="/artisphere/images/placeholder_product.jpg" alt="Produit">
+          <div class="product-price">TARIF : 250€</div>
+        </article>
+      <?php endfor; ?>
+    </div>
+
+    <div class="home-pill">LES EVENEMENTS A LA UNE</div>
+
+    <div class="home-events">
+      <?php for ($i=0; $i<5; $i++): ?>
+        <article class="event-card">
+          <img src="/artisphere/images/placeholder_event.jpg" alt="Event">
+          <div class="event-title">Lumière sur le bois</div>
+          <div class="event-date">DU 15 AU 28<br>DÉCEMBRE 2025</div>
+        </article>
+      <?php endfor; ?>
+    </div>
+  </div>
+
+  <aside class="home-hero__right">
+    <div class="cta-card">
+      <div class="cta-title">PRET A VENDRE DES<br>ARTICLES ?</div>
+      <a class="cta-button" href="/artisphere/?controller=FAQ&action=index">Commencer par ici</a>
+    </div>
+  </aside>
+</section>

@@ -12,9 +12,10 @@ class index_controller extends BaseController
         $personnes = PersonneModel::getAll();
 
         // Affiche la vue home.php
-        $this->render('home.php', [
-            'title' => 'Accueil - Artisphere',
-            'personnes' => $personnes
+       $this->render('home.php', [
+        'title' => 'Accueil - Artisphere',
+        'pageCss' => 'home.css',
+        'personnes' => $personnes
         ]);
     }
 

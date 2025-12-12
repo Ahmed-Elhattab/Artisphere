@@ -18,10 +18,10 @@
 
             <!-- Navigation -->
             <nav class="nav-links">
-                <a href="/catalogue">CATALOGUE</a>
-                <a href="/artisan">ARTISAN</a>
-                <a href="/evenement">EVENEMENT</a>
-                <a href="/profil">PROFIL</a>
+                <a href="/artisphere/catalogue">CATALOGUE</a>
+                <a href="/artisphere/artisan">ARTISAN</a>
+                <a href="/artisphere/evenement">EVENEMENT</a>
+                <a href="/artisphere/?controller=FAQ&action=index">PROFIL</a>
             </nav>
 
         </div>

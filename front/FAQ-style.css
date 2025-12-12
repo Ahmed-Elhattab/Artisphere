@@ -1,111 +1,219 @@
-/* --------- FAQ --------- */
+/* APRÈS */
+.faq-header {
+    text-align: center;    /* centre le texte du bloc */
+}
 
 .faq-header h1 {
-font-size: clamp(1.8rem, 3vw, 2.3rem);
-margin-bottom: 0.6rem;
+    font-size: clamp(1.8rem, 3vw, 2.3rem);
+    margin-bottom: 0.6rem;
 }
 
 .faq-intro {
-max-width: 640px;
-color: #4b5563;
-margin-top: 0.3rem;
+    max-width: 640px;
+    color: #4b5563;
+    margin: 0.3rem auto 0; /* auto = centre le paragraphe */
 }
 
-/* Titre de catégorie (compte, produits, etc.) */
-.faq-category-title {
-font-size: 1.1rem;
-margin: 2rem 0 0.8rem;
-color: #111827;
-}
+/* --------- Liste FAQ --------- */
 
-/* Bloc FAQ global */
 .faq-list {
-max-width: 800px;
+    max-width: 900px;
+    margin: 0 auto;
 }
 
-/* Chaque question / réponse */
+/* Titre de catégorie */
+.faq-category-title {
+    font-size: 1.3rem;
+    margin: 2rem 0 0.8rem;
+}
+
+/* Une question/réponse = une box */
 .faq-item {
-background: #ffffff;
-border-radius: 0.75rem;
-padding: 0.8rem 1rem;
-margin-bottom: 0.6rem;
-border: 1px solid #e5e7eb;
-box-shadow: 0 6px 14px rgba(15, 23, 42, 0.04);
+    background: #d4a976;                   /* un peu plus clair que le fond */
+    border-radius: 12px;
+    padding: 0.8rem 1rem;
+    margin-bottom: 0.6rem;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
 }
 
-/* Le summary (question) */
+/* Le titre cliquable (summary) */
 .faq-item > summary {
-list-style: none;
-cursor: pointer;
-font-weight: 500;
-display: flex;
-align-items: center;
-justify-content: space-between;
-gap: 0.6rem;
+    list-style: none;
+    cursor: pointer;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
-/* On enlève le triangle par défaut (selon navigateur) */
+/* on enlève la puce par défaut (Chrome/Edge) */
 .faq-item > summary::-webkit-details-marker {
-display: none;
+    display: none;
 }
 
-/* Icône +/− maison avec pseudo-éléments */
+/* Petite flèche personnalisée à droite */
 .faq-item > summary::after {
-content: "+";
-font-weight: 600;
-font-size: 1.1rem;
-color: #2563eb;
+    content: "▾";
+    margin-left: 0.5rem;
+    font-size: 0.9rem;
 }
 
 .faq-item[open] > summary::after {
-content: "−";
+    content: "▴";
 }
 
-/* Corps de la réponse */
+/* Texte de la réponse */
 .faq-body {
-margin-top: 0.5rem;
-padding-top: 0.5rem;
-border-top: 1px solid #e5e7eb;
-color: #4b5563;
-font-size: 0.95rem;
+    margin-top: 0.5rem;
+    padding-top: 0.5rem;
+    border-top: 1px solid rgba(0, 0, 0, 0.12);
+    font-size: 0.95rem;
 }
 
-/* Bloc final "vous ne trouvez pas votre réponse ?" */
-.faq-contact-cta {
-padding-top: 0;
+/* Mise en page générale des sections */
+.section {
+    padding: 2rem 0;
 }
 
-.faq-contact-box {
-background: #6d8edb;
-color: #f0f2f4;
-border-radius: 1rem;
-padding: 1.6rem 1.8rem;
-display: flex;
-justify-content: space-between;
-align-items: center;
-gap: 1rem;
-box-shadow: 0 20px 40px rgba(15, 23, 42, 0.6);
+/* Conteneur centré pour tout le contenu */
+.container {
+    max-width: 1100px;
+    margin: 0 auto;        /* centre horizontalement */
+    padding: 0 32px;       /* petites marges à gauche/droite */
 }
 
-.faq-contact-box h2 {
-font-size: 1.2rem;
-margin-bottom: 0.4rem;
+/* --------- Fond général --------- */
+body {
+    margin: 0;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background: #c49a74; /* marron/beige du fond de page */
 }
 
-.faq-contact-box p {
-max-width: 520px;
-font-size: 0.95rem;
+/* --------- Header (banderole du haut) --------- */
+
+.site-header {
+    background: #f6e6cf; /* beige clair */
+    border-bottom: 1px solid #e2d5c0;
 }
 
-/* Responsive FAQ */
+.header-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    height: 80px;              /* hauteur fixe de la banderole */
+    padding: 0 40px;           /* plus de padding vertical, seulement horizontal */
+    display: flex;
+    align-items: center;       /* centre verticalement logo / menu / profil */
+    justify-content: space-between;
+    gap: 40px;
+}
+
+/* APRÈS */
+.logo-zone {
+    display: flex;
+    align-items: center;
+}
+
+.logo-img {
+    height: 72px;          /* adapte si ton logo est trop grand/petit */
+    width: auto;
+}
+
+
+/* Menu au centre */
+.main-nav {
+    display: flex;
+    justify-content: center; /* centre CATALOGUE / ARTISAN / … */
+    gap: 3rem;
+}
+
+.nav-link {
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-size: 0.9rem;
+    color: #3c2b20;
+    padding-bottom: 3px;
+    position: relative;
+}
+
+.nav-link:hover,
+.nav-link.active {
+    font-weight: 600;
+}
+
+.nav-link.active::after,
+.nav-link:hover::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 2px;
+    width: 100%;
+    background: #3c2b20;
+}
+
+/* Icône profil à droite */
+.profile-icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    border: 2px solid #3c2b20;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: #3c2b20;
+    font-size: 1.3rem;
+    background: #f6e6cf;
+}
+
+/* --------- Footer (banderole du bas) --------- */
+
+.site-footer {
+    background: #f6e6cf;
+    border-top: 1px solid #e2d5c0;
+    padding: 14px 0;
+    margin-top: 40px;
+}
+
+.footer-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    gap: 4rem;
+}
+
+.footer-link {
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    font-size: 0.8rem;
+    color: #3c2b20;
+}
+
+.footer-link:hover {
+    text-decoration: underline;
+}
+
+/* --------- Responsive --------- */
+
 @media (max-width: 768px) {
-.faq-contact-box {
-flex-direction: column;
-align-items: flex-start;
-}
+    .header-inner {
+        flex-direction: column;
+        gap: 10px;
+    }
 
-.faq-contact-box a {
-width: 100%;
-text-align: center;
-}
+    .main-nav {
+        gap: 1.5rem;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .footer-inner {
+        flex-direction: column;
+        align-items: center;
+        gap: 0.6rem;
+    }
 }

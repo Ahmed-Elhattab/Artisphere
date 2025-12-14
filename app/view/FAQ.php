@@ -33,7 +33,7 @@
 
                 <?php endforeach; ?>
             <?php else: ?>
-                <p>Aucune question/réponse n’a été trouvée dans la base.</p>
+                <p>Aucune question/réponse n'a été trouvée dans la base.</p>
             <?php endif; ?>
 
         </div>
@@ -44,11 +44,11 @@
             <div>
                 <h2>Vous ne trouvez pas votre réponse&nbsp;?</h2>
                 <p>
-                    Contacte-nous et nous reviendrons vers toi au plus vite pour t’aider.
-                    Tu peux aussi préciser si tu es artisan ou client pour que l’on t’oriente mieux.
+                    Contacte-nous et nous reviendrons vers toi au plus vite pour t'aider.
+                    Tu peux aussi préciser si tu es artisan ou client pour que l'on t'oriente mieux.
                 </p>
             </div>
-            <a href="/artisphere/?controller=contact&action=index" class="btn-primary">Contacter l’équipe Artisphere</a>
+            <a href="/artisphere/?controller=contact&action=index" class="btn-primary">Contacter l'équipe Artisphere</a>
         </div>
     </section>
 

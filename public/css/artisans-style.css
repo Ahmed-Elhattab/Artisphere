@@ -1,111 +1,223 @@
-/* --------- Page artisans --------- */
+/* --------- BASE --------- */
 
-.artisans-header h1 {
-font-size: clamp(1.8rem, 3vw, 2.3rem);
-margin-bottom: 0.5rem;
+body {
+    margin: 0;
+    font-family: system-ui, sans-serif;
+    background: #c49a74;
+}
+
+.section {
+    padding: 2rem 0;
+}
+
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 32px;
+}
+
+/* --------- HEADER --------- */
+
+.site-header {
+    background: #f6e6cf;
+    border-bottom: 1px solid #e2d5c0;
+}
+
+.header-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    height: 80px;
+    padding: 0 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo-img {
+    height: 72px;
+}
+
+.main-nav {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    gap: 2.5rem;
+}
+
+.nav-link {
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-size: 0.9rem;
+    color: #3c2b20;
+}
+
+.nav-link.active {
+    font-weight: 600;
+    border-bottom: 2px solid #3c2b20;
+}
+
+.profile-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    border: 2px solid #3c2b20;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+}
+
+/* --------- TITRE --------- */
+
+.artisans-header {
+    text-align: center;
 }
 
 .artisans-intro {
-max-width: 640px;
-color: #0564ea;
-margin-top: 0.2rem;
+    max-width: 640px;
+    margin: 0 auto;
+    color: #4b5563;
 }
 
-/* Barre de recherche + filtres */
+/* --------- FILTRES --------- */
+
 .artisans-filters {
-display: flex;
-flex-direction: column;
-gap: 0.7rem;
-margin-bottom: 1.4rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    margin-bottom: 1.5rem;
 }
 
 .artisans-search {
-width: 100%;
-padding: 0.55rem 0.85rem;
-border-radius: 999px;
-border: 1px solid #d1d5db;
-font-size: 0.9rem;
-outline: none;
-}
-
-.artisans-search:focus {
-border-color: #2563eb;
-box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.15);
+    padding: 0.55rem 1rem;
+    border-radius: 999px;
+    border: 1px solid #d1d5db;
+    font-size: 0.9rem;
 }
 
 .artisans-filter-pills {
-display: flex;
-flex-wrap: wrap;
-gap: 0.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
 }
 
-/* Grille artisans */
-.artisans-grid {
-margin-top: 0.5rem;
+.filter-pill {
+    border-radius: 999px;
+    padding: 0.35rem 0.9rem;
+    border: 1px solid #e5e7eb;
+    background: #fff;
+    cursor: pointer;
 }
 
-/* Carte artisan */
+.filter-pill-active {
+    background: #3c2b20;
+    color: #fff;
+}
+
+/* --------- GRILLE --------- */
+
+.grid-3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+}
+
+/* --------- CARTES ARTISANS --------- */
+
 .artisan-card {
-display: flex;
-flex-direction: column;
-gap: 0.5rem;
+    background: #d4a976;
+    border-radius: 14px;
+    padding: 1.4rem;
+    box-shadow: 0 6px 14px rgba(0,0,0,0.08);
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
 }
 
 .artisan-header {
-display: flex;
-align-items: center;
-gap: 0.7rem;
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
 }
 
 .artisan-avatar {
-width: 40px;
-height: 40px;
-border-radius: 999px;
-background: #dbeafe;
-color: #1d4ed8;
-display: flex;
-align-items: center;
-justify-content: center;
-font-weight: 600;
-font-size: 0.9rem;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: #ede9fe;
+    color: #5b21b6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
 }
 
 .artisan-name {
-font-size: 1.02rem;
+    font-size: 1.05rem;
 }
 
 .artisan-location {
-font-size: 0.85rem;
-color: #6b7280;
+    font-size: 0.85rem;
+    color: #4b5563;
 }
 
 .artisan-bio {
-font-size: 0.93rem;
-color: #4b5563;
+    font-size: 0.95rem;
 }
 
 .artisan-tags {
-display: flex;
-flex-wrap: wrap;
-gap: 0.35rem;
-margin-top: 0.2rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
 }
 
 .artisan-tag {
-font-size: 0.78rem;
-padding: 0.15rem 0.6rem;
-border-radius: 999px;
-background: #eef2ff;
-color: #3730a3;
+    font-size: 0.75rem;
+    padding: 0.15rem 0.6rem;
+    border-radius: 999px;
+    background: #eef2ff;
+    color: #3730a3;
 }
 
 .artisan-btn {
-margin-top: 0.4rem;
+    margin-top: auto;
+    text-decoration: none;
+    font-weight: 500;
+    color: #3c2b20;
 }
 
-/* Responsive artisans */
-@media (max-width: 768px) {
-.artisan-card {
-padding: 1rem 1.1rem;
+/* --------- FOOTER --------- */
+
+.site-footer {
+    background: #f6e6cf;
+    padding: 1rem 0;
 }
+
+.footer-inner {
+    display: flex;
+    justify-content: center;
+    gap: 4rem;
+}
+
+.footer-link {
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    color: #3c2b20;
+}
+
+/* --------- RESPONSIVE --------- */
+
+@media (max-width: 900px) {
+    .grid-3 {
+        grid-template-columns: 1fr;
+    }
+
+    .header-inner {
+        flex-direction: column;
+        height: auto;
+        padding: 1rem;
+        gap: 0.8rem;
+    }
 }

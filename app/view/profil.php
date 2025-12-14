@@ -1,25 +1,6 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Profil - Artisphere</title>
-<link rel="stylesheet" href="profil.css">
+<!--<head>
 <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
-</head>
-<body>
-<header class="topbar">
-  <div class="logo-container">
-    <img src="logo.png" alt="Artisphere Logo" class="logo">
-    <div class="logo-text">ARTISPHERE</div>
-  </div>
-  <nav class="main-nav">
-    <a href="#">CATALOGUE</a>
-    <a href="#">ARTISAN</a>
-    <a href="#">EVENEMENT</a>
-    <a href="profil.html">PROFIL</a>
-  </nav>
-</header>
+</head>-->
 <main class="container">
     <section class="profile-section">
         <div class="photo-block">
@@ -51,11 +32,20 @@
             </div>
         </div>
     </section>
+    <h1 class="page-title">MES COMMANDES PASSÉES</h1>
+  
+    <div class="order-item">
+      <div class="order-header">
+        <span class="order-name">Pot à lait en céramique</span>
+        <div class="status-dot"></div>
+      </div>
+      <div class="order-content"></div>
+    </div>
+
+    <div class="action-buttons">
+      <button class="btn-spe">CRÉER UNE NOUVELLE FICHE</button>
+    </div>
+    <div class="action-buttons">
+      <button class="btn-spe">CHERCHER UN COMPTE</button>
+    </div>
 </main>
-<footer class="footer">
-  <a href="#">À PROPOS DE NOUS</a>
-  <a href="#">MENTIONS LÉGALES</a>
-  <a href="#">FAQ</a>
-</footer>
-</body>
-</html>

@@ -1,0 +1,46 @@
+/* Zone globale du header */
+.top-header {
+    width: 100%;
+    background-color: #F0E6D8; /* Beige clair identique à ton image */
+    padding: 10px 0;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Conteneur centré */
+.header-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 40px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* Logo à gauche */
+/*test*/
+.logo img {
+    height: 70px;
+    width: auto;
+}
+
+/* Navigation au centre */
+.nav-links {
+    display: flex;
+    gap: 80px; /* comme sur ta maquette */
+    margin-right: 100px; /* équilibre visuel */
+}
+
+/* Liens */
+.nav-links a {
+    text-decoration: none;
+    font-size: 20px;
+    color: #000;
+    font-family: "Times New Roman", serif; /* typo proche de ta maquette */
+    letter-spacing: 1px;
+    font-weight: 500;
+}
+
+.nav-links a:hover {
+    color: #5a4a3a; /* brun doux */
+}

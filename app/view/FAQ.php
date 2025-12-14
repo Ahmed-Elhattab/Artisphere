@@ -1,36 +1,3 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-<meta charset="UTF-8">
-<title>Artisphere – FAQ</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="css/FAQ-style.css">
-</head>
-<body>
-
-<header class="site-header">
-    <div class="header-inner">
-
-        <!-- LOGO À GAUCHE -->
-        <div class="logo-zone">
-            <img src="images/logo_site.png" alt="Logo Artisphere" class="logo-img">
-        </div>
-
-        <!-- MENU AU CENTRE -->
-        <nav class="main-nav">
-            <a href="index.html" class="nav-link">Catalogue</a>
-            <a href="artisans.html" class="nav-link">Artisan</a>
-            <a href="evenement.html" class="nav-link">Évènement</a>
-        </nav>
-
-        <!-- ICÔNE PROFIL À DROITE -->
-        <a href="profil.html" class="profile-icon" aria-label="Mon profil">
-            <span>👤</span>
-        </a>
-
-    </div>
-</header>
-
 <main>
 
     <!-- En-tête de la FAQ -->
@@ -177,14 +144,4 @@
 
 </main>
 
-<footer class="site-footer">
-    <div class="footer-inner">
-        <a href="apropos.html" class="footer-link">À propos de nous</a>
-        <a href="mentions.html" class="footer-link">Mentions légales</a>
-        <a href="FAQ.html" class="footer-link">FAQ</a>
-    </div>
-</footer>
-
 <script src="js/app.js"></script>
-</body>
-</html>

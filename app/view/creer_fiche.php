@@ -1,12 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <link rel="stylesheet" href="styles.css">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
+<main>
 <div class="conteneur-parent"></div>
 <img src="images\image-bouton-evenement.png" class="image-evenement"/>
 <img src="images\image-bouton-produit.png" class="image-produit"/>
@@ -14,5 +6,4 @@
     <div class="trait-vertical"></div>
     <button class="bouton-evenement" type="button">Nouvel évènement</button>
     </div>
-</body>
-</html>
+</main>

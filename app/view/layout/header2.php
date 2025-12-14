@@ -5,7 +5,8 @@
     <title><?= htmlspecialchars($title ?? 'Artisphere', ENT_QUOTES, 'UTF-8') ?></title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" type="image/x-icon" href="favicon.ico">
-    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/header2.css">
+    <link rel="stylesheet" href="css/footer.css">
 
     <!--rajoute un fichier css étant spécifié dans le controleur-->
     <?php if (!empty($pageCss)): ?>
@@ -17,14 +18,14 @@
 
         <!-- LOGO À GAUCHE -->
         <div class="logo-zone">
-            <img src="images/logo_site.png" alt="Logo Artisphere" class="logo-img">
+            <a class="logo_clickable" href="/artisphere/?controller=index&action=index" class="nav-link"><img src="images/logo_site.png" alt="Logo Artisphere" class="logo-img"></a>
         </div>
 
         <!-- MENU AU CENTRE -->
         <nav class="main-nav">
-            <a href="/artisphere/catalogue" class="nav-link">Catalogue</a>
-            <a href="/artisphere/artisan" class="nav-link">Artisan</a>
-            <a href="/artisphere/evenement" class="nav-link">Évènement</a>
+            <a href="/artisphere/?controller=index&action=index" class="nav-link">Catalogue</a>
+            <a href="/artisphere/?controller=artisans&action=index" class="nav-link">Artisan</a>
+            <a href="/artisphere/?controller=evenement&action=index" class="nav-link">Évènement</a>
         </nav>
 
         <!-- ICÔNE PROFIL À DROITE -->

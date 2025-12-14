@@ -1,46 +1,89 @@
-/* Zone globale du header */
-.top-header {
+
+body{
     width: 100%;
-    background-color: #F0E6D8; /* Beige clair identique à ton image */
-    padding: 10px 0;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    margin: 0;
+    background: #b6a894;
 }
 
-/* Conteneur centré */
-.header-container {
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 0 40px;
 
+
+/* --------- HEADER --------- */
+
+header{
+    font-family: system-ui, sans-serif;
+}
+.site-header {
+    background: #f6e6cf; /* beige clair */
+    border-bottom: 1px solid #e2d5c0;
+}
+
+.header-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    height: 80px;              /* hauteur fixe de la banderole */
+    padding: 0 40px;           /* plus de padding vertical, seulement horizontal */
+    display: flex;
+    align-items: center;       /* centre verticalement logo / menu / profil */
+    justify-content: space-between;
+    gap: 40px;
+}
+
+/* APRÈS */
+.logo-zone {
     display: flex;
     align-items: center;
-    justify-content: space-between;
 }
 
-/* Logo à gauche */
-/*test*/
-.logo img {
-    height: 70px;
+.logo-img {
+    height: 72px;          /* adapte si ton logo est trop grand/petit */
     width: auto;
 }
 
-/* Navigation au centre */
-.nav-links {
+
+/* Menu au centre */
+.main-nav {
     display: flex;
-    gap: 80px; /* comme sur ta maquette */
-    margin-right: 100px; /* équilibre visuel */
+    justify-content: center; /* centre CATALOGUE / ARTISAN / … */
+    gap: 3rem;
 }
 
-/* Liens */
-.nav-links a {
+.nav-link {
     text-decoration: none;
-    font-size: 20px;
-    color: #000;
-    font-family: "Times New Roman", serif; /* typo proche de ta maquette */
-    letter-spacing: 1px;
-    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-size: 0.9rem;
+    color: #3c2b20;
+    padding-bottom: 3px;
+    position: relative;
 }
 
-.nav-links a:hover {
-    color: #5a4a3a; /* brun doux */
+.nav-link:hover,
+.nav-link.active {
+    font-weight: 600;
+}
+
+.nav-link.active::after,
+.nav-link:hover::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 2px;
+    width: 100%;
+    background: #3c2b20;
+}
+
+/* Icône profil à droite */
+.profile-icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    border: 2px solid #3c2b20;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: #3c2b20;
+    font-size: 1.3rem;
+    background: #f6e6cf;
 }

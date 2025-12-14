@@ -1,7 +1,7 @@
 <main class="auth-page">
 
   <!-- Bouton retour -->
-  <a href="index.html" class="back-btn">Retour</a>
+  <a href="/artisphere/?controller=connexion&action=index" class="back-btn">Retour</a>
 
   <!-- Bloc centré -->
   <section class="auth-card" aria-label="Choisir son profil">
@@ -13,8 +13,8 @@
 
     <div class="auth-form">
 
-      <a href="inscription.html" class="choice-btn">Compte client</a>
-      <a href="inscription-artisan.html" class="choice-btn">Compte artisan</a>
+      <a href="/artisphere/?controller=inscription_Client&action=index" class="choice-btn">Compte client</a>
+      <a href="/artisphere/?controller=inscription_Artisans&action=index" class="choice-btn">Compte artisan</a>
 
       <a href="#" class="help-link">Besoin d’aide ?</a>
 

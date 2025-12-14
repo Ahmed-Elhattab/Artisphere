@@ -1,0 +1,19 @@
+/* --------- FOOTER --------- */
+
+.site-footer {
+    background: #f6e6cf;
+    padding: 1rem 0;
+}
+
+.footer-inner {
+    display: flex;
+    justify-content: center;
+    gap: 4rem;
+}
+
+.footer-link {
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    color: #3c2b20;
+}

@@ -1,7 +1,7 @@
 <main class="auth-page">
 
   <!-- Bouton retour (en haut à gauche) -->
-  <a href="index.html" class="back-btn">Retour</a>
+  <a href="/artisphere/?controller=type_Compte&action=index" class="back-btn">Retour</a>
 
   <!-- Bloc centré -->
   <section class="auth-card" aria-label="Création de compte client">

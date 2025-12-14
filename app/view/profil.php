@@ -20,15 +20,15 @@
             <h2>COMMANDES</h2>
             <div class="order-card">
                 <div class="order-title">Collier en argent</div>
-                <button class="btn">Donner son avis</button>
+                <a class="action-link" href="/artisphere/?controller=avis&action=index"><button class="btn">Donner son avis</button></a>
             </div>
             <div class="order-card">
                 <div class="order-title">Tableau</div>
-                <button class="btn">Donner son avis</button>
+                <a class="action-link" href="/artisphere/?controller=avis&action=index"><button class="btn">Donner son avis</button></a>
             </div>
             <div class="order-card">
                 <div class="order-title">Vase</div>
-                <button class="btn">Donner son avis</button>
+                <a class="action-link" href="/artisphere/?controller=avis&action=index"><button class="btn">Donner son avis</button></a>
             </div>
         </div>
     </section>
@@ -43,9 +43,9 @@
     </div>
 
     <div class="action-buttons">
-      <button class="btn-spe">CRÉER UNE NOUVELLE FICHE</button>
+      <a class="action-link" href="/artisphere/?controller=creer_fiche&action=index"><button class="btn-spe">CRÉER UNE NOUVELLE FICHE</button></a>
     </div>
     <div class="action-buttons">
-      <button class="btn-spe">CHERCHER UN COMPTE</button>
+      <a class="action-link" href="/artisphere/?controller=chercher_compte&action=index"><button class="btn-spe">CHERCHER UN COMPTE</button></a>
     </div>
 </main>

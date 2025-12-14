@@ -7,7 +7,7 @@ class fiche_produit_controller extends BaseController
     {
         $this->render('fiche_produit.php', [
             'title' => 'Artisphere - fiche-produit',
-            'pageCss' => 'fiche-EetP-style-style.css'
+            'pageCss' => 'fiche-EetP-style.css'
         ]);
     }
 }

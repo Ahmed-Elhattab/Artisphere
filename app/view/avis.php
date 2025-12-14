@@ -12,7 +12,7 @@
     <hr>
     <div class="art-row">
       <div>Pot à lait en céramique</div>
-      <img src="produit.png" alt="Oeuvre" class="art-thumb">
+      <img src="images/produit.png" alt="Oeuvre" class="art-thumb">
     </div>
 
     <!-- Étoiles interactives -->

@@ -23,7 +23,7 @@ class BaseController
         extract($params);
 
         // On inclut le header, puis la vue, puis le footer
-        require $root . '/view/layout/header.php';
+        require $root . '/view/layout/header2.php';
         require $viewPath;
         require $root . '/view/layout/footer.php';
     }

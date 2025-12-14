@@ -2,7 +2,7 @@
 <main class="auth-page">
 
   <!-- Bouton retour -->
-  <a href="index.html" class="back-btn">Retour</a>
+  <a href="/artisphere/?controller=index&action=index" class="back-btn">Retour</a>
 
   <!-- Bloc centré -->
   <section class="auth-card" aria-label="Connexion">
@@ -26,7 +26,7 @@
 
       <!-- Liens en bas (2 colonnes) -->
       <div class="auth-links">
-        <a href="choix-profil.html" class="small-link">Créer un compte</a>
+        <a href="/artisphere/?controller=type_Compte&action=index" class="small-link">Créer un compte</a>
         <a href="#" class="small-link">Mot de passe oublié ?</a>
       </div>
 

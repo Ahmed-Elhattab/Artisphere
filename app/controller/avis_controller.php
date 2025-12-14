@@ -5,7 +5,8 @@ class avis_controller extends BaseController
     {
         $this->render('avis.php', [
             'title' => 'Artisphere – Avis Produits',
-            'pageCss' => 'avis.css'
+            'pageCss' => 'avis.css',
+            'pageJs'=> 'avis.js'
         ]);
     }
 }

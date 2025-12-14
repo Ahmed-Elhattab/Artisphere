@@ -4,14 +4,14 @@
   box-sizing: border-box;
 }
 
-/*body {
+body {
   font-family: 'Montserrat', sans-serif;
-  background: #b79b81;
+  background: #b6a894;
   color: #1a1a1a;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-}*/
+}
 
 .topbar {
   display: flex;
@@ -324,6 +324,13 @@ body {
   flex-direction: column;
   gap: 15px;
   margin-top: 30px;
+}
+
+.action-link{
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  text-decoration: none;
 }
 
 .btn-spe {

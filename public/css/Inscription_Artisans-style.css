@@ -2,12 +2,12 @@
    BASE
 ================================ */
 
-body {
+/*body {
   margin: 0;
   font-family: system-ui, sans-serif;
-  background: #c49a74; /* fond marron/beige */
+  background: #c49a74;
   color: #3c2b20;
-}
+}*/
 
 /* ===============================
    LAYOUT
@@ -20,6 +20,7 @@ body {
   justify-content: center;
   align-items: center;
   padding: 28px 18px;
+  font-family: system-ui, sans-serif;
 }
 
 /* Bouton Retour (en haut à gauche) */

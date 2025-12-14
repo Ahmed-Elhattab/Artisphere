@@ -107,18 +107,18 @@ font-weight: bold;
 }
 
 #page-fiche-evenement .bouton-enregistrer{
-position: absolute;
-background-color: #887bb0 ;
-color : white;
-text-align: center;
-border-radius: 30px;
-padding: 1%;
-width: 120px;
-height: 30px;
-line-height: 0px;
-font-family : 'Verdana';
-font-weight: bold;
-   position: absolute;
+    position: absolute;
+    background-color: #887bb0 ;
+    color : white;
+    text-align: center;
+    border-radius: 30px;
+    padding: 1%;
+    width: 120px;
+    height: 30px;
+    line-height: 0px;
+    font-family : 'Verdana';
+    font-weight: bold;
+    position: absolute;
     top: 41.5rem ;              
     left: 53.5rem; 
     cursor: pointer;

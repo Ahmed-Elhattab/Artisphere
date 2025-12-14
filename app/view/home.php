@@ -1,10 +1,3 @@
-<head>
-<meta charset="UTF-8">
-<title>Artisphere – FAQ</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="css/home.css">
-</head>
-
 <section class="home-hero">
   <div class="home-hero__left">
     <p class="home-hero__text">
@@ -39,7 +32,7 @@
   <aside class="home-hero__right">
     <div class="cta-card">
       <div class="cta-title">PRET A VENDRE DES<br>ARTICLES ?</div>
-      <a class="cta-button" href="/artisphere/?controller=FAQ&action=index">Commencer par ici</a>
+      <a class="cta-button" href="/artisphere/?controller=connexion&action=index">Commencer par ici</a>
     </div>
   </aside>
 </section>

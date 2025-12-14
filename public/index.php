@@ -39,5 +39,5 @@ if (!method_exists($controller, $action)) {
     exit;
 }
 
-// ici on appelle la méthode du contrôleur
+// méthode du contrôleur
 $controller->$action();

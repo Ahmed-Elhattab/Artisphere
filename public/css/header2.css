@@ -73,7 +73,7 @@ header{
     background: #3c2b20;
 }
 
-/* Icône profil à droite */
+/* --- Icône profil à droite --- */
 .profile-icon {
     width: 42px;
     height: 42px;
@@ -87,3 +87,29 @@ header{
     font-size: 1.3rem;
     background: #f6e6cf;
 }
+
+.profile-zone {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.profile-greeting {
+    font-size: 0.9rem;
+    color: #3c2b20;
+}
+
+.logout-link {
+    font-size: 0.7rem;
+    text-decoration: none;
+    color: #3c2b20;
+}
+
+.logout-link:hover {
+    text-decoration: underline;
+}
+
+/*
+#connected-profil-zone{
+
+}*/

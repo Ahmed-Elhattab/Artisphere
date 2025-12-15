@@ -17,10 +17,18 @@ class profil_controller extends BaseController
             exit;
         }*/
 
+        //securité : page accessible uniquement si connecté
+        $this->requireLogin();
+
+        $user = $_SESSION['user'];
+
         $this->render('profil.php', [
             'title' => 'Artisphere – Profil',
             'pageCss' => 'profil.css',
-            //'role'    => $_SESSION['role']
+            'nom'    => $user['nom'] ?? '',
+            'prenom' => $user['prenom'] ?? '',
+            'pseudo' => $user['pseudo'] ?? '',
+            'role'=> $user['role'] ??''
         ]);
     }
 }

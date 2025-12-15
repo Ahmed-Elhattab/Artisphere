@@ -62,4 +62,21 @@ class PersonneModel
         $stmt->execute([':pseudo' => $pseudo]);
         return (bool)$stmt->fetchColumn();
     }
+
+    public static function findByPseudoOrEmail(string $identifier): ?array
+    {
+        $pdo = Database::getConnection();
+
+        $sql = "SELECT *
+                FROM personne
+                WHERE pseudo = :id OR email = :id
+                LIMIT 1";
+
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([':id' => $identifier]);
+
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        return $user ?: null;
+    }
 }

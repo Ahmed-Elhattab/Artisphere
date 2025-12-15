@@ -12,10 +12,22 @@
       <p class="brand-subtitle">Connexion</p>
     </div>
 
-    <form class="auth-form" action="#" method="post">
+    <!--gère les erreurs détéctées par php lors de l'envoi du form-->
+    <?php if (!empty($errors)): ?>
+      <div class="form-error-box">
+        <h3>Erreurs lors de la connexion</h3>
+        <ul>
+          <?php foreach ($errors as $error): ?>
+            <li><?= htmlspecialchars($error, ENT_QUOTES, 'UTF-8') ?></li>
+          <?php endforeach; ?>
+        </ul>
+      </div>
+    <?php endif; ?>
+
+    <form class="auth-form" action="/artisphere/?controller=connexion&action=submit" method="post">
 
       <label class="field">
-        <input type="text" name="username" placeholder="Identifiant" required />
+        <input type="text" name="username" placeholder="Identifiant ou email" required />
       </label>
 
       <label class="field">

@@ -17,8 +17,8 @@
             <div class="avatar">👤</div>
             <button class="btn">CHANGER MA PHOTO</button>
         </div>
-        <input type="text" placeholder="NOM" class="input">
-        <input type="text" placeholder="PRENOM" class="input">
+        <span class="personal-info"><?= htmlspecialchars($nom, ENT_QUOTES, 'UTF-8') ?></span>
+        <span class="personal-info"><?= htmlspecialchars($prenom, ENT_QUOTES, 'UTF-8') ?></span>
         <button class="btn">EDITER MES INFORMATIONS</button>
         <!-- Première section : Mes commandes en cours -->
         <div class="orders">

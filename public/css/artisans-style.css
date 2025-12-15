@@ -16,58 +16,6 @@ body {
     padding: 0 32px;
 }
 
-/* --------- HEADER --------- */
-
-.site-header {
-    background: #f6e6cf;
-    border-bottom: 1px solid #e2d5c0;
-}
-
-.header-inner {
-    max-width: 1100px;
-    margin: 0 auto;
-    height: 80px;
-    padding: 0 40px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.logo-img {
-    height: 72px;
-}
-
-.main-nav {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    gap: 2.5rem;
-}
-
-.nav-link {
-    text-decoration: none;
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
-    font-size: 0.9rem;
-    color: #3c2b20;
-}
-
-.nav-link.active {
-    font-weight: 600;
-    border-bottom: 2px solid #3c2b20;
-}
-
-.profile-icon {
-    width: 56px;
-    height: 56px;
-    border-radius: 50%;
-    border: 2px solid #3c2b20;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.3rem;
-}
-
 /* --------- TITRE --------- */
 
 .artisans-header {

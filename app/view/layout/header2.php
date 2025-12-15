@@ -37,10 +37,34 @@
             <a href="/artisphere/?controller=evenement&action=index" class="nav-link">Évènement</a>
         </nav>
 
-        <!-- ICÔNE PROFIL À DROITE -->
-        <a href="/artisphere/?controller=profil&action=index" class="profile-icon" aria-label="Mon profil">
-            <span>👤</span>
-        </a>
+        <!--gere la redirection de l'icone profil quand un utilisateur est connecter ou non-->
+        <?php
+        $isLogged = !empty($_SESSION['user']);
+
+        $profileUrl = $isLogged
+            ? '/artisphere/?controller=profil&action=index'
+            : '/artisphere/?controller=connexion&action=index';
+        ?>
+
+        <!-- ZONE PROFIL À DROITE -->
+        <div class="profile-zone">
+
+            <a href="<?= $profileUrl ?>" class="profile-icon" aria-label="Mon profil">
+                <span>👤</span>
+            </a>
+
+            <?php if ($isLogged): ?>
+                <div id="text-profil-zone">
+                    <span class="profile-greeting">
+                        <?= htmlspecialchars($_SESSION['user']['pseudo'], ENT_QUOTES, 'UTF-8') ?>
+                    </span>
+                    <a href="/artisphere/?controller=connexion&action=logout" class="logout-link">
+                        Déconnexion
+                    </a>
+                </div>
+            <?php endif; ?>
+
+        </div>
 
     </div>
 </header>

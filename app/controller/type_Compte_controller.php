@@ -13,7 +13,7 @@ class type_Compte_controller extends BaseController
      * Choix du type de compte (client / artisan) : on le stocke en session.
      * Pour le projet, cela permet ensuite d'afficher les bons boutons (profil artisan, page créer fiche, etc.)
      */
-    public function choose(): void
+    /*public function choose(): void
     {
         $type = $_GET['type'] ?? '';
         $type = strtolower(trim($type));
@@ -32,5 +32,5 @@ class type_Compte_controller extends BaseController
             header('Location: ?controller=inscription_Client&action=index');
         }
         exit;
-    }
+    }*/
 }

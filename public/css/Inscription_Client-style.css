@@ -144,6 +144,62 @@
   text-decoration: underline;
 }
 
+/* --------- Box contraintes sur mdp --------- */
+.pwd-rules-box {
+  background: #fff7ed;
+  border: 1px solid rgba(0,0,0,.12);
+  border-radius: 10px;
+  padding: 14px 16px;
+  margin-bottom: 16px;
+}
+
+.pwd-rules-box h3 {
+  margin: 0 0 10px 0;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.pwd-rules-list {
+  margin: 0;
+  padding-left: 18px;
+}
+
+.rule {
+  margin: 6px 0;
+  font-size: .95rem;
+  font-weight: 500;
+}
+
+.rule.good { color: #1f7a3a; } /* vert */
+.rule.bad  { color: #8a1f1f; } /* rouge */
+
+/* --------- Box d'erreurs formulaire --------- */
+
+.form-error-box {
+    background-color: #fdecea;
+    border: 1px solid #f5c2c0;
+    color: #8a1f1f;
+    border-radius: 10px;
+    padding: 16px 18px;
+    margin-bottom: 20px;
+}
+
+.form-error-box h3 {
+    margin: 0 0 10px 0;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.form-error-box ul {
+    margin: 0;
+    padding-left: 18px;
+}
+
+.form-error-box li {
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
 /* ===============================
    RESPONSIVE
 ================================ */

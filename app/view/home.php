@@ -10,7 +10,7 @@
     <div class="home-products">
       <?php for ($i=0; $i<6; $i++): ?>
         <article class="product-card">
-          <img src="/artisphere/images/placeholder_product.jpg" alt="Produit">
+          <img src="/artisphere/images/produit.png" alt="Produit">
           <div class="product-price">TARIF : 250€</div>
         </article>
       <?php endfor; ?>

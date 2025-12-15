@@ -1,0 +1,25 @@
+<main id="page-fiche-produit">
+
+    <label for="importImage" class="imagerond">IMAGE</label>
+    <input type="file" id="importImage" name="fichier_image" class="importimage">
+
+    <h1 class="titre-produit">NOUVEAU PRODUIT </h1>  
+    <p1 class="para_produit">NOM DU PRODUIT<br></p1>
+    <input class="nom_produit" type="text" id="nom_produit" ><br>
+    <p2 class="para_catégorie">Catégorie <br></p2>
+    <select  class="choixcategorie" id="choixcategorie" name="catégorie_selectionne">
+    <option value="" disabled selected>Choisissez une option</option>
+    <option value="produit_a">Bijoux</option>
+    <option value="produit_b">Tables</option>
+    <option value="produit_c">Chaises</option>
+    </select><br>
+    <p3 class="para_quantités">Quantités <br></p3>
+    <input type="text" class="Quantités" id="Quantités">
+    <p4 class="para_matériaux"><br>Matériaux</p4>
+    <br>
+    <input type="text" class="Matériaux" id="Matériaux">
+    <p5 class="para_description"><br>Description</p5>
+    <br>
+    <input type="text" class="Description" id="Description"> <br>  <br>
+    <button class="bouton-enregistrer" type="button">Enregistrer</button>
+</main>

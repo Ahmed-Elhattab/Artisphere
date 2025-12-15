@@ -1,0 +1,142 @@
+
+.home-hero {
+  background: #b6a894;
+  padding: 48px 40px 24px;
+  display: grid;
+  grid-template-columns: 1fr 360px;
+  gap: 32px;
+  min-height: calc(100vh - 140px); /* selon ton header */
+}
+
+.home-hero__text {
+  font-size: 22px;
+  line-height: 1.5;
+  margin: 0 0 28px;
+  max-width: 760px;
+}
+
+.home-pill {
+  background: #ded6c9;
+  color: #6f7c85;
+  border-radius: 999px;
+  padding: 14px 26px;
+  display: inline-block;
+  font-weight: 600;
+  letter-spacing: .5px;
+  margin: 18px 0 18px;
+}
+
+.home-products {
+  display: flex;
+  gap: 26px;
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
+
+.product-card {
+  width: 150px;
+  background: #d8cfbf;
+  border-radius: 28px;
+  padding: 14px;
+  text-align: center;
+}
+
+.product-card img {
+  width: 120px;
+  height: 85px;
+  object-fit: cover;
+  border-radius: 6px;
+  background: #eee;
+}
+
+.product-price {
+  margin-top: 10px;
+  background: #eee6d8;
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 10px;
+  letter-spacing: 1px;
+}
+
+.home-events {
+  display: flex;
+  gap: 26px;
+  flex-wrap: wrap;
+}
+
+.event-card {
+  width: 150px;
+  background: #d8cfbf;
+  border-radius: 28px;
+  padding: 14px;
+  text-align: center;
+}
+
+.event-card img {
+  width: 120px;
+  height: 85px;
+  object-fit: cover;
+  border-radius: 18px;
+  background: #eee;
+  margin: 0 auto 10px;
+  display: block;
+}
+
+.event-title {
+  font-weight: 700;
+  font-size: 12px;
+  margin-bottom: 10px;
+}
+
+.event-date {
+  font-weight: 800;
+  font-size: 12px;
+  line-height: 1.15;
+}
+
+.home-hero__right {
+  display: flex;
+  justify-content: flex-end;
+  height: 20%;
+}
+
+.cta-card {
+  background: #ded6c9;
+  border-radius: 34px;
+  padding: 26px 22px;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+}
+
+.cta-title {
+  color: #6f7c85;
+  font-weight: 700;
+  margin-bottom: 18px;
+  font-size: 20px;
+}
+
+.cta-button {
+  display: inline-block;
+  background: #b6a894;
+  color: white;
+  text-decoration: none;
+  padding: 12px 18px;
+  border-radius: 999px;
+  font-weight: 700;
+}
+
+.home-bottom-links {
+  background: #efe7db;
+  display: flex;
+  justify-content: space-around;
+  padding: 18px 20px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.home-bottom-links a {
+  color: #6f7c85;
+  text-decoration: none;
+}

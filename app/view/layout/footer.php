@@ -1,0 +1,16 @@
+<footer class="site-footer">
+    <div class="footer-inner">
+        <a href="?controller=apropos&action=index" class="footer-link">À propos de nous</a>
+        <a href="?controller=mentions&action=index" class="footer-link">Mentions légales</a>
+        <a href="?controller=FAQ&action=index" class="footer-link">FAQ</a>
+    </div>
+
+    <!--rajoute un fichier js si il y en a un de spécifier dans le controleur-->
+    <?php if (!empty($pageJs)): ?>
+        <?php foreach ((array)$pageJs as $js): ?>
+            <script src="js/<?= htmlspecialchars($js) ?>"></script>
+        <?php endforeach; ?>
+    <?php endif; ?>
+</footer>
+</body>
+</html>

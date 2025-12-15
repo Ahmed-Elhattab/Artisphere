@@ -1,3 +1,12 @@
+
+body{
+    width: 100%;
+    margin: 0;
+    background: #b6a894;
+}
+
+
+
 /* Zone globale du header */
 .top-header {
     width: 100%;

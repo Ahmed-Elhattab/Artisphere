@@ -1,0 +1,155 @@
+/* ===============================
+   BASE
+================================ */
+
+/*body {
+  margin: 0;
+  font-family: system-ui, sans-serif;
+  background: #c49a74; 
+  color: #3c2b20;
+}*/
+
+/* ===============================
+   LAYOUT
+================================ */
+
+.auth-page {
+  min-height: 100vh;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 28px 18px;
+  font-family: system-ui, sans-serif;
+}
+
+/* Bouton Retour (en haut à gauche) */
+.back-btn {
+  position: absolute;
+  top: 18px;
+  left: 18px;
+  text-decoration: none;
+  background: #7c4dff; /* violet comme la maquette */
+  color: #fff;
+  padding: 8px 14px;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+/* ===============================
+   CARD
+================================ */
+
+.auth-card {
+  width: min(420px, 92vw);
+  text-align: center;
+}
+
+.brand {
+  margin-bottom: 18px;
+}
+
+.brand-logo {
+  width: 150px;
+  height: auto;
+  display: block;
+  margin: 0 auto 10px;
+}
+
+.brand-name {
+  margin: 0;
+  font-size: 1rem;
+  letter-spacing: 0.12em;
+  font-weight: 700;
+}
+
+.brand-subtitle {
+  margin: 10px 0 0;
+  font-size: 0.95rem;
+  color: rgba(60, 43, 32, 0.85);
+}
+
+/* ===============================
+   FORM
+================================ */
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Champ arrondi avec "icône" */
+.field {
+  width: 100%;
+  background: #fff;
+  border-radius: 999px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  display: flex;
+  align-items: center;
+  padding: 10px 14px;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.08);
+}
+
+.field-icon {
+  width: 28px;
+  display: inline-flex;
+  justify-content: center;
+  opacity: 0.65;
+  font-size: 1rem;
+}
+
+.field input {
+  border: none;
+  outline: none;
+  width: 100%;
+  font-size: 0.95rem;
+  background: transparent;
+  color: #3c2b20;
+}
+
+.field input::placeholder {
+  color: rgba(60, 43, 32, 0.55);
+}
+
+/* Bouton principal */
+.primary-btn {
+  width: 100%;
+  border: none;
+  cursor: pointer;
+  border-radius: 999px;
+  padding: 12px 16px;
+  margin-top: 6px;
+  font-weight: 700;
+  color: #fff;
+  background: #7a4a1f; /* marron foncé */
+  box-shadow: 0 10px 18px rgba(0,0,0,0.12);
+}
+
+.primary-btn:hover {
+  filter: brightness(0.97);
+}
+
+/* Lien aide */
+.help-link {
+  margin-top: 6px;
+  font-size: 0.85rem;
+  color: rgba(60, 43, 32, 0.75);
+  text-decoration: none;
+}
+
+.help-link:hover {
+  text-decoration: underline;
+}
+
+/* ===============================
+   RESPONSIVE
+================================ */
+
+@media (max-width: 420px) {
+  .brand-logo {
+    width: 82px;
+  }
+}

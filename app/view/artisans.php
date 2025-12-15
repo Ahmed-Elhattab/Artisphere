@@ -1,0 +1,117 @@
+<main>
+
+    <!-- TITRE -->
+    <section class="section artisans-header">
+        <div class="container">
+            <h1>Tous les artisans</h1>
+            <p class="artisans-intro">
+                Découvre les créateurs présents sur Artisphere : ébénistes, céramistes,
+                bijoutiers, maroquiniers… Chaque profil représente un savoir-faire unique.
+            </p>
+        </div>
+    </section>
+
+    <!-- FILTRES -->
+    <section class="section">
+        <div class="container">
+
+            <div class="artisans-filters">
+                <input type="search"
+                       class="artisans-search"
+                       placeholder="Rechercher un artisan, une spécialité, une ville…">
+
+                <div class="artisans-filter-pills">
+                    <button class="filter-pill filter-pill-active">Tous</button>
+                    <button class="filter-pill">Bois</button>
+                    <button class="filter-pill">Céramique</button>
+                    <button class="filter-pill">Bijoux</button>
+                    <button class="filter-pill">Maroquinerie</button>
+                </div>
+            </div>
+
+            <!-- GRILLE ARTISANS -->
+            <div class="grid-3 artisans-grid">
+
+                <article class="artisan-card">
+                    <div class="artisan-header">
+                        <div class="artisan-avatar">LB</div>
+                        <div>
+                            <h2 class="artisan-name">Léa Bernard</h2>
+                            <p class="artisan-location">Ébéniste – Paris (75)</p>
+                        </div>
+                    </div>
+                    <p class="artisan-bio">
+                        Spécialisée dans le mobilier sur-mesure en chêne et noyer,
+                        Léa conçoit des pièces contemporaines valorisant les veines du bois.
+                    </p>
+                    <div class="artisan-tags">
+                        <span class="artisan-tag">Bois</span>
+                        <span class="artisan-tag">Mobilier</span>
+                        <span class="artisan-tag">Sur-mesure</span>
+                    </div>
+                    <a href="#" class="artisan-btn">Voir le profil</a>
+                </article>
+
+                <article class="artisan-card">
+                    <div class="artisan-header">
+                        <div class="artisan-avatar">AM</div>
+                        <div>
+                            <h2 class="artisan-name">Amine Moreau</h2>
+                            <p class="artisan-location">Céramiste – Lyon (69)</p>
+                        </div>
+                    </div>
+                    <p class="artisan-bio">
+                        Amine crée des pièces en grès émaillé aux couleurs douces :
+                        tasses, bols, assiettes et objets décoratifs.
+                    </p>
+                    <div class="artisan-tags">
+                        <span class="artisan-tag">Céramique</span>
+                        <span class="artisan-tag">Arts de la table</span>
+                    </div>
+                    <a href="#" class="artisan-btn">Voir le profil</a>
+                </article>
+
+                <article class="artisan-card">
+                    <div class="artisan-header">
+                        <div class="artisan-avatar">SC</div>
+                        <div>
+                            <h2 class="artisan-name">Sara Costa</h2>
+                            <p class="artisan-location">Bijoutière – Marseille (13)</p>
+                        </div>
+                    </div>
+                    <p class="artisan-bio">
+                        Bijoux minimalistes en argent et pierres fines,
+                        façonnés à la main en petites séries.
+                    </p>
+                    <div class="artisan-tags">
+                        <span class="artisan-tag">Bijoux</span>
+                        <span class="artisan-tag">Argent</span>
+                        <span class="artisan-tag">Petites séries</span>
+                    </div>
+                    <a href="#" class="artisan-btn">Voir le profil</a>
+                </article>
+
+                <article class="artisan-card">
+                    <div class="artisan-header">
+                        <div class="artisan-avatar">TH</div>
+                        <div>
+                            <h2 class="artisan-name">Thomas Hervier</h2>
+                            <p class="artisan-location">Maroquinier – Toulouse (31)</p>
+                        </div>
+                    </div>
+                    <p class="artisan-bio">
+                        Fabrication de sacs et accessoires en cuir pleine fleur,
+                        avec une attention particulière aux finitions.
+                    </p>
+                    <div class="artisan-tags">
+                        <span class="artisan-tag">Maroquinerie</span>
+                        <span class="artisan-tag">Cuir</span>
+                    </div>
+                    <a href="#" class="artisan-btn">Voir le profil</a>
+                </article>
+
+            </div>
+        </div>
+    </section>
+
+</main>

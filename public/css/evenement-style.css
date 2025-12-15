@@ -1,0 +1,192 @@
+/* --------- BASE --------- */
+
+body {
+    margin: 0;
+    font-family: system-ui, sans-serif;
+    background: #b6a894;
+}
+
+.section {
+    padding: 2rem 0;
+}
+
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 32px;
+}
+
+/* --------- HEADER --------- */
+
+.site-header {
+    background: #f6e6cf;
+    border-bottom: 1px solid #e2d5c0;
+}
+
+.header-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    height: 80px;
+    padding: 0 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo-img {
+    height: 72px;
+}
+
+.main-nav {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    gap: 2.5rem;
+}
+
+.nav-link {
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-size: 0.9rem;
+    color: #3c2b20;
+}
+
+.nav-link.active {
+    font-weight: 600;
+    border-bottom: 2px solid #3c2b20;
+}
+
+.profile-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    border: 2px solid #3c2b20;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+}
+
+/* --------- TITRE --------- */
+
+.events-header {
+    text-align: center;
+}
+
+.events-intro {
+    max-width: 640px;
+    margin: 0 auto;
+    color: #4b5563;
+}
+
+/* --------- FILTRES --------- */
+
+.events-filters {
+    display: flex;
+    gap: 0.6rem;
+    margin-bottom: 1.5rem;
+}
+
+.filter-pill {
+    border-radius: 999px;
+    padding: 0.4rem 1rem;
+    border: 1px solid #e5e7eb;
+    background: #fff;
+    cursor: pointer;
+}
+
+.filter-pill-active {
+    background: #3c2b20;
+    color: #fff;
+}
+
+/* --------- GRILLE --------- */
+
+.grid-3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+}
+
+/* --------- CARTES --------- */
+
+.event-card {
+    background: #d4a976;
+    border-radius: 14px;
+    padding: 1.4rem;
+    box-shadow: 0 6px 14px rgba(0,0,0,0.08);
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.event-title {
+    font-size: 1.05rem;
+}
+
+.event-meta,
+.event-extra {
+    font-size: 0.85rem;
+    color: #4b5563;
+}
+
+.event-desc {
+    font-size: 0.95rem;
+}
+
+.event-btn {
+    margin-top: auto;
+    text-decoration: none;
+    font-weight: 500;
+    color: #3c2b20;
+}
+
+/* --------- TAGS --------- */
+
+.event-tag {
+    width: fit-content;
+    padding: 0.2rem 0.6rem;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 500;
+}
+
+.event-tag-atelier { background: #ecfdf5; color: #15803d; }
+.event-tag-expo    { background: #eff6ff; color: #1d4ed8; }
+.event-tag-salon   { background: #fff7ed; color: #c2410c; }
+
+/* --------- FOOTER --------- */
+
+.site-footer {
+    background: #f6e6cf;
+    padding: 1rem 0;
+}
+
+.footer-inner {
+    display: flex;
+    justify-content: center;
+    gap: 4rem;
+}
+
+.footer-link {
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    color: #3c2b20;
+}
+
+/* --------- RESPONSIVE --------- */
+
+@media (max-width: 900px) {
+    .grid-3 {
+        grid-template-columns: 1fr;
+    }
+
+    .header-inner {
+        flex-direction: column;
+        height: auto;
+        padding: 1rem;
+        gap: 0.8rem;
+    }
+}

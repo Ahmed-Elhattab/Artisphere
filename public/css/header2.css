@@ -1,0 +1,89 @@
+
+body{
+    width: 100%;
+    margin: 0;
+    background: #b6a894;
+}
+
+
+
+/* --------- HEADER --------- */
+
+header{
+    font-family: system-ui, sans-serif;
+}
+.site-header {
+    background: #f6e6cf; /* beige clair */
+    border-bottom: 1px solid #e2d5c0;
+}
+
+.header-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    height: 80px;              /* hauteur fixe de la banderole */
+    padding: 0 40px;           /* plus de padding vertical, seulement horizontal */
+    display: flex;
+    align-items: center;       /* centre verticalement logo / menu / profil */
+    justify-content: space-between;
+    gap: 40px;
+}
+
+/* APRÈS */
+.logo-zone {
+    display: flex;
+    align-items: center;
+}
+
+.logo-img {
+    height: 72px;          /* adapte si ton logo est trop grand/petit */
+    width: auto;
+}
+
+
+/* Menu au centre */
+.main-nav {
+    display: flex;
+    justify-content: center; /* centre CATALOGUE / ARTISAN / … */
+    gap: 3rem;
+}
+
+.nav-link {
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-size: 0.9rem;
+    color: #3c2b20;
+    padding-bottom: 3px;
+    position: relative;
+}
+
+.nav-link:hover,
+.nav-link.active {
+    font-weight: 600;
+}
+
+.nav-link.active::after,
+.nav-link:hover::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 2px;
+    width: 100%;
+    background: #3c2b20;
+}
+
+/* Icône profil à droite */
+.profile-icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    border: 2px solid #3c2b20;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: #3c2b20;
+    font-size: 1.3rem;
+    background: #f6e6cf;
+}

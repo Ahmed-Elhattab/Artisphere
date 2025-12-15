@@ -1,0 +1,26 @@
+.simple-page{
+  padding: 28px 0 40px;
+}
+
+.simple-card{
+  max-width: 900px;
+  margin: 0 auto;
+  background: #d4a976;
+  border-radius: 18px;
+  padding: 22px;
+  box-shadow: 0 10px 20px rgba(0,0,0,.12);
+}
+
+.simple-card h1{
+  margin: 0 0 10px;
+}
+
+.simple-card p{
+  margin: 0 0 10px;
+  line-height: 1.5;
+}
+
+.simple-card ul{
+  margin: 0;
+  padding-left: 18px;
+}

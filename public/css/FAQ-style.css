@@ -217,3 +217,18 @@ body {
         gap: 0.6rem;
     }
 }
+
+/* Lien "Contactez-nous" (bas droite, au-dessus du footer) */
+.faq-contact-right{
+    display: flex;
+    justify-content: flex-end;
+    padding-bottom: 10px;
+}
+.faq-contact-link{
+    text-decoration: underline;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-size: 0.85rem;
+    color: #3c2b20;
+    font-weight: 600;
+}

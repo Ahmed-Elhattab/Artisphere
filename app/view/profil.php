@@ -2,6 +2,16 @@
 <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
 </head>-->
 <main class="container">
+
+    <!-- Demo helpers (you can remove before submission if you want) -->
+    <div class="role-bar">
+        <span class="role-badge">Rôle : <?= htmlspecialchars($role ?? 'inconnu', ENT_QUOTES, 'UTF-8') ?></span>
+        <div class="role-links">
+            <a href="?controller=profil&action=index&role=client">Client</a>
+            <a href="?controller=profil&action=index&role=artisan">Artisan</a>
+            <a href="?controller=profil&action=index&role=admin">Admin</a>
+        </div>
+    </div>
     <section class="profile-section">
         <div class="photo-block">
             <div class="avatar">👤</div>

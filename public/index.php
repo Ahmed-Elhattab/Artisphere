@@ -3,6 +3,11 @@
 IMPORTANT : ce fichier ne sert que de routeur entre les différentes pages du site
 */
 
+// Sessions (roles / login simulation, etc.)
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
 $root = dirname(__DIR__);
 
 // core

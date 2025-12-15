@@ -21,7 +21,7 @@
     <div class="home-events">
       <?php for ($i=0; $i<5; $i++): ?>
         <article class="event-card">
-          <img src="/artisphere/images/placeholder_event.jpg" alt="Event">
+          <img src="images/image-photo.jpg" alt="Évènement">
           <div class="event-title">Lumière sur le bois</div>
           <div class="event-date">DU 15 AU 28<br>DÉCEMBRE 2025</div>
         </article>

@@ -4,21 +4,30 @@
     <meta charset="utf-8">
     <title><?= htmlspecialchars($title ?? 'Artisphere', ENT_QUOTES, 'UTF-8') ?></title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" type="image/x-icon" href="favicon.ico">
+
+    <?php
+    // Base URL (works whether your folder is /chabchoub/public or /artisphere/public, etc.)
+    // All asset paths become: css/..., images/..., js/... and all links become: ?controller=...&action=...
+    $base = rtrim(dirname($_SERVER['SCRIPT_NAME'] ?? '/'), '/');
+    ?>
+    <base href="<?= htmlspecialchars($base . '/', ENT_QUOTES, 'UTF-8') ?>">
+
     <link rel="stylesheet" href="css/header2.css">
     <link rel="stylesheet" href="css/footer.css">
 
-    <!--rajoute un fichier css étant spécifié dans le controleur-->
     <?php if (!empty($pageCss)): ?>
-        <link rel="stylesheet" href="/artisphere/css/<?= htmlspecialchars($pageCss, ENT_QUOTES, 'UTF-8') ?>">
+        <link rel="stylesheet" href="css/<?= htmlspecialchars($pageCss, ENT_QUOTES, 'UTF-8') ?>">
     <?php endif; ?>
 </head>
+
 <header class="site-header">
     <div class="header-inner">
 
         <!-- LOGO À GAUCHE -->
         <div class="logo-zone">
-            <a class="logo_clickable" href="/artisphere/?controller=index&action=index" class="nav-link"><img src="images/logo_site.png" alt="Logo Artisphere" class="logo-img"></a>
+            <a class="logo_clickable" href="?controller=index&action=index">
+                <img src="images/logo_site.png" alt="Logo Artisphere" class="logo-img">
+            </a>
         </div>
 
         <!-- MENU AU CENTRE -->

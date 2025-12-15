@@ -78,14 +78,23 @@ header{
     width: 42px;
     height: 42px;
     border-radius: 50%;
+    overflow: hidden;
     border: 2px solid #3c2b20;
     display: flex;
     align-items: center;
     justify-content: center;
-    text-decoration: none;
-    color: #3c2b20;
-    font-size: 1.3rem;
     background: #f6e6cf;
+    text-decoration: none;
+    font-size: 1.4rem;
+    color: #3c2b20;
+}
+
+/* Image avatar dans le header */
+.profile-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
 }
 
 .profile-zone {

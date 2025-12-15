@@ -53,6 +53,7 @@ class connexion_controller extends BaseController
             'prenom' => $user['prenom'],
             'nom' => $user['nom'],
             'role'   => $user['role'],
+            'avatar' => $user['avatar'] ?? null,
         ];
 
         header('Location: /artisphere/?controller=index&action=index');

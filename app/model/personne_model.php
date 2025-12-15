@@ -79,4 +79,17 @@ class PersonneModel
 
         return $user ?: null;
     }
+
+    #met à jour le champ avatar (= le champ stockant LE CHEMIN vers la photo de profil)
+    public static function updateAvatar(int $idPersonne, ?string $filename): void
+    {
+        $pdo = Database::getConnection();
+
+        $sql = "UPDATE personne SET avatar = :avatar WHERE id_personne = :id";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([
+            ':avatar' => $filename, //peut être NULL
+            ':id'     => $idPersonne,
+        ]);
+    }
 }

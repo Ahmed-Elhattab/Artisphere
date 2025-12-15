@@ -40,17 +40,34 @@
         <!--gere la redirection de l'icone profil quand un utilisateur est connecter ou non-->
         <?php
         $isLogged = !empty($_SESSION['user']);
+        $avatarFile = $_SESSION['user']['avatar'] ?? null;
 
         $profileUrl = $isLogged
             ? '/artisphere/?controller=profil&action=index'
             : '/artisphere/?controller=connexion&action=index';
+        
+        // Construction de l’URL avatar (si existant)
+        $avatarUrl = null;
+        if ($isLogged && $avatarFile) {
+            $diskPath = rtrim($_SERVER['DOCUMENT_ROOT'], '/\\') . '/artisphere/images/avatars/' . $avatarFile;
+            if (is_file($diskPath)) {
+                $avatarUrl = '/artisphere/images/avatars/' . $avatarFile;
+            }
+        }
         ?>
+        
 
         <!-- ZONE PROFIL À DROITE -->
         <div class="profile-zone">
 
             <a href="<?= $profileUrl ?>" class="profile-icon" aria-label="Mon profil">
-                <span>👤</span>
+                <?php if ($avatarUrl): ?>
+                    <img src="<?= htmlspecialchars($avatarUrl, ENT_QUOTES, 'UTF-8') ?>"
+                        alt="Avatar utilisateur"
+                        onerror="this.onerror=null; this.textContent='👤';">
+                <?php else: ?>
+                    👤
+                <?php endif; ?>
             </a>
 
             <?php if ($isLogged): ?>

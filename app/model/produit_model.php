@@ -32,4 +32,24 @@ class ProduitModel
 
         return (int)$pdo->lastInsertId();
     }
+
+    public static function findByCreateur(int $idCreateur): array
+    {
+        $pdo = Database::getConnection();
+        $stmt = $pdo->prepare("SELECT id_produit, nom, image, quantite, prix, description
+                            FROM pproduit
+                            WHERE id_createur = :id
+                            ORDER BY id_produit DESC");
+        $stmt->execute([':id' => $idCreateur]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public static function findById(int $id): ?array
+    {
+        $pdo = Database::getConnection();
+        $stmt = $pdo->prepare("SELECT * FROM pproduit WHERE id_produit = :id LIMIT 1");
+        $stmt->execute([':id' => $id]);
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $row ?: null;
+    }
 }

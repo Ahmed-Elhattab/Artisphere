@@ -1,0 +1,176 @@
+.mycrea-page {
+  background: #b6a894;
+  padding: 28px 0 40px;
+}
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+
+.mycrea-header h1 {
+  margin: 0 0 6px;
+  color: #3c2b20;
+}
+
+.mycrea-header p {
+  margin: 0;
+  color: #4b5563;
+  max-width: 720px;
+}
+
+.mycrea-section {
+  margin-top: 26px;
+  background: #f6e6cf;
+  border: 1px solid #e2d5c0;
+  border-radius: 18px;
+  padding: 18px;
+}
+
+.mycrea-section-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.mycrea-section-title h2 {
+  margin: 0;
+  color: #3c2b20;
+  font-size: 1.2rem;
+}
+
+.btn-light {
+  background: #fff;
+  border: 1px solid #e2d5c0;
+  color: #3c2b20;
+  border-radius: 999px;
+  padding: 10px 14px;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: .9rem;
+}
+
+.btn-light:hover { filter: brightness(0.98); }
+
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.card {
+  background: #ffffff;
+  border: 1px solid rgba(0,0,0,.08);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 6px 16px rgba(0,0,0,.06);
+  display: flex;
+  flex-direction: column;
+}
+
+.card-media {
+  height: 170px;
+  background: #efe6d8;
+  position: relative;
+  overflow: hidden;
+}
+
+.card-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.card-media-fallback {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-size: 2.2rem;
+  opacity: .8;
+}
+
+.card-media.noimg .card-media-fallback { opacity: 1; }
+
+.card-body {
+  padding: 14px 14px 16px;
+}
+
+.card-title {
+  margin: 0 0 6px;
+  color: #3c2b20;
+  font-size: 1.05rem;
+}
+
+.card-meta {
+  margin: 0 0 6px;
+  color: #4b5563;
+  font-size: .9rem;
+}
+
+.card-desc {
+  margin: 8px 0 0;
+  color: #4b5563;
+  font-size: .92rem;
+  line-height: 1.35;
+}
+
+.card-actions {
+  margin-top: 12px;
+  display: flex;
+  gap: 10px;
+}
+
+.btn-outline {
+  border: 1px solid #3c2b20;
+  color: #3c2b20;
+  border-radius: 999px;
+  padding: 8px 12px;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: .88rem;
+}
+
+.btn-outline:hover {
+  background: #3c2b20;
+  color: #fff;
+}
+
+.empty {
+  margin: 8px 0 0;
+  color: #4b5563;
+}
+
+/* ===== Masquer le placeholder quand l'image existe ===== */
+
+.card-media img {
+  display: block;
+}
+
+/* Par défaut, on cache le placeholder */
+.card-media-fallback {
+  display: none;
+}
+
+/* Si l'image est absente ou cassée → on affiche le placeholder */
+.card-media.noimg .card-media-fallback {
+  display: grid;
+}
+
+/* Et on cache l'image si elle est cassée */
+.card-media.noimg img {
+  display: none;
+}
+
+@media (max-width: 980px) {
+  .cards-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 640px) {
+  .cards-grid { grid-template-columns: 1fr; }
+  .container { padding: 0 16px; }
+}

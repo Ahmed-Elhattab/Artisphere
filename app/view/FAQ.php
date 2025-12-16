@@ -9,6 +9,14 @@
                 la gestion des commandes ? Trouve ici les réponses aux questions les plus fréquentes.
             </p>
         </div>
+        <!--si admin = possibilité de creer des FAQ-->
+        <?php if (!empty($_SESSION['user']) && $_SESSION['user']['role'] === 'admin'): ?>
+            <div class="add-buttons">
+                <div class="action-buttons">
+                    <a class="action-link" href="/artisphere/?controller=FAQ_create&action=create"><button class="btn-spe">CREER UNE QUESTION/REPONSE</button></a>
+                </div>
+            </div>
+        <?php endif; ?>
     </section>
 
     <!-- liste des questions-réponses -->

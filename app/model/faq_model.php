@@ -23,4 +23,21 @@ class FaqModel
         }
         return $grouped;
     }
+
+    public static function create(array $data): int
+    {
+        $pdo = Database::getConnection();
+
+        $sql = "INSERT INTO faq (categorie, question, reponse)
+                VALUES (:categorie, :question, :reponse)";
+
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([
+            ':categorie' => $data['categorie'],
+            ':question'  => $data['question'],
+            ':reponse'   => $data['reponse'],
+        ]);
+
+        return (int)$pdo->lastInsertId();
+    }
 }

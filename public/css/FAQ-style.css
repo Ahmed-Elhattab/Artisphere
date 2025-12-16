@@ -232,3 +232,55 @@ body {
     color: #3c2b20;
     font-weight: 600;
 }
+
+.action-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 30px;
+  width: 20%;
+  
+}
+
+.action-link{
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  text-decoration: none;
+}
+
+.btn-spe {
+  background: #a24436;
+  color: white;
+  border: none;
+  padding: 15px 40px;
+  border-radius: 30px;
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: background 0.3s;
+  text-align: center;
+}
+
+.btn-spe:hover { background: #8b2e23; }
+
+.add-buttons {
+  display: flex;
+  justify-content: center; /* centre le bloc */
+  margin-top: 20px;
+}
+
+.action-buttons {
+  width: 100%;            /* au lieu de 20% */
+  max-width: 360px;       /* largeur raisonnable */
+}
+
+.action-link {
+  display: block;         /* pas besoin de flex ici */
+  text-decoration: none;
+}
+
+.btn-spe {
+  width: 100%;            /* le bouton prend toute la largeur du bloc */
+}

@@ -51,4 +51,35 @@ class BaseController
             exit;
         }
     }
+
+    protected function requireOwner(int $ownerId): void
+    {
+        $this->requireLogin();
+
+        if ((int)$_SESSION['user']['id'] !== (int)$ownerId) {
+            // 403 simple
+            http_response_code(403);
+            $this->render('not_found.php', [
+                'title' => 'Accès refusé – Artisphere',
+                'pageCss' => 'details-style.css',
+                'message' => "Accès refusé : vous n’êtes pas autorisé à consulter ce contenu."
+            ]);
+            exit;
+        }
+    }
+
+    #l'admin outrepasse le require role
+    protected function requireRole(string $role): void
+    {
+        $this->requireLogin();
+        if (($_SESSION['user']['role'] ?? '') !== $role && ($_SESSION['user']['role'] ?? '') !== 'admin') {
+            http_response_code(403);
+            $this->render('not_found.php', [
+                'title' => 'Accès refusé – Artisphere',
+                'pageCss' => 'details-style.css',
+                'message' => "Accès refusé."
+            ]);
+            exit;
+        }
+    }
 }

@@ -91,10 +91,17 @@
       <div class="order-content"></div>
     </div>
 
+    <?php if (!empty($_SESSION['user']) && $_SESSION['user']['role'] === 'artisan' || $_SESSION['user']['role'] === 'admin'): ?>
     <div class="action-buttons">
       <a class="action-link" href="/artisphere/?controller=creer_fiche&action=index"><button class="btn-spe">CRÉER UNE NOUVELLE FICHE</button></a>
     </div>
     <div class="action-buttons">
+      <a class="action-link" href="/artisphere/?controller=mes_creations&action=index"><button class="btn-spe">MES PRODUITS ET EVENEMENTS</button></a>
+    </div>
+    <?php endif; ?>
+    <?php if (!empty($_SESSION['user']) && $_SESSION['user']['role'] === 'admin'): ?>
+    <div class="action-buttons">
       <a class="action-link" href="/artisphere/?controller=chercher_compte&action=index"><button class="btn-spe">CHERCHER UN COMPTE</button></a>
     </div>
+    <?php endif; ?>
 </main>

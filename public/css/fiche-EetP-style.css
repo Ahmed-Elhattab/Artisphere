@@ -315,6 +315,28 @@ top: 21rem ;
 left: 37rem; 
 }
 
+#page-fiche-produit .Prix{
+  border-radius: 30px;
+  background-color: rgba(136, 123, 176, 0.7);
+  font-family: 'Verdana';
+  font-weight: bold;
+  border: none;
+  padding: 1%;
+  width: 140px;
+  height: 10px;
+  position: absolute;
+  top: 28.5rem;     /* ajuste si ça chevauche */
+  left: 43.5rem;
+}
+
+#page-fiche-produit .para_prix{
+  font-family: 'Verdana';
+  color: rgba(136, 123, 176, 0.7);
+  position: absolute;
+  top: 28rem;
+  left: 37rem;
+}
+
 #page-fiche-evenement .para_places{
 font-family : 'Verdana';
 color : rgba(136, 123, 176, 0.7);
@@ -329,6 +351,11 @@ color : rgba(136, 123, 176, 0.7);
 position: absolute;
 top: 16rem ;              
 left: 37rem; 
+}
+
+#page-fiche-produit {
+  position: relative;
+  min-height: 900px; /* ajuste selon ton design */
 }
 
 #page-fiche-produit .nom_produit{

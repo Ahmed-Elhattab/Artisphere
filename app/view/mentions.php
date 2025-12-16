@@ -2,7 +2,7 @@
   <div class="simple-card">
     <h1>Mentions légales</h1>
     <p>
-      Cette page est un placeholder pour le projet (contenu à compléter selon les consignes de votre cours).
+      le présent site et son contenu respectent le RGPD.
     </p>
     <ul>
       <li>Éditeur : Artisphere</li>

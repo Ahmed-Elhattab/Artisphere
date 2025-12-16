@@ -1,0 +1,155 @@
+/* Layout page évènement */
+#page-fiche-evenement {
+  background-color: #daebf3;
+  padding: 32px;
+  min-height: calc(100vh - 160px);
+  box-sizing: border-box;
+}
+
+#page-fiche-evenement form{
+  max-width: 980px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 160px 1fr;
+  gap: 18px 26px;
+  align-items: start;
+}
+
+#page-fiche-evenement .titre-produit{
+  grid-column: 1 / -1;
+  margin: 0 0 8px;
+}
+
+/* Bloc photo */
+.event-photo-block{
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin: 8px 0 10px;
+}
+
+.event-avatar{
+  width: 140px;
+  height: 140px;
+  min-width: 140px;
+  min-height: 140px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: rgba(136, 123, 176, 0.25);
+  border: 2px solid rgba(136, 123, 176, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.event-avatar__placeholder{
+  font-size: 2.2rem;
+  opacity: 0.85;
+}
+
+.event-avatar img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.event-photo-actions .hint{
+  margin: 8px 0 0;
+  font-size: 0.85rem;
+  opacity: 0.8;
+}
+
+/* ===== LABELS FORMULAIRE EVENEMENT ===== */
+#page-fiche-evenement p {
+    margin: 0;
+    font-family: Verdana, sans-serif;
+    color: rgba(136, 123, 176, 0.9);
+    font-weight: 700;
+}
+
+/* Champs */
+#page-fiche-evenement input[type="text"],
+#page-fiche-evenement input[type="number"],
+#page-fiche-evenement textarea{
+  border-radius: 18px;
+  background-color: rgba(136, 123, 176, 0.25);
+  font-family: Verdana, sans-serif;
+  font-weight: 700;
+  border: none;
+  padding: 12px 14px;
+  width: 100%;
+  box-sizing: border-box;
+  outline: none;
+}
+
+#page-fiche-evenement textarea{
+  min-height: 120px;
+  resize: vertical;
+}
+
+#page-fiche-evenement input:focus,
+#page-fiche-evenement textarea:focus{
+  box-shadow: 0 0 0 3px rgba(39, 218, 245, 0.35);
+}
+
+/* Bouton */
+#page-fiche-evenement .bouton-enregistrerV2{
+  background-color: #887bb0;
+  color: white;
+  border-radius: 999px;
+  padding: 12px 16px;
+  font-family: Verdana, sans-serif;
+  font-weight: 700;
+  cursor: pointer;
+  border: none;
+  width: fit-content;
+  min-width: 160px;
+  grid-column: 2 / 3;
+  justify-self: end;
+}
+
+#page-fiche-evenement .bouton-enregistrerV2:hover{
+  background-color: #27DAF5;
+}
+
+/* Box succès/erreur centrée */
+.form-success-box,
+.form-error-box{
+  max-width: 520px;
+  margin: 24px auto;
+  padding: 18px 22px;
+  border-radius: 14px;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.form-success-box{
+  background: #e6f4ea;
+  border: 2px solid #2ecc71;
+  color: #1f7a3a;
+}
+
+.form-error-box{
+  background: #fdecea;
+  border: 2px solid #e74c3c;
+  color: #8a1f1f;
+}
+
+#page-fiche-evenement .Prix,
+#page-fiche-evenement .DateDebut,
+#page-fiche-evenement .DateFin {
+  max-width: 240px;
+}
+
+/* Responsive */
+@media (max-width: 820px){
+  #page-fiche-evenement form{
+    grid-template-columns: 1fr;
+  }
+  #page-fiche-evenement .bouton-enregistrerV2{
+    grid-column: 1 / -1;
+    justify-self: start;
+  }
+}

@@ -17,30 +17,43 @@
       </div>
     </div>
 
-    <form class="contact-form" method="post" action="#" novalidate>
+    <?php if (!empty($_GET['success'])): ?>
+      <div class="form-success-box">
+        <h3>Message envoyé</h3>
+        <p>Merci ! Nous vous répondrons dès que possible.</p>
+      </div>
+    <?php endif; ?>
+
+    <?php if (!empty($errors)): ?>
+      <div class="form-error-box">
+        <h3>Erreur lors de l’envoi</h3>
+        <ul>
+          <?php foreach ($errors as $e): ?>
+            <li><?= htmlspecialchars($e, ENT_QUOTES, 'UTF-8') ?></li>
+          <?php endforeach; ?>
+        </ul>
+      </div>
+    <?php endif; ?>
+
+    <form class="contact-form" method="post" action="/artisphere/?controller=contact&action=submit" novalidate>
       <div class="form-row">
         <label for="nom">Nom <span aria-hidden="true">*</span></label>
-        <input id="nom" name="nom" type="text" autocomplete="family-name" required>
+        <input id="nom" name="nom" type="text" required value="<?= htmlspecialchars($old['nom'] ?? '', ENT_QUOTES, 'UTF-8') ?>">      
       </div>
 
       <div class="form-row">
         <label for="prenom">Prénom <span aria-hidden="true">*</span></label>
-        <input id="prenom" name="prenom" type="text" autocomplete="given-name" required>
+        <input id="prenom" name="prenom" type="text" required value="<?= htmlspecialchars($old['prenom'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
       </div>
 
       <div class="form-row">
         <label for="email">Email <span aria-hidden="true">*</span></label>
-        <input id="email" name="email" type="email" autocomplete="email" required>
-      </div>
-
-      <div class="form-row">
-        <label for="sujet">Sujet <span aria-hidden="true">*</span></label>
-        <input id="sujet" name="sujet" type="text" required>
+        <input id="email" name="email" type="email" required value="<?= htmlspecialchars($old['email'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
       </div>
 
       <div class="form-row">
         <label for="message">Message <span aria-hidden="true">*</span></label>
-        <textarea id="message" name="message" rows="6" required></textarea>
+        <textarea id="message" name="message" rows="6" required><?= htmlspecialchars($old['message'] ?? '', ENT_QUOTES, 'UTF-8') ?></textarea>
       </div>
 
       <div class="form-actions">

@@ -82,10 +82,7 @@
 }
 
 /* Champs spécifiques (on garde tes classes) */
-#page-fiche-produit .nom_produit { }
-#page-fiche-produit .choixcategorie { }
 #page-fiche-produit .Quantités { max-width: 220px; }
-#page-fiche-produit .Matériaux { }
 #page-fiche-produit .Prix { max-width: 220px; }
 #page-fiche-produit .Description {
   min-height: 110px;

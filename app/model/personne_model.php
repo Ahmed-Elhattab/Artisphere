@@ -63,6 +63,36 @@ class PersonneModel
         return (bool)$stmt->fetchColumn();
     }
 
+    #pareil que email exist, mais en excluant l'email de la personne qui l'utilise
+    public static function emailExistsEditionMode(string $email, ?int $excludeId = null): bool
+    {
+        $pdo = Database::getConnection();
+        $sql = "SELECT COUNT(*) FROM personne WHERE email = :email";
+        if ($excludeId !== null) $sql .= " AND id_personne <> :id";
+
+        $stmt = $pdo->prepare($sql);
+        $params = [':email' => $email];
+        if ($excludeId !== null) $params[':id'] = $excludeId;
+
+        $stmt->execute($params);
+        return (int)$stmt->fetchColumn() > 0;
+    }
+
+    #pareil que pseudo exist, mais en excluant le pseudo de la personne qui l'utilise
+    public static function pseudoExistsEditionMode(string $pseudo, ?int $excludeId = null): bool
+    {
+        $pdo = Database::getConnection();
+        $sql = "SELECT COUNT(*) FROM personne WHERE pseudo = :pseudo";
+        if ($excludeId !== null) $sql .= " AND id_personne <> :id";
+
+        $stmt = $pdo->prepare($sql);
+        $params = [':pseudo' => $pseudo];
+        if ($excludeId !== null) $params[':id'] = $excludeId;
+
+        $stmt->execute($params);
+        return (int)$stmt->fetchColumn() > 0;
+    }
+
     public static function findByPseudoOrEmail(string $identifier): ?array
     {
         $pdo = Database::getConnection();
@@ -90,6 +120,29 @@ class PersonneModel
         $stmt->execute([
             ':avatar' => $filename, //peut être NULL
             ':id'     => $idPersonne,
+        ]);
+    }
+
+    public static function updateProfile(int $id, array $data): void
+    {
+        $pdo = Database::getConnection();
+
+        $sql = "UPDATE personne
+                SET nom = :nom,
+                    prenom = :prenom,
+                    pseudo = :pseudo,
+                    email = :email,
+                    adresse = :adresse
+                WHERE id_personne = :id";
+
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([
+            ':nom'     => $data['nom'],
+            ':prenom'  => $data['prenom'],
+            ':pseudo'  => $data['pseudo'],
+            ':email'   => $data['email'],
+            ':adresse' => $data['adresse'],
+            ':id'      => $id,
         ]);
     }
 }

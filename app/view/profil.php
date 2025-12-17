@@ -58,7 +58,7 @@
         </div>
         <span class="personal-info"><?= htmlspecialchars($nom, ENT_QUOTES, 'UTF-8') ?></span>
         <span class="personal-info"><?= htmlspecialchars($prenom, ENT_QUOTES, 'UTF-8') ?></span>
-        <button class="btn">EDITER MES INFORMATIONS</button>
+        <a href="/artisphere/?controller=profil_edit&action=edit"><button class="btn">EDITER MES INFORMATIONS</button></a>
         <!-- Première section : Mes commandes en cours -->
         <div class="orders">
             <h2>MES COMMANDES EN COURS</h2>

@@ -53,6 +53,8 @@ class connexion_controller extends BaseController
             'prenom' => $user['prenom'],
             'nom' => $user['nom'],
             'role'   => $user['role'],
+            'email'   => $user['email'],
+            'adresse'=> $user['adresse'] ?? null,
             'avatar' => $user['avatar'] ?? null,
         ];
 

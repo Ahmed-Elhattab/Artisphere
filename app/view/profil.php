@@ -104,4 +104,9 @@
       <a class="action-link" href="/artisphere/?controller=admin_users&action=index"><button class="btn-spe">CHERCHER UN COMPTE</button></a>
     </div>
     <?php endif; ?>
+    <?php if (!empty($_SESSION['user']) && $_SESSION['user']['role'] === 'admin'): ?>
+    <div class="action-buttons">
+      <a class="action-link" href="/artisphere/?controller=admin_contact&action=index"><button class="btn-spe">GERER LES DEMANDES DE CONTACT</button></a>
+    </div>
+    <?php endif; ?>
 </main>

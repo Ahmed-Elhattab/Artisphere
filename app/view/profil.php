@@ -101,7 +101,7 @@
     <?php endif; ?>
     <?php if (!empty($_SESSION['user']) && $_SESSION['user']['role'] === 'admin'): ?>
     <div class="action-buttons">
-      <a class="action-link" href="/artisphere/?controller=chercher_compte&action=index"><button class="btn-spe">CHERCHER UN COMPTE</button></a>
+      <a class="action-link" href="/artisphere/?controller=admin_users&action=index"><button class="btn-spe">CHERCHER UN COMPTE</button></a>
     </div>
     <?php endif; ?>
 </main>

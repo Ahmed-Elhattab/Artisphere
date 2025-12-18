@@ -145,4 +145,64 @@ class PersonneModel
             ':id'      => $id,
         ]);
     }
+
+    public static function searchUsers(string $q, int $limit, int $offset): array
+    {
+        $pdo = Database::getConnection();
+
+        $q = trim($q);
+        if ($q === '') {
+            $stmt = $pdo->prepare("SELECT id_personne, nom, prenom, pseudo, email, role
+                                FROM personne
+                                ORDER BY id_personne DESC
+                                LIMIT :lim OFFSET :off");
+            $stmt->bindValue(':lim', $limit, PDO::PARAM_INT);
+            $stmt->bindValue(':off', $offset, PDO::PARAM_INT);
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        }
+
+        $like = '%' . $q . '%';
+        $stmt = $pdo->prepare("SELECT id_personne, nom, prenom, pseudo, email, role
+                            FROM personne
+                            WHERE nom LIKE :q OR prenom LIKE :q OR pseudo LIKE :q OR email LIKE :q
+                            ORDER BY id_personne DESC
+                            LIMIT :lim OFFSET :off");
+        $stmt->bindValue(':q', $like, PDO::PARAM_STR);
+        $stmt->bindValue(':lim', $limit, PDO::PARAM_INT);
+        $stmt->bindValue(':off', $offset, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public static function countUsers(string $q): int
+    {
+        $pdo = Database::getConnection();
+
+        $q = trim($q);
+        if ($q === '') {
+            return (int)$pdo->query("SELECT COUNT(*) FROM personne")->fetchColumn();
+        }
+
+        $like = '%' . $q . '%';
+        $stmt = $pdo->prepare("SELECT COUNT(*)
+                            FROM personne
+                            WHERE nom LIKE :q OR prenom LIKE :q OR pseudo LIKE :q OR email LIKE :q");
+        $stmt->execute([':q' => $like]);
+        return (int)$stmt->fetchColumn();
+    }
+
+    public static function promoteToAdmin(int $idPersonne): void
+    {
+        $pdo = Database::getConnection();
+        $stmt = $pdo->prepare("UPDATE personne SET role = 'admin' WHERE id_personne = :id");
+        $stmt->execute([':id' => $idPersonne]);
+    }
+
+    public static function deleteById(int $idPersonne): void
+    {
+        $pdo = Database::getConnection();
+        $stmt = $pdo->prepare("DELETE FROM personne WHERE id_personne = :id");
+        $stmt->execute([':id' => $idPersonne]);
+    }
 }

@@ -1,0 +1,102 @@
+.apropos-create-page {
+  background: #b6a894;
+  padding: 32px 0 40px;
+}
+
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+
+.apropos-create-card {
+  background: #f6e6cf;
+  border: 1px solid #e2d5c0;
+  border-radius: 18px;
+  padding: 24px;
+}
+
+.apropos-create-card h1 {
+  margin: 0 0 8px;
+  color: #3c2b20;
+}
+
+.apropos-create-card .sub {
+  margin: 0 0 18px;
+  color: #4b5563;
+  max-width: 780px;
+}
+
+.apropos-create-card p {
+  margin: 14px 0 6px;
+  font-weight: 700;
+  color: #3c2b20;
+}
+
+.apropos-create-card input,
+.apropos-create-card textarea {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: none;
+  background: rgba(136, 123, 176, 0.25);
+  box-sizing: border-box;
+  font-family: inherit;
+}
+
+.apropos-create-card textarea {
+  min-height: 180px;
+  resize: vertical;
+}
+
+.actions {
+  margin-top: 18px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+}
+
+.btn-primary {
+  background: #a24436;
+  color: white;
+  border: none;
+  border-radius: 999px;
+  padding: 12px 16px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.btn-outline {
+  border: 1px solid #3c2b20;
+  color: #3c2b20;
+  background: #fff;
+  border-radius: 999px;
+  padding: 10px 14px;
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.btn-outline:hover {
+  background: #3c2b20;
+  color: #fff;
+}
+
+/*box succès */
+.form-success-box {
+  background-color: #e6f4ea;           /* vert clair */
+  border: 2px solid #2ecc71;           /* vert */
+  color: #1f7a3a;
+  border-radius: 14px;
+  padding: 16px 20px;
+  margin: 20px auto;
+  max-width: 700px;
+  text-align: center;
+}
+
+.form-success-box h3 {
+  margin-top: 0;
+  margin-bottom: 8px;
+  font-size: 1.1rem;
+}
+

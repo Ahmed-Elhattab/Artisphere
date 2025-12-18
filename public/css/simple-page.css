@@ -1,26 +1,88 @@
+/* Page À propos (affichage) */
 .simple-page{
-  padding: 28px 0 40px;
+  background: #b6a894;
+  padding: 32px 0 40px;
 }
 
 .simple-card{
   max-width: 900px;
   margin: 0 auto;
-  background: #d4a976;
+  padding: 24px;
+  background: #f6e6cf;
+  border: 1px solid #e2d5c0;
   border-radius: 18px;
-  padding: 22px;
-  box-shadow: 0 10px 20px rgba(0,0,0,.12);
+  box-sizing: border-box;
 }
 
 .simple-card h1{
   margin: 0 0 10px;
+  color: #3c2b20;
 }
 
-.simple-card p{
-  margin: 0 0 10px;
+.apropos-intro{
+  color: #4b5563;
+  margin: 12px 0 20px;
   line-height: 1.5;
 }
 
-.simple-card ul{
-  margin: 0;
-  padding-left: 18px;
+/* Sections DB */
+.apropos-sections{
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
+
+.apropos-section{
+  background: #ffffff;
+  border: 1px solid rgba(0,0,0,.08);
+  border-radius: 16px;
+  padding: 16px;
+  box-shadow: 0 6px 16px rgba(0,0,0,.06);
+}
+
+.apropos-section h2{
+  margin: 0 0 8px;
+  color: #3c2b20;
+  font-size: 1.15rem;
+}
+
+.apropos-section p{
+  margin: 0;
+  color: #4b5563;
+  line-height: 1.5;
+}
+
+.apropos-empty{
+  margin: 0;
+  color: #4b5563;
+}
+
+/* Bouton admin (si tu utilises déjà ces classes ailleurs, garde ton style global) */
+.add-buttons{
+  display: flex;
+  justify-content: center;
+  margin: 14px 0 10px;
+}
+
+.action-buttons{
+  width: 100%;
+  max-width: 360px;
+}
+
+.action-link{
+  text-decoration: none;
+  display: block;
+}
+
+.btn-spe{
+  width: 100%;
+  background: #a24436;
+  color: white;
+  border: none;
+  padding: 14px 18px;
+  border-radius: 30px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.btn-spe:hover{ background: #8b2e23; }

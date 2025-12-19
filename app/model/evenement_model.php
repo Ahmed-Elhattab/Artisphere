@@ -43,4 +43,21 @@ class EvenementModel
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
         return $row ?: null;
     }
+    public static function listHome(int $limit, int $offset): array
+    {
+        $pdo = Database::getConnection();
+        $stmt = $pdo->prepare("SELECT id_event, nom, image, lieu, type, date_debut, date_fin FROM pevent 
+                            ORDER BY id_event DESC
+                            LIMIT :lim OFFSET :off");
+        $stmt->bindValue(':lim', $limit, PDO::PARAM_INT);
+        $stmt->bindValue(':off', $offset, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public static function countAll(): int
+    {
+        $pdo = Database::getConnection();
+        return (int)$pdo->query("SELECT COUNT(*) FROM pevent")->fetchColumn();
+    }
 }

@@ -35,13 +35,13 @@ class PersonneModel
 
         $stmt = $pdo->prepare($sql);
         $stmt->execute([
-            ':nom'     => $data['nom'],
-            ':prenom'  => $data['prenom'],
-            ':pseudo'  => $data['pseudo'],
-            ':email'   => $data['email'],
-            ':mdp'     => $data['mdp_hash'],
-            ':role'    => $role,
-            ':adresse' => $adresse,
+            ':nom' => $data['nom'],
+            ':prenom' => $data['prenom'],
+            ':pseudo' => $data['pseudo'],
+            ':email' => $data['email'],
+            ':mdp' => $data['mdp_hash'],
+            ':role' => $role,
+            ':adresse' => ($role === 'artisan') ? $data['adresse'] : null,
         ]);
 
         return (int)$pdo->lastInsertId();
@@ -204,5 +204,15 @@ class PersonneModel
         $pdo = Database::getConnection();
         $stmt = $pdo->prepare("DELETE FROM personne WHERE id_personne = :id");
         $stmt->execute([':id' => $idPersonne]);
+    }
+
+    public static function findById(int $id): ?array
+    {
+        $pdo = Database::getConnection();
+        $stmt = $pdo->prepare("SELECT id_personne, nom, prenom, pseudo, email, role, adresse, avatar
+                            FROM personne WHERE id_personne = :id LIMIT 1");
+        $stmt->execute([':id' => $id]);
+        $u = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $u ?: null;
     }
 }

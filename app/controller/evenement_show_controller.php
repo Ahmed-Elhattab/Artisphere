@@ -25,6 +25,15 @@ class evenement_show_controller extends BaseController
             $this->requireOwner((int)$evenement['id_createur']);
         }
 
+        if (!empty($_SERVER['HTTP_REFERER'])) {
+            $url = $_SERVER['HTTP_REFERER'];
+
+            // Sécurité : on accepte seulement les URLs internes
+            if (str_contains($url, '/artisphere/')) {
+                $_SESSION['previous_url'] = $url;
+            }
+        }
+
         $this->render('evenement_show.php', [
             'title' => $evenement['nom'] . ' – Artisphere',
             'pageCss' => 'details-style.css',

@@ -76,7 +76,7 @@ class inscription_Artisans_controller extends BaseController
         $hash = password_hash($password, PASSWORD_DEFAULT);
 
         //envoi les infos au modèle qui gère la table Personne, en spécifiant qu'il s'agit d'un artisan
-        PersonneModel::createPersonne([
+        $id = PersonneModel::createPersonne([
             'pseudo'   => $pseudo,
             'prenom'   => $prenom,
             'nom'      => $nom,
@@ -85,8 +85,21 @@ class inscription_Artisans_controller extends BaseController
             'adresse'  => $adresse
         ], 'artisan');
 
-        // Redirection post-succès (PRG pattern)
-        header('Location: /artisphere/?controller=index&action=index&success=1');
+        $user = PersonneModel::findById($id);
+
+        // Connexion automatique
+        $_SESSION['user'] = [
+            'id'     => (int)$user['id_personne'],
+            'pseudo' => $user['pseudo'],
+            'nom'    => $user['nom'],
+            'prenom' => $user['prenom'],
+            'email'  => $user['email'],
+            'role'   => $user['role'],
+            'adresse'=> $user['adresse'] ?? null,
+            'avatar' => $user['avatar'] ?? null,
+        ];
+
+        header('Location: /artisphere/?controller=index&action=index&welcome=1');
         exit;
-    }
+        }
 }

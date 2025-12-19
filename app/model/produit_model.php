@@ -52,4 +52,22 @@ class ProduitModel
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
         return $row ?: null;
     }
+    public static function listHome(int $limit, int $offset): array
+    {
+        $pdo = Database::getConnection();
+        $stmt = $pdo->prepare("SELECT id_produit, nom, image, prix
+                            FROM pproduit
+                            ORDER BY id_produit DESC
+                            LIMIT :lim OFFSET :off");
+        $stmt->bindValue(':lim', $limit, PDO::PARAM_INT);
+        $stmt->bindValue(':off', $offset, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public static function countAll(): int
+    {
+        $pdo = Database::getConnection();
+        return (int)$pdo->query("SELECT COUNT(*) FROM pproduit")->fetchColumn();
+    }
 }

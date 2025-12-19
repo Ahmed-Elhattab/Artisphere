@@ -26,10 +26,19 @@ class produit_show_controller extends BaseController
             $this->requireOwner((int)$produit['id_createur']);
         }
 
+        if (!empty($_SERVER['HTTP_REFERER'])) {
+            $url = $_SERVER['HTTP_REFERER'];
+
+            // Sécurité : on accepte seulement les URLs internes
+            if (str_contains($url, '/artisphere/')) {
+                $_SESSION['previous_url'] = $url;
+            }
+        }
+
         $this->render('produit_show.php', [
             'title' => $produit['nom'] . ' – Artisphere',
             'pageCss' => 'details-style.css',
-            'produit' => $produit
+            'produit' => $produit,
         ]);
     }
 }

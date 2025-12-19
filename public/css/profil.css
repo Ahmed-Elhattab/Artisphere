@@ -43,23 +43,6 @@ body {
   color: #6b4e3d;
 }
 
-.main-nav {
-  display: flex;
-  gap: 40px;
-}
-
-.main-nav a {
-  text-decoration: none;
-  color: #000;
-  font-weight: 600;
-  font-size: 14px;
-  letter-spacing: 1px;
-  transition: color 0.3s;
-}
-
-.main-nav a:hover {
-  color: #6b4e3d;
-}
 
 .container {
   flex: 1;
@@ -364,23 +347,7 @@ body {
   color: #6b4e3d;
 }
 
-.main-nav {
-  display: flex;
-  gap: 40px;
-}
 
-.main-nav a {
-  text-decoration: none;
-  color: #000;
-  font-weight: 600;
-  font-size: 14px;
-  letter-spacing: 1px;
-  transition: color 0.3s;
-}
-
-.main-nav a:hover {
-  color: #6b4e3d;
-}
 
 .container {
   flex: 1;

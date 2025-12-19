@@ -14,6 +14,9 @@ $img = !empty($evenement['image']) ? 'images/evenements/' . $evenement['image'] 
 
     <div class="details-body">
       <h1><?= htmlspecialchars($evenement['nom'], ENT_QUOTES, 'UTF-8') ?></h1>
+      <p class="meta">
+        Créé par : <strong>@<?= htmlspecialchars($evenement['createur_pseudo'] ?? 'inconnu', ENT_QUOTES, 'UTF-8') ?></strong>
+      </p>
 
       <p class="meta">
         <?= htmlspecialchars($evenement['lieu'], ENT_QUOTES, 'UTF-8') ?> ·
@@ -37,9 +40,44 @@ $img = !empty($evenement['image']) ? 'images/evenements/' . $evenement['image'] 
         $backUrl = $_SESSION['previous_url']?? '/artisphere/?controller=index&action=index';
       ?>
 
+      <?php
+        $backUrl = $_SESSION['previous_url'] ?? '/artisphere/?controller=index&action=index';
+        $isLogged = !empty($_SESSION['user']);
+        $isOwner = $isLogged && ((int)$_SESSION['user']['id'] === (int)$evenement['id_createur']);
+
+        if (empty($_SESSION['csrf'])) {
+          $_SESSION['csrf'] = bin2hex(random_bytes(16));
+        }
+      ?>
+
       <div class="actions">
+        <?php if ($isLogged): ?>
+          <form method="post" action="/artisphere/?controller=evenement_show&action=reserve" class="inline">
+            <input type="hidden" name="csrf" value="<?= htmlspecialchars($_SESSION['csrf'], ENT_QUOTES, 'UTF-8') ?>">
+            <input type="hidden" name="id_evenement" value="<?= (int)$evenement['id_event'] ?>">
+            <input type="hidden" name="back" value="<?= htmlspecialchars($backUrl, ENT_QUOTES, 'UTF-8') ?>">
+            <button class="btn-primary" type="submit" <?= ((int)$evenement['nombre_place'] <= 0 ? 'disabled' : '') ?>>
+              Réserver
+            </button>
+          </form>
+        <?php else: ?>
+          <a class="btn-primary" href="/artisphere/?controller=connexion&action=index">Réserver</a>
+        <?php endif; ?>
+
+        <?php if ($isOwner): ?>
+          <a class="btn-outline" href="/artisphere/?controller=fiche_evenement&action=edit&id=<?= (int)$evenement['id_event'] ?>">
+            Éditer
+          </a>
+        <?php endif; ?>
+
         <a class="btn-outline" href="<?= htmlspecialchars($backUrl, ENT_QUOTES, 'UTF-8') ?>">← Retour</a>
       </div>
+
+      <?php if (isset($_GET['reserved'])): ?>
+        <p class="meta">
+          <?= ($_GET['reserved'] === '1') ? 'Réservation enregistrée' : 'Impossible de réserver (stock épuisé ou déjà réservé).' ?>
+        </p>
+      <?php endif; ?>
     </div>
   </section>
 </main>

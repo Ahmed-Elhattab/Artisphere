@@ -11,7 +11,7 @@
 }
 
 .contact-hero{
-  background: #d4a976;
+  background: #efe6d8;
   border-radius: 18px;
   padding: 22px;
   display: grid;
@@ -122,6 +122,18 @@
   margin: 0;
   font-size: 12px;
   opacity: .8;
+}
+
+.form-row input,
+.form-row textarea{
+  width: 100%;
+  box-sizing: border-box; 
+  border: 2px solid rgba(60,43,32,.25);
+  background: #f6e6cf;
+  border-radius: 14px;
+  padding: 12px 14px;
+  outline: none;
+  font-size: 14px;
 }
 
 @media (max-width: 900px){

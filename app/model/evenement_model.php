@@ -38,7 +38,7 @@ class EvenementModel
     public static function findById(int $id): ?array
     {
         $pdo = Database::getConnection();
-        $stmt = $pdo->prepare("SELECT * FROM pevent WHERE id_event = :id LIMIT 1");
+        $stmt = $pdo->prepare("SELECT e.*, u.pseudo AS createur_pseudo FROM pevent e JOIN personne u ON u.id_personne = e.id_createur WHERE e.id_event = :id");
         $stmt->execute([':id' => $id]);
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
         return $row ?: null;
@@ -60,4 +60,8 @@ class EvenementModel
         $pdo = Database::getConnection();
         return (int)$pdo->query("SELECT COUNT(*) FROM pevent")->fetchColumn();
     }
+
+    
+    
+    
 }

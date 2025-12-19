@@ -72,8 +72,8 @@ border-radius: 30px;
 filter : grayscale(10%)
 }
 
-main{
-background-color: #daebf3;
+body{
+background-color: #daebf3 !important;
 }
 
 .titre-produit {

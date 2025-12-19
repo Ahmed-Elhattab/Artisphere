@@ -1,5 +1,4 @@
 .details-page {
-  background: #b6a894;
   padding: 28px 0 40px;
 }
 
@@ -57,9 +56,27 @@
   color: #4b5563;
 }
 
-.actions {
+.actions{
   margin-top: 16px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: center;
 }
+
+.inline{ display: inline-block; }
+
+.btn-primary{
+  border: 1px solid #3c2b20;
+  background: #3c2b20;
+  color: #fff;
+  border-radius: 999px;
+  padding: 10px 14px;
+  font-weight: 800;
+  cursor: pointer;
+}
+.btn-primary:hover{ filter: brightness(.97); }
+.btn-primary:disabled{ opacity: .45; cursor: not-allowed; }
 
 .btn-outline {
   border: 1px solid #3c2b20;

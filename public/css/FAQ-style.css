@@ -29,7 +29,7 @@
 
 /* Une question/réponse = une box */
 .faq-item {
-    background: #d4a976;                   /* un peu plus clair que le fond */
+    background: #efe6d8;                   /* un peu plus clair que le fond */
     border-radius: 12px;
     padding: 0.8rem 1rem;
     margin-bottom: 0.6rem;
@@ -81,6 +81,16 @@
     max-width: 1100px;
     margin: 0 auto;        /* centre horizontalement */
     padding: 0 32px;       /* petites marges à gauche/droite */
+}
+
+.faq-contact-box{
+    background: #efe6d8;
+    border-radius: 12px;
+}
+
+.faq-title-box{
+    background: #efe6d8;
+    border-radius: 12px;
 }
 
 /* --------- Fond général --------- */

@@ -64,9 +64,10 @@
             <h2>MES COMMANDES EN COURS</h2>
             <div class="order-card">
                 <div class="order-title">Collier en or</div>
+                <a class="action-link" href="/artisphere/?controller=index&action=index"><button class="btn">Détail</button></a>
             </div>
             <!-- Deuxième section : Commandes -->
-            <h2>COMMANDES</h2>
+            <h2>DERNIERES COMMANDES</h2>
             <div class="order-card">
                 <div class="order-title">Collier en argent</div>
                 <a class="action-link" href="/artisphere/?controller=avis&action=index"><button class="btn">Donner son avis</button></a>
@@ -81,14 +82,8 @@
             </div>
         </div>
     </section>
-    <h1 class="page-title">MES COMMANDES PASSÉES</h1>
-  
-    <div class="order-item">
-      <div class="order-header">
-        <span class="order-name">Pot à lait en céramique</span>
-        <div class="status-dot"></div>
-      </div>
-      <div class="order-content"></div>
+    <div class="action-buttons">
+      <a class="action-link" href="/artisphere/?controller=index&action=index"><button class="btn-spe">TOUTES MES COMMANDES PASSEES</button></a>
     </div>
 
     <?php if (!empty($_SESSION['user']) && $_SESSION['user']['role'] === 'artisan' || $_SESSION['user']['role'] === 'admin'): ?>

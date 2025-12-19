@@ -2,7 +2,7 @@
 
     <!-- En-tête de la FAQ -->
     <section class="section faq-header">
-        <div class="container">
+        <div class="container faq-title-box">
             <h1>Foire aux questions</h1>
             <p class="faq-intro">
                 Tu te poses des questions sur Artisphere, le fonctionnement de la plateforme ou

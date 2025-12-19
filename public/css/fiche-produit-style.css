@@ -1,11 +1,10 @@
 #page-fiche-produit {
   background-color: #daebf3;
   padding: 32px;
-  min-height: calc(100vh - 160px); /* évite le footer collé (header+footer ~ 160px) */
+  min-height: calc(100vh - 160px);
   box-sizing: border-box;
 }
 
-/* si tu as mis le <form> à l’intérieur de #page-fiche-produit */
 #page-fiche-produit form {
   max-width: 980px;
   margin: 0 auto;

@@ -1,5 +1,7 @@
 <?php
 require_once __DIR__ . '/../model/produit_model.php';
+require_once __DIR__ . '/../model/reservation_produit_model.php';
+
 
 class produit_show_controller extends BaseController
 {
@@ -40,5 +42,32 @@ class produit_show_controller extends BaseController
             'pageCss' => 'details-style.css',
             'produit' => $produit,
         ]);
+    }
+    public function reserve(): void
+    {
+        $this->requireLogin();
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            header('Location: /artisphere/?controller=index&action=index');
+            exit;
+        }
+
+        // CSRF (si tu as déjà une méthode, utilise-la)
+        $token = $_POST['csrf'] ?? '';
+        if (empty($_SESSION['csrf']) || !hash_equals($_SESSION['csrf'], $token)) {
+            http_response_code(403);
+            exit('CSRF');
+        }
+
+        $idProduit = (int)($_POST['id_produit'] ?? 0);
+        $back = $_POST['back'] ?? '/artisphere/?controller=index&action=index';
+
+        $ok = false;
+        if ($idProduit > 0) {
+            $ok = ReservationProduitModel::reserve($idProduit, (int)$_SESSION['user']['id']);
+        }
+
+        $sep = (str_contains($back, '?') ? '&' : '?');
+        header('Location: ' . $back . $sep . ($ok ? 'reserved=1' : 'reserved=0'));
+        exit;
     }
 }

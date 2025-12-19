@@ -47,7 +47,12 @@ class ProduitModel
     public static function findById(int $id): ?array
     {
         $pdo = Database::getConnection();
-        $stmt = $pdo->prepare("SELECT * FROM pproduit WHERE id_produit = :id LIMIT 1");
+        $sql = "SELECT p.*, u.pseudo AS createur_pseudo
+                FROM pproduit p
+                JOIN personne u ON u.id_personne = p.id_createur
+                WHERE p.id_produit = :id
+                LIMIT 1";
+        $stmt = $pdo->prepare($sql);
         $stmt->execute([':id' => $id]);
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
         return $row ?: null;

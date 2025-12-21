@@ -60,6 +60,10 @@ class inscription_Artisans_controller extends BaseController
             $errors[] = "Cet identifiant est déjà utilisé.";
         }
 
+        if (empty($_POST['accept_terms'])) {
+            $errors[] = "Vous devez accepter les conditions d’utilisation du site.";
+        }
+
         //si erreurs, retour au formulaire
         if (!empty($errors)) {
             $this->render('inscription_Artisans.php', [

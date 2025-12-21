@@ -75,4 +75,35 @@ class ProduitModel
         $pdo = Database::getConnection();
         return (int)$pdo->query("SELECT COUNT(*) FROM pproduit")->fetchColumn();
     }
+
+    public static function updateProduit(int $idProduit, int $idCreateur, array $data): bool
+    {
+        $pdo = Database::getConnection();
+
+        // Sécurité : update seulement si le créateur correspond
+        $sql = "UPDATE pproduit
+                SET nom = :nom,
+                    image = :image,
+                    quantite = :quantite,
+                    materiaux = :materiaux,
+                    prix = :prix,
+                    description = :description,
+                    id_categorie = :id_categorie
+                WHERE id_produit = :id_produit AND id_createur = :id_createur";
+
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([
+            ':nom' => $data['nom'],
+            ':image' => $data['image'],
+            ':quantite' => $data['quantite'],
+            ':materiaux' => $data['materiaux'],
+            ':prix' => $data['prix'],
+            ':description' => $data['description'],
+            ':id_categorie' => $data['id_categorie'],
+            ':id_produit' => $idProduit,
+            ':id_createur' => $idCreateur,
+        ]);
+
+        return $stmt->rowCount() > 0;
+    }
 }

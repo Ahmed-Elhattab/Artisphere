@@ -58,9 +58,25 @@
         <input id="password_confirm" type="password" name="password_confirm" placeholder="Vérifier le mot de passe" required />
       </label>
 
-      <button type="submit" class="primary-btn">Créer le compte</button>
+      <!--conditions d'utilisations-->
+      <div class="terms-box">
+        <label class="terms-label">
+          <input type="checkbox" id="accept_terms" name="accept_terms">
+          <span>
+            J’ai lu et j’accepte les
+            <a href="/artisphere/?controller=mention_legale&action=index"
+              target="_blank" rel="noopener">
+              conditions d’utilisation
+            </a>
+            du site.
+          </span>
+        </label>
+      </div>
 
-      <a href="#" class="help-link">Besoin d’aide ?</a>
+      <button id="submit-btn" type="submit" class="primary-btn">Créer le compte</button>
+
+
+      <a href="/artisphere/?controller=faq&action=index" class="help-link">Besoin d’aide ?</a>
 
     </form>
 

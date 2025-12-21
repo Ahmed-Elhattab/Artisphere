@@ -200,6 +200,36 @@
     line-height: 1.4;
 }
 
+.terms-box {
+  margin: 12px 0 16px;
+}
+
+.terms-label {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 14px;
+  color: #3c2b20;
+  cursor: pointer;
+}
+
+.terms-label input {
+  margin-top: 3px;
+  accent-color: #3c2b20;
+}
+
+.terms-label a {
+  color: #a24436;
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+.primary-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+
 /* ===============================
    RESPONSIVE
 ================================ */

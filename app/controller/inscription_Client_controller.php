@@ -58,6 +58,10 @@ class inscription_Client_controller extends BaseController
         if (PersonneModel::pseudoExists($pseudo)) {
             $errors[] = "Cet identifiant est déjà utilisé.";
         }
+        
+        if (empty($_POST['accept_terms'])) {
+            $errors[] = "Vous devez accepter les conditions d’utilisation du site.";
+        }
 
         //si erreurs, retour au formulaire
         if (!empty($errors)) {

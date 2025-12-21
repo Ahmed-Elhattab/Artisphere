@@ -15,7 +15,7 @@ $img = !empty($evenement['image']) ? 'images/evenements/' . $evenement['image'] 
     <div class="details-body">
       <h1><?= htmlspecialchars($evenement['nom'], ENT_QUOTES, 'UTF-8') ?></h1>
       <p class="meta">
-        Créé par : <strong>@<?= htmlspecialchars($evenement['createur_pseudo'] ?? 'inconnu', ENT_QUOTES, 'UTF-8') ?></strong>
+        Créé par : <strong><?= htmlspecialchars($evenement['createur_pseudo'] ?? 'inconnu', ENT_QUOTES, 'UTF-8') ?></strong>
       </p>
 
       <p class="meta">
@@ -65,12 +65,16 @@ $img = !empty($evenement['image']) ? 'images/evenements/' . $evenement['image'] 
         <?php endif; ?>
 
         <?php if ($isOwner): ?>
-          <a class="btn-outline" href="/artisphere/?controller=fiche_evenement&action=edit&id=<?= (int)$evenement['id_event'] ?>">
+          <a class="btn-outline" href="/artisphere/?controller=evenement_update&action=index&id=<?= (int)$evenement['id_event'] ?>">
             Éditer
           </a>
         <?php endif; ?>
 
-        <a class="btn-outline" href="<?= htmlspecialchars($backUrl, ENT_QUOTES, 'UTF-8') ?>">← Retour</a>
+        <?php if ($isOwner): ?>
+          <a class="btn-outline" href="/artisphere/?controller=mes_creations&action=index">← Retour</a>
+        <?php else: ?>
+          <a class="btn-outline" href="/artisphere/?controller=index&action=index">← Retour</a>
+        <?php endif; ?>
       </div>
 
       <?php if (isset($_GET['reserved'])): ?>

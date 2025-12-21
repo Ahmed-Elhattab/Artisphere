@@ -59,12 +59,16 @@ $img = !empty($produit['image']) ? 'images/produits/' . $produit['image'] : null
         <?php endif; ?>
 
         <?php if ($isOwner): ?>
-          <a class="btn-outline" href="/artisphere/?controller=fiche_produit&action=edit&id=<?= (int)$produit['id_produit'] ?>">
+          <a class="btn-outline" href="/artisphere/?controller=produit_update&action=edit&id=<?= (int)$produit['id_produit'] ?>">
             Éditer
           </a>
         <?php endif; ?>
 
-        <a class="btn-outline" href="<?= htmlspecialchars($backUrl, ENT_QUOTES, 'UTF-8') ?>">← Retour</a>
+        <?php if ($isOwner): ?>
+          <a class="btn-outline" href="/artisphere/?controller=mes_creations&action=index">← Retour</a>
+        <?php else: ?>
+          <a class="btn-outline" href="/artisphere/?controller=index&action=index">← Retour</a>
+        <?php endif; ?>
       </div>
 
       <?php if (isset($_GET['reserved'])): ?>

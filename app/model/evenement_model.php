@@ -61,7 +61,35 @@ class EvenementModel
         return (int)$pdo->query("SELECT COUNT(*) FROM pevent")->fetchColumn();
     }
 
-    
-    
-    
+    public static function updateEvent(int $id, array $data): void
+    {
+        $pdo = Database::getConnection();
+
+        $sql = "UPDATE pevent
+                SET nom = :nom,
+                    image = :image,
+                    lieu = :lieu,
+                    nombre_place = :nombre_place,
+                    description = :description,
+                    type = :type,
+                    prix = :prix,
+                    date_debut = :date_debut,
+                    date_fin = :date_fin
+                WHERE id_event = :id";
+
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([
+            ':nom'          => $data['nom'],
+            ':image'        => $data['image'],
+            ':lieu'         => $data['lieu'],
+            ':nombre_place' => $data['nombre_place'],
+            ':description'  => $data['description'],
+            ':type'         => $data['type'],
+            ':prix'         => $data['prix'],
+            ':date_debut'   => $data['date_debut'],
+            ':date_fin'     => $data['date_fin'],
+            ':id'           => $id,
+        ]);
+    }
+
 }

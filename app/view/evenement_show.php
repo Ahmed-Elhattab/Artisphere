@@ -52,18 +52,31 @@ $img = !empty($evenement['image']) ? 'images/evenements/' . $evenement['image'] 
 
       <div class="actions">
         <?php if ($isLogged): ?>
-          <form method="post" action="/artisphere/?controller=evenement_show&action=reserve" class="inline">
-            <input type="hidden" name="csrf" value="<?= htmlspecialchars($_SESSION['csrf'], ENT_QUOTES, 'UTF-8') ?>">
-            <input type="hidden" name="id_evenement" value="<?= (int)$evenement['id_event'] ?>">
-            <input type="hidden" name="back" value="<?= htmlspecialchars($backUrl, ENT_QUOTES, 'UTF-8') ?>">
-            <button class="btn-primary" type="submit" <?= ((int)$evenement['nombre_place'] <= 0 ? 'disabled' : '') ?>>
-              Réserver
-            </button>
-          </form>
+
+          <?php if (!empty($isReserved)): ?>
+            <!-- Annuler réservation -->
+            <form method="post" action="/artisphere/?controller=evenement_show&action=cancelReservation" class="inline">
+              <input type="hidden" name="csrf" value="<?= htmlspecialchars($_SESSION['csrf'], ENT_QUOTES, 'UTF-8') ?>">
+              <input type="hidden" name="id_evenement" value="<?= (int)$evenement['id_event'] ?>">
+              <input type="hidden" name="back" value="<?= htmlspecialchars($backUrl, ENT_QUOTES, 'UTF-8') ?>">
+              <button class="btn-outline" type="submit">Annuler la réservation</button>
+            </form>
+
+          <?php else: ?>
+            <!-- Réserver -->
+            <form method="post" action="/artisphere/?controller=evenement_show&action=reserve" class="inline">
+              <input type="hidden" name="csrf" value="<?= htmlspecialchars($_SESSION['csrf'], ENT_QUOTES, 'UTF-8') ?>">
+              <input type="hidden" name="id_evenement" value="<?= (int)$evenement['id_event'] ?>">
+              <input type="hidden" name="back" value="<?= htmlspecialchars($backUrl, ENT_QUOTES, 'UTF-8') ?>">
+              <button class="btn-primary" type="submit" <?= ((int)$evenement['nombre_place'] <= 0 ? 'disabled' : '') ?>>
+                Réserver
+              </button>
+            </form>
+          <?php endif; ?>
+
         <?php else: ?>
           <a class="btn-primary" href="/artisphere/?controller=connexion&action=index">Réserver</a>
         <?php endif; ?>
-
         <?php if ($isOwner): ?>
           <a class="btn-outline" href="/artisphere/?controller=evenement_update&action=index&id=<?= (int)$evenement['id_event'] ?>">
             Éditer
@@ -80,6 +93,11 @@ $img = !empty($evenement['image']) ? 'images/evenements/' . $evenement['image'] 
       <?php if (isset($_GET['reserved'])): ?>
         <p class="meta">
           <?= ($_GET['reserved'] === '1') ? 'Réservation enregistrée' : 'Impossible de réserver (stock épuisé ou déjà réservé).' ?>
+        </p>
+      <?php endif; ?>
+      <?php if (isset($_GET['cancelled'])): ?>
+        <p class="meta">
+          <?= ($_GET['cancelled'] === '1') ? 'Réservation annulée' : 'Impossible d’annuler la réservation.' ?>
         </p>
       <?php endif; ?>
     </div>

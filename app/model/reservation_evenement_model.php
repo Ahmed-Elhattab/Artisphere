@@ -42,4 +42,41 @@ class ReservationEventModel
             return false;
         }
     }
+
+    public static function exists(int $idEvent, int $idPersonne): bool
+    {
+        $pdo = Database::getConnection();
+        $stmt = $pdo->prepare("SELECT 1 FROM reservation_event
+                               WHERE id_event = :e AND id_personne = :u
+                               LIMIT 1");
+        $stmt->execute([':e' => $idEvent, ':u' => $idPersonne]);
+        return (bool)$stmt->fetchColumn();
+    }
+
+     public static function cancel(int $idEvent, int $idPersonne): bool
+    {
+        $pdo = Database::getConnection();
+
+        try {
+            $pdo->beginTransaction();
+
+            $del = $pdo->prepare("DELETE FROM reservation_event
+                                  WHERE id_event = :e AND id_personne = :u");
+            $del->execute([':e' => $idEvent, ':u' => $idPersonne]);
+
+            if ($del->rowCount() === 0) {
+                $pdo->rollBack();
+                return false;
+            }
+
+            $upd = $pdo->prepare("UPDATE pevent SET nombre_place = nombre_place + 1 WHERE id_event = :id");
+            $upd->execute([':id' => $idEvent]);
+
+            $pdo->commit();
+            return true;
+        } catch (Throwable $e) {
+            if ($pdo->inTransaction()) $pdo->rollBack();
+            return false;
+        }
+    }
 }

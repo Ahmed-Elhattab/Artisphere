@@ -62,10 +62,26 @@
         <!-- Première section : Mes commandes en cours -->
         <div class="orders">
             <h2>MES COMMANDES EN COURS</h2>
-            <div class="order-card">
-                <div class="order-title">Collier en or</div>
-                <a class="action-link" href="/artisphere/?controller=index&action=index"><button class="btn">Détail</button></a>
-            </div>
+
+            <?php if (!empty($reservations)): ?>
+                <?php foreach ($reservations as $r): ?>
+                <div class="order-card">
+                    <div class="order-title">
+                    <?= htmlspecialchars($r['nom'], ENT_QUOTES, 'UTF-8') ?>
+                    </div>
+
+                    <a class="action-link"
+                    href="/artisphere/?controller=produit_show&action=show&id=<?= (int)$r['id_produit'] ?>">
+                    <button class="btn">Détail</button>
+                    </a>
+                </div>
+                <?php endforeach; ?>
+            <?php else: ?>
+                <div class="order-card">
+                <div class="order-title">Aucune réservation en cours.</div>
+                </div>
+            <?php endif; ?>
+        </div>
             <!-- Deuxième section : Commandes -->
             <h2>DERNIERES COMMANDES</h2>
             <div class="order-card">

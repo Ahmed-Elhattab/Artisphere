@@ -42,4 +42,75 @@ class ReservationProduitModel
             return false;
         }
     }
+    public static function listForUser(int $idPersonne): array
+    {
+        $pdo = Database::getConnection();
+
+        $sql = "SELECT
+                rp.id_produit,
+                p.nom,
+                p.image,
+                p.prix
+                FROM reservation_produit rp
+                JOIN pproduit p ON p.id_produit = rp.id_produit
+                WHERE rp.id_personne = :u
+                ORDER BY rp.id_produit DESC";  // ou ORDER BY rp.date si tu ajoutes un champ date plus tard
+
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([':u' => $idPersonne]);
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public static function exists(int $idProduit, int $idPersonne): bool
+    {
+        $pdo = Database::getConnection();
+        $stmt = $pdo->prepare(
+            "SELECT 1 FROM reservation_produit
+             WHERE id_produit = :p AND id_personne = :u
+             LIMIT 1"
+        );
+        $stmt->execute([
+            ':p' => $idProduit,
+            ':u' => $idPersonne
+        ]);
+        return (bool)$stmt->fetchColumn();
+    }
+
+    public static function cancel(int $idProduit, int $idPersonne): bool
+    {
+        $pdo = Database::getConnection();
+        $pdo->beginTransaction();
+
+        try {
+            // supprimer la réservation
+            $stmt = $pdo->prepare(
+                "DELETE FROM reservation_produit
+                 WHERE id_produit = :p AND id_personne = :u"
+            );
+            $stmt->execute([
+                ':p' => $idProduit,
+                ':u' => $idPersonne
+            ]);
+
+            if ($stmt->rowCount() === 0) {
+                $pdo->rollBack();
+                return false;
+            }
+
+            // remettre +1 en quantité
+            $stmt = $pdo->prepare(
+                "UPDATE pproduit
+                 SET quantite = quantite + 1
+                 WHERE id_produit = :p"
+            );
+            $stmt->execute([':p' => $idProduit]);
+
+            $pdo->commit();
+            return true;
+        } catch (Exception $e) {
+            $pdo->rollBack();
+            return false;
+        }
+    }
 }

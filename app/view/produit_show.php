@@ -45,37 +45,61 @@ $img = !empty($produit['image']) ? 'images/produits/' . $produit['image'] : null
       ?>
 
       <div class="actions">
-        <?php if ($isLogged): ?>
-          <form method="post" action="/artisphere/?controller=produit_show&action=reserve" class="inline">
-            <input type="hidden" name="csrf" value="<?= htmlspecialchars($_SESSION['csrf'], ENT_QUOTES, 'UTF-8') ?>">
-            <input type="hidden" name="id_produit" value="<?= (int)$produit['id_produit'] ?>">
-            <input type="hidden" name="back" value="<?= htmlspecialchars($backUrl, ENT_QUOTES, 'UTF-8') ?>">
-            <button class="btn-primary" type="submit" <?= ((int)$produit['quantite'] <= 0 ? 'disabled' : '') ?>>
-              Réserver
-            </button>
-          </form>
-        <?php else: ?>
-          <a class="btn-primary" href="/artisphere/?controller=connexion&action=index">Réserver</a>
-        <?php endif; ?>
 
-        <?php if ($isOwner): ?>
-          <a class="btn-outline" href="/artisphere/?controller=produit_update&action=edit&id=<?= (int)$produit['id_produit'] ?>">
-            Éditer
+        <?php if ($isLogged): ?>
+
+          <?php if ($isReserved): ?>
+            <!-- Annuler réservation -->
+            <form method="post"
+                  action="/artisphere/?controller=produit_show&action=cancelReservation"
+                  class="inline">
+              <input type="hidden" name="csrf" value="<?= htmlspecialchars($_SESSION['csrf'], ENT_QUOTES, 'UTF-8') ?>">
+              <input type="hidden" name="id_produit" value="<?= (int)$produit['id_produit'] ?>">
+              <input type="hidden" name="back" value="<?= htmlspecialchars($backUrl, ENT_QUOTES, 'UTF-8') ?>">
+              <button class="btn-outline" type="submit">
+                Annuler la réservation
+              </button>
+            </form>
+
+          <?php else: ?>
+            <!-- Réserver -->
+            <form method="post"
+                  action="/artisphere/?controller=produit_show&action=reserve"
+                  class="inline">
+              <input type="hidden" name="csrf" value="<?= htmlspecialchars($_SESSION['csrf'], ENT_QUOTES, 'UTF-8') ?>">
+              <input type="hidden" name="id_produit" value="<?= (int)$produit['id_produit'] ?>">
+              <input type="hidden" name="back" value="<?= htmlspecialchars($backUrl, ENT_QUOTES, 'UTF-8') ?>">
+              <button class="btn-primary" type="submit"
+                <?= ((int)$produit['quantite'] <= 0 ? 'disabled' : '') ?>>
+                Réserver
+              </button>
+            </form>
+          <?php endif; ?>
+
+        <?php else: ?>
+          <a class="btn-primary" href="/artisphere/?controller=connexion&action=index">
+            Réserver
           </a>
         <?php endif; ?>
 
         <?php if ($isOwner): ?>
-          <a class="btn-outline" href="/artisphere/?controller=mes_creations&action=index">← Retour</a>
-        <?php else: ?>
-          <a class="btn-outline" href="/artisphere/?controller=index&action=index">← Retour</a>
+          <a class="btn-outline"
+            href="/artisphere/?controller=produit_update&action=edit&id=<?= (int)$produit['id_produit'] ?>">
+            Éditer
+          </a>
         <?php endif; ?>
+
+        <a class="btn-outline" href="<?= htmlspecialchars($backUrl, ENT_QUOTES, 'UTF-8') ?>">
+          ← Retour
+        </a>
       </div>
 
-      <?php if (isset($_GET['reserved'])): ?>
+      <?php if (isset($_GET['cancelled'])): ?>
         <p class="meta">
-          <?= ($_GET['reserved'] === '1') ? 'Réservation enregistrée' : 'Impossible de réserver (stock épuisé ou déjà réservé).' ?>
+          <?= $_GET['cancelled'] === '1'
+              ? 'Réservation annulée.'
+              : 'Impossible d’annuler la réservation.' ?>
         </p>
       <?php endif; ?>
-    </div>
   </section>
 </main>

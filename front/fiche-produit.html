@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles_Thushjan.css">
+    <title>Document</title>
+</head>
+
+<!-- HEADER (identique FAQ / Événements) -->
+<header class="site-header">
+    <div class="header-inner">
+
+        <div class="logo-zone">
+             <img src="../public/images/logo_site.png" alt="Logo Artisphere" class="logo-img">
+        </div>
+
+        <nav class="main-nav">
+            <a href="index.html" class="nav-link">Catalogue</a>
+            <a href="artisans.html" class="nav-link active">Artisan</a>
+            <a href="evenement.html" class="nav-link">Évènement</a>
+        </nav>
+
+        <a href="profil.html" class="profile-icon" aria-label="Mon profil">
+            <span>👤</span>
+        </a>
+
+    </div>
+</header>
+
+<body id="page-fiche-produit">
+
+    <div class="form-card">
+    <label for="importImage" class="imagerond">IMAGE</label>
+    <input type="file" id="importImage" name="fichier_image" class="importimage">
+
+    <h1 class="titre-produit">NOUVEAU PRODUIT </h1>  
+    <p1 class="para_produit">NOM DU PRODUIT<br></p1>
+    <input class="nom_produit" type="text" id="nom_produit" ><br>
+    <p2 class="para_catégorie">Catégorie <br></p2>
+    <select  class="choixcategorie" id="choixcategorie" name="catégorie_selectionne">
+    <option value="" disabled selected>Choisissez une option</option>
+    <option value="produit_a">Bijoux</option>
+    <option value="produit_b">Tables</option>
+    <option value="produit_c">Chaises</option>
+    </select><br>
+    <p3 class="para_quantités">Quantités <br></p3>
+    <input type="text" class="Quantités" id="Quantités">
+    <p4 class="para_matériaux"><br>Matériaux</p4>
+    <br>
+    <input type="text" class="Matériaux" id="Matériaux">
+    <p5 class="para_description"><br>Description</p5>
+    <br>
+    <input type="text" class="Description" id="Description"> <br>  <br>
+    <button class="bouton-enregistrer" type="button">Enregistrer</button>
+</div>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+    <div class="footer-inner">
+        <a href="apropos.html" class="footer-link">À propos de nous</a>
+        <a href="mentions.html" class="footer-link">Mentions légales</a>
+        <a href="faq.html" class="footer-link">FAQ</a>
+    </div>
+</footer>
+
+</body>
+</html>

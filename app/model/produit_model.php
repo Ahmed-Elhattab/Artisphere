@@ -106,4 +106,52 @@ class ProduitModel
 
         return $stmt->rowCount() > 0;
     }
+    public static function search(array $filters): array
+    {
+        $pdo = Database::getConnection();
+
+        $where = [];
+        $params = [];
+
+        // Recherche (nom / description)
+        if (!empty($filters['q'])) {
+            $where[] = "(p.nom LIKE :q OR p.description LIKE :q)";
+            $params[':q'] = '%' . $filters['q'] . '%';
+        }
+
+        // Catégorie
+        if (!empty($filters['id_categorie'])) {
+            $where[] = "p.id_categorie = :cat";
+            $params[':cat'] = (int)$filters['id_categorie'];
+        }
+
+        // En stock uniquement
+        if (!empty($filters['in_stock'])) {
+            $where[] = "p.quantite > 0";
+        }
+
+        // Prix min/max
+        if ($filters['min_price'] !== '' && $filters['min_price'] !== null) {
+            $where[] = "p.prix >= :minp";
+            $params[':minp'] = (float)$filters['min_price'];
+        }
+        if ($filters['max_price'] !== '' && $filters['max_price'] !== null) {
+            $where[] = "p.prix <= :maxp";
+            $params[':maxp'] = (float)$filters['max_price'];
+        }
+
+        $sql = "SELECT p.id_produit, p.nom, p.image, p.prix, p.quantite, c.nom AS categorie_nom
+                FROM pproduit p
+                LEFT JOIN categorie c ON c.id_categorie = p.id_categorie";
+
+        if ($where) {
+            $sql .= " WHERE " . implode(" AND ", $where);
+        }
+
+        $sql .= " ORDER BY p.id_produit DESC";
+
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute($params);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 }

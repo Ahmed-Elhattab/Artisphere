@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles_Thushjan.css">
+    <title>Document</title>
+</head>
+
+<body id="page-recherche-profil-admin">
+ 
+<!-- HEADER (identique FAQ / Événements) -->
+<header class="site-header">
+    <div class="header-inner">
+
+        <div class="logo-zone">
+             <img src="../public/images/logo_site.png" alt="Logo Artisphere" class="logo-img">
+        </div>
+
+        <nav class="main-nav">
+            <a href="index.html" class="nav-link">Catalogue</a>
+            <a href="artisans.html" class="nav-link active">Artisan</a>
+            <a href="evenement.html" class="nav-link">Évènement</a>
+        </nav>
+
+        <a href="profil.html" class="profile-icon" aria-label="Mon profil">
+            <span>👤</span>
+        </a>
+
+    </div>
+</header>
+
+
+<!-- Le Contenue -->
+<main id="page-recherche-profil-admin">
+    <form class="search-form" id="searchForm">
+        <input type="text" class="barre-recherche" id="searchInput" placeholder="RECHERCHE" name="recherche">
+        <button type="submit" class="bouton-recherche">
+            <img src="../public/images/Loupe.png" alt="Loupe" class="icone-loupe">
+        </button>
+    </form>
+
+    <div class="pave_rose" id="resultsArea">
+        </div>
+</main>
+
+
+<!-- FOOTER -->
+<footer class="site-footer">
+    <div class="footer-inner">
+        <a href="apropos.html" class="footer-link">À propos de nous</a>
+        <a href="mentions.html" class="footer-link">Mentions légales</a>
+        <a href="faq.html" class="footer-link">FAQ</a>
+    </div>
+</footer>
+
+<script src="trouve-compte.js"></script>
+</body>
+</html>

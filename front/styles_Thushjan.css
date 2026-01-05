@@ -1,0 +1,661 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+#Menu_choix_evenement_produit {
+    position: relative;    
+    width: 100%;
+    min-height: 600px;     
+    background-color: #bba38c;
+}
+
+.conteneur-parent {
+    flex: 1; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 80px;
+    background-color: #bba38c;
+    position: relative;
+}
+
+.colonne{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.trait-vertical {
+    width: 4px;
+    height: 400px;          
+    background-color: black;
+    border-radius: 10px;     
+}
+
+
+.bouton-produit {
+position: absolute;
+top: 21rem;            
+left: 200px;
+background-color: #887bb0 ;
+color : white;
+text-align: center;
+border-radius: 30px;
+padding: 1%;
+width: 20%;
+font-family : 'Verdana';
+ cursor: pointer;
+}
+
+.bouton-produit:hover {
+    background-color: #27DAF5;
+    
+}
+
+.bouton-evenement {
+position: absolute;
+top: 21rem;              
+left: 1000px;
+background-color: #887bb0 ;
+color : white;
+text-align: center;
+border-radius: 30px;
+padding: 1%;
+width: 20%;
+font-family : 'Verdana';
+ cursor: pointer;
+}
+
+.bouton-evenement:hover {
+    background-color: #27DAF5;
+}
+
+.image-evenement {
+position: absolute;
+width: 200px;
+top: 6.8rem;              
+left: 1050px;
+}
+
+.image-produit {
+position: absolute;
+width: 200px;
+top: 7rem;              
+left: 250px;
+}
+
+.titre-produit {
+color: #6e6295 !important;
+position: absolute;
+top: 3rem ;              
+left: 40rem;
+}
+
+
+/*#page-fiche-evenement {
+    position: relative;    
+    width: 100%;
+    min-height: 600px;     
+    background-color: #bba38c;
+}*/
+
+#page-fiche-evenement {
+    position: relative;
+    width: 100%;
+    min-height: 100vh; /* Force la hauteur à 100% de l'écran minimum */
+    padding-bottom: 100px; /* Espace pour ne pas que le footer cache le bouton Enregistrer */
+    background-color: #bba38c;
+    display: flex;
+    flex-direction: column;
+}
+
+.site-footer {
+    margin-top: auto; /* Pousse le footer tout en bas si le contenu est court */
+}
+
+#page-fiche-evenement .bouton-enregistrerV2{
+position: absolute;
+background-color: #887bb0 ;
+color : white;
+text-align: center;
+border-radius: 30px;
+padding: 1%;
+width: 120px;
+height: 30px;
+line-height: 0px;
+font-family : 'Verdana';
+font-weight: bold;
+   position: absolute;
+    top: 36.5rem ;              
+    left: 53.5rem; 
+    cursor: pointer;
+}
+
+#page-fiche-evenement .importimage{
+    opacity: 0; 
+    overflow: hidden;
+    position: absolute; 
+}
+
+#page-fiche-evenement .Places{
+    border-radius: 30px;
+    background-color:rgba(136, 123, 176, 0.7);
+    font-family : 'Verdana';
+    font-weight: bold;
+    border: none;
+    padding: 1%;
+    width: 140px;
+    height: 10px; 
+    position: absolute;
+    top: 20.5rem ;              
+    left: 47.5rem;  
+}
+
+#page-fiche-evenement .Lieu{
+    border-radius: 30px;
+    background-color:rgba(136, 123, 176, 0.7);
+    font-family : 'Verdana';
+    font-weight: bold;
+    border: none;
+    padding: 1%;
+    width: 140px;
+    height: 10px; 
+    position: absolute;
+    top: 15.5rem ;              
+    left: 40rem;  
+}
+
+#page-fiche-evenement .choixcategorie{
+    border-radius: 30px;
+    background-color:rgba(136, 123, 176, 0.7);
+    font-family : 'Verdana';
+    font-weight: bold;
+    border: none;
+    padding: 1%;
+    width: 300px;
+    height: 50px;   
+    position: absolute;
+    top: 15rem ;              
+    left: 43.5rem;
+}
+
+#page-fiche-evenement .DescriptionV2{
+    border-radius: 30px;
+    background-color:rgba(136, 123, 176, 0.7);
+    font-family : 'Verdana';
+    font-weight: bold;
+    border: none;
+    padding: 1%;
+    width: 370px;
+    height: 100px;   
+    position: absolute;
+    top: 26.5rem ;              
+    left: 36.5rem;  
+}
+
+#page-fiche-evenement .para_evenement{
+font-family : 'Verdana';
+color : rgba(136, 123, 176, 0.7);
+position: absolute;
+top: 8rem ;              
+left: 47rem;
+}
+
+#page-fiche-evenement .para_places{
+font-family : 'Verdana';
+color : rgba(136, 123, 176, 0.7);
+position: absolute;
+top: 21rem ;              
+left: 37rem; 
+}
+
+#page-fiche-evenement .para_lieu{
+font-family : 'Verdana';
+color : rgba(136, 123, 176, 0.7);
+position: absolute;
+top: 16rem ;              
+left: 37rem; 
+}
+
+#page-fiche-evenement .nom_produit{
+    border-radius: 30px;
+    background-color:rgba(136, 123, 176, 0.7);
+    font-family : 'Verdana';
+    font-weight: bold;
+    border: none;
+    padding: 1%;
+    width: 200px;
+    height: 20px;   
+    vertical-align: top;
+    text-align: auto;
+    position: absolute;
+    top: 10.5rem ;              
+    left: 45.5rem;
+} 
+
+#page-fiche-evenement .imagerond {
+    width: 80px;
+    height: 80px;
+    background-color: #27DAF5;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    color: white;
+    font-size: 20px;
+    user-select: none;
+    position: absolute;
+    top: 9.0rem ;              
+    left: 38.5rem; 
+}
+
+#page-fiche-evenement .para_descriptionV2{
+font-family : 'Verdana';
+color : rgba(136, 123, 176, 0.7);
+    position: absolute;
+    top: 23rem ;              
+    left: 37rem;
+}
+
+
+
+#page-fiche-produit {
+    background-color: #bba38c;
+    width: 100%;
+    position: relative; 
+    flex: 1; 
+    min-height: 900px; 
+}
+
+#page-produit .h2{
+color: #6e6295 !important;
+}
+
+#page-fiche-produit .form-card {
+    background-color: #E2D1C3; /* Un beige très clair qui va avec ton fond */
+    width: 550px;
+    height: 550px;
+    margin: 50px auto; /* Centre le carré sur la page */
+    padding: 30px;
+    border-radius: 30px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    
+    /* Pour que les éléments dedans s'alignent bien */
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+}
+
+
+
+#page-fiche-produit .Quantités{
+    border-radius: 30px;
+    background-color:rgba(136, 123, 176, 0.7);
+    font-family : 'Verdana';
+    font-weight: bold;
+    border: none;
+    padding: 1%;
+    width: 140px;
+    height: 10px; 
+    position: absolute;
+    top: 23.5rem ;              
+    left: 43.5rem;  
+}
+
+#page-fiche-produit .Matériaux{
+    border-radius: 30px;
+    background-color:rgba(136, 123, 176, 0.7);
+    font-family : 'Verdana';
+    font-weight: bold;
+    border: none;
+    padding: 1%;
+    width: 140px;
+    height: 10px;   
+    position: absolute;
+    top: 27.5rem ;              
+    left: 43.5rem;  
+}
+
+#page-fiche-produit .choixcategorie{
+    border-radius: 30px;
+    background-color:rgba(136, 123, 176, 0.7);
+    font-family : 'Verdana';
+    font-weight: bold;
+    border: none;
+    padding: 1%;
+    width: 300px;
+    height: 50px;   
+    position: absolute;
+    top: 18rem ;              
+    left: 43.5rem;
+}
+
+#page-fiche-produit .para_produit{
+font-family : 'Verdana';
+color : rgba(136, 123, 176, 0.7);
+position: absolute;
+top: 11rem ;              
+left: 48rem;
+}
+
+#page-fiche-produit .para_catégorie{
+font-family : 'Verdana';
+color : rgba(136, 123, 176, 0.7);
+position: absolute;
+top: 19rem ;              
+left: 37rem; 
+}
+
+#page-fiche-evenement .para_catégorie{
+font-family : 'Verdana';
+color : rgba(136, 123, 176, 0.7);
+position: absolute;
+top: 16rem ;              
+left: 37rem; 
+}
+
+#page-fiche-produit .para_description{
+font-family : 'Verdana';
+color : rgba(136, 123, 176, 0.7);
+    position: absolute;
+    top: 30rem ;              
+    left: 37rem;
+}
+
+#page-fiche-produit .bouton-enregistrer{
+position: absolute;
+background-color: #887bb0 ;
+color : white;
+text-align: center;
+border-radius: 30px;
+padding: 1%;
+width: 120px;
+height: 30px;
+line-height: 0px;
+font-family : 'Verdana';
+font-weight: bold;
+   position: absolute;
+    top: 43.5rem ;              
+    left: 53.5rem; 
+    cursor: pointer;
+}
+
+#page-fiche-produit .Description{
+    border-radius: 30px;
+    background-color:rgba(136, 123, 176, 0.7);
+    font-family : 'Verdana';
+    font-weight: bold;
+    border: none;
+    padding: 1%;
+    width: 370px;
+    height: 100px;   
+    position: absolute;
+    top: 33.5rem ;              
+    left: 36.5rem;  
+}
+
+#page-fiche-produit .imagerond {
+    width: 80px;
+    height: 80px;
+    background-color: #27DAF5;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    color: white;
+    font-size: 20px;
+    user-select: none;
+       position: absolute;
+    top: 12.0rem ;              
+    left: 38.5rem; 
+}
+
+#page-fiche-produit .importimage{
+    opacity: 0; 
+    overflow: hidden;
+    position: absolute; 
+}
+
+#page-fiche-produit .catégorie{
+font-family : 'Verdana';
+color : rgba(136, 123, 176, 0.7);
+}
+
+#page-fiche-produit .para_matériaux{
+font-family : 'Verdana';
+color : rgba(136, 123, 176, 0.7);
+position: absolute;
+top: 27rem ;              
+left: 37rem; 
+}
+
+#page-fiche-produit .para_quantités{
+font-family : 'Verdana';
+color : rgba(136, 123, 176, 0.7);
+position: absolute;
+top: 24rem ;              
+left: 37rem; 
+}
+
+#page-fiche-produit .nom_produit{
+    border-radius: 30px;
+    background-color:rgba(136, 123, 176, 0.7);
+    font-family : 'Verdana';
+    font-weight: bold;
+    border: none;
+    padding: 1%;
+    width: 200px;
+    height: 20px;   
+    vertical-align: top;
+    text-align: auto;
+    position: absolute;
+    top: 13.5rem ;              
+    left: 45.5rem;
+} 
+
+#page-fiche-produit .bouton-enregistrer:hover {
+    background-color: #27DAF5;
+}
+
+
+
+/*Page recherche profil admin*/
+#page-recherche-profil-admin {
+    position: relative;    
+    width: 100%;
+    min-height: 600px;     
+    background-color: #bba38c;
+}
+
+/* Le pavé rose */
+#page-recherche-profil-admin .pave_rose {
+    background-color: #BFBFBF;
+    width: 40rem; 
+    height: 15rem;
+    margin-top: 8rem;; 
+    margin-left:28rem;
+}
+
+
+/* La barre de texte */
+#page-recherche-profil-admin .barre-recherche {
+    width: 300px;
+    padding: 10px 40px 10px 15px; 
+    border-radius: 20px;
+    border: 1px solid #ccc;
+    outline: none;
+}
+
+#page-recherche-profil-admin .barre-recherche::placeholder {
+    color: #A1A1A1; 
+    opacity: 1;
+}
+
+
+*#page-recherche-profil-admin  .search-form {
+    display: flex !important;
+    position: relative !important;
+    width: 23rem !important;    
+    margin: 0 auto 0 39% !important;
+    transform: translateY(5.9rem) !important; 
+}
+
+/* La loupe */
+#page-recherche-profil-admin .bouton-recherche {
+    position: absolute;
+    right: 1.4rem;
+    top: 0.30rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+#page-recherche-profil-admin .icone-loupe {
+    width: 25px; 
+    height: auto;
+}
+
+/* CSS POUR LE JS */
+
+#resultsArea {
+    padding-top: 0.9rem ; 
+    padding-left: 0rem;   
+    padding-right: 0rem;  
+    align-items: stretch;
+}
+
+.barre-grise {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #737373; 
+    color: white;
+    padding: 10px 25px;
+    margin: 0px auto;
+    width: 92%;         
+    border-radius: 30px; 
+    font-family: Arial;
+    font-size: 14px;
+}
+
+.profile-name, .account-type {
+    font-weight: bold;
+}
+
+.barre-grise div {
+    display: flex;
+    gap: 13px; /* Espace entre les deux pastilles */
+}
+
+
+.status-light {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%; /* Rend les boutons parfaitement ronds */
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.light-green {
+    background-color: #add6b8; 
+}
+
+.light-red {
+    background-color: #a51c06; 
+}
+
+
+/* --------- HEADER --------- */
+
+
+.header-inner {
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;            
+    width: 100%;
+    max-width: 1100px;              
+    height: 80px;                  
+    margin: 0 auto;                 
+    padding: 0 40px;               
+}
+
+.site-header {
+    width: 100%;
+    min-height: 80px; 
+    background: #f6e6cf;
+    display: flex;
+    align-items: center; 
+    padding: 10px 20px;
+    position: relative;
+    z-index: 1000; 
+}
+
+.logo-img {
+    height: 72px;
+}
+
+.main-nav {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    gap: 2.5rem;
+}
+
+.nav-link {
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-size: 0.9rem;
+    color: #3c2b20;
+}
+
+.nav-link.active {
+    font-weight: 600;
+    border-bottom: 2px solid #3c2b20;
+}
+
+.profile-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    border: 2px solid #3c2b20;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+}
+
+
+/* --------- FOOTER --------- */
+
+
+.site-footer {
+    position: relative;    
+    clear: both;          
+    background: #f6e6cf;
+    padding: 1rem;
+    width: 100%
+}
+
+
+.footer-inner {
+    display: flex;
+    justify-content: center;
+    gap: 4rem;
+}
+
+.footer-link {
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    color: #3c2b20;
+}

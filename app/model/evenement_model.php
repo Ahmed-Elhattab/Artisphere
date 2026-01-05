@@ -92,4 +92,61 @@ class EvenementModel
         ]);
     }
 
+    public static function search(array $filters): array
+    {
+        $pdo = Database::getConnection();
+
+        $where = [];
+        $params = [];
+
+        // Recherche (nom / description / lieu)
+        if (!empty($filters['q'])) {
+            $where[] = "(e.nom LIKE :q OR e.description LIKE :q OR e.lieu LIKE :q)";
+            $params[':q'] = '%' . $filters['q'] . '%';
+        }
+
+        // Type
+        if (!empty($filters['type'])) {
+            $where[] = "e.type = :type";
+            $params[':type'] = $filters['type'];
+        }
+
+        // Places disponibles
+        if (!empty($filters['in_stock'])) {
+            $where[] = "e.nombre_place > 0";
+        }
+
+        // Prix min/max
+        if ($filters['min_price'] !== '' && $filters['min_price'] !== null) {
+            $where[] = "e.prix >= :minp";
+            $params[':minp'] = (float)$filters['min_price'];
+        }
+        if ($filters['max_price'] !== '' && $filters['max_price'] !== null) {
+            $where[] = "e.prix <= :maxp";
+            $params[':maxp'] = (float)$filters['max_price'];
+        }
+
+        $sql = "SELECT e.id_event, e.nom, e.image, e.lieu, e.nombre_place, e.description,
+                    e.type, e.prix, e.date_debut, e.date_fin
+                FROM pevent e";
+
+        if ($where) {
+            $sql .= " WHERE " . implode(" AND ", $where);
+        }
+
+        // exemple : bientôt d'abord
+        $sql .= " ORDER BY e.date_debut ASC, e.id_event DESC";
+
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute($params);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public static function listTypes(): array
+    {
+        $pdo = Database::getConnection();
+        $stmt = $pdo->query("SELECT DISTINCT type FROM pevent ORDER BY type ASC");
+        return array_values(array_filter(array_map(fn($r) => $r['type'], $stmt->fetchAll(PDO::FETCH_ASSOC))));
+    }
+
 }

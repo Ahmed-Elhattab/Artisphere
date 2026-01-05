@@ -104,37 +104,110 @@ body {
 .event-tag-expo    { background: #eff6ff; color: #1d4ed8; }
 .event-tag-salon   { background: #fff7ed; color: #c2410c; }
 
-/* --------- FOOTER --------- */
-
-.site-footer {
-    background: #f6e6cf;
-    padding: 1rem 0;
+/* barre : types à gauche + recherche/filtres à droite */
+.events-toolbar{
+  display:flex;
+  align-items:center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 1.5rem;
 }
 
-.footer-inner {
-    display: flex;
-    justify-content: center;
-    gap: 4rem;
+/* pills = liens */
+.events-filters{
+  display:flex;
+  gap: .6rem;
+  flex-wrap: wrap;
+  margin-bottom: 0; /* c'est la toolbar qui gère */
 }
 
-.footer-link {
-    text-decoration: none;
-    text-transform: uppercase;
-    font-size: 0.8rem;
-    color: #3c2b20;
+.filter-pill{
+  border-radius: 999px;
+  padding: 0.4rem 1rem;
+  border: 1px solid #e5e7eb;
+  background: #fff;
+  cursor: pointer;
+  text-decoration: none;
+  color: #111;
 }
 
-/* --------- RESPONSIVE --------- */
+.filter-pill-active{
+  background: #3c2b20;
+  color: #fff;
+}
 
-@media (max-width: 900px) {
-    .grid-3 {
-        grid-template-columns: 1fr;
-    }
+/* search block right */
+.events-search{
+  display:flex;
+  align-items:center;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
 
-    .header-inner {
-        flex-direction: column;
-        height: auto;
-        padding: 1rem;
-        gap: 0.8rem;
-    }
+.search-input{
+  width: 240px;
+  padding: 10px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(0,0,0,.35);
+  background: #fff;
+  box-sizing: border-box;
+}
+
+.price-input{
+  width: 120px;
+  padding: 10px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(0,0,0,.35);
+  background: #fff;
+  box-sizing: border-box;
+}
+
+.stock-check{
+  display:flex;
+  align-items:center;
+  gap: 8px;
+  font-size: 14px;
+  color: #3c2b20;
+}
+
+.apply-btn{
+  border:none;
+  background:#3c2b20;
+  color:#fff;
+  border-radius: 999px;
+  padding: 10px 14px;
+  font-weight: 700;
+  cursor:pointer;
+}
+
+.reset-link{
+  text-decoration:none;
+  color:#3c2b20;
+  font-weight: 700;
+}
+
+/* image dans carte */
+.event-img{
+  width: 100%;
+  height: 140px;
+  object-fit: cover;
+  border-radius: 12px;
+  margin-bottom: 8px;
+}
+
+/* empty state */
+.events-empty{
+  color: #3c2b20;
+  font-weight: 700;
+  text-align: center;
+}
+
+/* responsive */
+@media (max-width: 900px){
+  .grid-3{ grid-template-columns: 1fr; }
+  .events-toolbar{ justify-content: center; }
+  .events-search{ justify-content: center; }
+  .search-input{ width: 100%; }
 }

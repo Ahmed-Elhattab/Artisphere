@@ -1,70 +1,60 @@
-<!-- CONTENU -->
-<main>
+<!-- MAIN CONTENT -->
+<main class="events-main">
+    <!-- Title -->
+    <h1 class="events-title">A L'AFFICHE</h1>
 
-    <!-- Titre -->
-    <section class="section events-header">
-        <div class="container">
-            <h1>Tous les événements</h1>
-            <p class="events-intro">
-                Ateliers, expositions, salons et marchés d’artisans :
-                retrouve ici l’ensemble des événements référencés sur Artisphere.
-            </p>
-        </div>
+    <!-- events grid -->
+    <section class="events-grid">
+
+        <?php if (!empty($evenements)): ?>
+            <?php foreach ($evenements as $e): ?>
+                <article class="event-card">
+
+                    <!-- the image display -->
+                    <?php
+                        $img = !empty($e['image'])
+                            ? "images/evenements/" . $e['image']
+                            : "images/image-photo.jpg";
+                    ?>
+                    <img
+                        src="<?= htmlspecialchars($img, ENT_QUOTES, 'UTF-8') ?>"
+                        alt="<?= htmlspecialchars($e['nom'], ENT_QUOTES, 'UTF-8') ?>"
+                        onerror="this.onerror=null; this.src='images/image-photo.jpg';"
+                    >
+
+                    <div class="event-body">
+                        <h2 class="event-name"><?= htmlspecialchars($e['nom']) ?></h2>
+
+                        <?php if (!empty($e['lieu'])): ?>
+                            <p class="event-location"><?= htmlspecialchars($e['lieu']) ?></p>
+                        <?php endif; ?>
+
+                        <p class="event-date">
+                            Du <?= htmlspecialchars($e['date_debut']) ?>
+                            au <?= htmlspecialchars($e['date_fin']) ?>
+                        </p>
+
+                        <?php
+            
+            
+                        ?>
+                        <a class="event-link"
+                            href="/artisphere/?controller=evenement_show&action=show&id=<?= (int)$e['id_event'] ?>">
+                                Voir
+                        </a>
+
+                    </div>
+                </article>
+            <?php endforeach; ?>
+        <?php else: ?>
+            <p class="no-events-message">Aucun évènement pour le moment.</p>
+        <?php endif; ?>
+
     </section>
 
-    <!-- Filtres -->
-    <section class="section">
-        <div class="container">
-
-            <div class="events-filters">
-                <button class="filter-pill filter-pill-active">Tous</button>
-                <button class="filter-pill">Ateliers</button>
-                <button class="filter-pill">Expositions</button>
-                <button class="filter-pill">Salons & marchés</button>
-            </div>
-
-            <!-- Grille -->
-            <div class="events-grid grid-3">
-
-                <!-- Carte événement -->
-                <article class="event-card">
-                    <span class="event-tag event-tag-atelier">Atelier</span>
-                    <h2 class="event-title">Atelier d’initiation au travail du bois</h2>
-                    <p class="event-meta">📍 Paris 11e · 🗓 18 octobre 2025 · ⏰ 14h – 17h</p>
-                    <p class="event-desc">
-                        Découvre les bases de l’ébénisterie : découpe, ponçage,
-                        assemblage et création d’un objet décoratif.
-                    </p>
-                    <p class="event-extra">Places limitées – matériel fourni.</p>
-                    <a href="#" class="event-btn">Voir le détail</a>
-                </article>
-
-                <article class="event-card">
-                    <span class="event-tag event-tag-expo">Exposition</span>
-                    <h2 class="event-title">Exposition « Matières & Lumières »</h2>
-                    <p class="event-meta">📍 Lyon · 🗓 1 – 15 novembre 2025</p>
-                    <p class="event-desc">
-                        Une exposition collective autour de la céramique,
-                        du verre et des bijoux artisanaux.
-                    </p>
-                    <p class="event-extra">Entrée gratuite.</p>
-                    <a href="#" class="event-btn">Voir le détail</a>
-                </article>
-
-                <article class="event-card">
-                    <span class="event-tag event-tag-salon">Salon</span>
-                    <h2 class="event-title">Salon de l’artisanat local</h2>
-                    <p class="event-meta">📍 Lille · 🗓 22 – 24 novembre 2025</p>
-                    <p class="event-desc">
-                        Plus de 80 artisans, démonstrations en direct
-                        et ateliers participatifs.
-                    </p>
-                    <p class="event-extra">Pass 3 jours.</p>
-                    <a href="#" class="event-btn">Voir le détail</a>
-                </article>
-
-            </div>
-        </div>
-    </section>
-
+    <!-- Button under cards -->
+    <div class="events-button-wrapper">
+        <!-- this button can reload the full events list -->
+        <a href="/artisphere/?controller=tous_les_evenements&action=index" class="btn-events">VOIR TOUS LES EVENEMENTS</a>
+    </div>
 </main>

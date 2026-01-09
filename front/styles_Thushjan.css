@@ -659,3 +659,423 @@ left: 37rem;
     font-size: 0.8rem;
     color: #3c2b20;
 }
+
+
+
+/* --------- FORUM --------- */
+
+#Forum .barre {
+  width: 1100px;      
+  height: 30px;       
+  background-color: white;
+  margin: 5px auto; 
+  border: 1px solid #e5e7eb; 
+  border-radius: 6px; 
+}
+
+#Forum {
+  box-sizing: border-box;
+  font-family: Inter, Arial, sans-serif;
+   margin: 0;
+  background: white;
+}
+
+/* HEADER */
+#Forum .top {
+  background: white;
+  padding: 25px 0;
+}
+
+#Forum .container {
+  width: 1100px;
+  margin: auto;
+}
+
+#Forum .search-container {
+  background-color: #f3f4f6; 
+  padding: 30px 40px 50px 40px;
+  border-radius: 12px;      
+  display: flex;
+  flex-direction: column;    
+  gap: 0rem;               
+  max-width: 1200px;         
+}
+
+#Forum .search-box {
+  display: flex;
+  margin-top: 10px;
+  width: 20rem;
+}
+
+#Forum .search-box input {
+  flex: 1;
+  padding: 10px;
+  border : 1px solid #d1d5db;
+  border-radius: 6px 0 0 6px;
+}
+
+#Forum .search-box button {
+  padding: 10px 14px;
+  border: 1px solid #d1d5db;
+  border-left: none;
+  background: #f9fafb;
+  cursor : pointer;
+}
+
+#Forum .image-communauté {
+  height: 8rem;        
+  width: auto;           
+  object-fit: contain;
+  margin-left: 25rem;
+  margin-top: -6.5rem;
+}
+
+/* LAYOUT */
+#Forum .forum-layout {
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  gap: 30px;
+  margin-top: 30px;
+}
+
+/* TOOLBAR */
+#Forum .toolbar {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+ #Forum .filtres button {
+  background: none;
+  border: none;
+  margin-right: 12px;
+  color: #6b7280;
+  cursor: pointer;
+}
+
+#Forum .filtres .active {
+  color: #2563eb;
+  border-bottom: 2px solid #2563eb;
+}
+
+#Forum .new-topic {
+  background: #111827;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+#Forum .vide {
+  background: white;
+  padding: 40px;
+  text-align: center;
+  border-radius: 8px;
+  color: #6b7280;
+}
+
+/* TOPIC */
+#Forum .topic {
+  background: white;
+  padding: 16px;
+  border-radius: 8px;
+  margin-bottom: 12px;
+  border: 1px solid #e5e7eb;
+}
+
+#Forum .topic-title {
+  font-weight: 600;
+}
+
+#Forum .topic-content {
+  color: #6b7280;
+  margin-top: 6px;
+  font-size: 14px;
+}
+
+/* SIDEBAR */
+#Forum .sidebar {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  border: 1px solid #e5e7eb;
+  align-self: start
+}
+
+/* FENETRESUJET */
+#Forum .Fenetresujet {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+
+#Forum .Fenetresujet-contenu {
+  background: white;
+  padding: 20px;
+  width: 400px;
+  border-radius: 8px;
+}
+
+#Forum .Fenetresujet-contenu input {
+  width: 100%;
+  margin-top: 10px;
+  padding: 10px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  box-sizing: border-box;
+  font-size: 14px;
+}
+
+#Forum .Fenetresujet-contenu textarea {
+  width: 100%;
+  height: 10rem;
+  margin-top: 10px;
+  padding: 12px 16px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  box-sizing: border-box;
+  font-size: 14px;
+}
+
+
+#Forum .Fenetresujet-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+#Forum .Fenetresujet-actions button {
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.35em;
+  padding: 0.75em 1em;
+  padding-right: 1.25em;
+  border: 1px solid transparent;
+  font-weight: 700;
+  border-radius: 2em;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+
+/* --------- CONTENUE SUJET --------- */
+
+#Forum-contenu-sujet {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #f0f2f5; /* Gris clair comme Reddit/Facebook */
+    margin: 0;
+    font-family: sans-serif;
+}
+
+/* La boîte du sujet principal */
+.boite-sujet {
+    background: white;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    margin: 20px 0;
+}
+
+.boite-sujet h1 {
+    margin-top: 0;
+    font-size: 24px;
+}
+
+/* La section des commentaires */
+.commentaires {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+#comm-texte {
+    width: 100%;
+    height: 80px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box; /* Pour que ça ne dépasse pas */
+    resize: vertical;
+}
+
+.commentaires button {
+    margin-top: 10px;
+    padding: 8px 20px;
+    background: #111;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+/* Style pour chaque réponse affichée */
+.reponse-affichee {
+    padding: 15px 0;
+    border-bottom: 1px solid #eee;
+}
+
+
+/* --------- MOT-DE-PASSE-OUBLIE --------- */
+
+#Mot-de-passe-oublie {
+    position: relative;    
+    width: 100%;
+    min-height: 600px;     
+    background-color: #bba38c;
+}
+
+/* Conteneur principal */
+#Mot-de-passe-oublie .container {
+    max-width: 900px;
+    margin: 20px auto;
+    background: #ffffff;
+    border: 1px solid #ddd;
+    font-family: Arial, sans-serif;
+}
+
+/* Bandeau bleu du titre */
+#Mot-de-passe-oublie .form-header {
+    background-color: #3174b5; /* Bleu identique à l'image */
+    color: white;
+    padding: 12px 15px;
+}
+
+#Mot-de-passe-oublie .form-header h1 {
+    font-size: 16px;
+    margin: 0;
+    font-weight: bold;
+}
+
+/* Espacement du formulaire */
+#Mot-de-passe-oublie form {
+    padding: 20px;
+}
+
+/* Style du label et du texte d'exemple */
+#Mot-de-passe-oublie .input-group label {
+    display: block;
+    font-weight: bold;
+    font-size: 14px;
+    margin-bottom: 8px;
+    color: #333;
+}
+
+#Mot-de-passe-oublie .example-text {
+    font-weight: normal;
+    color: #666;
+    margin-left: 5px;
+}
+
+/* Style du champ de saisie (input) */
+#Mot-de-passe-oublie .input-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 2px;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+}
+
+
+#Mot-de-passe-oublie .button-container {
+    display: flex;
+    justify-content: flex-end;
+}
+
+
+#Mot-de-passe-oublie .bouton-envoyer {
+    background-color: #2c3e50;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+
+/* --------- MOT-DE-PASSE-CHANGER --------- */
+
+#Mot-de-passe-changer {
+    position: relative;    
+    width: 100%;
+    min-height: 600px;     
+    background-color: #bba38c;
+}
+
+#Mot-de-passe-changer .container {
+    max-width: 900px;
+    margin: 20px auto;
+    background: #ffffff;
+    border: 1px solid #ddd;
+    font-family: Arial;
+}
+
+#Mot-de-passe-changer .form-header {
+    background-color: #3174b5;
+    color: white;
+    padding: 12px 15px;
+}
+
+#Mot-de-passe-changer .form-header h1 {
+    font-size: 16px;
+    margin: 0;
+}
+
+#Mot-de-passe-changer form {
+    padding: 20px;
+}
+
+#Mot-de-passe-changer .instruction {
+    font-size: 14px;
+    margin-bottom: 20px;
+    color: #555;
+}
+
+#Mot-de-passe-changer .input-group {
+    margin-bottom: 15px;
+}
+
+#Mot-de-passe-changer .input-group label {
+    display: block;
+    font-weight: bold;
+    font-size: 14px;
+    margin-bottom: 8px;
+    color: #333;
+}
+
+
+/* Style spécifique pour les inputs password */
+#Mot-de-passe-changer .input-group input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 2px;
+    box-sizing: border-box;
+    font-size: 16px;
+}
+
+#Mot-de-passe-changer .button-container {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 25px;
+}
+
+#Mot-de-passe-changer .bouton-envoyer {
+    background-color: #2c3e50;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+}

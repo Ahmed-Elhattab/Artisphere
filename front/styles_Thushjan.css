@@ -5,6 +5,30 @@ html, body {
     flex-direction: column;
 }
 
+/* --- CETTE PARTIE DÉCLENCHE LE CHANGEMENT DE COULEUR --- */
+
+/* 1. Change le fond de la page et la couleur du texte global */
+body.dalto-mode {
+    background-color: #222222 !important; /* Fond sombre pour le contraste */
+    color: #ffffff !important;           /* Texte blanc */
+}
+
+/* 2. Change la couleur de tes boutons (ajoute tes propres classes ici) */
+body.dalto-mode button:not(#bouton-dalto), 
+body.dalto-mode .bouton-enregistrerV2 {
+    background-color: #E69F00 !important; /* Orange (très visible pour les daltoniens) */
+    color: #000000 !important;           /* Texte noir sur fond orange */
+    border-color: #ffffff !important;
+}
+
+/* 3. Optionnel : Change la couleur du header en mode accessibilité */
+body.dalto-mode header {
+    background-color: #333333 !important;
+    border-bottom: 2px solid #E69F00 !important;
+}
+
+  
+
 #Menu_choix_evenement_produit {
     position: relative;    
     width: 100%;
@@ -576,6 +600,34 @@ left: 37rem;
 
 /* --------- HEADER --------- */
 
+/* Style du bouton pour qu'il ressemble à ton image */
+.bouton-style {
+/* --- Design pilule --- */
+    background-color: #f0f0f0; 
+    color: #3c2b20;
+    border: 2px solid #3c2b20; 
+    border-radius: 50px;       
+    padding: 8px 20px;
+    font-family: 'Verdana', sans-serif;
+    font-size: 0.9rem;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+    transition: all 0.2s ease;
+
+    /* --- Positionnement corrigé --- */
+    position: absolute; 
+    right: 50px;         /* Augmenté de 15px à 50px pour le ramener vers la gauche */
+    top: 50%;            
+    transform: translateY(-50%); 
+    z-index: 1001;
+    white-space: nowrap;
+}
+
+.bouton-style:hover {
+    background-color: #27DAF5;
+ 
+}
 
 .header-inner {
     display: flex;
@@ -632,6 +684,9 @@ left: 37rem;
     align-items: center;
     justify-content: center;
     font-size: 1.3rem;
+    margin-right: 20px; 
+    position: relative;
+    right: 10px;
 }
 
 

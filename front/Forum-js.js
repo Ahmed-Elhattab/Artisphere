@@ -5,7 +5,20 @@ function save() {
 }
 
 
-// On modifie le render pour qu'il accepte la liste qu'on lui donne
+function filtrerSujets() {
+  // On récupère ce qu'on a tapé
+  const saisie = document.getElementById("inputRecherche").value.toLowerCase();
+  
+  const resultats = topics.filter(t => {
+    // On vérifie si le champs de saisie n'est pas vide 
+    return t.title.toLowerCase().includes(saisie);
+  });
+
+  // On rafraîchit l'affichage avec seulement les résultats
+  render(resultats);
+}
+
+// On modifie le render (affichage) pour qu'il accepte la liste qu'on lui donne
 function render(listeAAfficher = topics) {
 const list = document.getElementById("topicsList");
 const vide = document.getElementById("vide");

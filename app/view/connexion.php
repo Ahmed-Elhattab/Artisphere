@@ -39,7 +39,7 @@
       <!-- Liens en bas (2 colonnes) -->
       <div class="auth-links">
         <a href="/artisphere/?controller=type_Compte&action=index" class="small-link">Créer un compte</a>
-        <a href="#" class="small-link">Mot de passe oublié ?</a>
+        <a href="#" class="small-link">Mot de passe oublié ? ZIZI</a>
       </div>
 
     </form>

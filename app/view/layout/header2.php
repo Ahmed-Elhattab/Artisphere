@@ -84,5 +84,5 @@
         </div>
 
     </div>
-<script src="../Artisphere/public/js/accessibilite.js"></script>
+<script src="/Artisphere/public/js/accessibilite.js"></script>
 </header>

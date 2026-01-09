@@ -5,6 +5,27 @@ body{
     background: #c49a74 !important;
 }
 
+/* --- CETTE PARTIE DÉCLENCHE LE CHANGEMENT DE COULEUR --- */
+
+/* 1. Change le fond de la page et la couleur du texte global */
+body.dalto-mode {
+    background-color: #222222 !important; /* Fond sombre pour le contraste */
+    color: #ffffff !important;           /* Texte blanc */
+}
+
+/* 2. Change la couleur de tes boutons (ajoute tes propres classes ici) */
+body.dalto-mode button:not(#bouton-dalto), 
+body.dalto-mode .bouton-enregistrerV2 {
+    background-color: #E69F00 !important; /* Orange (très visible pour les daltoniens) */
+    color: #000000 !important;           /* Texte noir sur fond orange */
+    border-color: #ffffff !important;
+}
+
+/* 3. Optionnel : Change la couleur du header en mode accessibilité */
+body.dalto-mode header {
+    background-color: #333333 !important;
+    border-bottom: 2px solid #E69F00 !important;
+}
 
 
 /* --------- HEADER --------- */

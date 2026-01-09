@@ -14,6 +14,7 @@
 
     <link rel="stylesheet" href="css/header2.css">
     <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/styles_Thushjan.css">
 
     <?php if (!empty($pageCss)): ?>
         <link rel="stylesheet" href="css/<?= htmlspecialchars($pageCss, ENT_QUOTES, 'UTF-8') ?>">
@@ -84,5 +85,5 @@
         </div>
 
     </div>
-<script src="/Artisphere/public/js/accessibilite.js"></script>
+<script src="js/accessibilite.js"></script>
 </header>

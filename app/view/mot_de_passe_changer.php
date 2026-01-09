@@ -40,6 +40,6 @@
     </form>
 </div>
 
-<script src="accessibilite.js"></script>
+<script src="../Artisphere/public/js/accessibilite.js"></script>
 </body>
 </html>

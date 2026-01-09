@@ -69,7 +69,7 @@
                     👤
                 <?php endif; ?>
             </a>
-
+ <button id="bouton-dalto" class="bouton-style">Mode Accessibilité </button>
             <?php if ($isLogged): ?>
                 <div id="text-profil-zone">
                     <span class="profile-greeting">

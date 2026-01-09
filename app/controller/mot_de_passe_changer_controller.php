@@ -8,7 +8,7 @@ class mot_de_passe_changer_controller extends BaseController
     {
         $this->render('mot_de_passe_changer.php', [
             'title' => 'Artisphere – Mot_de_passe_changer',
-            'pageCss' => 'style_Thushjan.css'
+            'pageCss' => 'styles_Thushjan.css'
         ]);
     }
 

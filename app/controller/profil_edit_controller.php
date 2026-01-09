@@ -1,6 +1,8 @@
 <?php
 
 require_once __DIR__ . '/../model/personne_model.php';
+require_once __DIR__ . '/../model/specialite_model.php';
+require_once __DIR__ . '/../model/artisan_specialite_model.php';
 
 class profil_edit_controller extends BaseController
 {
@@ -9,6 +11,16 @@ class profil_edit_controller extends BaseController
         $this->requireLogin();
 
         $user = $_SESSION['user'];
+        $id = (int)($user['id'] ?? $user['id_personne'] ?? 0);
+        $role = $user['role'] ?? 'client';
+
+        $specialites = [];
+        $selectedSpecialiteId = null;
+
+        if ($role === 'artisan') {
+            $specialites = SpecialiteModel::all();
+            $selectedSpecialiteId = ArtisanSpecialiteModel::getForArtisan($id);
+        }
 
         $this->render('profil_edit.php', [
             'title'   => 'Éditer mon profil – Artisphere',
@@ -19,7 +31,9 @@ class profil_edit_controller extends BaseController
                 'pseudo' => $user['pseudo'] ?? '',
                 'email'  => $user['email'] ?? '',
                 'adresse'=> $user['adresse'] ?? '',
+                'id_specialite' => $selectedSpecialiteId, 
             ],
+            'specialites' => $specialites, 
         ]);
     }
 
@@ -34,6 +48,12 @@ class profil_edit_controller extends BaseController
 
         $id = (int)$_SESSION['user']['id'];
         $role = $_SESSION['user']['role'] ?? 'client';
+
+        $idSpecialite = null;
+        if ($role === 'artisan') {
+            $idSpecialite = (int)($_POST['id_specialite'] ?? 0);
+            if ($idSpecialite <= 0) $idSpecialite = null; // “aucune” si tu autorises
+        }
 
 
         $nom     = trim($_POST['nom'] ?? '');
@@ -68,7 +88,7 @@ class profil_edit_controller extends BaseController
                 'title'   => 'Éditer mon profil – Artisphere',
                 'pageCss' => 'profil_edit-style.css',
                 'errors'  => $errors,
-                'old'     => compact('nom','prenom','pseudo','email','adresse'),
+                'old'     => compact('nom','prenom','pseudo','email','adresse', 'id_specialite'),
             ]);
             return;
         }
@@ -80,6 +100,11 @@ class profil_edit_controller extends BaseController
             'email' => $email,
             'adresse' => $adresse,
         ]);
+
+        if ($role === 'artisan') {
+            ArtisanSpecialiteModel::setForArtisan($id, $idSpecialite);
+            $_SESSION['user']['id_specialite'] = $idSpecialite;
+        }
 
         // Synchroniser la session (super important)
         $_SESSION['user']['nom'] = $nom;

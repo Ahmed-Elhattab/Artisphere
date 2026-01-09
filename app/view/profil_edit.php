@@ -31,6 +31,19 @@
             <input type="text" name="adresse" value="<?= htmlspecialchars($old['adresse'] ?? '', ENT_QUOTES, 'UTF-8') ?>" required>
         <?php endif; ?>
 
+        <?php if (!empty($_SESSION['user']) && $_SESSION['user']['role'] === 'artisan'): ?>
+            <p>Spécialité</p>
+            <select name="id_specialite" required>
+                <option value="">— Choisir une spécialité —</option>
+                <?php foreach (($specialites ?? []) as $s): ?>
+                <option value="<?= (int)$s['id_specialite'] ?>"
+                    <?= ((int)($old['id_specialite'] ?? 0) === (int)$s['id_specialite']) ? 'selected' : '' ?>>
+                    <?= htmlspecialchars($s['nom'], ENT_QUOTES, 'UTF-8') ?>
+                </option>
+                <?php endforeach; ?>
+            </select>
+        <?php endif; ?>
+
         <div class="actions">
             <button class="btn-primary" type="submit">Enregistrer</button>
             <a class="btn-outline" href="/artisphere/?controller=profil&action=index">Annuler</a>

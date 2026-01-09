@@ -2,7 +2,7 @@
 
 require_once __DIR__ . '/../model/personne_model.php';
 
-class mot-de-passe-changer_controller extends BaseController
+class mot_de_passe_changer_controller extends BaseController
 {
     public function index(): void
     {

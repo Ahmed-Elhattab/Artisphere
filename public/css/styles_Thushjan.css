@@ -1,0 +1,1136 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+/* --- CETTE PARTIE DÉCLENCHE LE CHANGEMENT DE COULEUR --- */
+
+/* 1. Change le fond de la page et la couleur du texte global */
+body.dalto-mode {
+    background-color: #222222 !important; /* Fond sombre pour le contraste */
+    color: #ffffff !important;           /* Texte blanc */
+}
+
+/* 2. Change la couleur de tes boutons (ajoute tes propres classes ici) */
+body.dalto-mode button:not(#bouton-dalto), 
+body.dalto-mode .bouton-enregistrerV2 {
+    background-color: #E69F00 !important; /* Orange (très visible pour les daltoniens) */
+    color: #000000 !important;           /* Texte noir sur fond orange */
+    border-color: #ffffff !important;
+}
+
+/* 3. Optionnel : Change la couleur du header en mode accessibilité */
+body.dalto-mode header {
+    background-color: #333333 !important;
+    border-bottom: 2px solid #E69F00 !important;
+}
+
+  
+
+#Menu_choix_evenement_produit {
+    position: relative;    
+    width: 100%;
+    min-height: 600px;     
+    background-color: #bba38c;
+}
+
+.conteneur-parent {
+    flex: 1; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 80px;
+    background-color: #bba38c;
+    position: relative;
+}
+
+.colonne{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.trait-vertical {
+    width: 4px;
+    height: 400px;          
+    background-color: black;
+    border-radius: 10px;     
+}
+
+
+.bouton-produit {
+position: absolute;
+top: 21rem;            
+left: 200px;
+background-color: #887bb0 ;
+color : white;
+text-align: center;
+border-radius: 30px;
+padding: 1%;
+width: 20%;
+font-family : 'Verdana';
+ cursor: pointer;
+}
+
+.bouton-produit:hover {
+    background-color: #27DAF5;
+    
+}
+
+.bouton-evenement {
+position: absolute;
+top: 21rem;              
+left: 1000px;
+background-color: #887bb0 ;
+color : white;
+text-align: center;
+border-radius: 30px;
+padding: 1%;
+width: 20%;
+font-family : 'Verdana';
+ cursor: pointer;
+}
+
+.bouton-evenement:hover {
+    background-color: #27DAF5;
+}
+
+.image-evenement {
+position: absolute;
+width: 200px;
+top: 6.8rem;              
+left: 1050px;
+}
+
+.image-produit {
+position: absolute;
+width: 200px;
+top: 7rem;              
+left: 250px;
+}
+
+.titre-produit {
+color: #6e6295 !important;
+position: absolute;
+top: 3rem ;              
+left: 40rem;
+}
+
+
+/*#page-fiche-evenement {
+    position: relative;    
+    width: 100%;
+    min-height: 600px;     
+    background-color: #bba38c;
+}*/
+
+#page-fiche-evenement {
+    position: relative;
+    width: 100%;
+    min-height: 100vh; /* Force la hauteur à 100% de l'écran minimum */
+    padding-bottom: 100px; /* Espace pour ne pas que le footer cache le bouton Enregistrer */
+    background-color: #bba38c;
+    display: flex;
+    flex-direction: column;
+}
+
+.site-footer {
+    margin-top: auto; /* Pousse le footer tout en bas si le contenu est court */
+}
+
+#page-fiche-evenement .bouton-enregistrerV2{
+position: absolute;
+background-color: #887bb0 ;
+color : white;
+text-align: center;
+border-radius: 30px;
+padding: 1%;
+width: 120px;
+height: 30px;
+line-height: 0px;
+font-family : 'Verdana';
+font-weight: bold;
+   position: absolute;
+    top: 36.5rem ;              
+    left: 53.5rem; 
+    cursor: pointer;
+}
+
+#page-fiche-evenement .importimage{
+    opacity: 0; 
+    overflow: hidden;
+    position: absolute; 
+}
+
+#page-fiche-evenement .Places{
+    border-radius: 30px;
+    background-color:rgba(136, 123, 176, 0.7);
+    font-family : 'Verdana';
+    font-weight: bold;
+    border: none;
+    padding: 1%;
+    width: 140px;
+    height: 10px; 
+    position: absolute;
+    top: 20.5rem ;              
+    left: 47.5rem;  
+}
+
+#page-fiche-evenement .Lieu{
+    border-radius: 30px;
+    background-color:rgba(136, 123, 176, 0.7);
+    font-family : 'Verdana';
+    font-weight: bold;
+    border: none;
+    padding: 1%;
+    width: 140px;
+    height: 10px; 
+    position: absolute;
+    top: 15.5rem ;              
+    left: 40rem;  
+}
+
+#page-fiche-evenement .choixcategorie{
+    border-radius: 30px;
+    background-color:rgba(136, 123, 176, 0.7);
+    font-family : 'Verdana';
+    font-weight: bold;
+    border: none;
+    padding: 1%;
+    width: 300px;
+    height: 50px;   
+    position: absolute;
+    top: 15rem ;              
+    left: 43.5rem;
+}
+
+#page-fiche-evenement .DescriptionV2{
+    border-radius: 30px;
+    background-color:rgba(136, 123, 176, 0.7);
+    font-family : 'Verdana';
+    font-weight: bold;
+    border: none;
+    padding: 1%;
+    width: 370px;
+    height: 100px;   
+    position: absolute;
+    top: 26.5rem ;              
+    left: 36.5rem;  
+}
+
+#page-fiche-evenement .para_evenement{
+font-family : 'Verdana';
+color : rgba(136, 123, 176, 0.7);
+position: absolute;
+top: 8rem ;              
+left: 47rem;
+}
+
+#page-fiche-evenement .para_places{
+font-family : 'Verdana';
+color : rgba(136, 123, 176, 0.7);
+position: absolute;
+top: 21rem ;              
+left: 37rem; 
+}
+
+#page-fiche-evenement .para_lieu{
+font-family : 'Verdana';
+color : rgba(136, 123, 176, 0.7);
+position: absolute;
+top: 16rem ;              
+left: 37rem; 
+}
+
+#page-fiche-evenement .nom_produit{
+    border-radius: 30px;
+    background-color:rgba(136, 123, 176, 0.7);
+    font-family : 'Verdana';
+    font-weight: bold;
+    border: none;
+    padding: 1%;
+    width: 200px;
+    height: 20px;   
+    vertical-align: top;
+    text-align: auto;
+    position: absolute;
+    top: 10.5rem ;              
+    left: 45.5rem;
+} 
+
+#page-fiche-evenement .imagerond {
+    width: 80px;
+    height: 80px;
+    background-color: #27DAF5;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    color: white;
+    font-size: 20px;
+    user-select: none;
+    position: absolute;
+    top: 9.0rem ;              
+    left: 38.5rem; 
+}
+
+#page-fiche-evenement .para_descriptionV2{
+font-family : 'Verdana';
+color : rgba(136, 123, 176, 0.7);
+    position: absolute;
+    top: 23rem ;              
+    left: 37rem;
+}
+
+
+
+#page-fiche-produit {
+    background-color: #bba38c;
+    width: 100%;
+    position: relative; 
+    flex: 1; 
+    min-height: 900px; 
+}
+
+#page-produit .h2{
+color: #6e6295 !important;
+}
+
+#page-fiche-produit .form-card {
+    background-color: #E2D1C3; /* Un beige très clair qui va avec ton fond */
+    width: 550px;
+    height: 550px;
+    margin: 50px auto; /* Centre le carré sur la page */
+    padding: 30px;
+    border-radius: 30px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    
+    /* Pour que les éléments dedans s'alignent bien */
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+}
+
+
+
+#page-fiche-produit .Quantités{
+    border-radius: 30px;
+    background-color:rgba(136, 123, 176, 0.7);
+    font-family : 'Verdana';
+    font-weight: bold;
+    border: none;
+    padding: 1%;
+    width: 140px;
+    height: 10px; 
+    position: absolute;
+    top: 23.5rem ;              
+    left: 43.5rem;  
+}
+
+#page-fiche-produit .Matériaux{
+    border-radius: 30px;
+    background-color:rgba(136, 123, 176, 0.7);
+    font-family : 'Verdana';
+    font-weight: bold;
+    border: none;
+    padding: 1%;
+    width: 140px;
+    height: 10px;   
+    position: absolute;
+    top: 27.5rem ;              
+    left: 43.5rem;  
+}
+
+#page-fiche-produit .choixcategorie{
+    border-radius: 30px;
+    background-color:rgba(136, 123, 176, 0.7);
+    font-family : 'Verdana';
+    font-weight: bold;
+    border: none;
+    padding: 1%;
+    width: 300px;
+    height: 50px;   
+    position: absolute;
+    top: 18rem ;              
+    left: 43.5rem;
+}
+
+#page-fiche-produit .para_produit{
+font-family : 'Verdana';
+color : rgba(136, 123, 176, 0.7);
+position: absolute;
+top: 11rem ;              
+left: 48rem;
+}
+
+#page-fiche-produit .para_catégorie{
+font-family : 'Verdana';
+color : rgba(136, 123, 176, 0.7);
+position: absolute;
+top: 19rem ;              
+left: 37rem; 
+}
+
+#page-fiche-evenement .para_catégorie{
+font-family : 'Verdana';
+color : rgba(136, 123, 176, 0.7);
+position: absolute;
+top: 16rem ;              
+left: 37rem; 
+}
+
+#page-fiche-produit .para_description{
+font-family : 'Verdana';
+color : rgba(136, 123, 176, 0.7);
+    position: absolute;
+    top: 30rem ;              
+    left: 37rem;
+}
+
+#page-fiche-produit .bouton-enregistrer{
+position: absolute;
+background-color: #887bb0 ;
+color : white;
+text-align: center;
+border-radius: 30px;
+padding: 1%;
+width: 120px;
+height: 30px;
+line-height: 0px;
+font-family : 'Verdana';
+font-weight: bold;
+   position: absolute;
+    top: 43.5rem ;              
+    left: 53.5rem; 
+    cursor: pointer;
+}
+
+#page-fiche-produit .Description{
+    border-radius: 30px;
+    background-color:rgba(136, 123, 176, 0.7);
+    font-family : 'Verdana';
+    font-weight: bold;
+    border: none;
+    padding: 1%;
+    width: 370px;
+    height: 100px;   
+    position: absolute;
+    top: 33.5rem ;              
+    left: 36.5rem;  
+}
+
+#page-fiche-produit .imagerond {
+    width: 80px;
+    height: 80px;
+    background-color: #27DAF5;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    color: white;
+    font-size: 20px;
+    user-select: none;
+       position: absolute;
+    top: 12.0rem ;              
+    left: 38.5rem; 
+}
+
+#page-fiche-produit .importimage{
+    opacity: 0; 
+    overflow: hidden;
+    position: absolute; 
+}
+
+#page-fiche-produit .catégorie{
+font-family : 'Verdana';
+color : rgba(136, 123, 176, 0.7);
+}
+
+#page-fiche-produit .para_matériaux{
+font-family : 'Verdana';
+color : rgba(136, 123, 176, 0.7);
+position: absolute;
+top: 27rem ;              
+left: 37rem; 
+}
+
+#page-fiche-produit .para_quantités{
+font-family : 'Verdana';
+color : rgba(136, 123, 176, 0.7);
+position: absolute;
+top: 24rem ;              
+left: 37rem; 
+}
+
+#page-fiche-produit .nom_produit{
+    border-radius: 30px;
+    background-color:rgba(136, 123, 176, 0.7);
+    font-family : 'Verdana';
+    font-weight: bold;
+    border: none;
+    padding: 1%;
+    width: 200px;
+    height: 20px;   
+    vertical-align: top;
+    text-align: auto;
+    position: absolute;
+    top: 13.5rem ;              
+    left: 45.5rem;
+} 
+
+#page-fiche-produit .bouton-enregistrer:hover {
+    background-color: #27DAF5;
+}
+
+
+
+/*Page recherche profil admin*/
+#page-recherche-profil-admin {
+    position: relative;    
+    width: 100%;
+    min-height: 600px;     
+    background-color: #bba38c;
+}
+
+/* Le pavé rose */
+#page-recherche-profil-admin .pave_rose {
+    background-color: #BFBFBF;
+    width: 40rem; 
+    height: 15rem;
+    margin-top: 8rem;; 
+    margin-left:28rem;
+}
+
+
+/* La barre de texte */
+#page-recherche-profil-admin .barre-recherche {
+    width: 300px;
+    padding: 10px 40px 10px 15px; 
+    border-radius: 20px;
+    border: 1px solid #ccc;
+    outline: none;
+}
+
+#page-recherche-profil-admin .barre-recherche::placeholder {
+    color: #A1A1A1; 
+    opacity: 1;
+}
+
+
+*#page-recherche-profil-admin  .search-form {
+    display: flex !important;
+    position: relative !important;
+    width: 23rem !important;    
+    margin: 0 auto 0 39% !important;
+    transform: translateY(5.9rem) !important; 
+}
+
+/* La loupe */
+#page-recherche-profil-admin .bouton-recherche {
+    position: absolute;
+    right: 1.4rem;
+    top: 0.30rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+#page-recherche-profil-admin .icone-loupe {
+    width: 25px; 
+    height: auto;
+}
+
+/* CSS POUR LE JS */
+
+#resultsArea {
+    padding-top: 0.9rem ; 
+    padding-left: 0rem;   
+    padding-right: 0rem;  
+    align-items: stretch;
+}
+
+.barre-grise {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #737373; 
+    color: white;
+    padding: 10px 25px;
+    margin: 0px auto;
+    width: 92%;         
+    border-radius: 30px; 
+    font-family: Arial;
+    font-size: 14px;
+}
+
+.profile-name, .account-type {
+    font-weight: bold;
+}
+
+.barre-grise div {
+    display: flex;
+    gap: 13px; /* Espace entre les deux pastilles */
+}
+
+
+.status-light {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%; /* Rend les boutons parfaitement ronds */
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.light-green {
+    background-color: #add6b8; 
+}
+
+.light-red {
+    background-color: #a51c06; 
+}
+
+
+/* --------- HEADER --------- */
+
+/* Style du bouton pour qu'il ressemble à ton image */
+.bouton-style {
+/* --- Design pilule --- */
+    background-color: #f0f0f0; 
+    color: #3c2b20;
+    border: 2px solid #3c2b20; 
+    border-radius: 50px;       
+    padding: 8px 20px;
+    font-family: 'Verdana', sans-serif;
+    font-size: 0.9rem;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+    transition: all 0.2s ease;
+
+    /* --- Positionnement corrigé --- */
+    position: absolute; 
+    right: 50px;         /* Augmenté de 15px à 50px pour le ramener vers la gauche */
+    top: 50%;            
+    transform: translateY(-50%); 
+    z-index: 1001;
+    white-space: nowrap;
+}
+
+.bouton-style:hover {
+    background-color: #27DAF5;
+ 
+}
+
+.header-inner {
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;            
+    width: 100%;
+    max-width: 1100px;              
+    height: 80px;                  
+    margin: 0 auto;                 
+    padding: 0 40px;               
+}
+
+.site-header {
+    width: 100%;
+    min-height: 80px; 
+    background: #f6e6cf;
+    display: flex;
+    align-items: center; 
+    padding: 10px 20px;
+    position: relative;
+    z-index: 1000; 
+}
+
+.logo-img {
+    height: 72px;
+}
+
+.main-nav {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    gap: 2.5rem;
+}
+
+.nav-link {
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-size: 0.9rem;
+    color: #3c2b20;
+}
+
+.nav-link.active {
+    font-weight: 600;
+    border-bottom: 2px solid #3c2b20;
+}
+
+.profile-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    border: 2px solid #3c2b20;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+    margin-right: 20px; 
+    position: relative;
+    right: 10px;
+}
+
+
+/* --------- FOOTER --------- */
+
+
+.site-footer {
+    position: relative;    
+    clear: both;          
+    background: #f6e6cf;
+    padding: 1rem;
+    width: 100%
+}
+
+
+.footer-inner {
+    display: flex;
+    justify-content: center;
+    gap: 4rem;
+}
+
+.footer-link {
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    color: #3c2b20;
+}
+
+
+
+/* --------- FORUM --------- */
+
+#Forum .barre {
+  width: 1100px;      
+  height: 30px;       
+  background-color: white;
+  margin: 5px auto; 
+  border: 1px solid #e5e7eb; 
+  border-radius: 6px; 
+}
+
+#Forum {
+  box-sizing: border-box;
+  font-family: Inter, Arial, sans-serif;
+   margin: 0;
+  background: white;
+}
+
+/* HEADER */
+#Forum .top {
+  background: white;
+  padding: 25px 0;
+}
+
+#Forum .container {
+  width: 1100px;
+  margin: auto;
+}
+
+#Forum .search-container {
+  background-color: #f3f4f6; 
+  padding: 30px 40px 50px 40px;
+  border-radius: 12px;      
+  display: flex;
+  flex-direction: column;    
+  gap: 0rem;               
+  max-width: 1200px;         
+}
+
+#Forum .search-box {
+  display: flex;
+  margin-top: 10px;
+  width: 20rem;
+}
+
+#Forum .search-box input {
+  flex: 1;
+  padding: 10px;
+  border : 1px solid #d1d5db;
+  border-radius: 6px 0 0 6px;
+}
+
+#Forum .search-box button {
+  padding: 10px 14px;
+  border: 1px solid #d1d5db;
+  border-left: none;
+  background: #f9fafb;
+  cursor : pointer;
+}
+
+#Forum .image-communauté {
+  height: 8rem;        
+  width: auto;           
+  object-fit: contain;
+  margin-left: 25rem;
+  margin-top: -6.5rem;
+}
+
+/* LAYOUT */
+#Forum .forum-layout {
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  gap: 30px;
+  margin-top: 30px;
+}
+
+/* TOOLBAR */
+#Forum .toolbar {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+ #Forum .filtres button {
+  background: none;
+  border: none;
+  margin-right: 12px;
+  color: #6b7280;
+  cursor: pointer;
+}
+
+#Forum .filtres .active {
+  color: #2563eb;
+  border-bottom: 2px solid #2563eb;
+}
+
+#Forum .new-topic {
+  background: #111827;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+#Forum .vide {
+  background: white;
+  padding: 40px;
+  text-align: center;
+  border-radius: 8px;
+  color: #6b7280;
+}
+
+/* TOPIC */
+#Forum .topic {
+  background: white;
+  padding: 16px;
+  border-radius: 8px;
+  margin-bottom: 12px;
+  border: 1px solid #e5e7eb;
+}
+
+#Forum .topic-title {
+  font-weight: 600;
+}
+
+#Forum .topic-content {
+  color: #6b7280;
+  margin-top: 6px;
+  font-size: 14px;
+}
+
+/* SIDEBAR */
+#Forum .sidebar {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  border: 1px solid #e5e7eb;
+  align-self: start
+}
+
+/* FENETRESUJET */
+#Forum .Fenetresujet {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+
+#Forum .Fenetresujet-contenu {
+  background: white;
+  padding: 20px;
+  width: 400px;
+  border-radius: 8px;
+}
+
+#Forum .Fenetresujet-contenu input {
+  width: 100%;
+  margin-top: 10px;
+  padding: 10px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  box-sizing: border-box;
+  font-size: 14px;
+}
+
+#Forum .Fenetresujet-contenu textarea {
+  width: 100%;
+  height: 10rem;
+  margin-top: 10px;
+  padding: 12px 16px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  box-sizing: border-box;
+  font-size: 14px;
+}
+
+
+#Forum .Fenetresujet-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+#Forum .Fenetresujet-actions button {
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.35em;
+  padding: 0.75em 1em;
+  padding-right: 1.25em;
+  border: 1px solid transparent;
+  font-weight: 700;
+  border-radius: 2em;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+
+/* --------- CONTENUE SUJET --------- */
+
+#Forum-contenu-sujet {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #f0f2f5; /* Gris clair comme Reddit/Facebook */
+    margin: 0;
+    font-family: sans-serif;
+}
+
+/* La boîte du sujet principal */
+.boite-sujet {
+    background: white;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    margin: 20px 0;
+}
+
+.boite-sujet h1 {
+    margin-top: 0;
+    font-size: 24px;
+}
+
+/* La section des commentaires */
+.commentaires {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+#comm-texte {
+    width: 100%;
+    height: 80px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box; /* Pour que ça ne dépasse pas */
+    resize: vertical;
+}
+
+.commentaires button {
+    margin-top: 10px;
+    padding: 8px 20px;
+    background: #111;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+/* Style pour chaque réponse affichée */
+.reponse-affichee {
+    padding: 15px 0;
+    border-bottom: 1px solid #eee;
+}
+
+
+/* --------- MOT-DE-PASSE-OUBLIE --------- */
+
+#Mot-de-passe-oublie {
+    position: relative;    
+    width: 100%;
+    min-height: 600px;     
+    background-color: #bba38c;
+}
+
+/* Conteneur principal */
+#Mot-de-passe-oublie .container {
+    max-width: 900px;
+    margin: 20px auto;
+    background: #ffffff;
+    border: 1px solid #ddd;
+    font-family: Arial, sans-serif;
+}
+
+/* Bandeau bleu du titre */
+#Mot-de-passe-oublie .form-header {
+    background-color: #3174b5; /* Bleu identique à l'image */
+    color: white;
+    padding: 12px 15px;
+}
+
+#Mot-de-passe-oublie .form-header h1 {
+    font-size: 16px;
+    margin: 0;
+    font-weight: bold;
+}
+
+/* Espacement du formulaire */
+#Mot-de-passe-oublie form {
+    padding: 20px;
+}
+
+/* Style du label et du texte d'exemple */
+#Mot-de-passe-oublie .input-group label {
+    display: block;
+    font-weight: bold;
+    font-size: 14px;
+    margin-bottom: 8px;
+    color: #333;
+}
+
+#Mot-de-passe-oublie .example-text {
+    font-weight: normal;
+    color: #666;
+    margin-left: 5px;
+}
+
+/* Style du champ de saisie (input) */
+#Mot-de-passe-oublie .input-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 2px;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+}
+
+
+#Mot-de-passe-oublie .button-container {
+    display: flex;
+    justify-content: flex-end;
+}
+
+
+#Mot-de-passe-oublie .bouton-envoyer {
+    background-color: #2c3e50;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+
+/* --------- MOT-DE-PASSE-CHANGER --------- */
+
+#Mot-de-passe-changer {
+    position: relative;    
+    width: 100%;
+    min-height: 600px;     
+    background-color: #bba38c;
+}
+
+#Mot-de-passe-changer .container {
+    max-width: 900px;
+    margin: 20px auto;
+    background: #ffffff;
+    border: 1px solid #ddd;
+    font-family: Arial;
+}
+
+#Mot-de-passe-changer .form-header {
+    background-color: #3174b5;
+    color: white;
+    padding: 12px 15px;
+}
+
+#Mot-de-passe-changer .form-header h1 {
+    font-size: 16px;
+    margin: 0;
+}
+
+#Mot-de-passe-changer form {
+    padding: 20px;
+}
+
+#Mot-de-passe-changer .instruction {
+    font-size: 14px;
+    margin-bottom: 20px;
+    color: #555;
+}
+
+#Mot-de-passe-changer .input-group {
+    margin-bottom: 15px;
+}
+
+#Mot-de-passe-changer .input-group label {
+    display: block;
+    font-weight: bold;
+    font-size: 14px;
+    margin-bottom: 8px;
+    color: #333;
+}
+
+
+/* Style spécifique pour les inputs password */
+#Mot-de-passe-changer .input-group input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 2px;
+    box-sizing: border-box;
+    font-size: 16px;
+}
+
+#Mot-de-passe-changer .button-container {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 25px;
+}
+
+#Mot-de-passe-changer .bouton-envoyer {
+    background-color: #2c3e50;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+}

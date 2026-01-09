@@ -11,29 +11,6 @@
 
 <body id="Mot-de-passe-oublie">
 
-
-
-<!-- HEADER (identique FAQ / Événements) -->
-<header class="site-header">
-    <div class="header-inner">
-
-        <div class="logo-zone">
-             <img src="../public/images/logo_site.png" alt="Logo Artisphere" class="logo-img">
-        </div>
-
-        <nav class="main-nav">
-            <a href="index.html" class="nav-link">Catalogue</a>
-            <a href="artisans.html" class="nav-link active">Artisan</a>
-            <a href="evenement.html" class="nav-link">Évènement</a>
-        </nav>
-
-        <a href="profil.html" class="profile-icon" aria-label="Mon profil">
-            <span>👤</span>
-        </a>
-    </div>
-</header>
-
-
 <!-- CONTENU -->
 
 <div class="container">
@@ -56,15 +33,6 @@
             </div>
         </form>
     </div>
-
-<!-- FOOTER -->
-<footer class="site-footer">
-    <div class="footer-inner">
-        <a href="apropos.html" class="footer-link">À propos de nous</a>
-        <a href="mentions.html" class="footer-link">Mentions légales</a>
-        <a href="faq.html" class="footer-link">FAQ</a>
-    </div>
-</footer>
 
 </body>
 </html>

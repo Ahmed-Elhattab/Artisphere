@@ -149,4 +149,15 @@ class EvenementModel
         return array_values(array_filter(array_map(fn($r) => $r['type'], $stmt->fetchAll(PDO::FETCH_ASSOC))));
     }
 
+    public static function listByCreator(int $idArtisan): array
+    {
+        $pdo = Database::getConnection();
+        $stmt = $pdo->prepare("SELECT id_event, nom, image, lieu, prix, nombre_place, date_debut, date_fin, type
+                            FROM pevent
+                            WHERE id_createur = :id
+                            ORDER BY date_debut ASC, id_event DESC");
+        $stmt->execute([':id' => $idArtisan]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
 }

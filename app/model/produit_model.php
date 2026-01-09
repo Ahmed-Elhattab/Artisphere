@@ -154,4 +154,14 @@ class ProduitModel
         $stmt->execute($params);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+    public static function listByCreator(int $idArtisan): array
+    {
+        $pdo = Database::getConnection();
+        $stmt = $pdo->prepare("SELECT id_produit, nom, image, prix, quantite
+                            FROM pproduit
+                            WHERE id_createur = :id
+                            ORDER BY id_produit DESC");
+        $stmt->execute([':id' => $idArtisan]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 }

@@ -215,4 +215,15 @@ class PersonneModel
         $u = $stmt->fetch(PDO::FETCH_ASSOC);
         return $u ?: null;
     }
+    public static function findArtisanById(int $id): ?array
+    {
+        $pdo = Database::getConnection();
+        $stmt = $pdo->prepare("SELECT id_personne, pseudo, nom, prenom, email, adresse, role, avatar
+                            FROM personne
+                            WHERE id_personne = :id AND role = 'artisan'
+                            LIMIT 1");
+        $stmt->execute([':id' => $id]);
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $row ?: null;
+    }
 }

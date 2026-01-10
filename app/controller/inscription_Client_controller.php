@@ -86,7 +86,7 @@ class inscription_Client_controller extends BaseController
             'email'    => $email,
             'mdp_hash' => $hash,
         ], 'client');
-
+        
         // Redirection post-succès (PRG pattern)
         header('Location: /artisphere/?controller=index&action=index&success=1');
         exit;

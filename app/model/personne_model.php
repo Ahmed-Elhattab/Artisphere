@@ -16,7 +16,7 @@ class PersonneModel
    public static function createPersonne(array $data, string $role): int
     {
         // Sécurité : rôles autorisés uniquement
-        $allowedRoles = ['artisan', 'client'];
+        $allowedRoles = ['artisan', 'client', 'admin'];
 
         if (!in_array($role, $allowedRoles, true)) {
             throw new InvalidArgumentException('Rôle utilisateur invalide');
@@ -225,5 +225,65 @@ class PersonneModel
         $stmt->execute([':id' => $id]);
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
         return $row ?: null;
+    }
+
+    public static function countPendingUsers(string $q = ''): int
+    {
+        $pdo = Database::getConnection();
+
+        $where = "validationStatus = 'en attente'";
+        $params = [];
+
+        if ($q !== '') {
+            $where .= " AND (nom LIKE :q OR prenom LIKE :q OR pseudo LIKE :q OR email LIKE :q)";
+            $params[':q'] = '%' . $q . '%';
+        }
+
+        $stmt = $pdo->prepare("SELECT COUNT(*) FROM personne WHERE $where");
+        $stmt->execute($params);
+        return (int)$stmt->fetchColumn();
+    }
+
+    public static function listPendingUsers(string $q, int $limit, int $offset): array
+    {
+        $pdo = Database::getConnection();
+
+        $where = "validationStatus = 'en attente'";
+        $params = [];
+
+        if ($q !== '') {
+            $where .= " AND (nom LIKE :q OR prenom LIKE :q OR pseudo LIKE :q OR email LIKE :q)";
+            $params[':q'] = '%' . $q . '%';
+        }
+
+        $sql = "SELECT id_personne, nom, prenom, pseudo, email, role, validationStatus
+                FROM personne
+                WHERE $where
+                ORDER BY id_personne DESC
+                LIMIT :lim OFFSET :off";
+
+        $stmt = $pdo->prepare($sql);
+        foreach ($params as $k => $v) $stmt->bindValue($k, $v, PDO::PARAM_STR);
+        $stmt->bindValue(':lim', $limit, PDO::PARAM_INT);
+        $stmt->bindValue(':off', $offset, PDO::PARAM_INT);
+
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public static function validateUser(int $id): void
+    {
+        $pdo = Database::getConnection();
+        $stmt = $pdo->prepare("UPDATE personne
+                            SET validationStatus = 'validé'
+                            WHERE id_personne = :id");
+        $stmt->execute([':id' => $id]);
+    }
+
+    public static function deleteUser(int $id): void
+    {
+        $pdo = Database::getConnection();
+        $stmt = $pdo->prepare("DELETE FROM personne WHERE id_personne = :id");
+        $stmt->execute([':id' => $id]);
     }
 }

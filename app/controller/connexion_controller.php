@@ -33,6 +33,10 @@ class connexion_controller extends BaseController
 
         if (!$user || !password_verify($password, $user['mdp'])) {
             $errors[] = "Identifiant ou mot de passe incorrect.";
+        }else {
+            if ($user['validationStatus'] === 'en attente') {
+                $errors[] = "Compte en attente de validation par un administrateur.";
+            }
         }
 
         if (!empty($errors)) {

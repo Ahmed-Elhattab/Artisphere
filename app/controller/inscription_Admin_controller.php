@@ -2,13 +2,13 @@
 
 require_once __DIR__ . '/../model/personne_model.php';
 
-class inscription_Artisans_controller extends BaseController
+class inscription_Admin_controller extends BaseController
 {
     public function index(): void
     {
-        $this->render('inscription_Artisans.php', [
-            'title' => 'Artisphere – Création de compte artisan',
-            'pageCss' => 'inscription_Artisans-style.css',
+        $this->render('inscription_Admin.php', [
+            'title' => 'Artisphere – Création de compte admininistrateur',
+            'pageCss' => 'inscription_Admin-style.css',
             'pageJs'  => 'password_rules.js'
         ]);
     }
@@ -18,7 +18,7 @@ class inscription_Artisans_controller extends BaseController
     {
         //sécurité : on refuse autre chose que POST
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-            header('Location: /artisphere/?controller=inscription_Artisans&action=index');
+            header('Location: /artisphere/?controller=inscription_Admin&action=index');
             exit;
         }
 
@@ -29,14 +29,13 @@ class inscription_Artisans_controller extends BaseController
         $email    = trim($_POST['email'] ?? '');
         $password = $_POST['password'] ?? '';
         $confirm  = $_POST['password_confirm'] ?? '';
-        $adresse  = trim($_POST['address'] ?? '');
 
         $errors = [];
 
         //validations des règles de création
         //POSSIBILITE D'EN RAJOUTER
         //ATTENTION : SI MODIF, PENSER A CHANGER FICHIER JS ET BOX DES CONTRAINTES SUR MDP
-        if ($pseudo === '' || $prenom === '' || $nom === '' || $email === '' || $adresse === '' || $password === '' || $confirm === '') {
+        if ($pseudo === '' || $prenom === '' || $nom === '' || $email === '' || $password === '' || $confirm === '') {
             $errors[] = "Tous les champs sont obligatoires.";
         }
 
@@ -59,19 +58,19 @@ class inscription_Artisans_controller extends BaseController
         if (PersonneModel::pseudoExists($pseudo)) {
             $errors[] = "Cet identifiant est déjà utilisé.";
         }
-
+        
         if (empty($_POST['accept_terms'])) {
             $errors[] = "Vous devez accepter les conditions d’utilisation du site.";
         }
 
         //si erreurs, retour au formulaire
         if (!empty($errors)) {
-            $this->render('inscription_Artisans.php', [
-                'title'   => 'Artisphere – Création de compte artisan',
-                'pageCss' => 'inscription_Artisans-style.css',
+            $this->render('inscription_Admin.php', [
+                'title'   => 'Artisphere – Création de compte administrateur',
+                'pageCss' => 'inscription_Admin-style.css',
                 'pageJs'  => 'password_rules.js',
                 'errors'  => $errors,
-                'old'     => compact('pseudo','prenom','nom','email','adresse')
+                'old'     => compact('pseudo','prenom','nom','email')
             ]);
             return;
         }
@@ -80,31 +79,16 @@ class inscription_Artisans_controller extends BaseController
         $hash = password_hash($password, PASSWORD_DEFAULT);
 
         //envoi les infos au modèle qui gère la table Personne, en spécifiant qu'il s'agit d'un artisan
-        $id = PersonneModel::createPersonne([
+        PersonneModel::createPersonne([
             'pseudo'   => $pseudo,
             'prenom'   => $prenom,
             'nom'      => $nom,
             'email'    => $email,
             'mdp_hash' => $hash,
-            'adresse'  => $adresse
-        ], 'artisan');
-
-        $user = PersonneModel::findById($id);
-
-        // Connexion automatique
-        /*
-        $_SESSION['user'] = [
-            'id'     => (int)$user['id_personne'],
-            'pseudo' => $user['pseudo'],
-            'nom'    => $user['nom'],
-            'prenom' => $user['prenom'],
-            'email'  => $user['email'],
-            'role'   => $user['role'],
-            'adresse'=> $user['adresse'] ?? null,
-            'avatar' => $user['avatar'] ?? null,
-        ];*/
-
-        header('Location: /artisphere/?controller=index&action=index&welcome=1');
+        ], 'admin');
+        
+        // Redirection post-succès (PRG pattern)
+        header('Location: /artisphere/?controller=index&action=index&success=1');
         exit;
-        }
+    }
 }

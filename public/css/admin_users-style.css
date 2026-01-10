@@ -122,3 +122,17 @@
   font-size: 1.1rem;
 }
 
+/*pour page validation compte en attente*/
+.status-badge{
+  display:inline-block;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-weight: 800;
+  font-size: 12px;
+}
+
+.status-pending{
+  background: #fff7ed;
+  color: #c2410c;
+  border: 1px solid rgba(194,65,12,.25);
+}

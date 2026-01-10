@@ -117,6 +117,11 @@
     <?php endif; ?>
     <?php if (!empty($_SESSION['user']) && $_SESSION['user']['role'] === 'admin'): ?>
     <div class="action-buttons">
+      <a class="action-link" href="/artisphere/?controller=admin_pending_users&action=index"><button class="btn-spe">VALIDER CREATION DE COMPTE</button></a>
+    </div>
+    <?php endif; ?>
+    <?php if (!empty($_SESSION['user']) && $_SESSION['user']['role'] === 'admin'): ?>
+    <div class="action-buttons">
       <a class="action-link" href="/artisphere/?controller=admin_contact&action=index"><button class="btn-spe">GERER LES DEMANDES DE CONTACT</button></a>
     </div>
     <?php endif; ?>

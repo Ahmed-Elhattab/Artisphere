@@ -23,19 +23,27 @@
             $currentType = $filters['type'] ?? '';
           ?>
 
-          <a class="filter-pill <?= $currentType === '' ? 'filter-pill-active' : '' ?>"
+          <a class="filter-pill <?= ($currentType === '' ? 'filter-pill-active' : '') ?>"
              href="<?= htmlspecialchars($base, ENT_QUOTES, 'UTF-8') ?>">
             Tous
           </a>
 
-          <?php foreach ($types as $t): ?>
-            <a class="filter-pill <?= ($currentType === $t) ? 'filter-pill-active' : '' ?>"
-               href="<?= htmlspecialchars($base . '&type=' . urlencode($t)
-                  . ($filters['q'] ? '&q=' . urlencode($filters['q']) : '')
-                  . ($filters['min_price'] !== '' ? '&min_price=' . urlencode($filters['min_price']) : '')
-                  . ($filters['max_price'] !== '' ? '&max_price=' . urlencode($filters['max_price']) : '')
-                  . (!empty($filters['in_stock']) ? '&in_stock=1' : ''), ENT_QUOTES, 'UTF-8') ?>">
-              <?= htmlspecialchars($t, ENT_QUOTES, 'UTF-8') ?>
+          <?php foreach (($types ?? []) as $t): ?>
+            <?php
+              $typeId = (int)($t['id_type'] ?? 0);
+              $typeNom = (string)($t['nom'] ?? '');
+              if ($typeId <= 0 || $typeNom === '') continue;
+
+              $href = $base . '&type=' . urlencode((string)$typeId)
+                . ($filters['q'] ? '&q=' . urlencode($filters['q']) : '')
+                . ($filters['min_price'] !== '' ? '&min_price=' . urlencode((string)$filters['min_price']) : '')
+                . ($filters['max_price'] !== '' ? '&max_price=' . urlencode((string)$filters['max_price']) : '')
+                . (!empty($filters['in_stock']) ? '&in_stock=1' : '');
+            ?>
+
+            <a class="filter-pill <?= ((string)$currentType !== '' && (int)$currentType === $typeId) ? 'filter-pill-active' : '' ?>"
+               href="<?= htmlspecialchars($href, ENT_QUOTES, 'UTF-8') ?>">
+              <?= htmlspecialchars($typeNom, ENT_QUOTES, 'UTF-8') ?>
             </a>
           <?php endforeach; ?>
         </div>
@@ -44,7 +52,7 @@
         <form class="events-search" method="get" action="/artisphere/">
           <input type="hidden" name="controller" value="evenement">
           <input type="hidden" name="action" value="index">
-          <input type="hidden" name="type" value="<?= htmlspecialchars($filters['type'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
+          <input type="hidden" name="type" value="<?= htmlspecialchars((string)($filters['type'] ?? ''), ENT_QUOTES, 'UTF-8') ?>">
 
           <input class="search-input" type="search" name="q" placeholder="Rechercher un événement…"
                  value="<?= htmlspecialchars($filters['q'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
@@ -76,46 +84,48 @@
                 ? '/artisphere/images/evenements/' . $e['image']
                 : '/artisphere/images/image-photo.jpg';
 
-              $isFree = ((float)$e['prix'] <= 0);
-              $places = (int)$e['nombre_place'];
+              $isFree = ((float)($e['prix'] ?? 0) <= 0);
+              $places = (int)($e['nombre_place'] ?? 0);
+
+              $typeNom = (string)($e['type_nom'] ?? '');
+              $typeLower = mb_strtolower($typeNom);
 
               $tagClass = 'event-tag-salon';
-              $t = strtolower($e['type'] ?? '');
-              if (str_contains($t, 'atelier')) $tagClass = 'event-tag-atelier';
-              elseif (str_contains($t, 'expo')) $tagClass = 'event-tag-expo';
+              if (str_contains($typeLower, 'atelier')) $tagClass = 'event-tag-atelier';
+              elseif (str_contains($typeLower, 'expo')) $tagClass = 'event-tag-expo';
             ?>
 
             <article class="event-card">
               <img class="event-img"
                    src="<?= htmlspecialchars($img, ENT_QUOTES, 'UTF-8') ?>"
-                   alt="<?= htmlspecialchars($e['nom'], ENT_QUOTES, 'UTF-8') ?>"
+                   alt="<?= htmlspecialchars($e['nom'] ?? '', ENT_QUOTES, 'UTF-8') ?>"
                    onerror="this.onerror=null; this.src='/artisphere/images/image-photo.jpg';">
 
-              <span class="event-tag <?= $tagClass ?>">
-                <?= htmlspecialchars($e['type'], ENT_QUOTES, 'UTF-8') ?>
+              <span class="event-tag <?= htmlspecialchars($tagClass, ENT_QUOTES, 'UTF-8') ?>">
+                <?= htmlspecialchars($typeNom !== '' ? $typeNom : 'Type', ENT_QUOTES, 'UTF-8') ?>
               </span>
 
-              <h2 class="event-title"><?= htmlspecialchars($e['nom'], ENT_QUOTES, 'UTF-8') ?></h2>
+              <h2 class="event-title"><?= htmlspecialchars($e['nom'] ?? '', ENT_QUOTES, 'UTF-8') ?></h2>
 
               <p class="event-meta">
-                📍 <?= htmlspecialchars($e['lieu'], ENT_QUOTES, 'UTF-8') ?> ·
-                🗓 <?= htmlspecialchars($e['date_debut'], ENT_QUOTES, 'UTF-8') ?>
+                📍 <?= htmlspecialchars($e['lieu'] ?? '', ENT_QUOTES, 'UTF-8') ?> ·
+                🗓 <?= htmlspecialchars($e['date_debut'] ?? '', ENT_QUOTES, 'UTF-8') ?>
                 <?php if (!empty($e['date_fin']) && $e['date_fin'] !== $e['date_debut']): ?>
                   – <?= htmlspecialchars($e['date_fin'], ENT_QUOTES, 'UTF-8') ?>
                 <?php endif; ?>
               </p>
 
               <p class="event-desc">
-                <?= nl2br(htmlspecialchars(mb_strimwidth($e['description'], 0, 140, '…'), ENT_QUOTES, 'UTF-8')) ?>
+                <?= nl2br(htmlspecialchars(mb_strimwidth((string)($e['description'] ?? ''), 0, 140, '…'), ENT_QUOTES, 'UTF-8')) ?>
               </p>
 
               <p class="event-extra">
-                <?= $isFree ? 'Entrée gratuite.' : ('Prix : ' . number_format((float)$e['prix'], 2, ',', ' ') . ' €') ?>
+                <?= $isFree ? 'Entrée gratuite.' : ('Prix : ' . number_format((float)($e['prix'] ?? 0), 2, ',', ' ') . ' €') ?>
                 ·
                 <?= ($places > 0) ? ('Places : ' . $places) : 'Complet' ?>
               </p>
 
-              <a href="/artisphere/?controller=evenement_show&&action=show&id=<?= (int)$e['id_event'] ?>"
+              <a href="/artisphere/?controller=evenement_show&action=show&id=<?= (int)($e['id_event'] ?? 0) ?>"
                  class="event-btn">
                 Voir le détail
               </a>

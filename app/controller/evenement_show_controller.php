@@ -28,8 +28,6 @@ class evenement_show_controller extends BaseController
 
         if (!empty($_SERVER['HTTP_REFERER'])) {
             $url = $_SERVER['HTTP_REFERER'];
-
-            // Sécurité : on accepte seulement les URLs internes
             if (str_contains($url, '/artisphere/')) {
                 $_SESSION['previous_url'] = $url;
             }
@@ -51,7 +49,6 @@ class evenement_show_controller extends BaseController
             $isReserved = ReservationEventModel::exists((int)$evenement['id_event'], $idUser);
         }
 
-
         $this->render('evenement_show.php', [
             'title' => $evenement['nom'] . ' – Artisphere',
             'pageCss' => 'details-style.css',
@@ -66,12 +63,12 @@ class evenement_show_controller extends BaseController
     public function reserve(): void
     {
         $this->requireLogin();
+
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
             header('Location: /artisphere/?controller=index&action=index');
             exit;
         }
 
-        // CSRF (si tu as déjà une méthode, utilise-la)
         $token = $_POST['csrf'] ?? '';
         if (empty($_SESSION['csrf']) || !hash_equals($_SESSION['csrf'], $token)) {
             http_response_code(403);
@@ -81,9 +78,11 @@ class evenement_show_controller extends BaseController
         $idEvent = (int)($_POST['id_evenement'] ?? 0);
         $back = $_POST['back'] ?? '/artisphere/?controller=index&action=index';
 
+        $idUser = (int)($_SESSION['user']['id'] ?? $_SESSION['user']['id_personne'] ?? 0);
+
         $ok = false;
-        if ($idEvent > 0) {
-            $ok = ReservationEventModel::reserve($idEvent, (int)$_SESSION['user']['id']);
+        if ($idEvent > 0 && $idUser > 0) {
+            $ok = ReservationEventModel::reserve($idEvent, $idUser);
         }
 
         $sep = (str_contains($back, '?') ? '&' : '?');
@@ -94,6 +93,7 @@ class evenement_show_controller extends BaseController
     public function cancelReservation(): void
     {
         $this->requireLogin();
+
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
             header('Location: /artisphere/?controller=index&action=index');
             exit;

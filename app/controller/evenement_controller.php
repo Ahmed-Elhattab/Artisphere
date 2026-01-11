@@ -6,7 +6,8 @@ class evenement_controller extends BaseController
     public function index(): void
     {
         $filters = [
-            'type' => trim($_GET['type'] ?? ''),
+            // type = id_type (int) ou '' si pas filtré
+            'type' => isset($_GET['type']) && $_GET['type'] !== '' ? (int)$_GET['type'] : '',
             'q' => trim($_GET['q'] ?? ''),
             'min_price' => $_GET['min_price'] ?? '',
             'max_price' => $_GET['max_price'] ?? '',
@@ -14,7 +15,7 @@ class evenement_controller extends BaseController
         ];
 
         $events = EvenementModel::search($filters);
-        $types = EvenementModel::listTypes();
+        $types = EvenementModel::listTypes(); // [{id_type, nom}, ...]
 
         $this->render('evenement.php', [
             'title' => 'Évènements – Artisphere',

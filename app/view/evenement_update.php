@@ -36,7 +36,7 @@ $imgUrl = !empty($event['image'])
           enctype="multipart/form-data">
 
       <input type="hidden" name="csrf" value="<?= htmlspecialchars($csrf ?? '', ENT_QUOTES, 'UTF-8') ?>">
-      <input type="hidden" name="id_event" value="<?= (int)$event['id_event'] ?>">
+      <input type="hidden" name="id_event" value="<?= (int)($event['id_event'] ?? 0) ?>">
 
       <div class="form-row">
         <label>Image</label>
@@ -57,12 +57,21 @@ $imgUrl = !empty($event['image'])
 
         <div class="form-row">
           <label>Type</label>
-          <input type="text" name="type" required value="<?= htmlspecialchars($event['type'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
+          <select name="id_type" required>
+            <option value="">-- Choisir un type --</option>
+            <?php foreach (($types ?? []) as $t): ?>
+              <option value="<?= (int)$t['id_type'] ?>"
+                <?= ((int)($event['id_type'] ?? 0) === (int)$t['id_type']) ? 'selected' : '' ?>>
+                <?= htmlspecialchars($t['nom'], ENT_QUOTES, 'UTF-8') ?>
+              </option>
+            <?php endforeach; ?>
+          </select>
         </div>
 
         <div class="form-row">
           <label>Prix (€)</label>
-          <input type="number" step="0.01" min="0" name="prix" required value="<?= htmlspecialchars((string)($event['prix'] ?? ''), ENT_QUOTES, 'UTF-8') ?>">
+          <input type="number" step="0.01" min="0" name="prix" required
+                 value="<?= htmlspecialchars((string)($event['prix'] ?? ''), ENT_QUOTES, 'UTF-8') ?>">
         </div>
 
         <div class="form-row">
@@ -88,7 +97,7 @@ $imgUrl = !empty($event['image'])
 
       <div class="actions">
         <button class="btn-primary" type="submit">Enregistrer</button>
-        <a class="btn-outline" href="/artisphere/?controller=evenement_show&action=show&id=<?= (int)$event['id_event'] ?>">Annuler</a>
+        <a class="btn-outline" href="/artisphere/?controller=evenement_show&action=show&id=<?= (int)($event['id_event'] ?? 0) ?>">Annuler</a>
       </div>
     </form>
   </section>

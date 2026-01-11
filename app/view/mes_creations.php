@@ -58,6 +58,7 @@
             <?php foreach ($evenements as $e): ?>
             <?php
                 $img = !empty($e['image']) ? 'images/evenements/' . $e['image'] : null;
+                $typeNom = (string)($e['type_nom'] ?? '');
             ?>
             <article class="card">
                 <div class="card-media <?= empty($img) ? 'noimg' : '' ?>">
@@ -73,7 +74,7 @@
                 <h3 class="card-title"><?= htmlspecialchars($e['nom'], ENT_QUOTES, 'UTF-8') ?></h3>
                 <p class="card-meta">
                     <?= htmlspecialchars($e['lieu'], ENT_QUOTES, 'UTF-8') ?>
-                    · <?= htmlspecialchars($e['type'], ENT_QUOTES, 'UTF-8') ?>
+                    · <?= htmlspecialchars($typeNom !== '' ? $typeNom : 'Type', ENT_QUOTES, 'UTF-8') ?>
                 </p>
                 <p class="card-meta">
                     Du <?= htmlspecialchars($e['date_debut'], ENT_QUOTES, 'UTF-8') ?>

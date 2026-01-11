@@ -25,13 +25,13 @@ class evenement_update_controller extends BaseController
 
         $id = (int)($_GET['id'] ?? 0);
         $event = ($id > 0) ? EvenementModel::findById($id) : null;
+        $types = EvenementModel::listTypes();
 
         if (!$event) {
             header('Location: /artisphere/?controller=index&action=index');
             exit;
         }
 
-        // Sécurité : seul le créateur peut éditer
         $userId = (int)($_SESSION['user']['id'] ?? $_SESSION['user']['id_personne'] ?? 0);
         if ($userId <= 0 || (int)$event['id_createur'] !== $userId) {
             http_response_code(403);
@@ -44,6 +44,7 @@ class evenement_update_controller extends BaseController
             'title' => 'Éditer un évènement – Artisphere',
             'pageCss' => 'evenement_update-style.css',
             'event' => $event,
+            'types' => $types,
             'csrf' => $_SESSION['csrf'],
         ]);
     }
@@ -61,6 +62,7 @@ class evenement_update_controller extends BaseController
 
         $id = (int)($_POST['id_event'] ?? 0);
         $event = ($id > 0) ? EvenementModel::findById($id) : null;
+        $types = EvenementModel::listTypes();
 
         if (!$event) {
             header('Location: /artisphere/?controller=index&action=index');
@@ -73,11 +75,10 @@ class evenement_update_controller extends BaseController
             exit("Accès refusé.");
         }
 
-        // Champs
         $nom = trim($_POST['nom'] ?? '');
         $lieu = trim($_POST['lieu'] ?? '');
         $nombre_place = (int)($_POST['nombre_place'] ?? 0);
-        $type = trim($_POST['type'] ?? '');
+        $id_type = (int)($_POST['id_type'] ?? 0);
         $prix = (float)($_POST['prix'] ?? 0);
         $date_debut = trim($_POST['date_debut'] ?? '');
         $date_fin = trim($_POST['date_fin'] ?? '');
@@ -87,7 +88,10 @@ class evenement_update_controller extends BaseController
         if ($nom === '') $errors[] = "Le nom est obligatoire.";
         if ($lieu === '') $errors[] = "Le lieu est obligatoire.";
         if ($nombre_place < 0) $errors[] = "Le nombre de places doit être positif.";
-        if ($type === '') $errors[] = "Le type est obligatoire.";
+
+        if ($id_type <= 0) $errors[] = "Le type est obligatoire.";
+        elseif (!EvenementModel::typeExists($id_type)) $errors[] = "Type invalide.";
+
         if ($prix < 0) $errors[] = "Le prix doit être positif.";
         if ($date_debut === '' || $date_fin === '') $errors[] = "Les dates sont obligatoires.";
         if ($date_debut !== '' && $date_fin !== '' && $date_fin < $date_debut) {
@@ -95,10 +99,8 @@ class evenement_update_controller extends BaseController
         }
         if ($description === '') $errors[] = "La description est obligatoire.";
 
-        // Image : garder l’ancienne si pas de nouveau fichier
         $imageFile = $event['image'];
 
-        // Si un nouveau fichier est uploadé, on le remplace
         if (!empty($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
             $tmp = $_FILES['image']['tmp_name'];
             $name = $_FILES['image']['name'];
@@ -110,7 +112,6 @@ class evenement_update_controller extends BaseController
             } else {
                 $newName = 'event_' . $id . '_' . time() . '.' . $ext;
 
-                // dossier cible (adapte si tu stockes ailleurs)
                 $targetDir = __DIR__ . '/../../public/uploads/evenements/';
                 if (!is_dir($targetDir)) {
                     @mkdir($targetDir, 0777, true);
@@ -127,11 +128,10 @@ class evenement_update_controller extends BaseController
         }
 
         if (!empty($errors)) {
-            // Recharger les valeurs saisies
             $event['nom'] = $nom;
             $event['lieu'] = $lieu;
             $event['nombre_place'] = $nombre_place;
-            $event['type'] = $type;
+            $event['id_type'] = $id_type;
             $event['prix'] = $prix;
             $event['date_debut'] = $date_debut;
             $event['date_fin'] = $date_fin;
@@ -142,6 +142,7 @@ class evenement_update_controller extends BaseController
                 'title' => 'Éditer un évènement – Artisphere',
                 'pageCss' => 'evenement_update-style.css',
                 'event' => $event,
+                'types' => $types, // ✅ indispensable
                 'errors' => $errors,
                 'csrf' => $_SESSION['csrf'],
             ]);
@@ -154,7 +155,7 @@ class evenement_update_controller extends BaseController
             'lieu' => $lieu,
             'nombre_place' => $nombre_place,
             'description' => $description,
-            'type' => $type,
+            'id_type' => $id_type,
             'prix' => $prix,
             'date_debut' => $date_debut,
             'date_fin' => $date_fin,

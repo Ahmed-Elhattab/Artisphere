@@ -12,22 +12,24 @@ class ProduitModel
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public static function create(array $data): int {
+    public static function create(array $data): int 
+    {
         $pdo = Database::getConnection();
 
-        $sql = "INSERT INTO pproduit (nom, image, quantite, materiaux, prix, id_createur, description, id_categorie)
-                VALUES (:nom, :image, :quantite, :materiaux, :prix, :id_createur, :description, :id_categorie)";
+        $sql = "INSERT INTO pproduit (nom, image, quantite, stock_reserve, materiaux, prix, id_createur, description, id_categorie)
+                VALUES (:nom, :image, :quantite, :stock_reserve, :materiaux, :prix, :id_createur, :description, :id_categorie)";
 
         $stmt = $pdo->prepare($sql);
         $stmt->execute([
-        ':nom'        => $data['nom'],
-        ':image'      => $data['image'],
-        ':quantite'   => $data['quantite'],
-        ':materiaux'  => $data['materiaux'],
-        ':prix'       => $data['prix'],
-        ':id_createur'=> $data['id_createur'],
-        ':description'=> $data['description'],
-        ':id_categorie'=> $data['id_categorie'],
+            ':nom'          => $data['nom'],
+            ':image'        => $data['image'],
+            ':quantite'     => (int)$data['quantite'],
+            ':stock_reserve'=> (int)($data['stock_reserve'] ?? 0),
+            ':materiaux'    => $data['materiaux'],
+            ':prix'         => (float)$data['prix'],
+            ':id_createur'  => (int)$data['id_createur'],
+            ':description'  => $data['description'],
+            ':id_categorie' => (int)$data['id_categorie'],
         ]);
 
         return (int)$pdo->lastInsertId();
@@ -36,7 +38,7 @@ class ProduitModel
     public static function findByCreateur(int $idCreateur): array
     {
         $pdo = Database::getConnection();
-        $stmt = $pdo->prepare("SELECT id_produit, nom, image, quantite, prix, description
+        $stmt = $pdo->prepare("SELECT id_produit, nom, image, stock_reserve, quantite, prix, description
                             FROM pproduit
                             WHERE id_createur = :id
                             ORDER BY id_produit DESC");
@@ -127,7 +129,7 @@ class ProduitModel
 
         // En stock uniquement
         if (!empty($filters['in_stock'])) {
-            $where[] = "p.quantite > 0";
+            $where[] = "(p.quantite - p.stock_reserve) > 0";
         }
 
         // Prix min/max
@@ -140,9 +142,11 @@ class ProduitModel
             $params[':maxp'] = (float)$filters['max_price'];
         }
 
-        $sql = "SELECT p.id_produit, p.nom, p.image, p.prix, p.quantite, c.nom AS categorie_nom
-                FROM pproduit p
-                LEFT JOIN categorie c ON c.id_categorie = p.id_categorie";
+        $sql = "SELECT p.id_produit, p.nom, p.image, p.prix, p.quantite, p.stock_reserve,
+               (p.quantite - p.stock_reserve) AS stock_disponible,
+               c.nom AS categorie_nom
+        FROM pproduit p
+        LEFT JOIN categorie c ON c.id_categorie = p.id_categorie";
 
         if ($where) {
             $sql .= " WHERE " . implode(" AND ", $where);

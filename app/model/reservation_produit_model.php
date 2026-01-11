@@ -1,39 +1,66 @@
 <?php
 class ReservationProduitModel
 {
-    public static function reserve(int $idProduit, int $idPersonne): bool
+    public static function reserve(int $idProduit, int $idPersonne, int $quantite = 1): bool
     {
+        $quantite = max(1, $quantite);
         $pdo = Database::getConnection();
 
         try {
             $pdo->beginTransaction();
 
-            // 1) lock produit
-            $stmt = $pdo->prepare("SELECT quantite FROM pproduit WHERE id_produit = :id FOR UPDATE");
+            // Lock produit (stock réel + réservé)
+            $stmt = $pdo->prepare("
+                SELECT quantite, stock_reserve
+                FROM pproduit
+                WHERE id_produit = :id
+                FOR UPDATE
+            ");
             $stmt->execute([':id' => $idProduit]);
-            $qte = $stmt->fetchColumn();
+            $prod = $stmt->fetch(PDO::FETCH_ASSOC);
+            if (!$prod) { $pdo->rollBack(); return false; }
 
-            if ($qte === false || (int)$qte <= 0) {
-                $pdo->rollBack();
-                return false;
-            }
+            $dispo = (int)$prod['quantite'] - (int)$prod['stock_reserve'];
+            if ($dispo < $quantite) { $pdo->rollBack(); return false; }
 
-            // 2) empêcher double réservation (si tu veux)
-            $check = $pdo->prepare("SELECT 1 FROM reservation_produit WHERE id_produit = :p AND id_personne = :u LIMIT 1");
+            // Vérifier s'il existe déjà une réservation EN COURS pour ce user+produit
+            $check = $pdo->prepare("
+                SELECT id_resa_produit, quantite
+                FROM reservation_produit
+                WHERE id_produit = :p AND id_personne = :u AND status = 'en cours'
+                LIMIT 1
+                FOR UPDATE
+            ");
             $check->execute([':p' => $idProduit, ':u' => $idPersonne]);
-            if ($check->fetchColumn()) {
-                $pdo->rollBack();
-                return false;
+            $existing = $check->fetch(PDO::FETCH_ASSOC);
+
+            if ($existing) {
+                // On augmente la quantité de la réservation existante
+                $updResa = $pdo->prepare("
+                    UPDATE reservation_produit
+                    SET quantite = quantite + :q
+                    WHERE id_resa_produit = :id
+                ");
+                $updResa->execute([
+                    ':q'  => $quantite,
+                    ':id' => (int)$existing['id_resa_produit'],
+                ]);
+            } else {
+                // Nouvelle réservation
+                $ins = $pdo->prepare("
+                    INSERT INTO reservation_produit (id_produit, id_personne, quantite, message, note, status)
+                    VALUES (:p, :u, :q, NULL, NULL, 'en cours')
+                ");
+                $ins->execute([':p' => $idProduit, ':u' => $idPersonne, ':q' => $quantite]);
             }
 
-            // 3) insert reservation (message/note plus tard => NULL)
-            $ins = $pdo->prepare("INSERT INTO reservation_produit (id_produit, id_personne, message, note)
-                                  VALUES (:p, :u, NULL, NULL)");
-            $ins->execute([':p' => $idProduit, ':u' => $idPersonne]);
-
-            // 4) décrément quantité
-            $upd = $pdo->prepare("UPDATE pproduit SET quantite = quantite - 1 WHERE id_produit = :id");
-            $upd->execute([':id' => $idProduit]);
+            // Incrémenter stock_reserve
+            $updStock = $pdo->prepare("
+                UPDATE pproduit
+                SET stock_reserve = stock_reserve + :q
+                WHERE id_produit = :p
+            ");
+            $updStock->execute([':q' => $quantite, ':p' => $idProduit]);
 
             $pdo->commit();
             return true;
@@ -42,93 +69,86 @@ class ReservationProduitModel
             return false;
         }
     }
-    public static function listForUser(int $idPersonne): array
-    {
-        $pdo = Database::getConnection();
-
-        $sql = "SELECT
-                rp.id_produit,
-                p.nom,
-                p.image,
-                p.prix
-                FROM reservation_produit rp
-                JOIN pproduit p ON p.id_produit = rp.id_produit
-                WHERE rp.id_personne = :u
-                ORDER BY rp.id_produit DESC";  // ou ORDER BY rp.date si tu ajoutes un champ date plus tard
-
-        $stmt = $pdo->prepare($sql);
-        $stmt->execute([':u' => $idPersonne]);
-
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
-    }
 
     public static function exists(int $idProduit, int $idPersonne): bool
     {
         $pdo = Database::getConnection();
-        $stmt = $pdo->prepare(
-            "SELECT 1 FROM reservation_produit
-             WHERE id_produit = :p AND id_personne = :u
-             LIMIT 1"
-        );
-        $stmt->execute([
-            ':p' => $idProduit,
-            ':u' => $idPersonne
-        ]);
+        $stmt = $pdo->prepare("
+            SELECT 1
+            FROM reservation_produit
+            WHERE id_produit = :p AND id_personne = :u AND status = 'en cours'
+            LIMIT 1
+        ");
+        $stmt->execute([':p' => $idProduit, ':u' => $idPersonne]);
         return (bool)$stmt->fetchColumn();
     }
 
+    // ✅ Annuler = supprimer la réservation EN COURS + décrémenter stock_reserve du bon montant
     public static function cancel(int $idProduit, int $idPersonne): bool
     {
         $pdo = Database::getConnection();
-        $pdo->beginTransaction();
 
         try {
-            // supprimer la réservation
-            $stmt = $pdo->prepare(
-                "DELETE FROM reservation_produit
-                 WHERE id_produit = :p AND id_personne = :u"
-            );
-            $stmt->execute([
-                ':p' => $idProduit,
-                ':u' => $idPersonne
-            ]);
+            $pdo->beginTransaction();
 
-            if ($stmt->rowCount() === 0) {
-                $pdo->rollBack();
-                return false;
+            // Lock réservation(s) en cours
+            $stmt = $pdo->prepare("
+                SELECT id_resa_produit, quantite
+                FROM reservation_produit
+                WHERE id_produit = :p AND id_personne = :u AND status = 'en cours'
+                FOR UPDATE
+            ");
+            $stmt->execute([':p' => $idProduit, ':u' => $idPersonne]);
+            $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            if (!$rows) { $pdo->rollBack(); return false; }
+
+            $totalQ = 0;
+            foreach ($rows as $r) {
+                $totalQ += (int)$r['quantite'];
             }
 
-            // remettre +1 en quantité
-            $stmt = $pdo->prepare(
-                "UPDATE pproduit
-                 SET quantite = quantite + 1
-                 WHERE id_produit = :p"
-            );
-            $stmt->execute([':p' => $idProduit]);
+            // Supprimer les réservations en cours (historique supprimé comme tu veux)
+            $del = $pdo->prepare("
+                DELETE FROM reservation_produit
+                WHERE id_produit = :p AND id_personne = :u AND status = 'en cours'
+            ");
+            $del->execute([':p' => $idProduit, ':u' => $idPersonne]);
+
+            // Décrémenter stock_reserve
+            $upd = $pdo->prepare("
+                UPDATE pproduit
+                SET stock_reserve = GREATEST(stock_reserve - :q, 0)
+                WHERE id_produit = :p
+            ");
+            $upd->execute([':q' => $totalQ, ':p' => $idProduit]);
 
             $pdo->commit();
             return true;
-        } catch (Exception $e) {
-            $pdo->rollBack();
+        } catch (Throwable $e) {
+            if ($pdo->inTransaction()) $pdo->rollBack();
             return false;
         }
     }
+
     public static function listForUserByStatus(int $idPersonne, string $status): array
     {
         $pdo = Database::getConnection();
 
         $sql = "SELECT
+                    rp.id_resa_produit,
                     rp.id_produit,
+                    rp.quantite,
+                    rp.status,
+                    rp.note,
                     p.nom,
                     p.image,
-                    p.prix,
-                    rp.status,
-                    rp.note
+                    p.prix
                 FROM reservation_produit rp
                 JOIN pproduit p ON p.id_produit = rp.id_produit
                 WHERE rp.id_personne = :u
                 AND rp.status = :s
-                ORDER BY rp.id_produit DESC";
+                ORDER BY rp.id_resa_produit DESC";
 
         $stmt = $pdo->prepare($sql);
         $stmt->execute([

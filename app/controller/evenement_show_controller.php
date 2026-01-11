@@ -77,12 +77,28 @@ class evenement_show_controller extends BaseController
 
         $idEvent = (int)($_POST['id_evenement'] ?? 0);
         $back = $_POST['back'] ?? '/artisphere/?controller=index&action=index';
-
         $idUser = (int)($_SESSION['user']['id'] ?? $_SESSION['user']['id_personne'] ?? 0);
+
+        $quantite = (int)($_POST['quantite'] ?? 1);
+        if ($quantite < 1) $quantite = 1;
 
         $ok = false;
         if ($idEvent > 0 && $idUser > 0) {
-            $ok = ReservationEventModel::reserve($idEvent, $idUser);
+
+            $evenement = EvenementModel::findById($idEvent);
+            if ($evenement) {
+                $placesReelles = (int)($evenement['nombre_place'] ?? 0);
+                $placesReservees = (int)($evenement['stock_reserve'] ?? 0);
+                $placesDispo = max(0, $placesReelles - $placesReservees);
+
+                if ($quantite > $placesDispo) {
+                    $quantite = $placesDispo;
+                }
+            }
+
+            if ($quantite >= 1) {
+                $ok = ReservationEventModel::reserve($idEvent, $idUser, $quantite);
+            }
         }
 
         $sep = (str_contains($back, '?') ? '&' : '?');

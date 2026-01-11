@@ -93,6 +93,25 @@
   color: #fff;
 }
 
+.qty{
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px;
+  border: 1px solid #e2d5c0;
+  border-radius: 999px;
+  background: #fff;
+  color: #3c2b20;
+  font-weight: 700;
+}
+
+.qty input{
+  width: 72px;
+  border: 1px solid #e2d5c0;
+  border-radius: 999px;
+  padding: 8px 10px;
+}
+
 @media (max-width: 920px) {
   .details-card { grid-template-columns: 1fr; }
   .details-media { min-height: 260px; }

@@ -72,7 +72,6 @@ class produit_show_controller extends BaseController
             exit;
         }
 
-        // CSRF (si tu as déjà une méthode, utilise-la)
         $token = $_POST['csrf'] ?? '';
         if (empty($_SESSION['csrf']) || !hash_equals($_SESSION['csrf'], $token)) {
             http_response_code(403);
@@ -81,10 +80,28 @@ class produit_show_controller extends BaseController
 
         $idProduit = (int)($_POST['id_produit'] ?? 0);
         $back = $_POST['back'] ?? '/artisphere/?controller=index&action=index';
+        $idUser = (int)($_SESSION['user']['id'] ?? $_SESSION['user']['id_personne'] ?? 0);
+
+        $quantite = (int)($_POST['quantite'] ?? 1);
+        if ($quantite < 1) $quantite = 1;
 
         $ok = false;
-        if ($idProduit > 0) {
-            $ok = ReservationProduitModel::reserve($idProduit, (int)$_SESSION['user']['id']);
+        if ($idProduit > 0 && $idUser > 0) {
+            // Optionnel : clamp côté serveur (sécurité) avec les vraies données
+            $produit = ProduitModel::findById($idProduit);
+            if ($produit) {
+                $stockReel = (int)($produit['quantite'] ?? 0);
+                $stockReserve = (int)($produit['stock_reserve'] ?? 0);
+                $stockDispo = max(0, $stockReel - $stockReserve);
+
+                if ($quantite > $stockDispo) {
+                    $quantite = $stockDispo;
+                }
+            }
+
+            if ($quantite >= 1) {
+                $ok = ReservationProduitModel::reserve($idProduit, $idUser, $quantite);
+            }
         }
 
         $sep = (str_contains($back, '?') ? '&' : '?');
@@ -101,7 +118,6 @@ class produit_show_controller extends BaseController
             exit;
         }
 
-        // CSRF
         $token = $_POST['csrf'] ?? '';
         if (empty($_SESSION['csrf']) || !hash_equals($_SESSION['csrf'], $token)) {
             http_response_code(403);
@@ -110,17 +126,14 @@ class produit_show_controller extends BaseController
 
         $idProduit = (int)($_POST['id_produit'] ?? 0);
         $back = $_POST['back'] ?? '/artisphere/';
-
         $idUser = (int)($_SESSION['user']['id'] ?? $_SESSION['user']['id_personne'] ?? 0);
 
-        if ($idProduit <= 0 || $idUser <= 0) {
-            header('Location: ' . $back);
-            exit;
-        }
+        $ok = ($idProduit > 0 && $idUser > 0)
+            ? ReservationProduitModel::cancel($idProduit, $idUser)
+            : false;
 
-        $ok = ReservationProduitModel::cancel($idProduit, $idUser);
-
-        header('Location: ' . $back . ($ok ? '&cancelled=1' : '&cancelled=0'));
+        $sep = (str_contains($back, '?') ? '&' : '?');
+        header('Location: ' . $back . $sep . 'cancelled=' . ($ok ? '1' : '0'));
         exit;
     }
 }

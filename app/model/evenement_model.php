@@ -6,9 +6,9 @@ class EvenementModel
         $pdo = Database::getConnection();
 
         $sql = "INSERT INTO pevent
-                    (nom, image, lieu, nombre_place, description, id_type, prix, date_debut, date_fin, id_createur)
-                VALUES
-                    (:nom, :image, :lieu, :nombre_place, :description, :id_type, :prix, :date_debut, :date_fin, :id_createur)";
+            (nom, image, lieu, nombre_place, stock_reserve, description, id_type, prix, date_debut, date_fin, id_createur)
+        VALUES
+            (:nom, :image, :lieu, :nombre_place, :stock_reserve, :description, :id_type, :prix, :date_debut, :date_fin, :id_createur)";
 
         $stmt = $pdo->prepare($sql);
         $stmt->execute([
@@ -16,6 +16,7 @@ class EvenementModel
             ':image'        => $data['image'],
             ':lieu'         => $data['lieu'],
             ':nombre_place' => (int)$data['nombre_place'],
+            ':stock_reserve' => (int)($data['stock_reserve'] ?? 0),
             ':description'  => $data['description'],
             ':id_type'      => (int)$data['id_type'],
             ':prix'         => (float)$data['prix'],
@@ -130,7 +131,7 @@ class EvenementModel
         }
 
         if (!empty($filters['in_stock'])) {
-            $where[] = "e.nombre_place > 0";
+            $where[] = "(e.nombre_place - e.stock_reserve) > 0";
         }
 
         if ($filters['min_price'] !== '' && $filters['min_price'] !== null) {
@@ -142,10 +143,11 @@ class EvenementModel
             $params[':maxp'] = (float)$filters['max_price'];
         }
 
-        $sql = "SELECT e.id_event, e.nom, e.image, e.lieu, e.nombre_place, e.description,
-                       e.id_type, t.nom AS type_nom, e.prix, e.date_debut, e.date_fin
-                FROM pevent e
-                JOIN `type` t ON t.id_type = e.id_type";
+        $sql = "SELECT e.id_event, e.nom, e.image, e.lieu, e.nombre_place, e.stock_reserve,
+               (e.nombre_place - e.stock_reserve) AS places_disponibles,
+               e.description, e.id_type, t.nom AS type_nom, e.prix, e.date_debut, e.date_fin
+        FROM pevent e
+        JOIN `type` t ON t.id_type = e.id_type";
 
         if ($where) {
             $sql .= " WHERE " . implode(" AND ", $where);

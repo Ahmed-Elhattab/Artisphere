@@ -63,40 +63,80 @@
         <div class="orders">
             <h2>MES COMMANDES EN COURS</h2>
 
-            <?php if (!empty($reservations)): ?>
-                <?php foreach ($reservations as $r): ?>
-                <div class="order-card">
-                    <div class="order-title">
-                    <?= htmlspecialchars($r['nom'], ENT_QUOTES, 'UTF-8') ?>
+            <h3 class="orders-subtitle">Produits</h3>
+            <?php if (!empty($reservationsProduitsEnCours)): ?>
+                <?php foreach ($reservationsProduitsEnCours as $r): ?>
+                    <div class="order-card">
+                        <div class="order-title"><?= htmlspecialchars($r['nom'] ?? '', ENT_QUOTES, 'UTF-8') ?></div>
+                        <a class="action-link"
+                        href="/artisphere/?controller=produit_show&action=show&id=<?= (int)($r['id_produit'] ?? 0) ?>">
+                            <button class="btn">Détail</button>
+                        </a>
                     </div>
-
-                    <a class="action-link"
-                    href="/artisphere/?controller=produit_show&action=show&id=<?= (int)$r['id_produit'] ?>">
-                    <button class="btn">Détail</button>
-                    </a>
-                </div>
                 <?php endforeach; ?>
             <?php else: ?>
-                <div class="order-card">
-                <div class="order-title">Aucune réservation en cours.</div>
-                </div>
+                <div class="order-card"><div class="order-title">Aucune réservation produit en cours.</div></div>
+            <?php endif; ?>
+
+            <h3 class="orders-subtitle">Évènements</h3>
+            <?php if (!empty($reservationsEvenementsEnCours)): ?>
+                <?php foreach ($reservationsEvenementsEnCours as $ev): ?>
+                    <div class="order-card">
+                        <div class="order-title">
+                            <?= htmlspecialchars($ev['nom'] ?? '', ENT_QUOTES, 'UTF-8') ?>
+                            <?php if (!empty($ev['type_nom'])): ?>
+                                <span class="muted"> · <?= htmlspecialchars($ev['type_nom'], ENT_QUOTES, 'UTF-8') ?></span>
+                            <?php endif; ?>
+                        </div>
+                        <a class="action-link"
+                        href="/artisphere/?controller=evenement_show&action=show&id=<?= (int)($ev['id_event'] ?? 0) ?>">
+                            <button class="btn">Détail</button>
+                        </a>
+                    </div>
+                <?php endforeach; ?>
+            <?php else: ?>
+                <div class="order-card"><div class="order-title">Aucune inscription à un évènement en cours.</div></div>
             <?php endif; ?>
         </div>
             <!-- Deuxième section : Commandes -->
-            <h2>DERNIERES COMMANDES</h2>
-            <div class="order-card">
-                <div class="order-title">Collier en argent</div>
-                <a class="action-link" href="/artisphere/?controller=avis&action=index"><button class="btn">Donner son avis</button></a>
-            </div>
-            <div class="order-card">
-                <div class="order-title">Tableau</div>
-                <a class="action-link" href="/artisphere/?controller=avis&action=index"><button class="btn">Donner son avis</button></a>
-            </div>
-            <div class="order-card">
-                <div class="order-title">Vase</div>
-                <a class="action-link" href="/artisphere/?controller=avis&action=index"><button class="btn">Donner son avis</button></a>
-            </div>
-        </div>
+            <h2>DERNIÈRES COMMANDES</h2>
+
+                <h3 class="orders-subtitle">Produits (payées)</h3>
+                <?php if (!empty($reservationsProduitsPayees)): ?>
+                    <?php foreach ($reservationsProduitsPayees as $r): ?>
+                        <div class="order-card">
+                            <div class="order-title"><?= htmlspecialchars($r['nom'] ?? '', ENT_QUOTES, 'UTF-8') ?></div>
+
+                            <a class="action-link"
+                            href="/artisphere/?controller=avis&action=index&type=produit&id=<?= (int)($r['id_produit'] ?? 0) ?>">
+                                <button class="btn">Donner son avis</button>
+                            </a>
+                        </div>
+                    <?php endforeach; ?>
+                <?php else: ?>
+                    <div class="order-card"><div class="order-title">Aucun produit passé.</div></div>
+                <?php endif; ?>
+
+                <h3 class="orders-subtitle">Évènements (payées)</h3>
+                <?php if (!empty($reservationsEvenementsPayees)): ?>
+                    <?php foreach ($reservationsEvenementsPayees as $ev): ?>
+                        <div class="order-card">
+                            <div class="order-title">
+                                <?= htmlspecialchars($ev['nom'] ?? '', ENT_QUOTES, 'UTF-8') ?>
+                                <?php if (!empty($ev['type_nom'])): ?>
+                                    <span class="muted"> · <?= htmlspecialchars($ev['type_nom'], ENT_QUOTES, 'UTF-8') ?></span>
+                                <?php endif; ?>
+                            </div>
+
+                            <a class="action-link"
+                            href="/artisphere/?controller=avis&action=index&type=evenement&id=<?= (int)($ev['id_event'] ?? 0) ?>">
+                                <button class="btn">Donner son avis</button>
+                            </a>
+                        </div>
+                    <?php endforeach; ?>
+                <?php else: ?>
+                    <div class="order-card"><div class="order-title">Aucun évènement passé.</div></div>
+                <?php endif; ?>
     </section>
     <div class="action-buttons">
       <a class="action-link" href="/artisphere/?controller=index&action=index"><button class="btn-spe">TOUTES MES COMMANDES PASSEES</button></a>

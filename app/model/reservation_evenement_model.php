@@ -79,4 +79,65 @@ class ReservationEventModel
             return false;
         }
     }
+    public static function listForUser(int $idPersonne): array
+    {
+        $pdo = Database::getConnection();
+
+        // On récupère aussi le nom du type via JOIN
+        // (table `type` : adapte en `types` si tu l’as renommée)
+        $sql = "SELECT
+                    re.id_event,
+                    e.nom,
+                    e.image,
+                    e.lieu,
+                    e.prix,
+                    e.date_debut,
+                    e.date_fin,
+                    e.id_type,
+                    t.nom AS type_nom,
+                    re.status
+                FROM reservation_event re
+                JOIN pevent e ON e.id_event = re.id_event
+                JOIN `type` t ON t.id_type = e.id_type
+                WHERE re.id_personne = :u
+                ORDER BY re.id_event DESC";
+
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([':u' => $idPersonne]);
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    public static function listForUserByStatus(int $idPersonne, string $status): array
+    {
+        $pdo = Database::getConnection();
+
+        $sql = "SELECT
+                    re.id_event,
+                    e.nom,
+                    e.image,
+                    e.lieu,
+                    e.prix,
+                    e.date_debut,
+                    e.date_fin,
+                    e.id_type,
+                    t.nom AS type_nom,
+                    re.status,
+                    re.note
+                FROM reservation_event re
+                JOIN pevent e ON e.id_event = re.id_event
+                JOIN `type` t ON t.id_type = e.id_type
+                WHERE re.id_personne = :u
+                AND re.status = :s
+                ORDER BY re.id_event DESC";
+
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([
+            ':u' => $idPersonne,
+            ':s' => $status
+        ]);
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    
 }

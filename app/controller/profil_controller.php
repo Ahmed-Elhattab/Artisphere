@@ -2,20 +2,26 @@
 
 require_once __DIR__ . '/../model/personne_model.php';
 require_once __DIR__ . '/../model/reservation_produit_model.php';
+require_once __DIR__ . '/../model/reservation_evenement_model.php';
+
 
 
 class profil_controller extends BaseController
 {
     public function index(): void
     {
-
-        //securité : page accessible uniquement si connecté
         $this->requireLogin();
 
         $user = $_SESSION['user'];
         $idPersonne = (int)($_SESSION['user']['id'] ?? $_SESSION['user']['id_personne'] ?? 0);
 
-        $reservations = ReservationProduitModel::listForUser($idPersonne);
+        // En cours
+        $reservationsProduitsEnCours = ReservationProduitModel::listForUserByStatus($idPersonne, 'en cours');
+        $reservationsEvenementsEnCours = ReservationEventModel::listForUserByStatus($idPersonne, 'en cours');
+
+        // Payées (dernières commandes)
+        $reservationsProduitsPayees = ReservationProduitModel::listForUserByStatus($idPersonne, 'payée');
+        $reservationsEvenementsPayees = ReservationEventModel::listForUserByStatus($idPersonne, 'payée');
 
         $this->render('profil.php', [
             'title' => 'Artisphere – Profil',
@@ -23,11 +29,13 @@ class profil_controller extends BaseController
             'nom'    => $user['nom'] ?? '',
             'prenom' => $user['prenom'] ?? '',
             'pseudo' => $user['pseudo'] ?? '',
-            'role'=> $user['role'] ??'',
-            'reservations' => $reservations
+            'role'   => $user['role'] ?? '',
+            'reservationsProduitsEnCours' => $reservationsProduitsEnCours,
+            'reservationsEvenementsEnCours' => $reservationsEvenementsEnCours,
+            'reservationsProduitsPayees' => $reservationsProduitsPayees,
+            'reservationsEvenementsPayees' => $reservationsEvenementsPayees,
         ]);
     }
-
     #modifie la photo de profil de l'utilisateur, et vérifie la conformité de celle ci (niveau sécu)
     public function updateAvatar(): void
     {

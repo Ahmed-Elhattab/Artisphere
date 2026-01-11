@@ -113,4 +113,29 @@ class ReservationProduitModel
             return false;
         }
     }
+    public static function listForUserByStatus(int $idPersonne, string $status): array
+    {
+        $pdo = Database::getConnection();
+
+        $sql = "SELECT
+                    rp.id_produit,
+                    p.nom,
+                    p.image,
+                    p.prix,
+                    rp.status,
+                    rp.note
+                FROM reservation_produit rp
+                JOIN pproduit p ON p.id_produit = rp.id_produit
+                WHERE rp.id_personne = :u
+                AND rp.status = :s
+                ORDER BY rp.id_produit DESC";
+
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([
+            ':u' => $idPersonne,
+            ':s' => $status
+        ]);
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 }

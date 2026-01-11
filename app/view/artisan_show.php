@@ -1,4 +1,4 @@
-<?php
+<?php 
 // Avatar
 $avatarFile = $artisan['avatar'] ?? null;
 $avatarDir  = 'images/avatars/';
@@ -86,8 +86,10 @@ function stars(int $note): string {
 
             $dates = htmlspecialchars($ev['date_debut'], ENT_QUOTES, 'UTF-8');
             if (!empty($ev['date_fin']) && $ev['date_fin'] !== $ev['date_debut']) {
-            $dates .= ' – ' . htmlspecialchars($ev['date_fin'], ENT_QUOTES, 'UTF-8');
+              $dates .= ' – ' . htmlspecialchars($ev['date_fin'], ENT_QUOTES, 'UTF-8');
             }
+
+            $typeNom = (string)($ev['type_nom'] ?? '');
         ?>
 
         <a class="event-card"
@@ -99,14 +101,14 @@ function stars(int $note): string {
             <div class="event-name"><?= htmlspecialchars($ev['nom'], ENT_QUOTES, 'UTF-8') ?></div>
 
             <div class="event-meta">
-            <?= htmlspecialchars($ev['type'], ENT_QUOTES, 'UTF-8') ?> ·
-            📍 <?= htmlspecialchars($ev['lieu'], ENT_QUOTES, 'UTF-8') ?>
+              <?= htmlspecialchars($typeNom !== '' ? $typeNom : 'Type', ENT_QUOTES, 'UTF-8') ?> ·
+              📍 <?= htmlspecialchars($ev['lieu'], ENT_QUOTES, 'UTF-8') ?>
             </div>
 
             <div class="event-meta">
-            🗓 <?= $dates ?> ·
-            <?= ((float)$ev['prix'] <= 0) ? 'Gratuit' : (number_format((float)$ev['prix'], 2, ',', ' ') . ' €') ?> ·
-            <?= ((int)$ev['nombre_place'] > 0) ? ('Places : ' . (int)$ev['nombre_place']) : 'Complet' ?>
+              🗓 <?= $dates ?> ·
+              <?= ((float)$ev['prix'] <= 0) ? 'Gratuit' : (number_format((float)$ev['prix'], 2, ',', ' ') . ' €') ?> ·
+              <?= ((int)$ev['nombre_place'] > 0) ? ('Places : ' . (int)$ev['nombre_place']) : 'Complet' ?>
             </div>
         </a>
 

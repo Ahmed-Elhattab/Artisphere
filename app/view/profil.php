@@ -138,9 +138,10 @@
                     <div class="order-card"><div class="order-title">Aucun évènement passé.</div></div>
                 <?php endif; ?>
     </section>
+    <!--
     <div class="action-buttons">
       <a class="action-link" href="/artisphere/?controller=index&action=index"><button class="btn-spe">TOUTES MES COMMANDES PASSEES</button></a>
-    </div>
+    </div>-->
 
     <?php if (!empty($_SESSION['user']) && $_SESSION['user']['role'] === 'artisan' || $_SESSION['user']['role'] === 'admin'): ?>
     <div class="action-buttons">

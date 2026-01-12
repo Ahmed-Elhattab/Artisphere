@@ -18,7 +18,7 @@
             <h1>RÉINITIALISATION DU MOT DE PASSE DU COMPTE</h1>
         </header>
 
-        <form action="envoyer_mail.php" method="POST">
+        <form action="?controller=mot_de_passe_oublie&action=envoyer" method="POST">
             <div class="input-group">
                 <label for="email">
                     Adresse courriel principale 

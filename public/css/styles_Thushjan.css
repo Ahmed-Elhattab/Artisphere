@@ -5,15 +5,26 @@ html, body {
     flex-direction: column;
 }
 
-/*CHANGEMENT DE COULEUR */
+/*CONFIRMATION MESSAGE MAIL ENVOYE*/
 
-/* Change le fond de la page et la couleur du texte global */
+.message-success {
+    background-color: #d4edda;
+    color: #155724;
+    padding: 15px;
+    border: 1px solid #c3e6cb;
+    border-radius: 8px;
+    margin: 10px 0 20px 0;
+    text-align: center;
+    font-weight: bold;
+}
+
+/*CHANGEMENT DE COULEUR ACCESSIBILITE/CLASSIQUE*/
+
 body.dalto-mode {
     background-color: #222222 !important;
     color: #ffffff !important;           
 }
 
-/*Change la couleur des boutons */
 body.dalto-mode .bouton-enregistrerV2 {
     background-color: #E69F00 !important; 
     color: #000000 !important;         
@@ -26,13 +37,13 @@ body.dalto-mode button:not(#bouton-dalto) {
     border-color: #ffffff !important;
 }
 
-/*Change la couleur du header en mode accessibilité */
 body.dalto-mode header {
     background-color: #333333 !important;
     border-bottom: 2px solid #E69F00 !important;
 }
 
   
+/*PAGE MENU CHOIX EVENEMENT PRODUIT */
 
 #Menu_choix_evenement_produit {
     position: relative;    

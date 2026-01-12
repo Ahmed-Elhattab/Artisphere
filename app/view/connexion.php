@@ -25,11 +25,11 @@
     <?php endif; ?>
 
 <!--Confirmation mail envoyer -->
-  <?php if (isset($_GET['msg']) && $_GET['msg'] === 'sent'): ?>
-    <div class="message-success">
-        ✅ Un lien de réinitialisation a été envoyé à votre adresse.
-    </div>
-  <?php endif; ?>
+<?php if (isset($_GET['status']) && $_GET['status'] === 'success'): ?>
+  <div class="message-success">
+      ✅ Un lien de réinitialisation a été envoyé à votre adresse.
+  </div>
+<?php endif; ?>
 
     <form class="auth-form" action="/artisphere/?controller=connexion&action=submit" method="post">
 

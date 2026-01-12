@@ -45,20 +45,20 @@
     <div class="commentaires">
         <h3>Réponses</h3>
         <textarea id="comm-texte" placeholder="Écrire une réponse..."></textarea>
-        <button onclick="ajouterCommentaire()">Répondre</button>
+        <button onclick="ajouterCommentaire()">Répondre</button> <!-- Fonction Ajoutercommentaire -->
     </div>
 </div>
 
 <script>
-    // 1. On récupère le numéro dans l'URL (?id=...)
+    // On récupère le numéro dans l'URL (?id=...)
     const urlParams = new URLSearchParams(window.location.search);
     const id = urlParams.get('id');
 
-    // 2. On va chercher TA base de données
+    // On va chercher la base de données
     const topics = JSON.parse(localStorage.getItem("topics")) || [];
     const leSujet = topics[id];
 
-    // 3. On affiche les infos
+    // On affiche les infos
     if (leSujet) {
         document.getElementById('titre').innerText = leSujet.title;
         document.getElementById('message').innerText = leSujet.content;

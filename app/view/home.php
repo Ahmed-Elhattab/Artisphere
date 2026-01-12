@@ -1,5 +1,5 @@
 
-<section class="home-hero">
+<section class="home">
   <?php
     $isLogged = !empty($_SESSION['user']);
     $role = $_SESSION['user']['role'] ?? null;
@@ -13,105 +13,55 @@
       }
     }
   ?>
-  <aside class="home-cta">
-    <div class="cta-card">
-      <div class="cta-title">PRET A VENDRE OU ACHETER<br>DES ARTICLES ?</div>
-      <a class="cta-button" href="<?= htmlspecialchars($ctaHref, ENT_QUOTES, 'UTF-8') ?>">
-        Commencer par ici
-      </a>
-    </div>
-  </aside>
 
-  <div class="home-hero__left">
-    <p class="home-hero__text">
-      Découvrez le talent des artisans et créateurs passionnés près de chez vous.<br>
-      Ici, chaque pièce raconte une histoire, chaque artisan partage son savoir-faire.
-    </p>
+  <header class="home-hero">
+    <!-- image de fond (via CSS) + overlay -->
+    <div class="home-hero__overlay" aria-hidden="true"></div>
 
-    <div class="home-pill">LES PRODUITS TENDANCES</div>
+    <div class="home-hero__container">
+      <div class="home-hero__intro">
+        <h1 class="home-hero__title">Artisphere</h1>
+        <p class="home-hero__subtitle">
+          Une plateforme pour découvrir, acheter et vendre des créations artisanales.
+        </p>
 
-    <div class="carousel-row">
-      <a class="arrow <?= ($pProd <= 1 ? 'disabled' : '') ?>"
-        href="/artisphere/?controller=index&action=index&p_prod=<?= max(1, $pProd-1) ?>&p_evt=<?= (int)$pEvt ?>">←</a>
-
-      <div class="home-products">
-        <?php foreach ($produits as $p): ?>
-          <?php
-            $img = !empty($p['image'])
-              ? "images/produits/" . $p['image']
-              : "/artisphere/images/produit.png";
-          ?>
-          <article class="product-card">
-            <img
-              src="<?= htmlspecialchars($img, ENT_QUOTES, 'UTF-8') ?>"
-              alt="<?= htmlspecialchars($p['nom'], ENT_QUOTES, 'UTF-8') ?>"
-              onerror="this.onerror=null; this.src='/artisphere/images/produit.png';"
-            >
-
-            <div class="product-name">
-              <?= htmlspecialchars($p['nom'], ENT_QUOTES, 'UTF-8') ?>
+        <div class="home-hero__features" aria-label="À quoi sert Artisphere">
+          <article class="feature-card">
+            <div class="feature-card__title">Découvrir des créations</div>
+            <div class="feature-card__text">
+              Parcourez des créations uniques (déco, accessoires, cadeaux) et filtrez par catégorie, prix et localisation pour trouver la pièce parfaite.
             </div>
-
-            <div class="product-price">
-              <?= number_format((float)$p['prix'], 2, ',', ' ') ?> €
-            </div>
-
-            <a class="card-link"
-              href="/artisphere/?controller=produit_show&action=show&id=<?= (int)$p['id_produit'] ?>">
-              Voir
-            </a>
           </article>
-        <?php endforeach; ?>
+
+          <article class="feature-card">
+            <div class="feature-card__title">Mettre en avant les artisans</div>
+            <div class="feature-card__text">
+              Découvrez les profils : univers, matières, technique, réalisations. Suivez vos artisans préférés et contactez-les facilement.
+            </div>
+
+          </article>
+
+          <article class="feature-card">
+            <div class="feature-card__title">Participer à des événements</div>
+            <div class="feature-card__text">
+              Consultez les événements à venir (ateliers, expos, marchés), voyez le lieu et les dates, et repérez ceux proches de chez vous.
+            </div>
+          </article>
+        </div>
+
+        <a class="hero-cta"
+           href="<?= htmlspecialchars($ctaHref, ENT_QUOTES, 'UTF-8') ?>">
+          Commencer
+        </a>
+
+        <div class="hero-hint">
+          <?php if (!$isLogged): ?>
+            Connexion / inscription rapide.
+          <?php else: ?>
+            Accès direct à votre espace.
+          <?php endif; ?>
+        </div>
       </div>
-
-      <a class="arrow <?= ($pProd >= $pagesProd ? 'disabled' : '') ?>"
-        href="/artisphere/?controller=index&action=index&p_prod=<?= min($pagesProd, $pProd+1) ?>&p_evt=<?= (int)$pEvt ?>">→</a>
     </div>
-
-    <div class="home-pill">LES EVENEMENTS A LA UNE</div>
-
-    <div class="carousel-row">
-      <a class="arrow <?= ($pEvt <= 1 ? 'disabled' : '') ?>"
-        href="/artisphere/?controller=index&action=index&p_evt=<?= max(1, $pEvt-1) ?>&p_prod=<?= (int)$pProd ?>">←</a>
-
-     <div class="home-events">
-      <?php foreach ($evenements as $e): ?>
-        <?php
-          $img = !empty($e['image'])
-            ? "images/evenements/" . $e['image']
-            : "images/image-photo.jpg";
-        ?>
-        <article class="event-card">
-          <img
-            src="<?= htmlspecialchars($img, ENT_QUOTES, 'UTF-8') ?>"
-            alt="<?= htmlspecialchars($e['nom'], ENT_QUOTES, 'UTF-8') ?>"
-            onerror="this.onerror=null; this.src='images/image-photo.jpg';"
-          >
-
-          <div class="event-title">
-            <?= htmlspecialchars($e['nom'], ENT_QUOTES, 'UTF-8') ?>
-          </div>
-
-          <div class="event-meta">
-            <?= htmlspecialchars($e['lieu'] ?? '', ENT_QUOTES, 'UTF-8') ?>
-            <?= !empty($e['type']) ? ' · ' . htmlspecialchars($e['type'], ENT_QUOTES, 'UTF-8') : '' ?>
-          </div>
-
-          <div class="event-date">
-            DU <?= htmlspecialchars($e['date_debut'], ENT_QUOTES, 'UTF-8') ?>
-            AU <?= htmlspecialchars($e['date_fin'], ENT_QUOTES, 'UTF-8') ?>
-          </div>
-
-          <a class="card-link"
-            href="/artisphere/?controller=evenement_show&action=show&id=<?= (int)$e['id_event'] ?>">
-            Voir
-          </a>
-        </article>
-      <?php endforeach; ?>
-    </div>
-
-      <a class="arrow <?= ($pEvt >= $pagesEvt ? 'disabled' : '') ?>"
-        href="/artisphere/?controller=index&action=index&p_evt=<?= min($pagesEvt, $pEvt+1) ?>&p_prod=<?= (int)$pProd ?>">→</a>
-    </div>
-
+  </header>
 </section>

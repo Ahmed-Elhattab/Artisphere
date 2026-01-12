@@ -1,7 +1,8 @@
 <?php
-require_once __DIR__ . '/../model/reservation_produit_model.php';
 
-class avis_controller extends BaseController
+require_once __DIR__ . '/../model/reservation_evenement_model.php';
+
+class avis_evenement_controller extends BaseController
 {
     public function index(): void
     {
@@ -15,7 +16,7 @@ class avis_controller extends BaseController
             exit;
         }
 
-        $resa = ReservationProduitModel::findOneForUser($idResa, $idPersonne);
+        $resa = ReservationEventModel::findOneForUser($idResa, $idPersonne);
         if (!$resa) {
             $this->render('not_found.php', [
                 'title' => 'Avis introuvable – Artisphere',
@@ -25,15 +26,14 @@ class avis_controller extends BaseController
             return;
         }
 
-        // CSRF
         if (empty($_SESSION['csrf'])) {
             $_SESSION['csrf'] = bin2hex(random_bytes(16));
         }
 
-        $this->render('avis.php', [
-            'title' => 'Artisphere – Avis Produits',
+        $this->render('avis_evenement.php', [
+            'title' => 'Artisphere – Avis Évènements',
             'pageCss' => 'avis.css',
-            'pageJs' => 'avis.js',
+            'pageJs' => 'avis.js', // tu peux réutiliser le même JS étoiles
             'resa' => $resa,
             'csrf' => $_SESSION['csrf'],
             'userPseudo' => $_SESSION['user']['pseudo'] ?? 'User',
@@ -66,20 +66,20 @@ class avis_controller extends BaseController
         if (mb_strlen($message) > 1000) $errors[] = "Message trop long (max 1000 caractères).";
 
         $resa = ($idResa > 0 && $idPersonne > 0)
-            ? ReservationProduitModel::findOneForUser($idResa, $idPersonne)
+            ? ReservationEventModel::findOneForUser($idResa, $idPersonne)
             : null;
 
         if (!$resa) {
             $errors[] = "Réservation introuvable.";
         } else {
             if (($resa['status'] ?? '') !== 'payée') {
-                $errors[] = "Vous ne pouvez laisser un avis que pour une commande payée.";
+                $errors[] = "Vous ne pouvez laisser un avis que pour une réservation payée.";
             }
         }
 
         if (!empty($errors)) {
-            $this->render('avis.php', [
-                'title' => 'Artisphere – Avis Produits',
+            $this->render('avis_evenement.php', [
+                'title' => 'Artisphere – Avis Évènements',
                 'pageCss' => 'avis.css',
                 'pageJs' => 'avis.js',
                 'errors' => $errors,
@@ -94,10 +94,9 @@ class avis_controller extends BaseController
             return;
         }
 
-        $ok = ReservationProduitModel::setReview($idResa, $idPersonne, $note, $message);
+        $ok = ReservationEventModel::setReview($idResa, $idPersonne, $note, $message);
 
-        // PRG
-        header('Location: /artisphere/?controller=avis&action=index&id_resa=' . $idResa . '&sent=' . ($ok ? '1' : '0'));
+        header('Location: /artisphere/?controller=avis_evenement&action=index&id_resa=' . $idResa . '&sent=' . ($ok ? '1' : '0'));
         exit;
     }
 }

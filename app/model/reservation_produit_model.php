@@ -158,4 +158,58 @@ class ReservationProduitModel
 
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    public static function findOneForUser(int $idResaProduit, int $idPersonne): ?array
+    {
+        $pdo = Database::getConnection();
+
+        $sql = "SELECT
+                    rp.id_resa_produit,
+                    rp.id_produit,
+                    rp.id_personne,
+                    rp.quantite,
+                    rp.status,
+                    rp.note,
+                    rp.message,
+                    p.nom,
+                    p.image,
+                    p.prix
+                FROM reservation_produit rp
+                JOIN pproduit p ON p.id_produit = rp.id_produit
+                WHERE rp.id_resa_produit = :r
+                AND rp.id_personne = :u
+                LIMIT 1";
+
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([
+            ':r' => $idResaProduit,
+            ':u' => $idPersonne,
+        ]);
+
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $row ?: null;
+    }
+
+    public static function setReview(int $idResaProduit, int $idPersonne, int $note, string $message): bool
+    {
+        $pdo = Database::getConnection();
+
+        $sql = "UPDATE reservation_produit
+                SET note = :n,
+                    message = :m,
+                    status = 'notée'
+                WHERE id_resa_produit = :r
+                AND id_personne = :u
+                AND status = 'payée'";
+
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([
+            ':n' => $note,
+            ':m' => $message,
+            ':r' => $idResaProduit,
+            ':u' => $idPersonne,
+        ]);
+
+        return $stmt->rowCount() > 0;
+    }
 }

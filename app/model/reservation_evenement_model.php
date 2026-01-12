@@ -123,9 +123,40 @@ class ReservationEventModel
         $sql = "SELECT
                     re.id_resa_event,
                     re.id_event,
+                    e.nom,
+                    e.image,
+                    e.lieu,
+                    e.prix,
+                    e.date_debut,
+                    e.date_fin,
+                    e.id_type,
+                    t.nom AS type_nom,
+                    re.status,
+                    re.note
+                FROM reservation_event re
+                JOIN pevent e ON e.id_event = re.id_event
+                JOIN `type` t ON t.id_type = e.id_type
+                WHERE re.id_personne = :u
+                AND re.status = :s
+                ORDER BY re.id_resa_event DESC";
+
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([':u' => $idPersonne, ':s' => $status]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public static function findOneForUser(int $idResaEvent, int $idPersonne): ?array
+    {
+        $pdo = Database::getConnection();
+
+        $sql = "SELECT
+                    re.id_resa_event,
+                    re.id_event,
+                    re.id_personne,
                     re.quantite,
                     re.status,
                     re.note,
+                    re.message,
                     e.nom,
                     e.image,
                     e.lieu,
@@ -137,16 +168,40 @@ class ReservationEventModel
                 FROM reservation_event re
                 JOIN pevent e ON e.id_event = re.id_event
                 JOIN `type` t ON t.id_type = e.id_type
-                WHERE re.id_personne = :u
-                AND re.status = :s
-                ORDER BY re.id_resa_event DESC";
+                WHERE re.id_resa_event = :r
+                AND re.id_personne = :u
+                LIMIT 1";
 
         $stmt = $pdo->prepare($sql);
         $stmt->execute([
+            ':r' => $idResaEvent,
             ':u' => $idPersonne,
-            ':s' => $status
         ]);
 
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $row ?: null;
+    }
+
+    public static function setReview(int $idResaEvent, int $idPersonne, int $note, string $message): bool
+    {
+        $pdo = Database::getConnection();
+
+        $sql = "UPDATE reservation_event
+                SET note = :n,
+                    message = :m,
+                    status = 'notée'
+                WHERE id_resa_event = :r
+                AND id_personne = :u
+                AND status = 'payée'";
+
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([
+            ':n' => $note,
+            ':m' => $message,
+            ':r' => $idResaEvent,
+            ':u' => $idPersonne,
+        ]);
+
+        return $stmt->rowCount() > 0;
     }
 }

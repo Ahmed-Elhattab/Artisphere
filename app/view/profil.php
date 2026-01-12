@@ -108,7 +108,7 @@
                             <div class="order-title"><?= htmlspecialchars($r['nom'] ?? '', ENT_QUOTES, 'UTF-8') ?></div>
 
                             <a class="action-link"
-                            href="/artisphere/?controller=avis&action=index&type=produit&id=<?= (int)($r['id_produit'] ?? 0) ?>">
+                                href="/artisphere/?controller=avis&action=index&id_resa=<?= (int)$r['id_resa_produit'] ?>">
                                 <button class="btn">Donner son avis</button>
                             </a>
                         </div>
@@ -129,7 +129,7 @@
                             </div>
 
                             <a class="action-link"
-                            href="/artisphere/?controller=avis&action=index&type=evenement&id=<?= (int)($ev['id_event'] ?? 0) ?>">
+                                href="/artisphere/?controller=avis_evenement&action=index&id_resa=<?= (int)($ev['id_resa_event'] ?? 0) ?>">
                                 <button class="btn">Donner son avis</button>
                             </a>
                         </div>

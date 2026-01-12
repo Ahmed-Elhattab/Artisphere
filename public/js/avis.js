@@ -1,13 +1,14 @@
-// Étoiles interactives
 (function(){
   const stars = Array.from(document.querySelectorAll('.star'));
   const ratingInput = document.getElementById('rating');
+  if(!stars.length || !ratingInput) return;
 
-  // valeur initiale
   let current = parseInt(ratingInput.value || '0', 10);
-  paint(current);
+  if(!current || current < 1) current = 5;
 
-  // souris : clic pour fixer la note, survol pour prévisualiser
+  paint(current);
+  updateAria(current);
+
   stars.forEach(star => {
     const value = parseInt(star.dataset.value, 10);
 
@@ -20,7 +21,6 @@
       updateAria(current);
     });
 
-    // clavier (accessibilité) : gauche/droite et espace/entrée
     star.addEventListener('keydown', (e) => {
       if(['ArrowLeft','ArrowDown'].includes(e.key)){
         e.preventDefault();
@@ -31,7 +31,7 @@
       } else if([' ','Enter'].includes(e.key)){
         e.preventDefault();
       } else {
-        return; // ignorer
+        return;
       }
       ratingInput.value = String(current);
       paint(current);
@@ -39,7 +39,6 @@
       stars[current-1].focus();
     });
 
-    // rendre focusable
     star.setAttribute('tabindex','0');
     star.setAttribute('role','radio');
   });
@@ -50,15 +49,6 @@
     });
   }
   function updateAria(val){
-    stars.forEach((s, i) => s.setAttribute('aria-checked', i < val ? 'true' : 'false'));
-  }
-
-  // exemple d'envoi (ici, simple console.log)
-  const sendBtn = document.getElementById('sendBtn');
-  if(sendBtn){
-    sendBtn.addEventListener('click', () => {
-      console.log('Note envoyée :', ratingInput.value, 'Avis :', document.getElementById('avis').value);
-      alert('Merci ! Note : ' + ratingInput.value);
-    });
+    stars.forEach((s, i) => s.setAttribute('aria-checked', (i+1) === val ? 'true' : 'false'));
   }
 })();

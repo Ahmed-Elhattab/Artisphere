@@ -1,14 +1,21 @@
 <?php
-$img = !empty($resa['image']) ? 'images/produits/' . $resa['image'] : 'images/produit.png';
+$img = !empty($resa['image']) ? 'images/evenements/' . $resa['image'] : 'images/image-photo.jpg';
+
 $currentRating = (int)($old['rating'] ?? ($resa['note'] ?? 5));
 $currentRating = max(1, min(5, $currentRating));
+
 $currentMessage = (string)($old['message'] ?? ($resa['message'] ?? ''));
 
 $isAlreadyRated = (($resa['status'] ?? '') === 'notée');
+
+$dates = htmlspecialchars($resa['date_debut'] ?? '', ENT_QUOTES, 'UTF-8');
+if (!empty($resa['date_fin']) && $resa['date_fin'] !== $resa['date_debut']) {
+    $dates .= ' – ' . htmlspecialchars($resa['date_fin'], ENT_QUOTES, 'UTF-8');
+}
 ?>
 
 <main class="container">
-  <h1 class="page-title">AVIS PRODUITS</h1>
+  <h1 class="page-title">AVIS ÉVÈNEMENTS</h1>
 
   <?php if (!empty($errors)): ?>
     <div class="form-error-box" style="background:#fbecec;padding:12px;border-radius:10px;margin-bottom:18px;">
@@ -40,16 +47,22 @@ $isAlreadyRated = (($resa['status'] ?? '') === 'notée');
     <hr>
 
     <div class="art-row">
-      <div><?= htmlspecialchars($resa['nom'] ?? '', ENT_QUOTES, 'UTF-8') ?></div>
-      <img src="<?= htmlspecialchars($img, ENT_QUOTES, 'UTF-8') ?>" alt="Produit" class="art-thumb"
-           onerror="this.onerror=null; this.src='images/produit.png';">
+      <div>
+        <?= htmlspecialchars($resa['nom'] ?? '', ENT_QUOTES, 'UTF-8') ?><br>
+        <small style="opacity:.8;">
+          <?= htmlspecialchars($resa['lieu'] ?? '', ENT_QUOTES, 'UTF-8') ?>
+          · <?= htmlspecialchars($resa['type_nom'] ?? '', ENT_QUOTES, 'UTF-8') ?>
+          · <?= $dates ?>
+        </small>
+      </div>
+      <img src="<?= htmlspecialchars($img, ENT_QUOTES, 'UTF-8') ?>" alt="Évènement" class="art-thumb"
+           onerror="this.onerror=null; this.src='images/image-photo.jpg';">
     </div>
 
-    <form method="post" action="/artisphere/?controller=avis&action=submit">
+    <form method="post" action="/artisphere/?controller=avis_evenement&action=submit">
       <input type="hidden" name="csrf" value="<?= htmlspecialchars($csrf ?? '', ENT_QUOTES, 'UTF-8') ?>">
-      <input type="hidden" name="id_resa" value="<?= (int)($resa['id_resa_produit'] ?? 0) ?>">
+      <input type="hidden" name="id_resa" value="<?= (int)($resa['id_resa_event'] ?? 0) ?>">
 
-      <!-- étoiles -->
       <div class="stars" role="radiogroup" aria-label="Note (de 1 à 5 étoiles)">
         <button class="star" type="button" data-value="1" aria-label="1 étoile" aria-checked="false">★</button>
         <button class="star" type="button" data-value="2" aria-label="2 étoiles" aria-checked="false">★</button>

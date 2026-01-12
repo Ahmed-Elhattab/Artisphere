@@ -84,12 +84,12 @@ function createTopic() {
   save();
   closeFenetresujet();
   render();
-
-  document.getElementById("title").value = "";
-  document.getElementById("content").value = "";
 }
+render();
 
-// 1. Récupérer le champ texte et son contenu
+
+function ajouterCommentaire() {
+    // 1. Récupérer le champ texte et son contenu
     const champTexte = document.getElementById('comm-texte');
     const texte = champTexte.value.trim();
 
@@ -131,10 +131,3 @@ function createTopic() {
         location.reload(); 
     }
 }
-
-
-
-
-render();
-
-

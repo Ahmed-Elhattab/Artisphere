@@ -1,31 +1,26 @@
-/* --------- BASE --------- */
-
-body {
+/* RESET BASICS */
+* {
     margin: 0;
-    font-family: system-ui, sans-serif;
-    background: #b6a894;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-.section {
-    padding: 2rem 0;
-}
-
-.container {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 0 32px;
-}
-
-/* --------- TITRE --------- */
-
-.events-header {
+/* MAIN AREA BACKGROUND */
+.events-main {
+    background-color: #C49A74;
+    padding: 60px 0 80px;
     text-align: center;
+    min-height: 100vh; /* page not tiny */
+    width: 100%;
 }
 
-.events-intro {
-    max-width: 640px;
-    margin: 0 auto;
-    color: #4b5563;
+/* PAGE TITLE */
+.events-main .events-title {
+    font-size: 40px;
+    letter-spacing: 3px;
+    color: #f3e7d9;
+    margin-bottom: 40px;
+    font-weight: 700;
 }
 
 /* --------- FILTRES --------- */

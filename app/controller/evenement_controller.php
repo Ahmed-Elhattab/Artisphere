@@ -3,6 +3,7 @@ require_once __DIR__ . '/../model/evenement_model.php';
 
 class evenement_controller extends BaseController
 {
+    // this function shows the events list page
     public function index(): void
     {
         $filters = [
@@ -26,3 +27,4 @@ class evenement_controller extends BaseController
         ]);
     }
 }
+

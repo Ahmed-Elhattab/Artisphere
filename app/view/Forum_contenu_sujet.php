@@ -34,7 +34,7 @@
 
 <!-- Contenue -->
 
-<div id="Forum-contenu-sujet">
+<div id="Forum">
     <a href="Forum.html">Retour au forum</a>
     
     <div class="boite-sujet">
@@ -49,9 +49,21 @@
     </div>
 </div>
 
+<script>
+    // On récupère le numéro dans l'URL (?id=...)
+    const urlParams = new URLSearchParams(window.location.search);
+    const id = urlParams.get('id');
 
+    // On va chercher la base de données
+    const topics = JSON.parse(localStorage.getItem("topics")) || [];
+    const leSujet = topics[id];
 
-<script src="Forum-jsjs"></script>
+    // On affiche les infos
+    if (leSujet) {
+        document.getElementById('titre').innerText = leSujet.title;
+        document.getElementById('message').innerText = leSujet.content;
+    }
+</script>
 
 <!-- FOOTER -->
 <footer class="site-footer">

@@ -88,46 +88,70 @@ function createTopic() {
 render();
 
 
+// 1. Récupération des données du sujet via l'URL
+const urlParams = new URLSearchParams(window.location.search);
+const id = urlParams.get('id');
+const leSujet = topics[id];
+
+// 2. Affichage au chargement
+if (leSujet) {
+    document.getElementById('titre').innerText = leSujet.title;
+    document.getElementById('message').innerText = leSujet.content;
+    chargerCommentaires();
+}
+
+// 3. FONCTION : Afficher les commentaires
+function chargerCommentaires() {
+    const liste = document.getElementById('liste-reponses');
+    const topicsActuels = JSON.parse(localStorage.getItem("topics")) || [];
+    const sujetActuel = topicsActuels[id];
+
+    if (!sujetActuel || !sujetActuel.comments) return;
+
+    liste.innerHTML = ""; 
+
+    sujetActuel.comments.forEach(comment => {
+        liste.innerHTML += `
+            <div class="reponse-affichee">
+                <img src="${comment.image || 'https://via.placeholder.com/40'}" class="reponse-auteur-img">
+                <div class="reponse-contenu">
+                    <span class="reponse-nom">${comment.nom || 'Anonyme'}</span>
+                    <p class="reponse-texte">${comment.texte}</p>
+                </div>
+            </div>
+        `;
+    });
+}
+
+// 4. FONCTION : Ajouter une réponse
 function ajouterCommentaire() {
-    // 1. Récupérer le champ texte et son contenu
     const champTexte = document.getElementById('comm-texte');
     const texte = champTexte.value.trim();
 
-    // 2. Vérifier que le message n'est pas vide
-    if (texte === "") {
-        alert("Vous ne pouvez pas envoyer une réponse vide !");
-        return;
-    }
+    if (texte === "") return;
 
-    // 3. Charger les données actuelles depuis le localStorage
-    const topics = JSON.parse(localStorage.getItem("topics")) || [];
+    const user = JSON.parse(localStorage.getItem("user")) || {
+        nom: "Utilisateur Test",
+        image: "https://via.placeholder.com/40" 
+    };
+
+    const topicsMisAJour = JSON.parse(localStorage.getItem("topics")) || [];
     
-    // On récupère l'id depuis l'URL (défini au début de ton script)
-    const urlParams = new URLSearchParams(window.location.search);
-    const id = urlParams.get('id');
+    if (topicsMisAJour[id]) {
+        if (!topicsMisAJour[id].comments) topicsMisAJour[id].comments = [];
 
-    if (topics[id]) {
-        // 4. Initialiser le tableau de commentaires s'il n'existe pas encore
-        if (!topics[id].comments) {
-            topics[id].comments = [];
-        }
-
-        // 5. Ajouter la nouvelle réponse
-        // On peut ajouter un objet avec la date pour faire plus pro
         const nouvelleReponse = {
             texte: texte,
-            date: new Date().toLocaleString('fr-FR')
+            nom: user.nom,
+            image: user.image,
+            date: new Date().toLocaleString()
         };
-        
-        topics[id].comments.push(nouvelleReponse);
 
-        // 6. Sauvegarder les modifications dans le localStorage
-        localStorage.setItem("topics", JSON.stringify(topics));
+        topicsMisAJour[id].comments.push(nouvelleReponse);
+        localStorage.setItem("topics", JSON.stringify(topicsMisAJour));
 
-        // 7. Effacer le champ de saisie
-        champTexte.value = "";
-
-        // 8. Rafraîchir l'affichage des commentaires
-        location.reload(); 
+        champTexte.value = ""; 
+        chargerCommentaires(); 
     }
-}
+  }
+

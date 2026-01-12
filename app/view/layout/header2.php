@@ -14,6 +14,7 @@
 
     <link rel="stylesheet" href="css/header2.css">
     <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/styles_Thushjan.css">
 
     <?php if (!empty($pageCss)): ?>
         <link rel="stylesheet" href="css/<?= htmlspecialchars($pageCss, ENT_QUOTES, 'UTF-8') ?>">
@@ -35,6 +36,7 @@
             <a href="/artisphere/?controller=catalogue&action=index" class="nav-link">Catalogue</a>
             <a href="/artisphere/?controller=artisans&action=index" class="nav-link">Artisan</a>
             <a href="/artisphere/?controller=evenement&action=index" class="nav-link">Évènement</a>
+            <a href="/artisphere/?controller=evenement&action=index" class="nav-link">Forum</a>
         </nav>
 
         <!--gere la redirection de l'icone profil quand un utilisateur est connecter ou non-->
@@ -69,7 +71,7 @@
                     👤
                 <?php endif; ?>
             </a>
-
+ <button id="bouton-dalto" class="bouton-style">Mode Accessibilité </button>
             <?php if ($isLogged): ?>
                 <div id="text-profil-zone">
                     <span class="profile-greeting">
@@ -84,4 +86,5 @@
         </div>
 
     </div>
+<script src="js/accessibilite.js"></script>
 </header>

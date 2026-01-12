@@ -24,6 +24,13 @@
       </div>
     <?php endif; ?>
 
+<!--Confirmation mail envoyer -->
+<?php if (isset($_GET['status']) && $_GET['status'] === 'success'): ?>
+  <div class="message-success">
+      ✅ Un lien de réinitialisation a été envoyé à votre adresse.
+  </div>
+<?php endif; ?>
+
     <form class="auth-form" action="/artisphere/?controller=connexion&action=submit" method="post">
 
       <label class="field">
@@ -39,7 +46,7 @@
       <!-- Liens en bas (2 colonnes) -->
       <div class="auth-links">
         <a href="/artisphere/?controller=type_Compte&action=index" class="small-link">Créer un compte</a>
-        <a href="#" class="small-link">Mot de passe oublié ?</a>
+        <a href="/artisphere/?controller=mot_de_passe_oublie&action=index" class="small-link">Mot de passe oublié ? </a>
       </div>
 
     </form>

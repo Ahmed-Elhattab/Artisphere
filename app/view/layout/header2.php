@@ -35,7 +35,7 @@
         <nav class="main-nav">
             <a href="/artisphere/?controller=catalogue&action=index" class="nav-link">Catalogue</a>
             <a href="/artisphere/?controller=artisans&action=index" class="nav-link">Artisan</a>
-            <a href="/artisphere/?controller=evenement&action=index" class="nav-link">Évènement</a>
+            <a href="/artisphere/?controller=evenement_AFFICHE&action=index" class="nav-link">Évènement</a>
             <a href="/artisphere/?controller=evenement&action=index" class="nav-link">Forum</a>
         </nav>
 

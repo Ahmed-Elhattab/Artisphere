@@ -346,4 +346,50 @@ class ReservationEventModel
             return false;
         }
     }
+
+    public static function getAverageRating(int $idEvent): array
+    {
+        $pdo = Database::getConnection();
+
+        $sql = "SELECT
+                    COALESCE(AVG(note), 0) AS avg_note,
+                    COUNT(*) AS nb_avis
+                FROM reservation_event
+                WHERE id_event = :e
+                AND status = 'notée'
+                AND note IS NOT NULL";
+
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([':e' => $idEvent]);
+        $row = $stmt->fetch(PDO::FETCH_ASSOC) ?: ['avg_note' => 0, 'nb_avis' => 0];
+
+        return [
+            'avg' => (float)$row['avg_note'],
+            'count' => (int)$row['nb_avis'],
+        ];
+    }
+
+    public static function getRandomReviews(int $idEvent, int $limit = 3): array
+    {
+        $pdo = Database::getConnection();
+        $limit = max(1, min(10, $limit));
+
+        $sql = "SELECT
+                    re.note,
+                    re.message,
+                    re.id_resa_event,
+                    u.pseudo AS auteur
+                FROM reservation_event re
+                JOIN personne u ON u.id_personne = re.id_personne
+                WHERE re.id_event = :e
+                AND re.status = 'notée'
+                AND re.note IS NOT NULL
+                AND (re.message IS NOT NULL AND re.message <> '')
+                ORDER BY RAND()
+                LIMIT $limit";
+
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([':e' => $idEvent]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 }

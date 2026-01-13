@@ -39,6 +39,8 @@ class evenement_show_controller extends BaseController
         $isOwner = $isLogged && ($idUser > 0) && ((int)$evenement['id_createur'] === $idUser);
 
         $backUrl = $_SESSION['previous_url'] ?? '/artisphere/?controller=index&action=index';
+        $rating = ReservationEventModel::getAverageRating((int)$evenement['id_event']);
+        $randomReviews = ReservationEventModel::getRandomReviews((int)$evenement['id_event'], 3);
 
         if (empty($_SESSION['csrf'])) {
             $_SESSION['csrf'] = bin2hex(random_bytes(16));
@@ -56,7 +58,9 @@ class evenement_show_controller extends BaseController
             'isLogged' => $isLogged,
             'isOwner' => $isOwner,
             'isReserved' => $isReserved,
-            'backUrl' => $backUrl
+            'backUrl' => $backUrl,
+            'rating' => $rating,
+            'randomReviews' => $randomReviews,
         ]);
     }
 

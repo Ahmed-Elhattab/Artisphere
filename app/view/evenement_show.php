@@ -58,6 +58,52 @@ $placesDispo = max(0, $placesReelles - $placesReservees);
       <h2>Description</h2>
       <p><?= nl2br(htmlspecialchars($evenement['description'] ?? '', ENT_QUOTES, 'UTF-8')) ?></p>
 
+      <?php
+        $avg = isset($rating['avg']) ? (float)$rating['avg'] : 0.0;
+        $nb  = isset($rating['count']) ? (int)$rating['count'] : 0;
+        $avgTxt = number_format($avg, 1, ',', ' ');
+        $fullStars = (int)floor($avg);
+        $half = ($avg - $fullStars) >= 0.5;
+        ?>
+
+        <section class="reviews">
+          <h2>Avis</h2>
+
+          <div class="rating-summary">
+            <div class="stars-line" aria-label="Note moyenne">
+              <?php for ($i = 1; $i <= 5; $i++): ?>
+                <?php
+                  $cls = 'star-empty';
+                  if ($i <= $fullStars) $cls = 'star-filled';
+                  elseif ($half && $i === $fullStars + 1) $cls = 'star-half';
+                ?>
+                <span class="star <?= $cls ?>">★</span>
+              <?php endfor; ?>
+            </div>
+
+            <div class="rating-text">
+              <strong><?= htmlspecialchars($avgTxt, ENT_QUOTES, 'UTF-8') ?>/5</strong>
+              <span class="muted">(<?= $nb ?> avis)</span>
+            </div>
+          </div>
+
+          <?php if (!empty($randomReviews)): ?>
+            <div class="reviews-list">
+              <?php foreach ($randomReviews as $rv): ?>
+                <article class="review-card">
+                  <div class="review-head">
+                    <span class="review-author"><?= htmlspecialchars($rv['auteur'] ?? 'Client', ENT_QUOTES, 'UTF-8') ?></span>
+                    <span class="review-note"><?= (int)$rv['note'] ?>/5</span>
+                  </div>
+                  <p class="review-msg"><?= nl2br(htmlspecialchars($rv['message'] ?? '', ENT_QUOTES, 'UTF-8')) ?></p>
+                </article>
+              <?php endforeach; ?>
+            </div>
+          <?php else: ?>
+            <p class="muted">Aucun avis pour le moment.</p>
+          <?php endif; ?>
+        </section>
+
       <div class="actions">
         <?php if ($isLogged): ?>
 

@@ -356,4 +356,51 @@ class ReservationProduitModel
             return false;
         }
     }
+
+    public static function getAverageRating(int $idProduit): array
+    {
+        $pdo = Database::getConnection();
+
+        $sql = "SELECT
+                    COALESCE(AVG(note), 0) AS avg_note,
+                    COUNT(*) AS nb_avis
+                FROM reservation_produit
+                WHERE id_produit = :p
+                  AND status = 'notée'
+                  AND note IS NOT NULL";
+
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([':p' => $idProduit]);
+        $row = $stmt->fetch(PDO::FETCH_ASSOC) ?: ['avg_note' => 0, 'nb_avis' => 0];
+
+        return [
+            'avg' => (float)$row['avg_note'],
+            'count' => (int)$row['nb_avis'],
+        ];
+    }
+
+    public static function getRandomReviews(int $idProduit, int $limit = 3): array
+    {
+        $pdo = Database::getConnection();
+        $limit = max(1, min(10, $limit)); // sécurité
+
+        // ⚠️ ORDER BY RAND() ok si pas énorme. Sinon on fera une version optimisée.
+        $sql = "SELECT
+                    rp.note,
+                    rp.message,
+                    rp.id_resa_produit,
+                    u.pseudo AS auteur
+                FROM reservation_produit rp
+                JOIN personne u ON u.id_personne = rp.id_personne
+                WHERE rp.id_produit = :p
+                  AND rp.status = 'notée'
+                  AND rp.note IS NOT NULL
+                  AND (rp.message IS NOT NULL AND rp.message <> '')
+                ORDER BY RAND()
+                LIMIT $limit";
+
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([':p' => $idProduit]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 }

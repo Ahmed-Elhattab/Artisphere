@@ -41,6 +41,8 @@ class produit_show_controller extends BaseController
         $idUser = (int)($_SESSION['user']['id'] ?? $_SESSION['user']['id_personne'] ?? 0);
         $isOwner = $isLogged && ($idUser > 0) && ((int)$produit['id_createur'] === $idUser);
         $backUrl = $_SESSION['previous_url'] ?? '/artisphere/?controller=index&action=index';
+        $rating = ReservationProduitModel::getAverageRating((int)$produit['id_produit']);
+        $randomReviews = ReservationProduitModel::getRandomReviews((int)$produit['id_produit'], 3);
         
         // CSRF 
         if (empty($_SESSION['csrf'])) {
@@ -60,8 +62,9 @@ class produit_show_controller extends BaseController
             'isLogged' => $isLogged,
             'isOwner' => $isOwner,
             'isReserved' => $isReserved,
-            'backUrl' => $backUrl
-            
+            'backUrl' => $backUrl,
+            'rating' => $rating,
+            'randomReviews' => $randomReviews,
         ]);
     }
     public function reserve(): void

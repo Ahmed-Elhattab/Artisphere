@@ -116,7 +116,7 @@
     <section class="home-section" aria-label="Sélection d'événements">
       <div class="home-section__head">
         <h2 class="home-section__title">Événements</h2>
-        <a class="home-section__link" href="/artisphere/?controller=evenements&action=index">Voir tout</a>
+        <a class="home-section__link" href="/artisphere/?controller=evenement&action=index">Voir tout</a>
       </div>
 
       <div class="h-row" role="list" aria-label="Événements à la une">

@@ -70,7 +70,7 @@
           <input type="checkbox" id="accept_terms" name="accept_terms">
           <span>
             J’ai lu et j’accepte les
-            <a href="/artisphere/?controller=mention_legale&action=index"
+            <a href="/artisphere/?controller=mentions&action=index"
               target="_blank" rel="noopener">
               conditions d’utilisation
             </a>

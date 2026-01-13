@@ -150,6 +150,9 @@
     <div class="action-buttons">
       <a class="action-link" href="/artisphere/?controller=mes_creations&action=index"><button class="btn-spe">MES PRODUITS ET EVENEMENTS</button></a>
     </div>
+    <div class="action-buttons">
+      <a class="action-link" href="/artisphere/?controller=artisan_commandes&action=index"><button class="btn-spe">COMMANDES À TRAITER</button></a>
+    </div>
     <?php endif; ?>
     <?php if (!empty($_SESSION['user']) && $_SESSION['user']['role'] === 'admin'): ?>
     <div class="action-buttons">

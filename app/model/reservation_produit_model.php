@@ -212,4 +212,148 @@ class ReservationProduitModel
 
         return $stmt->rowCount() > 0;
     }
+
+    public static function listPendingForArtisan(int $idArtisan, string $q = ''): array
+    {
+        $pdo = Database::getConnection();
+
+        $whereQ = "";
+        $params = [':a' => $idArtisan];
+
+        if ($q !== '') {
+            $whereQ = " AND (
+                p.nom LIKE :q
+                OR c.pseudo LIKE :q
+                OR c.nom LIKE :q
+                OR c.prenom LIKE :q
+                OR c.email LIKE :q
+            )";
+            $params[':q'] = '%' . $q . '%';
+        }
+
+        $sql = "
+            SELECT
+                rp.id_resa_produit,
+                rp.quantite,
+                rp.status,
+                rp.id_personne AS id_client,
+                p.id_produit,
+                p.nom AS produit_nom,
+                p.prix,
+                c.pseudo AS client_pseudo,
+                c.nom AS client_nom,
+                c.prenom AS client_prenom,
+                c.email AS client_email
+            FROM reservation_produit rp
+            JOIN pproduit p ON p.id_produit = rp.id_produit
+            JOIN personne c ON c.id_personne = rp.id_personne
+            WHERE p.id_createur = :a
+              AND rp.status = 'en cours'
+            $whereQ
+            ORDER BY rp.id_resa_produit DESC
+        ";
+
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute($params);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public static function markPaidByArtisan(int $idResaProduit, int $idArtisan): bool
+    {
+        $pdo = Database::getConnection();
+
+        try {
+            $pdo->beginTransaction();
+
+            // Lock réservation + produit
+            $stmt = $pdo->prepare("
+                SELECT rp.id_resa_produit, rp.quantite, rp.status, rp.id_produit,
+                       p.quantite AS stock_reel, p.stock_reserve, p.id_createur
+                FROM reservation_produit rp
+                JOIN pproduit p ON p.id_produit = rp.id_produit
+                WHERE rp.id_resa_produit = :r
+                FOR UPDATE
+            ");
+            $stmt->execute([':r' => $idResaProduit]);
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            if (!$row) { $pdo->rollBack(); return false; }
+            if ((int)$row['id_createur'] !== $idArtisan) { $pdo->rollBack(); return false; }
+            if (($row['status'] ?? '') !== 'en cours') { $pdo->rollBack(); return false; }
+
+            $q = max(1, (int)$row['quantite']);
+
+            // sécurité : il faut que stock_reserve >= q
+            if ((int)$row['stock_reserve'] < $q) { $pdo->rollBack(); return false; }
+            // sécurité : stock réel suffisant
+            if ((int)$row['stock_reel'] < $q) { $pdo->rollBack(); return false; }
+
+            // 1) statut => payée
+            $upd = $pdo->prepare("
+                UPDATE reservation_produit
+                SET status = 'payée'
+                WHERE id_resa_produit = :r
+            ");
+            $upd->execute([':r' => $idResaProduit]);
+
+            // 2) stock réel ↓ et stock_reserve ↓
+            $updStock = $pdo->prepare("
+                UPDATE pproduit
+                SET quantite = quantite - :q,
+                    stock_reserve = GREATEST(stock_reserve - :q, 0)
+                WHERE id_produit = :p
+            ");
+            $updStock->execute([':q' => $q, ':p' => (int)$row['id_produit']]);
+
+            $pdo->commit();
+            return true;
+        } catch (Throwable $e) {
+            if ($pdo->inTransaction()) $pdo->rollBack();
+            return false;
+        }
+    }
+
+    public static function cancelByArtisan(int $idResaProduit, int $idArtisan): bool
+    {
+        $pdo = Database::getConnection();
+
+        try {
+            $pdo->beginTransaction();
+
+            $stmt = $pdo->prepare("
+                SELECT rp.id_resa_produit, rp.quantite, rp.status, rp.id_produit,
+                       p.stock_reserve, p.id_createur
+                FROM reservation_produit rp
+                JOIN pproduit p ON p.id_produit = rp.id_produit
+                WHERE rp.id_resa_produit = :r
+                FOR UPDATE
+            ");
+            $stmt->execute([':r' => $idResaProduit]);
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            if (!$row) { $pdo->rollBack(); return false; }
+            if ((int)$row['id_createur'] !== $idArtisan) { $pdo->rollBack(); return false; }
+            if (($row['status'] ?? '') !== 'en cours') { $pdo->rollBack(); return false; }
+
+            $q = max(1, (int)$row['quantite']);
+
+            // Supprimer la réservation
+            $del = $pdo->prepare("DELETE FROM reservation_produit WHERE id_resa_produit = :r");
+            $del->execute([':r' => $idResaProduit]);
+
+            // stock_reserve ↓
+            $updStock = $pdo->prepare("
+                UPDATE pproduit
+                SET stock_reserve = GREATEST(stock_reserve - :q, 0)
+                WHERE id_produit = :p
+            ");
+            $updStock->execute([':q' => $q, ':p' => (int)$row['id_produit']]);
+
+            $pdo->commit();
+            return true;
+        } catch (Throwable $e) {
+            if ($pdo->inTransaction()) $pdo->rollBack();
+            return false;
+        }
+    }
 }

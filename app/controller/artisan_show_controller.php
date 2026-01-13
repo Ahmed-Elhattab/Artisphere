@@ -4,7 +4,6 @@ require_once __DIR__ . '/../model/produit_model.php';
 require_once __DIR__ . '/../model/note_artisan_model.php';
 require_once __DIR__ . '/../model/evenement_model.php';
 
-
 class artisan_show_controller extends BaseController
 {
     public function show(): void
@@ -25,27 +24,46 @@ class artisan_show_controller extends BaseController
             return;
         }
 
-        // Produits de l'artisan
         $produits = ProduitModel::listByCreator($id);
         $evenements = EvenementModel::listByCreator($id);
 
-
-        // Notes / avis
         $avg = NoteArtisanModel::averageForArtisan($id);
         $avis = NoteArtisanModel::listForArtisan($id);
 
-        // Back url (optionnel, pratique)
         $backUrl = $_SESSION['previous_url'] ?? '/artisphere/?controller=index&action=index';
+
+        // ✅ Affichage bouton "Noter cet artisan"
+        $isLogged = !empty($_SESSION['user']);
+        $idClient = (int)($_SESSION['user']['id'] ?? $_SESSION['user']['id_personne'] ?? 0);
+
+        $canRate = false;
+        $alreadyRated = false;
+
+        if ($isLogged && $idClient > 0) {
+            // éviter qu’un artisan se note lui-même
+            if ($idClient !== (int)$artisan['id_personne']) {
+                $alreadyRated = NoteArtisanModel::existsForClient($id, $idClient);
+                if (!$alreadyRated) {
+                    $canRate = NoteArtisanModel::clientCanRate($id, $idClient);
+                }
+            }
+        }
+
+        if (empty($_SESSION['csrf'])) {
+            $_SESSION['csrf'] = bin2hex(random_bytes(16));
+        }
 
         $this->render('artisan_show.php', [
             'title' => 'Profil de ' . $artisan['pseudo'] . ' – Artisphere',
             'pageCss' => 'artisan_show-style.css',
             'artisan' => $artisan,
             'produits' => $produits,
-            'evenements' => $evenements, 
+            'evenements' => $evenements,
             'avg' => $avg,
             'avis' => $avis,
-            'backUrl' => $backUrl
+            'backUrl' => $backUrl,
+            'canRate' => $canRate,
+            'alreadyRated' => $alreadyRated,
         ]);
     }
 }

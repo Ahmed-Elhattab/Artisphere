@@ -158,5 +158,18 @@ function stars(int $note): string {
       <p class="empty">Aucun avis pour le moment.</p>
     <?php endif; ?>
 
+    <div class="actions">
+      <?php if (!empty($canRate)): ?>
+        <a class="btn-outline"
+          href="/artisphere/?controller=avis_artisan&action=index&id_artisan=<?= (int)$artisan['id_personne'] ?>">
+          Noter cet artisan
+        </a>
+      <?php elseif (!empty($alreadyRated)): ?>
+        <span class="muted">Vous avez déjà noté cet artisan.</span>
+      <?php endif; ?>
+
+      <a class="btn-outline" href="<?= htmlspecialchars($backUrl, ENT_QUOTES, 'UTF-8') ?>">← Retour</a>
+    </div>
+
   </section>
 </main>

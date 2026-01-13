@@ -6,7 +6,7 @@ class forum_controller extends BaseController
 {
     public function index(): void
     {
-        $this->render('forum.php', [
+        $this->render('Forum.php', [
             'title' => 'Artisphere – Forum',
             'pageCss' => 'styles_Thushjan.css'
         ]);

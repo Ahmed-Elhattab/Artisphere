@@ -36,7 +36,7 @@
             <a href="/artisphere/?controller=catalogue&action=index" class="nav-link">Catalogue</a>
             <a href="/artisphere/?controller=artisans&action=index" class="nav-link">Artisan</a>
             <a href="/artisphere/?controller=evenement_AFFICHE&action=index" class="nav-link">Évènement</a>
-            <a href="/artisphere/?controller=evenement&action=index" class="nav-link">Forum</a>
+            <a href="/artisphere/?controller=Forum&action=index" class="nav-link">Forum</a>
         </nav>
 
         <!--gere la redirection de l'icone profil quand un utilisateur est connecter ou non-->
@@ -71,7 +71,10 @@
                     👤
                 <?php endif; ?>
             </a>
+
+<!-- Bouton Dalto --> 
  <button id="bouton-dalto" class="bouton-style">Mode Accessibilité </button>
+ 
             <?php if ($isLogged): ?>
                 <div id="text-profil-zone">
                     <span class="profile-greeting">

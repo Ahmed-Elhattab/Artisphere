@@ -5,26 +5,15 @@ html, body {
     flex-direction: column;
 }
 
-/*CONFIRMATION MESSAGE MAIL ENVOYE*/
+/* MODE DALTO */
 
-.message-success {
-    background-color: #d4edda;
-    color: #155724;
-    padding: 15px;
-    border: 1px solid #c3e6cb;
-    border-radius: 8px;
-    margin: 10px 0 20px 0;
-    text-align: center;
-    font-weight: bold;
-}
-
-/*CHANGEMENT DE COULEUR ACCESSIBILITE/CLASSIQUE*/
-
+/*Change le fond de la page et la couleur du texte global */
 body.dalto-mode {
     background-color: #222222 !important;
-    color: #ffffff !important;           
+    color: #ffffff !important;         
 }
 
+/*Change la couleur de des boutons*/
 body.dalto-mode .bouton-enregistrerV2 {
     background-color: #E69F00 !important; 
     color: #000000 !important;         
@@ -37,13 +26,13 @@ body.dalto-mode button:not(#bouton-dalto) {
     border-color: #ffffff !important;
 }
 
+/*Change la couleur du header en mode accessibilité */
 body.dalto-mode header {
     background-color: #333333 !important;
     border-bottom: 2px solid #E69F00 !important;
 }
 
   
-/*PAGE MENU CHOIX EVENEMENT PRODUIT */
 
 #Menu_choix_evenement_produit {
     position: relative;    
@@ -736,12 +725,16 @@ left: 37rem;
 /* --------- FORUM --------- */
 
 #Forum .barre {
-  width: 1100px;      
-  height: 30px;       
-  background-color: white;
-  margin: 5px auto; 
-  border: 1px solid #e5e7eb; 
-  border-radius: 6px; 
+    width: 1100px;      
+    height: 2px; /* On en fait une ligne fine */
+    background-color: #e5e7eb;
+      margin: 5px auto; 
+}
+
+body#Forum {
+    background-color: white !important; 
+    margin: 0;
+    padding: 0;
 }
 
 #Forum {
@@ -751,7 +744,6 @@ left: 37rem;
   background: white;
 }
 
-/* HEADER */
 #Forum .top {
   background: white;
   padding: 25px 0;
@@ -936,65 +928,118 @@ left: 37rem;
 }
 
 
-/* --------- CONTENUE SUJET --------- */
+/* --- FORUM CONTENUE SUJET --- */
 
 #Forum-contenu-sujet {
-    max-width: 800px;
-    margin: 20px auto;
-    padding: 20px;
-    background-color: #f0f2f5; /* Gris clair comme Reddit/Facebook */
-    margin: 0;
-    font-family: sans-serif;
+    background-color: #f0f2f5; 
+    min-height: 100vh;
+    font-family: 'Segoe UI', sans-serif;
+    display: flex;
+    flex-direction: column;
 }
 
-/* La boîte du sujet principal */
-.boite-sujet {
-    background: white;
-    padding: 25px;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    margin: 20px 0;
-}
-
-.boite-sujet h1 {
-    margin-top: 0;
-    font-size: 24px;
-}
-
-/* La section des commentaires */
-.commentaires {
-    background: white;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
-
-#comm-texte {
+#Forum-contenu-sujet .site-header {
     width: 100%;
-    height: 80px;
-    padding: 10px;
+    background-color: #F3E5D0; 
+}
+
+#Forum-contenu-sujet .boite-sujet {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.08);
+    margin-bottom: 25px;
+}
+
+
+#Forum-contenu-sujet .commentaires {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.08);
+    margin-bottom: 25px;
+}
+
+#Forum-contenu-sujet h1 {
+    margin-top: 0;
+    font-size: 26px;
+    color: #050505;
+}
+
+#Forum-contenu-sujet #message {
+    color: #4b4b4b;
+    line-height: 1.6;
+}
+
+/* --- 5. STYLE DES RÉPONSES --- */
+.reponse-affichee {
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    border-left: 5px solid #8B5E3C;
+}
+
+/* --- 6. FORMULAIRE DE RÉPONSE --- */
+#Forum-contenu-sujet #comm-texte {
+    width: 100%;
+    min-height: 100px;
     border: 1px solid #ddd;
-    border-radius: 4px;
-    box-sizing: border-box; /* Pour que ça ne dépasse pas */
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 15px;
+    font-family: inherit;
     resize: vertical;
 }
 
-.commentaires button {
-    margin-top: 10px;
-    padding: 8px 20px;
-    background: #111;
-    color: white;
-    border: none;
+#Forum-contenu-sujet a[href="Forum.html"] {
+display: table;
+    width: max-content;
+    padding: 8px 16px;
+    background-color: #ffffff;
+    color: #111;
+    text-decoration: none;
+    border: 1px solid #ddd;
     border-radius: 20px;
-    cursor: pointer;
+    font-weight: bold;
+    font-size: 13px;
+    margin-top: 10px; 
+    margin-bottom: 25px; 
 }
 
-/* Style pour chaque réponse affichée */
-.reponse-affichee {
-    padding: 15px 0;
-    border-bottom: 1px solid #eee;
+#Forum-contenu-sujet a[href="Forum.html"]:hover {
+    background-color: #111; 
+    color: #fff; 
+    border-color: #111;
+    transform: translateY(-2px); 
 }
 
+
+.reponse-auteur-img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1px solid #ddd;
+}
+
+
+.reponse-contenu {
+    display: flex;
+    flex-direction: column;
+}
+
+.reponse-nom {
+    font-weight: bold;
+    font-size: 14px;
+    color: #111;
+    margin-bottom: 4px;
+}
+
+.reponse-texte {
+    font-size: 15px;
+    color: #444;
+}
 
 /* --------- MOT-DE-PASSE-OUBLIE --------- */
 

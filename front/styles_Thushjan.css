@@ -9,8 +9,8 @@ html, body {
 
 /* 1. Change le fond de la page et la couleur du texte global */
 body.dalto-mode {
-    background-color: #222222 !important; /* Fond sombre pour le contraste */
-    color: #ffffff !important;           /* Texte blanc */
+    background-color: #222222 !important; 
+    color: #ffffff !important;           
 }
 
 /* 2. Change la couleur de tes boutons (ajoute tes propres classes ici) */

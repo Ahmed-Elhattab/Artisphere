@@ -19,7 +19,7 @@
         <h1>CHOISIR UN NOUVEAU MOT DE PASSE</h1>
     </header>
 
-    <form>
+    <form action="update_password.php" method="POST">
         <p class="instruction">Veuillez saisir votre nouveau mot de passe ci-dessous.</p>
 
         <div class="input-group">

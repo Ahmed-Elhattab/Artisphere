@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const btn = document.getElementById('bouton-dalto');
     const body = document.body;
 
-    // Vérifie si le mode était déjà activé auparavant
+    // Vérifie si le mode était déjà activé auparavant en mode local 
     if (localStorage.getItem('mode-access') === 'active') {
         body.classList.add('dalto-mode');
         if (btn) btn.innerText = "Mode Classique";

@@ -1,155 +1,203 @@
-/* ===== HOME / HERO (étape 1) ===== */
+  body { outline: 12px solid lime !important; }
 
-.home {
-  /* on laisse le reste vide pour l’instant */
-}
+ 
+ *{ box-sizing:border-box; }
 
-/* Hero avec image en fond */
-.home-hero{
-  position: relative;
-  min-height: 560px;
-  display: flex;
-  align-items: center;
-  padding: 60px 40px;
-  overflow: hidden;
-
-  /* 👉 remplace le chemin par ton image */
-  background: url("/artisphere/images/home.png") center/cover no-repeat;
-}
-
-/* voile pour lisibilité */
-.home-hero__overlay{
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    90deg,
-    rgba(0,0,0,.62) 0%,
-    rgba(0,0,0,.38) 55%,
-    rgba(0,0,0,.18) 100%
-  );
-}
-
-/* contenu */
-.home-hero__container{
-  position: relative;
-  z-index: 1;
-  width: 100%;
-  max-width: 1100px;
-}
-
-/* intro */
-.home-hero__title{
-  margin: 0 0 10px;
-  color: #fff;
-  font-size: 52px;
-  line-height: 1.05;
-  letter-spacing: .2px;
-}
-
-.home-hero__subtitle{
-  margin: 0 0 22px;
-  color: rgba(255,255,255,.92);
-  font-size: 18px;
-  line-height: 1.55;
-  max-width: 720px;
-}
-
-/* 3 blocs */
-.home-hero__features{
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 14px;
-  margin-top: 18px;
-  max-width: 980px;
-}
-
-.feature-card{
-  background: rgba(222,214,201,.94);
-  border-radius: 18px;
-  padding: 14px 14px;
-  box-shadow: 0 10px 22px rgba(0,0,0,.18);
-}
-
-.feature-card__title{
-  font-weight: 900;
-  color: #3c2b20;
-  font-size: 13px;
-  margin-bottom: 6px;
-  letter-spacing: .4px;
-  text-transform: uppercase;
-}
-
-.feature-card__text{
-  color: #6f7c85;
-  font-size: 13px;
-  line-height: 1.35;
-}
-
-/* CTA */
-.hero-cta{
-  display: inline-block;
-  margin-top: 110px;
-  background: #b6a894;
-  color: #fff;
-  text-decoration: none;
-  padding: 12px 18px;
-  border-radius: 999px;
-
-  font-weight: 900;
-  letter-spacing: .3px;
-}
-
-.hero-cta:hover{
-  filter: brightness(.97);
-}
-
-.hero-hint{
-  margin-top: 10px;
-
-  font-size: 12px;
-  color: rgba(255,255,255,.85);
-}
-
-/* Responsive */
-@media (max-width: 1000px){
-  .home-hero__features{
-    grid-template-columns: 1fr;
-    max-width: 720px;
+  /* ===== HERO ===== */
+  .home .home-hero{
+    position: relative;
+    min-height: 560px;
+    display: flex;
+    align-items: flex-start;
+    padding: 90px 40px 60px;
+    overflow: hidden;
+    background: url("/artisphere/images/home.png") center/cover no-repeat;
   }
-  .home-hero__title{
-    font-size: 40px;
+  .home .home-hero__overlay{
+    position:absolute; inset:0;
+    background: linear-gradient(
+      90deg,
+      rgba(0,0,0,.62) 0%,
+      rgba(0,0,0,.38) 55%,
+      rgba(0,0,0,.18) 100%
+    );
   }
-}
-
-@media (max-width: 720px){
-  .home-hero{
-    padding: 48px 18px;
-    min-height: 620px;
+  .home .home-hero__container{
+    position:relative; z-index:1;
+    width:100%; max-width:1100px;
   }
-}
+  .home .home-hero__title{
+    margin:0 0 10px;
+    color:#fff;
+    font-size:52px;
+    line-height:1.05;
+  }
+  .home .home-hero__subtitle{
+    margin:0 0 50px;
+    color:rgba(255,255,255,.92);
+    font-size:18px;
+    line-height:1.55;
+    max-width:720px;
+  }
+  .home .home-hero__features{
+    display:grid;
+    grid-template-columns:repeat(3, minmax(240px, 340px));
+    gap:14px;
+    width:100%;
+    max-width:1150px;
+    margin-top:60px;
+    margin-left:70px;
+  }
+  .home .feature-card{
+    background: rgba(222,214,201,.94);
+    border-radius:18px;
+    padding:14px;
+    box-shadow:0 10px 22px rgba(0,0,0,.18);
+  }
+  .home .feature-card__title{
+    font-weight:900;
+    color:#3c2b20;
+    font-size:13px;
+    margin-bottom:6px;
+    text-transform:uppercase;
+    letter-spacing:.4px;
+  }
+  .home .feature-card__text{
+    color:#6f7c85;
+    font-size:13px;
+    line-height:1.35;
+  }
+  .home .hero-cta{
+    display:inline-block;
+    margin-top:110px;
+    background:#b6a894;
+    color:#fff;
+    text-decoration:none;
+    padding:12px 18px;
+    border-radius:999px;
+    font-weight:900;
+  }
+  .home .hero-hint{
+    margin-top:10px;
+    font-size:12px;
+    color:rgba(255,255,255,.85);
+  }
 
-/* Remonter tout le contenu du hero */
-.home-hero{
-  align-items: flex-start;     /* au lieu de center */
-  padding-top: 90px;           /* ajuste si besoin (80-110) */
-}
+  /* ===== PRODUITS (bas) ===== */
+  .home .home-content{
+    background:#c49a74;
+    padding: 40px 40px 70px;
+  }
+  .home .home-section{
+    max-width:1100px;
+    margin:0 auto 30px;
+  }
+  .home .home-section__head{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:16px;
+    margin-bottom:14px;
+  }
+  .home .home-section__title{
+    margin:0;
+    font-size:26px;
+    font-weight:900;
+    color:#fff;
+  }
+  .home .home-section__link{
+    text-decoration:none;
+    font-weight:900;
+    color:rgba(255,255,255,.92);
+    background:rgba(0,0,0,.18);
+    border:1px solid rgba(255,255,255,.15);
+    padding:10px 14px;
+    border-radius:999px;
+  }
 
-/* Un peu plus d’air entre texte et box (optionnel) */
-.home-hero__subtitle{
-  margin-bottom: 50px;         /* augmente si tu veux plus d’écart */
-}
+  /* ligne scrollable sans JS */
+  .home .products-row{
+    display:flex;
+    gap:16px;
+    overflow-x:auto;
+    padding: 4px 2px 14px;
+    scroll-snap-type:x mandatory;
+  }
+  .home .products-row::-webkit-scrollbar{ height:10px; }
+  .home .products-row::-webkit-scrollbar-thumb{
+    background:rgba(0,0,0,.18);
+    border-radius:999px;
+  }
 
-/* Box : légèrement plus à droite (sans toucher au texte) */
-.home-hero__features{
-  display: grid;
-  grid-template-columns: repeat(3, minmax(240px, 340px));
-  gap: 14px;
+  .home .product-tile{
+    flex:0 0 220px;
+    border-radius:22px;
+    overflow:hidden;
+    background:rgba(222,214,201,.95);
+    box-shadow:0 10px 22px rgba(0,0,0,.12);
+    scroll-snap-align:start;
+  }
+  .home .product-tile__img{
+    width:100%;
+    aspect-ratio:1/1;
+    background:#e9e2d6;
+  }
+  .home .product-tile__body{
+    padding:14px;
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+  }
+  .home .product-tile__name{
+    font-weight:900;
+    color:#3c2b20;
+    font-size:14px;
+    line-height:1.2;
+    min-height:34px;
+  }
+  .home .price-pill{
+    display:inline-block;
+    background:#eee6d8;
+    padding:6px 10px;
+    border-radius:999px;
+    font-weight:900;
+    font-size:12px;
+    color:#3c2b20;
+  }
+  .home .product-tile__btn{
+    display:inline-block;
+    align-self:flex-start;
+    text-decoration:none;
+    font-weight:900;
+    font-size:12px;
+    color:#3c2b20;
+    background:#b6a894;
+    padding:10px 14px;
+    border-radius:999px;
+  }
+  .home .home-empty{
+    padding:14px;
+    border-radius:14px;
+    background:rgba(0,0,0,.08);
+    font-weight:700;
+    color:#fff;
+  }
 
-  width: 100%;
-  max-width: 1150px;
-
-  /* IMPORTANT : décale seulement les box */
-  margin-top: 120px;
-  margin-left: 70px; /* ajuste : 80 / 120 / 160 selon ton goût */
-}
-
+  @media (max-width: 1000px){
+    .home .home-hero__features{
+      grid-template-columns:1fr;
+      max-width:720px;
+      margin-left:0;
+      margin-top:24px;
+    }
+    .home .hero-cta{ margin-top:28px; }
+    .home .home-hero__title{ font-size:40px; }
+  }
+  @media (max-width: 720px){
+    .home .home-hero{
+      padding:70px 18px 50px;
+      min-height:620px;
+    }
+    .home .home-content{ padding:30px 18px 60px; }
+    .home .product-tile{ flex:0 0 200px; }
+  }

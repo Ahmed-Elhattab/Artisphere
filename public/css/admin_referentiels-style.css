@@ -1,0 +1,253 @@
+.admin-users-page { padding:32px 0 40px; }
+.container { max-width:1100px; margin:0 auto; padding:0 32px; }
+
+.admin-users-card{
+  background:#f6e6cf;
+  border:1px solid #e2d5c0;
+  border-radius:18px;
+  padding:22px;
+}
+
+.admin-users-card h1{ margin:0 0 14px; color:#3c2b20; }
+
+.search-bar{
+  display:flex;
+  gap:10px;
+  margin: 10px 0 16px;
+}
+.search-bar input{
+  flex:1;
+  border:none;
+  border-radius:12px;
+  padding:12px 14px;
+  background: rgba(136,123,176,.25);
+  box-sizing:border-box;
+}
+
+.table-wrap{ overflow:auto; border-radius:14px; border:1px solid rgba(0,0,0,.08); background:#fff; }
+.users-table{ width:100%; border-collapse:collapse; min-width: 900px; }
+.users-table th, .users-table td{ padding:12px 12px; border-bottom:1px solid rgba(0,0,0,.08); text-align:left; }
+.users-table th{ background:#efe6d8; color:#3c2b20; position: sticky; top: 0; }
+.empty{ text-align:center; color:#4b5563; padding:18px; }
+
+.actions-col{ white-space:nowrap; }
+.inline{ display:inline-block; margin-right:8px; }
+
+.role-badge{
+  display:inline-block;
+  padding:4px 10px;
+  border-radius:999px;
+  font-weight:700;
+  font-size:.85rem;
+  border:1px solid rgba(0,0,0,.08);
+}
+.role-admin{ background:#e6f4ea; color:#1f7a3a; }
+.role-artisan{ background:#fff3cd; color:#7a5b00; }
+.role-client{ background:#e7f0ff; color:#1f4f9e; }
+
+.btn-primary{
+  background:#a24436; color:#fff; border:none;
+  border-radius:999px; padding:10px 14px; font-weight:700; cursor:pointer;
+}
+.btn-outline{
+  border:1px solid #3c2b20; color:#3c2b20; background:#fff;
+  border-radius:999px; padding:8px 12px; font-weight:700; cursor:pointer;
+}
+.btn-outline:hover{ background:#3c2b20; color:#fff; }
+.btn-danger{
+  background:#8b2e23; color:#fff; border:none;
+  border-radius:999px; padding:8px 12px; font-weight:700; cursor:pointer;
+}
+.btn-danger:hover{ filter: brightness(.95); }
+.muted{ color:#6b7280; font-size:.9rem; }
+
+.pagination{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:14px;
+  margin-top:16px;
+}
+.page-link{
+  text-decoration:none;
+  border:1px solid #3c2b20;
+  color:#3c2b20;
+  border-radius:999px;
+  padding:8px 12px;
+  font-weight:700;
+}
+.page-link.disabled{
+  opacity:.4;
+  pointer-events:none;
+}
+.page-info{ color:#3c2b20; font-weight:700; }
+
+/*box erreur*/
+.form-error-box {
+  background-color: #fdecea;           /* rouge très clair */
+  border: 2px solid #e74c3c;           /* rouge */
+  color: #8a1f1f;
+  border-radius: 14px;
+  padding: 16px 20px;
+  margin: 20px auto;
+  max-width: 700px;
+}
+
+.form-error-box h3 {
+  margin-top: 0;
+  margin-bottom: 10px;
+  font-size: 1.1rem;
+}
+
+.form-error-box ul {
+  margin: 0;
+  padding-left: 20px;
+}
+
+/*box succès */
+.form-success-box {
+  background-color: #e6f4ea;           /* vert clair */
+  border: 2px solid #2ecc71;           /* vert */
+  color: #1f7a3a;
+  border-radius: 14px;
+  padding: 16px 20px;
+  margin: 20px auto;
+  max-width: 700px;
+  text-align: center;
+}
+
+.form-success-box h3 {
+  margin-top: 0;
+  margin-bottom: 8px;
+  font-size: 1.1rem;
+}
+
+/*pour page validation compte en attente*/
+.status-badge{
+  display:inline-block;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-weight: 800;
+  font-size: 12px;
+}
+
+.status-pending{
+  background: #fff7ed;
+  color: #c2410c;
+  border: 1px solid rgba(194,65,12,.25);
+}
+
+.admin-users-page { padding:32px 0 40px; }
+.container { max-width:1100px; margin:0 auto; padding:0 32px; }
+.admin-users-card{
+  background:#f6e6cf;
+  border:1px solid #e2d5c0;
+  border-radius:18px;
+  padding:22px;
+}
+.admin-users-card h1{ margin:0 0 14px; color:#3c2b20; }
+
+.search-bar{ display:flex; gap:10px; margin: 10px 0 16px; }
+.search-bar input{
+  flex:1; border:none; border-radius:12px; padding:12px 14px;
+  background: rgba(136,123,176,.25); box-sizing:border-box;
+}
+
+.table-wrap{ overflow:auto; border-radius:14px; border:1px solid rgba(0,0,0,.08); background:#fff; }
+.users-table{ width:100%; border-collapse:collapse; min-width: 420px; }
+.users-table th, .users-table td{ padding:12px 12px; border-bottom:1px solid rgba(0,0,0,.08); text-align:left; }
+.users-table th{ background:#efe6d8; color:#3c2b20; position: sticky; top: 0; }
+.empty{ text-align:center; color:#4b5563; padding:18px; }
+
+.actions-col{ white-space:nowrap; }
+.inline{ display:inline-block; margin-right:8px; }
+
+.btn-primary{
+  background:#a24436; color:#fff; border:none;
+  border-radius:999px; padding:10px 14px; font-weight:700; cursor:pointer;
+}
+.btn-outline{
+  border:1px solid #3c2b20; color:#3c2b20; background:#fff;
+  border-radius:999px; padding:8px 12px; font-weight:700; cursor:pointer;
+}
+.btn-outline:hover{ background:#3c2b20; color:#fff; }
+.btn-danger{
+  background:#8b2e23; color:#fff; border:none;
+  border-radius:999px; padding:8px 12px; font-weight:700; cursor:pointer;
+}
+.btn-danger:hover{ filter: brightness(.95); }
+
+.form-success-box {
+  background-color: #e6f4ea;
+  border: 2px solid #2ecc71;
+  color: #1f7a3a;
+  border-radius: 14px;
+  padding: 16px 20px;
+  margin: 20px auto;
+  max-width: 700px;
+  text-align: center;
+}
+/* ---- Fond plein écran uniquement pour cette page ---- */
+html, body{
+  height: 100%;
+}
+
+body{
+  margin: 0;
+  background: #f2e2c9; /* le beige du fond */
+}
+
+/* Wrapper plein largeur */
+.admin-ref-page{
+  width: 100%;
+  min-height: calc(100vh - 160px); /* ajuste si ton header+footer = autre chose */
+  padding: 32px 0 40px;
+  box-sizing: border-box;
+}
+
+/* IMPORTANT : ne pas réutiliser .container global si tu en as déjà un sur le site */
+.admin-ref-wrap{
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 32px;
+  box-sizing: border-box;
+}
+
+/* Carte */
+.admin-ref-card{
+  background: #f6e6cf;
+  border: 1px solid #e2d5c0;
+  border-radius: 18px;
+  padding: 22px;
+  box-sizing: border-box;
+}
+
+/* Si tu as une grille 3 colonnes */
+.admin-ref-grid{
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+  align-items: start;
+}
+
+/* Pour éviter les débordements horizontaux */
+.admin-ref-card,
+.admin-ref-wrap,
+.admin-ref-grid,
+.table-wrap{
+  max-width: 100%;
+}
+
+.table-wrap{
+  overflow-x: auto;
+}
+
+/* Responsive */
+@media (max-width: 980px){
+  .admin-ref-grid{
+    grid-template-columns: 1fr;
+  }
+  .admin-ref-wrap{
+    padding: 0 16px;
+  }
+}

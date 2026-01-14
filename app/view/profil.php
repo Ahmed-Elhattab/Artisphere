@@ -145,7 +145,10 @@
 
     <?php if (!empty($_SESSION['user']) && $_SESSION['user']['role'] === 'artisan' || $_SESSION['user']['role'] === 'admin'): ?>
     <div class="action-buttons">
-      <a class="action-link" href="/artisphere/?controller=creer_fiche&action=index"><button class="btn-spe">CRÉER UNE NOUVELLE FICHE</button></a>
+      <a class="action-link" href="/artisphere/?controller=fiche_produit&action=index"><button class="btn-spe">CRÉER UN NOUVEAU PRODUIT</button></a>
+    </div>
+    <div class="action-buttons">
+      <a class="action-link" href="/artisphere/?controller=fiche_evenement&action=index"><button class="btn-spe">CRÉER UN NOUVEL EVENEMENT</button></a>
     </div>
     <div class="action-buttons">
       <a class="action-link" href="/artisphere/?controller=mes_creations&action=index"><button class="btn-spe">MES PRODUITS ET EVENEMENTS</button></a>
@@ -167,6 +170,9 @@
     <?php if (!empty($_SESSION['user']) && $_SESSION['user']['role'] === 'admin'): ?>
     <div class="action-buttons">
       <a class="action-link" href="/artisphere/?controller=admin_contact&action=index"><button class="btn-spe">GERER LES DEMANDES DE CONTACT</button></a>
+    </div>
+    <div class="action-buttons">
+      <a class="action-link" href="/artisphere/?controller=admin_referentiels&action=index"><button class="btn-spe">GERER LES REFERENTIELS</button></a>
     </div>
     <?php endif; ?>
 </main>

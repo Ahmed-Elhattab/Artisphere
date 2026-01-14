@@ -1,6 +1,6 @@
 <main class="admin-users-page">
   <section class="container admin-users-card">
-    <h1>Commandes en cours</h1>
+    <h1>Commandes passées chez vous</h1>
 
     <?php if (!empty($_GET['success'])): ?>
       <?php if ($_GET['success'] === 'pay_prod'): ?>
@@ -50,7 +50,7 @@
                   <input type="hidden" name="csrf" value="<?= htmlspecialchars($csrf, ENT_QUOTES, 'UTF-8') ?>">
                   <input type="hidden" name="id_resa" value="<?= (int)$r['id_resa_produit'] ?>">
                   <input type="hidden" name="q" value="<?= htmlspecialchars($q ?? '', ENT_QUOTES, 'UTF-8') ?>">
-                  <button class="btn-outline" type="submit">Valider paiement</button>
+                  <button class="btn-outline" type="submit">Valider le paiement</button>
                 </form>
 
                 <form method="post" action="/artisphere/?controller=artisan_commandes&action=cancelProduit" class="inline"
@@ -58,7 +58,7 @@
                   <input type="hidden" name="csrf" value="<?= htmlspecialchars($csrf, ENT_QUOTES, 'UTF-8') ?>">
                   <input type="hidden" name="id_resa" value="<?= (int)$r['id_resa_produit'] ?>">
                   <input type="hidden" name="q" value="<?= htmlspecialchars($q ?? '', ENT_QUOTES, 'UTF-8') ?>">
-                  <button class="btn-danger" type="submit">Annuler</button>
+                  <button class="btn-danger" type="submit">Annuler la commande</button>
                 </form>
               </td>
             </tr>
@@ -98,7 +98,7 @@
                   <input type="hidden" name="csrf" value="<?= htmlspecialchars($csrf, ENT_QUOTES, 'UTF-8') ?>">
                   <input type="hidden" name="id_resa" value="<?= (int)$ev['id_resa_event'] ?>">
                   <input type="hidden" name="q" value="<?= htmlspecialchars($q ?? '', ENT_QUOTES, 'UTF-8') ?>">
-                  <button class="btn-outline" type="submit">Valider paiement</button>
+                  <button class="btn-outline" type="submit">Valider le paiement</button>
                 </form>
 
                 <form method="post" action="/artisphere/?controller=artisan_commandes&action=cancelEvent" class="inline"
@@ -106,7 +106,7 @@
                   <input type="hidden" name="csrf" value="<?= htmlspecialchars($csrf, ENT_QUOTES, 'UTF-8') ?>">
                   <input type="hidden" name="id_resa" value="<?= (int)$ev['id_resa_event'] ?>">
                   <input type="hidden" name="q" value="<?= htmlspecialchars($q ?? '', ENT_QUOTES, 'UTF-8') ?>">
-                  <button class="btn-danger" type="submit">Annuler</button>
+                  <button class="btn-danger" type="submit">Annuler la commande</button>
                 </form>
               </td>
             </tr>

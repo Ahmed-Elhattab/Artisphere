@@ -2,6 +2,9 @@
 
 require_once __DIR__ . '/../model/categorie_model.php';
 require_once __DIR__ . '/../model/produit_model.php';
+require_once __DIR__ . '/../model/produit_image_model.php';
+
+
 class fiche_produit_controller extends BaseController
 {
     public function index(): void
@@ -51,22 +54,45 @@ class fiche_produit_controller extends BaseController
         $errors[] = "Catégorie invalide.";
         }
 
-        // Upload image
-        $filename = null;
-        if (empty($_FILES['image']) || $_FILES['image']['error'] !== UPLOAD_ERR_OK) {
-        $errors[] = "Veuillez ajouter une image valide.";
-        } else {
-        $maxSize = 3 * 1024 * 1024; // 3 Mo
-        if ($_FILES['image']['size'] > $maxSize) $errors[] = "Image trop lourde (max 3 Mo).";
-
-        $finfo = new finfo(FILEINFO_MIME_TYPE);
-        $mime = $finfo->file($_FILES['image']['tmp_name']);
+        // Upload images
         $allowed = [
-            'image/jpeg' => 'jpg',
-            'image/png'  => 'png',
-            'image/webp' => 'webp',
+        'image/jpeg' => 'jpg',
+        'image/png'  => 'png',
+        'image/webp' => 'webp',
         ];
-        if (!isset($allowed[$mime])) $errors[] = "Format image non accepté (JPG/PNG/WEBP).";
+        $maxSize = 3 * 1024 * 1024; // 3 Mo par image
+        $uploadedNames = [];
+
+        $files = $_FILES['images'] ?? null;
+
+        if (!$files || empty($files['name']) || !is_array($files['name']) || count(array_filter($files['name'])) === 0) {
+        $errors[] = "Veuillez ajouter au moins une image valide.";
+        } else {
+        $finfo = new finfo(FILEINFO_MIME_TYPE);
+
+        // (optionnel) limite
+        $count = count($files['name']);
+        if ($count > 6) $errors[] = "Maximum 6 images.";
+
+        for ($i = 0; $i < $count; $i++) {
+            if (empty($files['name'][$i])) continue;
+
+            if ($files['error'][$i] !== UPLOAD_ERR_OK) {
+            $errors[] = "Erreur d’upload sur une des images.";
+            continue;
+            }
+
+            if ($files['size'][$i] > $maxSize) {
+            $errors[] = "Une image dépasse 3 Mo.";
+            continue;
+            }
+
+            $mime = $finfo->file($files['tmp_name'][$i]);
+            if (!isset($allowed[$mime])) {
+            $errors[] = "Format non accepté (JPG/PNG/WEBP).";
+            continue;
+            }
+        }
         }
 
         if (!empty($errors)) {
@@ -88,38 +114,80 @@ class fiche_produit_controller extends BaseController
         return;
         }
 
-        //sauvegarde dans fichiers
-        $ext = $allowed[$mime];
-        $filename = 'p' . $id_createur . '_' . bin2hex(random_bytes(8)) . '.' . $ext;
-
+        // Transaction : DB + fichiers
+        $pdo = Database::getConnection();
         $destDir = dirname(__DIR__, 2) . '/public/images/produits/';
         if (!is_dir($destDir)) mkdir($destDir, 0775, true);
 
-        if (!move_uploaded_file($_FILES['image']['tmp_name'], $destDir . $filename)) {
-        $this->render('fiche_produit.php', [
-            'title' => 'Artisphere - fiche-produit',
-            'pageCss' => 'fiche-produit-style.css',
-            'pageJs'  => 'produit_image_preview.js',
-            'categories' => $categories,
-            'errors' => ["Erreur lors de l'enregistrement de l'image."],
+        try {
+        $pdo->beginTransaction();
+
+        // 1) Insert produit (on garde image principale = première image après upload)
+        $idProduit = ProduitModel::create([
+            'nom' => $nom,
+            'image' => null, // on mettra la première après upload
+            'quantite' => $quantite,
+            'materiaux' => $materiaux,
+            'prix' => $prix,
+            'id_createur' => $id_createur,
+            'description' => $description,
+            'id_categorie' => $id_categorie,
         ]);
-        return;
+
+        // 2) Upload fichiers
+        $finfo = new finfo(FILEINFO_MIME_TYPE);
+        $count = count($files['name']);
+
+        for ($i = 0; $i < $count; $i++) {
+            if (empty($files['name'][$i])) continue;
+
+            $tmp = $files['tmp_name'][$i];
+            $mime = $finfo->file($tmp);
+            if (!isset($allowed[$mime])) continue;
+
+            $ext = $allowed[$mime];
+            $fn = 'p' . $id_createur . '_' . bin2hex(random_bytes(8)) . '.' . $ext;
+
+            if (!move_uploaded_file($tmp, $destDir . $fn)) {
+            throw new RuntimeException("Erreur lors de l'enregistrement d'une image.");
+            }
+            $uploadedNames[] = $fn;
         }
 
-        // Insertion DB (image = nom de fichier)
-        ProduitModel::create([
-        'nom' => $nom,
-        'image' => $filename,
-        'quantite' => $quantite,
-        'materiaux' => $materiaux,
-        'prix' => $prix,
-        'id_createur' => $id_createur,
-        'description' => $description,
-        'id_categorie' => $id_categorie,
-        ]);
+        if (empty($uploadedNames)) {
+            throw new RuntimeException("Aucune image n'a été enregistrée.");
+        }
+
+        // 3) Insert en table enfant
+        ProduitImageModel::insertMany($idProduit, $uploadedNames);
+
+        // 4) (fallback) on remplit pproduit.image avec la première image (comme avant)
+        // => ajoute une méthode dans ProduitModel OU fais un UPDATE ici
+        $stmt = $pdo->prepare("UPDATE pproduit SET image = :img WHERE id_produit = :id");
+        $stmt->execute([':img' => $uploadedNames[0], ':id' => $idProduit]);
+
+        $pdo->commit();
 
         header('Location: /artisphere/?controller=fiche_produit&action=index&success=1');
         exit;
+
+        } catch (Throwable $e) {
+            if ($pdo->inTransaction()) $pdo->rollBack();
+
+            // (optionnel) supprimer les fichiers déjà uploadés
+            foreach ($uploadedNames as $fn) {
+                @unlink($destDir . $fn);
+            }
+
+            $this->render('fiche_produit.php', [
+                'title' => 'Artisphere - fiche-produit',
+                'pageCss' => 'fiche-produit-style.css',
+                'pageJs'  => 'produit_image_preview.js',
+                'categories' => $categories,
+                'errors' => ["Erreur : " . $e->getMessage()],
+            ]);
+            return;
+        }
     }
 
     

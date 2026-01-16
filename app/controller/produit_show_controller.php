@@ -1,6 +1,8 @@
 <?php
 require_once __DIR__ . '/../model/produit_model.php';
 require_once __DIR__ . '/../model/reservation_produit_model.php';
+require_once __DIR__ . '/../model/produit_image_model.php';
+
 
 
 class produit_show_controller extends BaseController
@@ -14,6 +16,7 @@ class produit_show_controller extends BaseController
         }
 
         $produit = ProduitModel::findById($id);
+        
         if (!$produit) {
             $this->render('not_found.php', [
                 'title' => 'Produit introuvable – Artisphere',
@@ -22,6 +25,8 @@ class produit_show_controller extends BaseController
             ]);
             return;
         }
+
+        $images = ProduitImageModel::listForProduit((int)$produit['id_produit']);
 
         //mode=mine => page privée (seul le créateur)
         if (!empty($_GET['mode']) && $_GET['mode'] === 'mine') {
@@ -58,12 +63,14 @@ class produit_show_controller extends BaseController
         $this->render('produit_show.php', [
             'title' => $produit['nom'] . ' – Artisphere',
             'pageCss' => 'details-style.css',
+            'pageJs'  => 'gallery.js',
             'produit' => $produit,
             'isLogged' => $isLogged,
             'isOwner' => $isOwner,
             'isReserved' => $isReserved,
             'backUrl' => $backUrl,
             'rating' => $rating,
+            'images' => $images,
             'randomReviews' => $randomReviews,
         ]);
     }

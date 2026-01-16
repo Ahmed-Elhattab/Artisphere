@@ -31,10 +31,14 @@
             <div class="product-photo-actions">
                 <input type="file"
                     id="importImage"
-                    name="image"
+                    name="images[]"
                     accept="image/png, image/jpeg, image/webp"
+                    multiple
                     required>
-                <p class="hint">Formats acceptés : JPG, PNG, WEBP (max 3 Mo)</p>
+                <p class="hint">Pour selectionner plusieurs photos, ctrl + clique sur les photos souhaitées (max 6) - JPG/PNG/WEBP (max 3 Mo par image)</p>
+
+                <!-- Miniatures -->
+                <div class="thumbs" id="productThumbs"></div>
             </div>
         </div>
 

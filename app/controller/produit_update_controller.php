@@ -1,6 +1,7 @@
 <?php
 require_once __DIR__ . '/../model/produit_model.php';
 require_once __DIR__ . '/../model/categorie_model.php';
+require_once __DIR__ . '/../model/produit_image_model.php';
 
 class produit_update_controller extends BaseController
 {
@@ -26,13 +27,11 @@ class produit_update_controller extends BaseController
 
         $id = (int)($_GET['id'] ?? 0);
         $produit = ($id > 0) ? ProduitModel::findById($id) : null;
-
         if (!$produit) {
             header('Location: /artisphere/?controller=index&action=index');
             exit;
         }
 
-        // Autorisation : seul le créateur peut éditer
         $userId = (int)($_SESSION['user']['id'] ?? $_SESSION['user']['id_personne'] ?? 0);
         if ($userId !== (int)$produit['id_createur']) {
             header('Location: /artisphere/?controller=produit_show&action=show&id=' . $id);
@@ -40,6 +39,7 @@ class produit_update_controller extends BaseController
         }
 
         $categories = CategorieModel::all();
+        $images = ProduitImageModel::listForProduit((int)$produit['id_produit']);
         $this->ensureCsrf();
 
         $this->render('produit_update.php', [
@@ -47,6 +47,7 @@ class produit_update_controller extends BaseController
             'pageCss' => 'produit_update-style.css',
             'produit' => $produit,
             'categories' => $categories,
+            'images' => $images,
             'csrf' => $_SESSION['csrf'],
         ]);
     }
@@ -73,6 +74,9 @@ class produit_update_controller extends BaseController
             exit;
         }
 
+        $pdo = Database::getConnection();
+
+        // ====== Champs texte ======
         $nom = trim($_POST['nom'] ?? '');
         $quantite = (int)($_POST['quantite'] ?? 0);
         $materiaux = trim($_POST['materiaux'] ?? '');
@@ -88,42 +92,140 @@ class produit_update_controller extends BaseController
         if ($description === '') $errors[] = "La description est obligatoire.";
         if ($idCategorie <= 0) $errors[] = "Veuillez choisir une catégorie.";
 
-        // Gestion image : si pas d’upload => garder l’ancienne
-        $imageName = $produit['image'];
+        // ✅ IDs à supprimer (depuis la vue => delete_images[])
+        $toDelete = $_POST['delete_images'] ?? [];
+        if (!is_array($toDelete)) $toDelete = [];
+        $toDelete = array_values(array_filter(array_map('intval', $toDelete)));
 
-        if (!empty($_FILES['image']['name'])) {
-            $file = $_FILES['image'];
-            if ($file['error'] !== UPLOAD_ERR_OK) {
-                $errors[] = "Erreur lors de l’upload de l’image.";
-            } else {
-                $allowed = ['image/jpeg','image/png','image/webp'];
-                if (!in_array(mime_content_type($file['tmp_name']), $allowed, true)) {
-                    $errors[] = "Format d’image non supporté (jpg/png/webp uniquement).";
-                } else {
-                    $ext = pathinfo($file['name'], PATHINFO_EXTENSION);
-                    $imageName = uniqid('prod_', true) . '.' . strtolower($ext);
+        // Image principale choisie (filename)
+        $mainImage = trim($_POST['main_image'] ?? '');
 
-                    $destDir = __DIR__ . '/../../public/images/produits/';
-                    if (!is_dir($destDir)) mkdir($destDir, 0777, true);
+        // ====== Upload images ======
+        $allowed = [
+            'image/jpeg' => 'jpg',
+            'image/png'  => 'png',
+            'image/webp' => 'webp',
+        ];
+        $maxSize = 3 * 1024 * 1024;
 
-                    $destPath = $destDir . $imageName;
-                    if (!move_uploaded_file($file['tmp_name'], $destPath)) {
-                        $errors[] = "Impossible d’enregistrer l’image sur le serveur.";
+        $destDir = dirname(__DIR__, 2) . '/public/images/produits/';
+        if (!is_dir($destDir)) mkdir($destDir, 0775, true);
+
+        $uploaded = [];
+
+        try {
+            $pdo->beginTransaction();
+
+            // 1) Supprimer images demandées (DB + fichiers)
+            if (!empty($toDelete)) {
+                // On récupère les filenames avant suppression DB
+                $imgs = ProduitImageModel::findByIdsForProduit($idProduit, $toDelete);
+
+                // On supprime en DB (IMPORTANT : doit faire un DELETE réel)
+                ProduitImageModel::deleteManyForProduit($idProduit, $toDelete);
+
+                // On supprime les fichiers
+                foreach ($imgs as $im) {
+                    if (!empty($im['filename'])) {
+                        @unlink($destDir . $im['filename']);
                     }
                 }
+
+                // Si l'image principale actuelle a été supprimée => on la vide (on recalcule après)
+                foreach ($imgs as $im) {
+                    if (!empty($im['filename']) && $produit['image'] === $im['filename']) {
+                        $produit['image'] = null;
+                    }
+                }
+
+                // Si l’utilisateur avait choisi en "main_image" une image supprimée => on invalide
+                $deletedNames = array_map(fn($x) => (string)($x['filename'] ?? ''), $imgs);
+                if ($mainImage !== '' && in_array($mainImage, $deletedNames, true)) {
+                    $mainImage = '';
+                }
             }
-        }
 
-        $categories = CategorieModel::all();
+            // 2) Ajouter nouvelles images (si envoyées)
+            $files = $_FILES['images'] ?? null;
+            if ($files && !empty($files['name']) && is_array($files['name'])) {
+                $finfo = new finfo(FILEINFO_MIME_TYPE);
+                $count = count($files['name']);
 
-        if (!empty($errors)) {
-            // réaffiche le form avec valeurs saisies
+                for ($i = 0; $i < $count; $i++) {
+                    if (empty($files['name'][$i])) continue;
+                    if (($files['error'][$i] ?? UPLOAD_ERR_NO_FILE) !== UPLOAD_ERR_OK) continue;
+                    if (($files['size'][$i] ?? 0) > $maxSize) continue;
+
+                    $tmp = $files['tmp_name'][$i];
+                    $mime = $finfo->file($tmp);
+                    if (!isset($allowed[$mime])) continue;
+
+                    $fn = 'p' . $userId . '_' . bin2hex(random_bytes(8)) . '.' . $allowed[$mime];
+                    if (!move_uploaded_file($tmp, $destDir . $fn)) {
+                        throw new RuntimeException("Erreur upload image.");
+                    }
+                    $uploaded[] = $fn;
+                }
+
+                if (!empty($uploaded)) {
+                    ProduitImageModel::insertMany($idProduit, $uploaded);
+                }
+            }
+
+            // 3) Re-lister images restantes
+            $images = ProduitImageModel::listForProduit($idProduit);
+            $filenames = array_values(array_filter(array_map(fn($r) => $r['filename'] ?? '', $images)));
+
+            // 4) Définir image principale
+            if ($mainImage !== '' && in_array($mainImage, $filenames, true)) {
+                $imagePrincipale = $mainImage;
+            } elseif (!empty($produit['image']) && in_array($produit['image'], $filenames, true)) {
+                $imagePrincipale = $produit['image'];
+            } else {
+                $imagePrincipale = $filenames[0] ?? null;
+            }
+
+            // 5) Si erreurs de formulaire => rollback
+            if (!empty($errors)) {
+                throw new RuntimeException("form_errors");
+            }
+
+            // 6) Update produit
+            ProduitModel::updateProduit($idProduit, $userId, [
+                'nom' => $nom,
+                'image' => $imagePrincipale,
+                'quantite' => $quantite,
+                'materiaux' => $materiaux,
+                'prix' => $prix,
+                'description' => $description,
+                'id_categorie' => $idCategorie,
+            ]);
+
+            $pdo->commit();
+
+            header('Location: /artisphere/?controller=produit_show&action=show&id=' . $idProduit . '&updated=1');
+            exit;
+
+        } catch (Throwable $e) {
+            if ($pdo->inTransaction()) $pdo->rollBack();
+
+            // supprime les fichiers uploadés si rollback
+            foreach ($uploaded as $fn) @unlink($destDir . $fn);
+
+            if ($e->getMessage() !== "form_errors") {
+                $errors[] = "Erreur : " . $e->getMessage();
+            }
+
+            $categories = CategorieModel::all();
+            $images = ProduitImageModel::listForProduit($idProduit);
+
             $this->render('produit_update.php', [
                 'title' => 'Éditer le produit – Artisphere',
                 'pageCss' => 'produit_update-style.css',
                 'errors' => $errors,
                 'csrf' => $_SESSION['csrf'],
                 'categories' => $categories,
+                'images' => $images,
                 'produit' => array_merge($produit, [
                     'nom' => $nom,
                     'quantite' => $quantite,
@@ -131,23 +233,9 @@ class produit_update_controller extends BaseController
                     'prix' => $prix,
                     'description' => $description,
                     'id_categorie' => $idCategorie,
-                    'image' => $imageName,
                 ]),
             ]);
             return;
         }
-
-        ProduitModel::updateProduit($idProduit, $userId, [
-            'nom' => $nom,
-            'image' => $imageName,
-            'quantite' => $quantite,
-            'materiaux' => $materiaux,
-            'prix' => $prix,
-            'description' => $description,
-            'id_categorie' => $idCategorie,
-        ]);
-
-        header('Location: /artisphere/?controller=produit_show&action=show&id=' . $idProduit . '&updated=1');
-        exit;
     }
 }

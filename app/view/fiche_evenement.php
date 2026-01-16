@@ -31,11 +31,15 @@
 
       <div class="event-photo-actions">
         <input type="file"
-               id="eventImage"
-               name="image"
-               accept="image/png, image/jpeg, image/webp"
-               required>
-        <p class="hint">Formats : JPG/PNG/WEBP (max 3 Mo)</p>
+          id="eventImage"
+          name="images[]"
+          accept="image/png, image/jpeg, image/webp"
+          multiple
+          required>
+        <p class="hint">Pour selectionner plusieurs photos, ctrl + clique sur les photos souhaitées (max 6) - JPG/PNG/WEBP (max 3 Mo par image)</p>
+
+        <!-- Miniatures -->
+        <div class="thumbs" id="eventThumbs"></div>
       </div>
     </div>
 

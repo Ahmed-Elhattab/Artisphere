@@ -19,13 +19,36 @@ $stockDispo = max(0, $stockReel - $stockReserve);
 
 <main class="details-page">
   <section class="details-card container">
-    <div class="details-media <?= $img ? '' : 'noimg' ?>">
-      <?php if ($img): ?>
-        <img src="<?= htmlspecialchars($img, ENT_QUOTES, 'UTF-8') ?>"
-             alt="Image produit"
-             onerror="this.parentNode.classList.add('noimg')">
+    <?php
+    $gallery = $images ?? [];
+    $mainImg = null;
+
+    if (!empty($gallery)) {
+      $mainImg = 'images/produits/' . $gallery[0]['filename'];
+    } elseif (!empty($produit['image'])) {
+      $mainImg = 'images/produits/' . $produit['image'];
+    }
+    ?>
+
+    <div class="details-media <?= $mainImg ? '' : 'noimg' ?>">
+      <?php if ($mainImg): ?>
+        <img id="mainMedia"
+            src="<?= htmlspecialchars($mainImg, ENT_QUOTES, 'UTF-8') ?>"
+            alt="Image produit"
+            onerror="this.parentNode.classList.add('noimg')">
       <?php endif; ?>
       <div class="details-fallback">📦</div>
+
+      <?php if (count($gallery) > 1): ?>
+        <div class="thumbs">
+          <?php foreach ($gallery as $g): ?>
+            <?php $src = 'images/produits/' . $g['filename']; ?>
+            <button type="button" class="thumb" data-src="<?= htmlspecialchars($src, ENT_QUOTES, 'UTF-8') ?>">
+              <img src="<?= htmlspecialchars($src, ENT_QUOTES, 'UTF-8') ?>" alt="">
+            </button>
+          <?php endforeach; ?>
+        </div>
+      <?php endif; ?>
     </div>
 
     <div class="details-body">

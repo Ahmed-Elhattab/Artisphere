@@ -1,39 +1,75 @@
 (function () {
   const fileInput = document.getElementById("importImage");
   const avatar = document.getElementById("productAvatar");
+  const thumbs = document.getElementById("productThumbs");
 
-  if (!fileInput || !avatar) return;
+  if (!fileInput || !avatar || !thumbs) return;
 
-  function showPlaceholder() {
-    avatar.innerHTML = '<span class="product-avatar__placeholder">📷</span>';
+  console.log("produit_image_preview.js chargé ✅");
+
+  const objectUrls = [];
+  function cleanupUrls() {
+    while (objectUrls.length) URL.revokeObjectURL(objectUrls.pop());
   }
 
-  function showImage(file) {
-    // sécurité : uniquement images
-    if (!file.type || !file.type.startsWith("image/")) {
-      showPlaceholder();
-      return;
-    }
+  function showPlaceholder() {
+    cleanupUrls();
+    avatar.innerHTML = '<span class="product-avatar__placeholder">📷</span>';
+    thumbs.innerHTML = "";
+  }
 
+  function setMainFromFile(file) {
     const url = URL.createObjectURL(file);
+    objectUrls.push(url);
 
     avatar.innerHTML = "";
     const img = document.createElement("img");
     img.src = url;
     img.alt = "Aperçu image produit";
-    img.onload = () => URL.revokeObjectURL(url);
-    img.onerror = () => showPlaceholder();
-
+    img.onload = () => {}; // url révoquée au cleanup global
+    img.onerror = showPlaceholder;
     avatar.appendChild(img);
   }
 
-  fileInput.addEventListener("change", () => {
-    const file = fileInput.files && fileInput.files[0];
-    if (!file) {
+  function render(files) {
+    cleanupUrls();
+    thumbs.innerHTML = "";
+
+    const images = Array.from(files || []).filter(f => f && f.type && f.type.startsWith("image/"));
+    if (images.length === 0) {
       showPlaceholder();
       return;
     }
-    showImage(file);
+
+    // image principale = première
+    setMainFromFile(images[0]);
+
+    // miniatures
+    images.forEach((file, idx) => {
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "thumb" + (idx === 0 ? " is-active" : "");
+
+      const url = URL.createObjectURL(file);
+      objectUrls.push(url);
+
+      const img = document.createElement("img");
+      img.src = url;
+      img.alt = "";
+      btn.appendChild(img);
+
+      btn.addEventListener("click", () => {
+        thumbs.querySelectorAll(".thumb").forEach(b => b.classList.remove("is-active"));
+        btn.classList.add("is-active");
+        setMainFromFile(file);
+      });
+
+      thumbs.appendChild(btn);
+    });
+  }
+
+  fileInput.addEventListener("change", () => {
+    render(fileInput.files);
   });
 
   showPlaceholder();

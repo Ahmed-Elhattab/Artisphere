@@ -1,6 +1,8 @@
 <?php
 require_once __DIR__ . '/../model/evenement_model.php';
 require_once __DIR__ . '/../model/reservation_evenement_model.php';
+require_once __DIR__ . '/../model/event_image_model.php';
+
 
 class evenement_show_controller extends BaseController
 {
@@ -13,6 +15,7 @@ class evenement_show_controller extends BaseController
         }
 
         $evenement = EvenementModel::findById($id);
+        
         if (!$evenement) {
             $this->render('not_found.php', [
                 'title' => 'Évènement introuvable – Artisphere',
@@ -21,6 +24,8 @@ class evenement_show_controller extends BaseController
             ]);
             return;
         }
+
+        $images = EventImageModel::listForEvent((int)$evenement['id_event']);
 
         if (!empty($_GET['mode']) && $_GET['mode'] === 'mine') {
             $this->requireOwner((int)$evenement['id_createur']);
@@ -54,12 +59,14 @@ class evenement_show_controller extends BaseController
         $this->render('evenement_show.php', [
             'title' => $evenement['nom'] . ' – Artisphere',
             'pageCss' => 'details-style.css',
+            'pageJs'  => 'gallery.js',
             'evenement' => $evenement,
             'isLogged' => $isLogged,
             'isOwner' => $isOwner,
             'isReserved' => $isReserved,
             'backUrl' => $backUrl,
             'rating' => $rating,
+            'images' => $images,
             'randomReviews' => $randomReviews,
         ]);
     }

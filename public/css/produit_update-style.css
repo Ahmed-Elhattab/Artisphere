@@ -110,6 +110,92 @@
   font-weight:800;
 }
 .btn-outline:hover{ background:#3c2b20; color:#fff; }
+/* ===== Galerie (edit produit) ===== */
+
+.gallery-grid{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 14px;
+}
+
+/* IMPORTANT : on ne met PAS overflow hidden ici sinon les boutons se font rogner */
+.gitem{
+  background: #fff;
+  border: 1px solid rgba(0,0,0,.08);
+  border-radius: 16px;
+  padding: 12px;
+  display: grid;
+  grid-template-rows: auto auto; /* image + actions */
+  gap: 10px;
+}
+
+/* on arrondit l'image elle-même */
+.gitem img{
+  width: 100%;
+  height: 140px;          /* fixe => layout stable */
+  object-fit: cover;
+  border-radius: 12px;
+  display: block;
+}
+
+/* bande actions : assez haute + pas collée en bas */
+.gactions{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding-bottom: 4px;    /* évite le “coupé” visuel */
+}
+
+/* Optionnel : contour “image principale” */
+.gitem.is-main{
+  outline: 3px solid rgba(136,123,176,.35);
+  outline-offset: 2px;
+}
+
+/* boutons */
+.btn-danger{
+  background:#8b2e23;
+  color:#fff;
+  border:none;
+  border-radius:999px;
+  padding: 8px 12px;
+  font-weight: 800;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.radio{
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 800;
+  color:#3c2b20;
+  white-space: nowrap;
+}
+
+/* ===== Fix débordement galerie ===== */
+
+/* espace sous la galerie */
+.gallery-grid{
+  margin-bottom: 26px;
+}
+
+/* empêche le contour de déborder sur le flux */
+.gitem{
+  box-sizing: border-box;
+}
+
+/* on évite que le outline pousse le layout */
+.gitem.is-main{
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(136,123,176,.35);
+}
+
+/* sécurité : zone photo bien contenue */
+.gitem img{
+  display: block;
+}
 
 @media (max-width: 920px){
   .container{ padding: 0 16px; }

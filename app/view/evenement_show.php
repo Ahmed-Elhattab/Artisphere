@@ -11,7 +11,7 @@ if (empty($_SESSION['csrf'])) {
   $_SESSION['csrf'] = bin2hex(random_bytes(16));
 }
 
-// ✅ Places dispo = nombre_place - stock_reserve
+// Places dispo = nombre_place - stock_reserve
 $placesReelles = (int)($evenement['nombre_place'] ?? 0);
 $placesReservees = (int)($evenement['stock_reserve'] ?? 0);
 $placesDispo = max(0, $placesReelles - $placesReservees);
@@ -19,13 +19,36 @@ $placesDispo = max(0, $placesReelles - $placesReservees);
 
 <main class="details-page">
   <section class="details-card container">
-    <div class="details-media <?= $img ? '' : 'noimg' ?>">
-      <?php if ($img): ?>
-        <img src="<?= htmlspecialchars($img, ENT_QUOTES, 'UTF-8') ?>"
-             alt="Image évènement"
-             onerror="this.parentNode.classList.add('noimg')">
+    <?php
+    $gallery = $images ?? [];
+    $mainImg = null;
+
+    if (!empty($gallery)) {
+      $mainImg = 'images/evenements/' . $gallery[0]['filename'];
+    } elseif (!empty($evenement['image'])) {
+      $mainImg = 'images/evenements/' . $evenement['image'];
+    }
+    ?>
+
+    <div class="details-media <?= $mainImg ? '' : 'noimg' ?>">
+      <?php if ($mainImg): ?>
+        <img id="mainMedia"
+            src="<?= htmlspecialchars($mainImg, ENT_QUOTES, 'UTF-8') ?>"
+            alt="Image evenement"
+            onerror="this.parentNode.classList.add('noimg')">
       <?php endif; ?>
-      <div class="details-fallback">🎟️</div>
+      <div class="details-fallback">🎫</div>
+
+      <?php if (count($gallery) > 1): ?>
+        <div class="thumbs">
+          <?php foreach ($gallery as $g): ?>
+            <?php $src = 'images/evenements/' . $g['filename']; ?>
+            <button type="button" class="thumb" data-src="<?= htmlspecialchars($src, ENT_QUOTES, 'UTF-8') ?>">
+              <img src="<?= htmlspecialchars($src, ENT_QUOTES, 'UTF-8') ?>" alt="">
+            </button>
+          <?php endforeach; ?>
+        </div>
+      <?php endif; ?>
     </div>
 
     <div class="details-body">

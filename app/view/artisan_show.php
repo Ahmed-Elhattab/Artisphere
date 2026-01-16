@@ -36,6 +36,7 @@ function stars(int $note): string {
           <?= htmlspecialchars($artisan['prenom'], ENT_QUOTES, 'UTF-8') ?>
           <?= htmlspecialchars($artisan['nom'], ENT_QUOTES, 'UTF-8') ?>
         </p>
+        <p class="muted">📧 <?= htmlspecialchars($artisan['email'], ENT_QUOTES, 'UTF-8') ?></p>
 
         <?php if (!empty($artisan['adresse'])): ?>
           <p class="muted">📍 <?= htmlspecialchars($artisan['adresse'], ENT_QUOTES, 'UTF-8') ?></p>

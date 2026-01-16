@@ -187,6 +187,96 @@
   margin:0;
   color:#4b5563;
 }
+/* ===== Galerie (produit / evenement) ===== */
+
+/* Zone media fixe et propre */
+.details-media{
+  background:#efe6d8;
+  position: relative;
+  padding: 14px;
+
+  display: flex;
+  flex-direction: column;
+
+  /* IMPORTANT */
+  gap: 12px;
+  overflow: visible;
+}
+
+/* Cadre image principale */
+.details-media #mainMedia{
+  width: 100%;
+  max-height: 320px;          /* ✅ limite claire */
+  object-fit: contain;
+
+  background: rgba(255,255,255,.55);
+  border-radius: 14px;
+  border: 1px solid rgba(0,0,0,.08);
+
+  display: block;
+}
+
+/* Fallback */
+.details-fallback{
+  position:absolute;
+  inset: 0;
+  display:none;
+  place-items:center;
+  font-size: 3rem;
+  opacity: .85;
+}
+
+.details-media.noimg #mainMedia{ display:none; }
+.details-media.noimg .details-fallback{ display:grid; }
+
+/* Miniatures : pas de scrollbar, wrap si nécessaire */
+.details-media .thumbs{
+  display: flex;
+  flex-wrap: nowrap;      /* reste propre */
+  gap: 10px;
+
+  padding-bottom: 4px;   /* ✅ évite coupe basse */
+}
+
+/* Bouton miniature */
+.details-media .thumb{
+  width: 60px;
+  height: 60px;
+
+  flex-shrink: 0;        /* ✅ empêche écrasement */
+  padding: 0;
+
+  border: 1px solid rgba(0,0,0,.15);
+  border-radius: 12px;
+  overflow: hidden;
+
+  background: #fff;
+  cursor: pointer;
+}
+
+.details-media .thumb img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display:block;
+}
+
+/* Effet sélection */
+.details-media .thumb.is-active{
+  box-shadow: 0 0 0 3px rgba(60,43,32,.35);
+  border-color: rgba(60,43,32,.45);
+}
+
+.details-media .thumb:hover{
+  transform: translateY(-1px);
+}
+
+/* Responsive : image un peu moins haute */
+@media (max-width: 920px){
+  .details-media #mainMedia{
+    aspect-ratio: 16 / 10;
+  }
+}
 
 @media (max-width: 920px) {
   .details-card { grid-template-columns: 1fr; }

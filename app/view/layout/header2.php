@@ -14,7 +14,7 @@
 
     <link rel="stylesheet" href="css/header2.css">
     <link rel="stylesheet" href="css/footer.css">
-    <link rel="stylesheet" href="css/styles_Thushjan.css">
+    <!-- <link rel="stylesheet" href="css/styles_Thushjan.css"> -->
 
     <?php if (!empty($pageCss)): ?>
         <link rel="stylesheet" href="css/<?= htmlspecialchars($pageCss, ENT_QUOTES, 'UTF-8') ?>">
@@ -72,8 +72,7 @@
                 <?php endif; ?>
             </a>
 
-<!-- Bouton Dalto --> 
- <button id="bouton-dalto" class="bouton-style">Mode Accessibilité </button>
+
  
             <?php if ($isLogged): ?>
                 <div id="text-profil-zone">
@@ -85,6 +84,9 @@
                     </a>
                 </div>
             <?php endif; ?>
+
+            <!-- Bouton Dalto --> 
+            <button id="bouton-dalto" class="bouton-style">Mode Accessibilité </button>
 
         </div>
 

@@ -74,4 +74,47 @@ class EventImageModel
         $stmt = $pdo->prepare($sql);
         $stmt->execute(array_merge([$idEvent], $ids));
     }
+
+    public static function findOneForUser(int $idResa, int $idUser): ?array
+    {
+        $pdo = Database::getConnection();
+
+        $sql = "
+            SELECT
+                re.*,
+
+                e.nom,
+                e.id_event,
+
+                -- Image principale avec fallback galerie
+                COALESCE(
+                    e.image,
+                    (
+                        SELECT ei.filename
+                        FROM event_image ei
+                        WHERE ei.id_event = e.id_event
+                        ORDER BY ei.ordre ASC, ei.id_image ASC
+                        LIMIT 1
+                    )
+                ) AS image
+
+            FROM reservation_event re
+            JOIN evenement e ON e.id_event = re.id_event
+
+            WHERE re.id_resa_event = :id_resa
+            AND re.id_personne = :id_user
+
+            LIMIT 1
+        ";
+
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([
+            ':id_resa' => $idResa,
+            ':id_user' => $idUser
+        ]);
+
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        return $row ?: null;
+    }
 }

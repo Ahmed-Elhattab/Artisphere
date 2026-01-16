@@ -95,4 +95,37 @@ class ProduitImageModel
 
         $stmt->execute(array_merge([$idProduit], $ids));
     }
+
+    public static function findOneForUser(int $idResa, int $idUser): ?array
+    {
+        $pdo = Database::getConnection();
+
+        $sql = "
+            SELECT
+                rp.*,
+                p.nom,
+                COALESCE(
+                p.image,
+                (SELECT pi.filename
+                FROM produit_image pi
+                WHERE pi.id_produit = p.id_produit
+                ORDER BY pi.ordre ASC, pi.id_image ASC
+                LIMIT 1)
+                ) AS image,
+                p.id_produit
+            FROM reservation_produit rp
+            JOIN pproduit p ON p.id_produit = rp.id_produit
+            WHERE rp.id_resa_produit = :id_resa
+            AND rp.id_personne = :id_user
+            LIMIT 1
+        ";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([
+            ':id_resa' => $idResa,
+            ':id_user' => $idUser
+        ]);
+
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $row ?: null;
+    }
 }

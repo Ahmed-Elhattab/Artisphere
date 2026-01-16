@@ -18,9 +18,9 @@ body {
 
 /* --------- TITRE --------- */
 
-.artisans-header {
+/*.artisans-header {
     text-align: center;
-}
+}*/
 
 .artisans-intro {
     max-width: 640px;
@@ -83,11 +83,11 @@ body {
     gap: 0.5rem;
 }
 
-.artisan-header {
+/*.artisan-header {
     display: flex;
     align-items: center;
     gap: 0.7rem;
-}
+}*/
 
 .artisan-avatar {
     width: 42px;
@@ -266,10 +266,10 @@ body {
         grid-template-columns: 1fr;
     }
 
-    .header-inner {
+    /*header-inner {
         flex-direction: column;
         height: auto;
         padding: 1rem;
         gap: 0.8rem;
-    }
+    }*/
 }

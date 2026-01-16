@@ -1,6 +1,11 @@
-/* --------- FOOTER --------- */
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
 
 .site-footer {
+    margin-top: auto;          /* <-- pousse le footer en bas */
     background: #f6e6cf;
     padding: 1rem 0;
 }

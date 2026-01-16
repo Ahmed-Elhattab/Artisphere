@@ -7,6 +7,25 @@ body{
 
 /* --- CETTE PARTIE DÉCLENCHE LE CHANGEMENT DE COULEUR --- */
 
+#bouton-dalto {
+    margin-left: 20px; /* espace avec le bloc profil */
+}
+
+#bouton-dalto {
+    background: #3c2b20;
+    color: #ffffff;
+    border: none;
+    padding: 8px 18px;
+    border-radius: 999px; /* pillule */
+    font-size: 0.75rem;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+
+    transition: all 0.2s ease;
+}
+
+
 /* 1. Change le fond de la page et la couleur du texte global */
 body.dalto-mode {
     background-color: #222222 !important; /* Fond sombre pour le contraste */
@@ -56,7 +75,7 @@ header{
 }
 
 .logo-img {
-    height: 72px;          /* adapte si ton logo est trop grand/petit */
+    height: 85px;          /* adapte si ton logo est trop grand/petit */
     width: auto;
 }
 
@@ -121,7 +140,8 @@ header{
 .profile-zone {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
+    margin-left: auto; /* pousse tout le bloc à droite */
 }
 
 .profile-greeting {

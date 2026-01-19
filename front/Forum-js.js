@@ -33,10 +33,11 @@ const vide = document.getElementById("vide");
   vide.style.display = "none";
 
 listeAAfficher.forEach((t, index) => {
+const realIndex = topics.indexOf(t); 
     list.innerHTML += `
       <div class="topic">
         <div class="topic-title">
-          <a href="Forum-contenu-sujet.html?id=${index}" style="text-decoration:none; color:inherit; font-weight:bold;">
+          <a href="Forum_contenu_sujet.html?id=${realIndex}" style="text-decoration:none; color:inherit; font-weight:bold;">
             ${t.title}
           </a>
         </div>
@@ -83,48 +84,133 @@ function createTopic() {
   document.getElementById("content").value = "";
 }
 
-render();
+function chargerCommentaires() {
+    const liste = document.getElementById('liste-reponses');
+    if (!liste) return;
+
+    // On recharge les topics depuis le storage pour avoir les derniers coms
+    const topicsActuels = JSON.parse(localStorage.getItem("topics")) || [];
+    const urlParams = new URLSearchParams(window.location.search);
+    const id = urlParams.get('id');
+    const sujet = topicsActuels[id];
+
+    if (!sujet || !sujet.comments) return;
+
+    // On vide la liste avant de la recréer
+    liste.innerHTML = ""; 
+
+    sujet.comments.forEach(comment => {
+        liste.innerHTML += `
+            <div class="reponse-affichee">
+                <div class="reponse-contenu">
+                    <span class="reponse-nom">Utilisateur</span>
+                    <p class="reponse-texte">${comment.texte}</p>
+                    <small style="color: #999; font-size: 12px;">${comment.date}</small>
+                </div>
+            </div>
+        `;
+    });
+}
 
 function ajouterCommentaire() {
-    // 1. Récupérer le champ texte et son contenu
     const champTexte = document.getElementById('comm-texte');
     const texte = champTexte.value.trim();
 
-    // 2. Vérifier que le message n'est pas vide
     if (texte === "") {
         alert("Vous ne pouvez pas envoyer une réponse vide !");
         return;
     }
 
-    // 3. Charger les données actuelles depuis le localStorage
-    const topics = JSON.parse(localStorage.getItem("topics")) || [];
-    
-    // On récupère l'id depuis l'URL (défini au début de ton script)
+    const topicsEnregistres = JSON.parse(localStorage.getItem("topics")) || [];
     const urlParams = new URLSearchParams(window.location.search);
     const id = urlParams.get('id');
 
-    if (topics[id]) {
-        // 4. Initialiser le tableau de commentaires s'il n'existe pas encore
-        if (!topics[id].comments) {
-            topics[id].comments = [];
+    if (topicsEnregistres[id]) {
+        if (!topicsEnregistres[id].comments) {
+            topicsEnregistres[id].comments = [];
         }
 
-        // 5. Ajouter la nouvelle réponse
-        // On peut ajouter un objet avec la date pour faire plus pro
         const nouvelleReponse = {
             texte: texte,
             date: new Date().toLocaleString('fr-FR')
         };
         
-        topics[id].comments.push(nouvelleReponse);
+        topicsEnregistres[id].comments.push(nouvelleReponse);
+        localStorage.setItem("topics", JSON.stringify(topicsEnregistres));
 
-        // 6. Sauvegarder les modifications dans le localStorage
-        localStorage.setItem("topics", JSON.stringify(topics));
-
-        // 7. Effacer le champ de saisie
         champTexte.value = "";
 
-        // 8. Rafraîchir l'affichage des commentaires
-        location.reload(); 
+        // On rafraîchit l'affichage sans recharger la page
+        chargerCommentaires(); 
     }
 }
+
+// --- AFFICHAGE DU SUJET SUR LA PAGE DÉTAIL ---
+
+// 1. On vérifie si on est bien sur la page du sujet (si les IDs titre et message existent)
+const titreElem = document.getElementById('titre');
+const messageElem = document.getElementById('message');
+
+if (titreElem && messageElem) {
+    // 2. On récupère l'ID depuis l'URL (?id=...)
+    const urlParams = new URLSearchParams(window.location.search);
+    const idSujet = urlParams.get('id');
+
+    // 3. On récupère le sujet correspondant dans notre tableau "topics"
+    // Note : "topics" est déjà déclaré tout en haut de ton fichier
+    const leSujet = topics[idSujet];
+
+    if (leSujet) {
+        // 4. On remplit le bloc blanc avec les données
+        titreElem.innerText = leSujet.title;
+        messageElem.innerText = leSujet.content;
+        
+        // 5. On lance l'affichage des commentaires s'il y en a
+        chargerCommentairesApresRemplissage();
+    } else {
+        titreElem.innerText = "Erreur";
+        messageElem.innerText = "Sujet introuvable.";
+    }
+}
+
+// Petite fonction pour afficher les commentaires déjà enregistrés
+function chargerCommentairesApresRemplissage() {
+    const listReponses = document.getElementById('liste-reponses'); // Assure-toi d'avoir cet ID dans ton HTML
+    if (!listReponses) return;
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const id = urlParams.get('id');
+    const sujet = topics[id];
+
+    if (sujet && sujet.comments) {
+        listReponses.innerHTML = sujet.comments.map(c => `
+            <div class="reponse-item">
+                <p><strong>Anonyme</strong> <small>(${c.date})</small></p>
+                <p>${c.texte}</p>
+            </div>
+        `).join('');
+    }
+}
+
+// Ce bloc remplit automatiquement le titre et le contenu
+window.onload = function() {
+    // 1. On cherche si on est sur la page de détail
+    const titreElem = document.getElementById('titre');
+    const messageElem = document.getElementById('message');
+
+    if (titreElem && messageElem) {
+        const urlParams = new URLSearchParams(window.location.search);
+        const id = urlParams.get('id');
+        const leSujet = topics[id];
+
+        if (leSujet) {
+            titreElem.innerText = leSujet.title;
+            messageElem.innerText = leSujet.content;
+            chargerCommentaires(); // Affiche les réponses
+        }
+    } 
+    // 2. Sinon, si on est sur la page d'accueil du forum
+    else if (document.getElementById("topicsList")) {
+        render();
+    }
+};

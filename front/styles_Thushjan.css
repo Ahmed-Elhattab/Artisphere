@@ -921,11 +921,14 @@ left: 37rem;
 
 /* --- FORUM CONTENUE SUJET --- */
 
+
+
 #Forum-contenu-sujet {
     background-color: #f0f2f5; 
     min-height: 100vh;
     font-family: 'Segoe UI', sans-serif;
     display: flex;
+    flex:1;
     flex-direction: column;
 }
 
@@ -983,7 +986,7 @@ left: 37rem;
     resize: vertical;
 }
 
-#Forum-contenu-sujet a[href="Forum.html"] {
+#Forum-contenu-sujet a[href="/artisphere/?controller=Forum&action=index"] {
 display: table;
     width: max-content;
     padding: 8px 16px;
@@ -1032,6 +1035,8 @@ display: table;
     font-size: 15px;
     color: #444;
 }
+
+
 
 /* --------- MOT-DE-PASSE-OUBLIE --------- */
 

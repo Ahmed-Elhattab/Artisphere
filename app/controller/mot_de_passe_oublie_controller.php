@@ -30,7 +30,7 @@ public function nouveau(): void
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $email_dest = htmlspecialchars($_POST['email'] ?? '');
 
-            // Chargement des fichiers PHPMailer (on remonte de app/controller vers libs)
+            
             require __DIR__ . '/../../libs/PHPMailer/Exception.php';
             require __DIR__ . '/../../libs/PHPMailer/PHPMailer.php';
             require __DIR__ . '/../../libs/PHPMailer/SMTP.php';

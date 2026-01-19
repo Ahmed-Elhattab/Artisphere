@@ -930,7 +930,7 @@ body#Forum {
 
 /* --- FORUM CONTENUE SUJET --- */
 
-#Forum-contenu-sujet {
+#Forum_contenu_sujet {
     background-color: #f0f2f5; 
     min-height: 100vh;
     font-family: 'Segoe UI', sans-serif;
@@ -938,12 +938,12 @@ body#Forum {
     flex-direction: column;
 }
 
-#Forum-contenu-sujet .site-header {
+#Forum_contenu_sujet .site-header {
     width: 100%;
     background-color: #F3E5D0; 
 }
 
-#Forum-contenu-sujet .boite-sujet {
+#Forum_contenu_sujet .boite-sujet {
     background: white;
     padding: 30px;
     border-radius: 12px;
@@ -952,7 +952,7 @@ body#Forum {
 }
 
 
-#Forum-contenu-sujet .commentaires {
+#Forum_contenu_sujet .commentaires {
     background: white;
     padding: 30px;
     border-radius: 12px;
@@ -960,13 +960,13 @@ body#Forum {
     margin-bottom: 25px;
 }
 
-#Forum-contenu-sujet h1 {
+#Forum_contenu_sujet h1 {
     margin-top: 0;
     font-size: 26px;
     color: #050505;
 }
 
-#Forum-contenu-sujet #message {
+#Forum_contenu_sujet #message {
     color: #4b4b4b;
     line-height: 1.6;
 }
@@ -981,7 +981,7 @@ body#Forum {
 }
 
 /* --- 6. FORMULAIRE DE RÉPONSE --- */
-#Forum-contenu-sujet #comm-texte {
+#Forum_contenu_sujet #comm-texte {
     width: 100%;
     min-height: 100px;
     border: 1px solid #ddd;
@@ -992,7 +992,7 @@ body#Forum {
     resize: vertical;
 }
 
-#Forum-contenu-sujet a[href="Forum.html"] {
+#Forum_contenu_sujet a[href*="controller=Forum"] {
 display: table;
     width: max-content;
     padding: 8px 16px;
@@ -1007,7 +1007,7 @@ display: table;
     margin-bottom: 25px; 
 }
 
-#Forum-contenu-sujet a[href="Forum.html"]:hover {
+#Forum_contenu_sujet a[href="Forum.html"]:hover {
     background-color: #111; 
     color: #fff; 
     border-color: #111;

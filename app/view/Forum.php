@@ -5,7 +5,6 @@
     <title>Front</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/x-icon" href="favicon.ico">
-    <link rel="stylesheet" href="header.css">
     <link rel="stylesheet" href="../../public/css/styles_Thushjan.css">
     <title>Document</title>
 </head>
@@ -14,7 +13,7 @@
 
 <!-- Contenue -->
 
-<header class="top">
+<div class="top">
   <div class="container">
     <div class="search-container">
     <h1>Forum Communautaire</h1>
@@ -25,7 +24,7 @@
    <img src="images/Communauté.png" class="image-communauté"/>
    </div>
   </div>
-</header>
+</div>
 
 
 <div class="barre"></div>

@@ -1,3 +1,7 @@
+/* =========================
+   PROFIL - CSS final propre
+   ========================= */
+
 * {
   margin: 0;
   padding: 0;
@@ -5,464 +9,222 @@
 }
 
 body {
-  font-family: 'Montserrat', sans-serif;
+  font-family: Montserrat, Arial, sans-serif;
   background: #b6a894;
   color: #1a1a1a;
   min-height: 100vh;
-  display: flex;
-  flex-direction: column;
 }
 
-.topbar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background: #efe3d3;
-  padding: 15px 40px;
-  position: sticky;
-  top: 0;
-  z-index: 100;
-}
-
-.logo-container {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.logo {
-  height: 50px;
-  width: 50px;
-  border-radius: 50%;
-}
-
-.logo-text {
-  font-family: 'Libre Baskerville', serif;
-  font-size: 14px;
-  letter-spacing: 1px;
-  color: #6b4e3d;
-}
-
-
+/* Container principal */
 .container {
-  flex: 1;
-  padding: 20px;
-  max-width: 800px;
-  margin: auto;
-  width: 100%;
+  width: min(1100px, calc(100% - 64px));
+  margin: 0 auto;
+  padding: 32px 0 50px;
 }
 
+@media (max-width: 768px) {
+  .container {
+    width: calc(100% - 28px);
+    padding: 22px 0 40px;
+  }
+}
+
+/* Box erreur */
+.form-error-box {
+  background-color: #fdecea;
+  border: 1px solid #f5c2c0;
+  color: #8a1f1f;
+  border-radius: 12px;
+  padding: 16px 18px;
+  margin-bottom: 18px;
+}
+
+.form-error-box h3 {
+  margin-bottom: 10px;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+/* Carte profil */
 .profile-section {
-  text-align: center;
-  padding: 20px;
+  background: rgba(239,227,211,0.75);
+  border-radius: 18px;
+  padding: 22px;
+  box-shadow: 0 8px 18px rgba(0,0,0,0.05);
 }
 
+/* Photo */
 .photo-block {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: 18px 22px;
   align-items: center;
-  margin-bottom: 20px;
+  margin-bottom: 18px;
 }
 
 .avatar {
-  font-size: 80px;
-  border: 2px solid #ffffff;
+  width: 130px;
+  height: 130px;
   border-radius: 50%;
-  width: 120px;
-  height: 120px;
+  background: #f5f0e7;
+  border: 2px solid #fff;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #f5f0e7;
-  margin-bottom: 10px;
-  overflow: hidden;          /* coupe ce qui dépasse */
+  font-size: 70px;
+  overflow: hidden;
 }
 
-/* Image à l'intérieur */
 .avatar img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;         /* remplit le cercle sans déformer */
-    display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
+.photo-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Infos perso */
 .personal-info {
   display: block;
-  width: 80%;
-  margin: 10px auto;
-  padding: 10px;
-  border-radius: 20px;
-  border: none;
+  width: 100%;
+  margin: 10px 0;
+  padding: 12px 14px;
+  border-radius: 14px;
   background: #e9dcc7;
-  font-size: 16px;
+  border: none;
+  font-size: 15px;
 }
 
+/* Boutons généraux */
 .btn {
   background: #e9dcc7;
   border: none;
-  padding: 10px 20px;
+  padding: 10px 18px;
   border-radius: 20px;
-  margin: 10px;
-  font-weight: bold;
+  margin-top: 10px;
+  font-weight: 600;
+  font-size: 14px;
   cursor: pointer;
-  transition: background 0.3s;
 }
 
 .btn:hover {
   background: #d4c5b0;
 }
 
+/* Commandes */
 .orders {
-  margin-top: 30px;
-  text-align: left;
+  margin-top: 26px;
 }
 
+.profile-section h2 {
+  margin-top: 26px;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.orders-subtitle {
+  margin-top: 14px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+/* Carte commande */
 .order-card {
   background: #efe3d3;
-  padding: 20px;
-  border-radius: 10px;
-  margin-bottom: 15px;
+  padding: 16px;
+  border-radius: 12px;
+  margin-top: 12px;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
 .order-title {
-  font-weight: bold;
-}
-
-.order-card .btn {
-  background-color: #e9dcc7;
-  color: #000;
-  border: 2px solid #000;
-  padding: 8px 16px;
-  border-radius: 20px;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-.order-card .btn:hover {
-  background-color: #a79174;
-}
-/*
-.footer {
-  background: #efe3d3;
-  padding: 20px;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  margin-top: auto;
-}
-
-.footer a {
-  text-decoration: none;
-  color: #000;
-  font-size: 12px;
   font-weight: 600;
-  letter-spacing: 1px;
-  transition: color 0.3s;
 }
 
-.footer a:hover {
-  color: #6b4e3d;
-}*/
+/* =========================
+   Actions Artisan / Admin
+   ========================= */
 
-@media (max-width: 768px) {
-  .topbar {
-    padding: 15px 20px;
-  }
-  
-  .main-nav {
-    gap: 20px;
-  }
-  
-  .main-nav a {
-    font-size: 12px;
-  }
+.actions-card {
+  background: rgba(239,227,211,0.6);
+  border-radius: 16px;
+  padding: 18px;
+  margin-top: 20px;
 }
 
-/* ---- Role / artisan sections (minimal) ---- */
-.role-bar{
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  padding: 10px 6px;
-}
-.role-badge{
-  background: rgba(239,227,211,0.9);
-  border-radius: 999px;
-  padding: 6px 12px;
-  font-size: 12px;
-  letter-spacing: .06em;
-  text-transform: uppercase;
-}
-.role-links a{
-  font-size: 12px;
-  text-decoration: none;
-  margin-left: 10px;
-  color: #000;
-}
-.role-links a:hover{
-  text-decoration: underline;
+/* distinction latérale */
+.actions-card--artisan {
+  border-left: 6px solid rgba(136,123,176,0.55);
 }
 
-.sell-section, .reviews-section{
-  margin-top: 26px;
-  text-align: left;
+.actions-card--admin {
+  border-left: 6px solid rgba(39,218,245,0.45);
 }
-.sell-title{
-  font-size: 18px;
+
+/* Header card */
+.actions-card__title {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.actions-card__subtitle {
+  font-size: 13px;
+  opacity: 0.8;
   margin-bottom: 12px;
 }
-.sell-grid{
+
+/* Grille boutons */
+.actions-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 14px;
 }
-.sell-card{
-  background: #efe3d3;
-  padding: 14px;
-  border-radius: 12px;
-}
-.sell-img{
-  width: 100%;
-  height: 120px;
-  object-fit: cover;
-  border-radius: 10px;
-  margin-bottom: 10px;
-}
-.sell-label{
-  display: block;
-  font-size: 12px;
-  margin: 8px 0 4px;
-  letter-spacing: .04em;
-  text-transform: uppercase;
-}
-.sell-input{
-  width: 100%;
-  border: none;
-  border-radius: 999px;
-  padding: 10px 12px;
-  background: #e9dcc7;
-}
-.sell-save{
-  width: 100%;
-  margin: 10px 0 0;
-}
-
-.review-row{
-  background: #efe3d3;
-  padding: 12px 14px;
-  border-radius: 12px;
-  margin-bottom: 10px;
-}
-.stars{
-  font-size: 18px;
-  line-height: 1;
-  margin-bottom: 6px;
-}
-.star{ opacity: .35; }
-.star.filled{ opacity: 1; }
-.review-text{ font-size: 14px; }
 
 @media (max-width: 768px) {
-  .sell-grid{ grid-template-columns: 1fr; }
+  .actions-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .photo-block {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
 }
 
-/* --------- Box d'erreurs formulaire --------- */
-
-.form-error-box {
-    background-color: #fdecea;
-    border: 1px solid #f5c2c0;
-    color: #8a1f1f;
-    border-radius: 10px;
-    padding: 16px 18px;
-    margin-bottom: 20px;
-}
-
-.form-error-box h3 {
-    margin: 0 0 10px 0;
-    font-size: 1rem;
-    font-weight: 600;
-}
-
-.form-error-box ul {
-    margin: 0;
-    padding-left: 18px;
-}
-
-.form-error-box li {
-    font-size: 0.9rem;
-    line-height: 1.4;
-}
-
-
-
-/*----------- ADDING COMMANDES-PASSEES.CSS ----------*/
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-/*
-body {
-  font-family: 'Montserrat', sans-serif;
-  background: #b79b81;
-  color: #1a1a1a;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-}*/
-
-.topbar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background: #efe3d3;
-  padding: 15px 40px;
-  position: sticky;
-  top: 0;
-  z-index: 100;
-}
-
-.logo-container {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.logo {
-  height: 50px;
-  width: 50px;
-  border-radius: 50%;
-}
-
-.logo-text {
-  font-family: 'Libre Baskerville', serif;
-  font-size: 14px;
-  letter-spacing: 1px;
-  color: #6b4e3d;
-}
-
-
-
-.container {
-  flex: 1;
-  padding: 40px 20px;
-  max-width: 600px;
-  margin: 0 auto;
-  width: 100%;
-}
-
-.page-title {
-  background: #f4c5c8;
-  color: #8b2332;
-  text-align: center;
-  padding: 12px 30px;
-  border-radius: 25px;
-  font-size: 16px;
-  font-weight: 600;
-  letter-spacing: 2px;
-  margin-bottom: 30px;
-  display: inline-block;
-  width: 100%;
-}
-
-.order-item {
-  background: #9db3ba;
-  border-radius: 15px;
-  padding: 20px;
-  margin-bottom: 20px;
-  position: relative;
-}
-
-.order-header {
-  background: #5a6f75;
-  color: white;
-  padding: 10px 20px;
-  border-radius: 20px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 15px;
-}
-
-.order-name {
-  font-weight: 600;
-  font-size: 14px;
-  letter-spacing: 1px;
-}
-
-.status-dot {
-  width: 20px;
-  height: 20px;
-  background: white;
-  border-radius: 50%;
-  border: 2px solid #5a6f75;
-}
-
-.order-content {
-  min-height: 100px;
-  background: rgba(255, 255, 255, 0.2);
-  border-radius: 10px;
-}
-
-.action-buttons {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-  margin-top: 30px;
-}
-
-.action-link{
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-  text-decoration: none;
-}
-
+/* Boutons rouges */
 .btn-spe {
+  width: 100%;
   background: #a24436;
   color: white;
   border: none;
-  padding: 15px 40px;
+  padding: 14px;
   border-radius: 30px;
-  font-weight: 600;
   font-size: 14px;
-  letter-spacing: 1px;
-  cursor: pointer;
-  transition: background 0.3s;
-  text-align: center;
-}
-
-.btn-spe:hover { background: #8b2e23; }
-
-/*
-.footer {
-  background: #efe3d3;
-  padding: 20px;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  margin-top: auto;
-}
-
-.footer a {
-  text-decoration: none;
-  color: #000;
-  font-size: 12px;
   font-weight: 600;
-  letter-spacing: 1px;
-  transition: color 0.3s;
+  cursor: pointer;
 }
 
-.footer a:hover { color: #6b4e3d; }*/
+.btn-spe:hover {
+  background: #8b2e23;
+}
 
-@media (max-width: 768px) {
-  .topbar { padding: 15px 20px; }
-  .main-nav { gap: 20px; }
-  .main-nav a { font-size: 12px; }
+/* Bouton "Changer ma photo" plus discret */
+
+.photo-form .btn {
+  padding: 6px 12px;
+  font-size: 12px;
+  border-radius: 14px;
+  margin-top: 4px;
+}
+
+.photo-form .btn {
+  width: fit-content;
+  padding: 6px 14px;
+  font-size: 12px;
 }

@@ -43,7 +43,7 @@ function stars(int $note): string {
         <?php endif; ?>
 
         <div class="actions">
-          <a class="btn-outline" href="<?= htmlspecialchars($backUrl, ENT_QUOTES, 'UTF-8') ?>">← Retour</a>
+          <a class="btn-outline" href="/artisphere/?controller=artisans&action=index">← Retour</a>
         </div>
       </div>
     </div>
@@ -168,8 +168,6 @@ function stars(int $note): string {
       <?php elseif (!empty($alreadyRated)): ?>
         <span class="muted">Vous avez déjà noté cet artisan.</span>
       <?php endif; ?>
-
-      <a class="btn-outline" href="<?= htmlspecialchars($backUrl, ENT_QUOTES, 'UTF-8') ?>">← Retour</a>
     </div>
 
   </section>

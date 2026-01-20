@@ -1,9 +1,9 @@
-html, body {
+/*html, body {
     height: 100%;
     margin: 0;
     display: flex;
     flex-direction: column;
-}
+}*/
 
 /* MODE DALTO */
 
@@ -27,10 +27,10 @@ body.dalto-mode button:not(#bouton-dalto) {
 }
 
 /*Change la couleur du header en mode accessibilité */
-body.dalto-mode header {
+/*body.dalto-mode header {
     background-color: #333333 !important;
     border-bottom: 2px solid #E69F00 !important;
-}
+}*/
 
   
 
@@ -606,8 +606,8 @@ left: 37rem;
 /* --------- HEADER --------- */
 
 /* Style du bouton pour qu'il ressemble à ton image */
-.bouton-style {
-/* --- Design pilule --- */
+/*.bouton-style {
+/* --- Design pilule --- 
     background-color: #f0f0f0; 
     color: #3c2b20;
     border: 2px solid #3c2b20; 
@@ -620,9 +620,9 @@ left: 37rem;
     box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
     transition: all 0.2s ease;
 
-    /* --- Positionnement corrigé --- */
+    /* --- Positionnement corrigé --- 
     position: absolute; 
-    right: 50px;         /* Augmenté de 15px à 50px pour le ramener vers la gauche */
+    right: 50px;         /* Augmenté de 15px à 50px pour le ramener vers la gauche 
     top: 50%;            
     transform: translateY(-50%); 
     z-index: 1001;
@@ -692,12 +692,12 @@ left: 37rem;
     margin-right: 20px; 
     position: relative;
     right: 10px;
-}
+}*/
 
 
 /* --------- FOOTER --------- */
 
-
+/*
 .site-footer {
     position: relative;    
     clear: both;          
@@ -719,7 +719,7 @@ left: 37rem;
     font-size: 0.8rem;
     color: #3c2b20;
 }
-
+*/
 
 
 /* --------- FORUM --------- */
@@ -1194,4 +1194,416 @@ display: table;
     font-size: 14px;
     font-weight: bold;
     cursor: pointer;
+}
+
+/* =========================
+   BASE SAFE (ne touche pas header/footer)
+   ========================= */
+html, body { height: 100%; margin: 0; }
+
+/* =========================
+   DALTO MODE - safe (ne cible pas header global)
+   ========================= */
+body.dalto-mode {
+  background-color: #222222 !important;
+  color: #ffffff !important;
+}
+
+body.dalto-mode button:not(#bouton-dalto),
+body.dalto-mode .bouton-enregistrerV2 {
+  background-color: #E69F00 !important;
+  color: #000000 !important;
+  border-color: #ffffff !important;
+}
+
+/* Si tu veux un header “dalto” UNIQUEMENT sur les pages forum : */
+body#Forum.dalto-mode .top,
+body#Forum_contenu_sujet.dalto-mode #Forum {
+  filter: none; /* placeholder, tu peux l’enlever */
+}
+
+/* =========================
+   FORUM (scopé, n’impacte pas le site entier)
+   ========================= */
+
+body#Forum {
+  background-color: white !important;
+  padding: 0;
+}
+
+#Forum {
+  box-sizing: border-box;
+  font-family: Inter, Arial, sans-serif;
+  background: white;
+}
+
+/* Container responsive (remplace width fixe 1100px) */
+#Forum .container {
+  width: min(1100px, calc(100% - 32px));
+  margin: 0 auto;
+}
+
+#Forum .top {
+  background: white;
+  padding: 25px 0;
+}
+
+#Forum .search-container {
+  background-color: #f3f4f6;
+  padding: 30px 40px 50px 40px;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  max-width: 1200px;
+}
+
+#Forum .search-box {
+  display: flex;
+  margin-top: 10px;
+  width: 20rem;
+  max-width: 100%;
+}
+
+#Forum .image-communauté {
+  height: 8rem;
+  width: auto;
+  object-fit: contain;
+  max-width: 100%;
+  /* on évite margin-left fixe en responsive (géré plus bas) */
+  margin-left: 25rem;
+  margin-top: -6.5rem;
+}
+
+/* Barre */
+#Forum .barre {
+  width: min(1100px, calc(100% - 32px));
+  height: 2px;
+  background-color: #e5e7eb;
+  margin: 5px auto;
+}
+
+/* Layout */
+#Forum .forum-layout {
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  gap: 30px;
+  margin-top: 30px;
+}
+
+/* Toolbar */
+#Forum .toolbar {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+#Forum .filtres button {
+  background: none;
+  border: none;
+  margin-right: 12px;
+  color: #6b7280;
+  cursor: pointer;
+}
+
+#Forum .filtres .active {
+  color: #2563eb;
+  border-bottom: 2px solid #2563eb;
+}
+
+#Forum .new-topic {
+  background: #111827;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+#Forum .vide {
+  background: white;
+  padding: 40px;
+  text-align: center;
+  border-radius: 8px;
+  color: #6b7280;
+}
+
+#Forum .topic {
+  background: white;
+  padding: 16px;
+  border-radius: 8px;
+  margin-bottom: 12px;
+  border: 1px solid #e5e7eb;
+}
+
+#Forum .topic-title { font-weight: 600; }
+#Forum .topic-content { color: #6b7280; margin-top: 6px; font-size: 14px; }
+
+#Forum .sidebar {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  border: 1px solid #e5e7eb;
+  align-self: start;
+}
+
+/* Modal */
+#Forum .Fenetresujet {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+
+#Forum .Fenetresujet-contenu {
+  background: white;
+  padding: 20px;
+  width: 400px;
+  max-width: calc(100% - 32px);
+  border-radius: 8px;
+}
+
+/* =========================
+   FORUM contenu sujet (scopé)
+   ========================= */
+body#Forum_contenu_sujet {
+  background-color: #f0f2f5;
+  min-height: 100vh;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+#Forum_contenu_sujet #Forum {
+  width: min(900px, calc(100% - 32px));
+  margin: 0 auto;
+}
+
+#Forum_contenu_sujet .boite-sujet,
+#Forum_contenu_sujet .commentaires {
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.08);
+  margin-bottom: 25px;
+}
+
+/* =========================
+   Responsive forum (scopé)
+   ========================= */
+@media (max-width: 900px) {
+  #Forum .search-container { padding: 24px 20px; gap: 12px; }
+  #Forum .search-box { width: 100%; max-width: 520px; }
+
+  /* on annule les margins fixes de l'image */
+  #Forum .image-communauté {
+    margin-left: 0;
+    margin-top: 10px;
+    height: 7rem;
+    align-self: flex-start;
+  }
+
+  #Forum .forum-layout { grid-template-columns: 1fr; gap: 18px; }
+  #Forum .toolbar { flex-wrap: wrap; gap: 12px; }
+  #Forum .new-topic { width: 100%; }
+
+  #Forum_contenu_sujet #Forum { width: min(900px, calc(100% - 32px)); }
+  #Forum_contenu_sujet .boite-sujet,
+  #Forum_contenu_sujet .commentaires { padding: 18px; }
+}
+
+@media (max-width: 480px) {
+  #Forum .search-container { padding: 18px 14px; }
+  #Forum .topic { padding: 14px; }
+
+  #Forum .Fenetresujet-contenu { width: calc(100% - 24px); padding: 16px; }
+
+  #Forum_contenu_sujet #Forum { width: calc(100% - 24px); }
+  #Forum_contenu_sujet .boite-sujet,
+  #Forum_contenu_sujet .commentaires { padding: 16px; }
+}
+
+
+/* Correction image forum bannière */
+
+#Forum .image-communauté {
+  max-width: 100%;
+  height: auto;
+  max-height: 120px;
+  margin: 10px 0 0 0;   /* enlève les décalages dangereux */
+  display: block;
+}
+
+#Forum .search-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+}
+/* Positionnement image pingouins */
+
+#Forum .image-communauté {
+    align-self: flex-end;     /* pousse à droite */
+    margin-top: -60px;        /* remonte l'image */
+    margin-right: 20px;       /* espace avec le bord */
+    max-height: 140px;
+    width: auto;
+}
+
+@media (max-width: 768px) {
+
+  #Forum .image-communauté {
+      align-self: center;
+      margin-top: 10px;
+      margin-right: 0;
+      max-height: 90px;
+  }
+
+}
+
+
+/* =========================
+   RESPONSIVE - FORUM
+   ========================= */
+
+/* 1) Container fluide (remplace le width:1100px) */
+#Forum .container {
+  width: min(1100px, calc(100% - 32px));
+  margin: 0 auto;
+}
+
+/* Barre fluide */
+#Forum .barre {
+  width: min(1100px, calc(100% - 32px));
+  margin: 5px auto;
+}
+
+/* Image communauté: évite le margin-left fixe */
+#Forum .image-communauté {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Tablette */
+@media (max-width: 900px) {
+
+  /* Le header du forum (bloc recherche) */
+  #Forum .search-container {
+    padding: 24px 20px 24px 20px;
+    gap: 12px;
+  }
+
+  /* Input recherche prend la place */
+  #Forum .search-box {
+    width: 100%;
+    max-width: 520px;
+  }
+
+  /* On enlève le placement “à droite” par margin-left */
+  #Forum .image-communauté {
+    margin-left: 0;
+    margin-top: 10px;
+    height: 7rem;
+    align-self: flex-start;
+  }
+
+  /* Layout passe en 1 colonne (sidebar dessous) */
+  #Forum .forum-layout {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  /* Toolbar empile si besoin */
+  #Forum .toolbar {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  #Forum .new-topic {
+    width: 100%;
+  }
+
+  /* Modal (fenetre sujet) s’adapte */
+  #Forum .Fenetresujet-contenu {
+    width: min(420px, calc(100% - 32px));
+  }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+
+  #Forum .top {
+    padding: 18px 0;
+  }
+
+  #Forum .search-container {
+    padding: 18px 14px;
+  }
+
+  #Forum .search-box input {
+    padding: 10px 10px;
+  }
+
+  #Forum .search-box button {
+    padding: 10px 12px;
+  }
+
+  /* Topics plus compacts */
+  #Forum .topic {
+    padding: 14px;
+  }
+
+  /* Modal: full width + padding */
+  #Forum .Fenetresujet-contenu {
+    width: calc(100% - 24px);
+    padding: 16px;
+  }
+
+  #Forum .Fenetresujet-actions {
+    flex-direction: column;
+  }
+
+  #Forum .Fenetresujet-actions button {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+
+/* =========================
+   RESPONSIVE - CONTENU SUJET
+   ========================= */
+
+@media (max-width: 900px) {
+  /* Le wrapper #Forum dans la page sujet */
+  #Forum_contenu_sujet #Forum {
+    width: min(900px, calc(100% - 32px));
+    margin: 0 auto;
+    padding: 0;
+  }
+
+  #Forum_contenu_sujet .boite-sujet,
+  #Forum_contenu_sujet .commentaires {
+    padding: 18px;
+  }
+}
+
+@media (max-width: 480px) {
+  #Forum_contenu_sujet #Forum {
+    width: calc(100% - 24px);
+  }
+
+  #Forum_contenu_sujet h1 {
+    font-size: 20px;
+  }
+
+  #Forum_contenu_sujet .boite-sujet,
+  #Forum_contenu_sujet .commentaires {
+    padding: 16px;
+  }
+
+  #Forum_contenu_sujet a[href*="controller=forum"] {
+    font-size: 12px;
+    padding: 7px 12px;
+  }
 }

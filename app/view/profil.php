@@ -143,36 +143,35 @@
       <a class="action-link" href="/artisphere/?controller=index&action=index"><button class="btn-spe">TOUTES MES COMMANDES PASSEES</button></a>
     </div>-->
 
-    <?php if (!empty($_SESSION['user']) && $_SESSION['user']['role'] === 'artisan' || $_SESSION['user']['role'] === 'admin'): ?>
-    <div class="action-buttons">
-      <a class="action-link" href="/artisphere/?controller=fiche_produit&action=index"><button class="btn-spe">CRÉER UN NOUVEAU PRODUIT</button></a>
-    </div>
-    <div class="action-buttons">
-      <a class="action-link" href="/artisphere/?controller=fiche_evenement&action=index"><button class="btn-spe">CRÉER UN NOUVEL EVENEMENT</button></a>
-    </div>
-    <div class="action-buttons">
-      <a class="action-link" href="/artisphere/?controller=mes_creations&action=index"><button class="btn-spe">MES PRODUITS ET EVENEMENTS</button></a>
-    </div>
-    <div class="action-buttons">
-      <a class="action-link" href="/artisphere/?controller=artisan_commandes&action=index"><button class="btn-spe">COMMANDES À TRAITER</button></a>
-    </div>
+    <?php if (!empty($_SESSION['user']) && (($_SESSION['user']['role'] ?? '') === 'artisan' || ($_SESSION['user']['role'] ?? '') === 'admin')): ?>
+    <section class="actions-card actions-card--artisan">
+        <div class="actions-card__header">
+        <h3 class="actions-card__title">Espace artisan</h3>
+        <p class="actions-card__subtitle">Gestion de vos produits, évènements et commandes.</p>
+        </div>
+
+        <div class="actions-grid">
+        <a class="action-link" href="/artisphere/?controller=fiche_produit&action=index"><button class="btn-spe">CRÉER UN NOUVEAU PRODUIT</button></a>
+        <a class="action-link" href="/artisphere/?controller=fiche_evenement&action=index"><button class="btn-spe">CRÉER UN NOUVEL EVENEMENT</button></a>
+        <a class="action-link" href="/artisphere/?controller=mes_creations&action=index"><button class="btn-spe">MES PRODUITS ET EVENEMENTS</button></a>
+        <a class="action-link" href="/artisphere/?controller=artisan_commandes&action=index"><button class="btn-spe">COMMANDES À TRAITER</button></a>
+        </div>
+    </section>
     <?php endif; ?>
-    <?php if (!empty($_SESSION['user']) && $_SESSION['user']['role'] === 'admin'): ?>
-    <div class="action-buttons">
-      <a class="action-link" href="/artisphere/?controller=admin_users&action=index"><button class="btn-spe">CHERCHER UN COMPTE</button></a>
-    </div>
-    <?php endif; ?>
-    <?php if (!empty($_SESSION['user']) && $_SESSION['user']['role'] === 'admin'): ?>
-    <div class="action-buttons">
-      <a class="action-link" href="/artisphere/?controller=admin_pending_users&action=index"><button class="btn-spe">VALIDER CREATION DE COMPTE</button></a>
-    </div>
-    <?php endif; ?>
-    <?php if (!empty($_SESSION['user']) && $_SESSION['user']['role'] === 'admin'): ?>
-    <div class="action-buttons">
-      <a class="action-link" href="/artisphere/?controller=admin_contact&action=index"><button class="btn-spe">GERER LES DEMANDES DE CONTACT</button></a>
-    </div>
-    <div class="action-buttons">
-      <a class="action-link" href="/artisphere/?controller=admin_referentiels&action=index"><button class="btn-spe">GERER LES REFERENTIELS</button></a>
-    </div>
+
+    <?php if (!empty($_SESSION['user']) && (($_SESSION['user']['role'] ?? '') === 'admin')): ?>
+    <section class="actions-card actions-card--admin">
+        <div class="actions-card__header">
+        <h3 class="actions-card__title">Administration</h3>
+        <p class="actions-card__subtitle">Outils réservés aux administrateurs.</p>
+        </div>
+
+        <div class="actions-grid">
+        <a class="action-link" href="/artisphere/?controller=admin_users&action=index"><button class="btn-spe">CHERCHER UN COMPTE</button></a>
+        <a class="action-link" href="/artisphere/?controller=admin_pending_users&action=index"><button class="btn-spe">VALIDER CREATION DE COMPTE</button></a>
+        <a class="action-link" href="/artisphere/?controller=admin_contact&action=index"><button class="btn-spe">GERER LES DEMANDES DE CONTACT</button></a>
+        <a class="action-link" href="/artisphere/?controller=admin_referentiels&action=index"><button class="btn-spe">GERER LES REFERENTIELS</button></a>
+        </div>
+    </section>
     <?php endif; ?>
 </main>

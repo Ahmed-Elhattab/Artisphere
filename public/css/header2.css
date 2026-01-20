@@ -150,13 +150,34 @@ header{
 }
 
 .logout-link {
-    font-size: 0.7rem;
-    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 6px 12px;
+    border: 1.5px solid #3c2b20;
+    border-radius: 999px;
+
+    font-size: 0.75rem;
+    font-weight: 600;
+
     color: #3c2b20;
+    background: transparent;
+    text-decoration: none;
+    white-space: nowrap;
+
+    transition: all 0.2s ease;
 }
 
 .logout-link:hover {
-    text-decoration: underline;
+    background: #3c2b20;
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.logout-link:focus {
+    outline: 3px solid #E69F00;
+    outline-offset: 2px;
 }
 
 @media (max-width: 900px) {
@@ -201,13 +222,17 @@ header{
     }
 
     .profile-greeting {
-        display: none; /* cache le pseudo */
+        display: none; /* ok: on cache le pseudo */
     }
 
     .logout-link {
-        display: none;
+        padding: 5px 10px;
+        font-size: 0.65rem;
     }
 
+    .logout-link:hover {
+        text-decoration: none;
+    }
     /* Bouton accessibilité */
     #bouton-dalto {
         padding: 6px 14px;
@@ -275,4 +300,153 @@ header{
     padding: 6px 12px;
     font-size: 0.65rem;
   }
+}
+
+
+
+/* =========================
+   HEADER - Homogénéisation + largeur
+   ========================= */
+
+/* Le bandeau prend toute la largeur */
+.site-header {
+  width: 100%;
+}
+
+/* Le contenu interne utilise plus de largeur (au lieu de 1100px) */
+.header-inner {
+  max-width: 1400px;               /* <-- augmente l'espace disponible */
+  width: calc(100% - 64px);        /* padding “virtuel” */
+  margin: 0 auto;
+  height: 80px;
+  padding: 0;                      /* on gère via width */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 28px;
+}
+
+/* Menu au centre, occupe l'espace dispo */
+.main-nav {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  gap: clamp(1.2rem, 3vw, 3rem);   /* spacing fluide */
+}
+
+/* Zone profil à droite bien alignée */
+.profile-zone {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-left: 0;                  /* pas nécessaire si main-nav flex:1 */
+  flex: 0 0 auto;
+}
+
+/* Le bloc pseudo + déconnexion aligné */
+#text-profil-zone {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  white-space: nowrap;
+}
+
+/* =========================
+   Boutons cohérents (même "hauteur" visuelle)
+   ========================= */
+.logout-link,
+#bouton-dalto {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 34px;                    /* <-- homogénéise */
+  padding: 0 14px;
+  border-radius: 999px;
+  white-space: nowrap;
+  line-height: 1;
+}
+
+/* Déconnexion : pillule bordée */
+.logout-link {
+  border: 1.5px solid #3c2b20;
+  background: transparent;
+  color: #3c2b20;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.logout-link:hover {
+  background: #3c2b20;
+  color: #fff;
+  text-decoration: none;
+}
+
+/* Accessibilité : pillule pleine (tu avais déjà, on harmonise juste hauteur/padding) */
+#bouton-dalto {
+  background: #3c2b20;
+  color: #fff;
+  border: none;
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-left: 6px;                /* petit espace après déconnexion */
+}
+
+#bouton-dalto:hover {
+  transform: translateY(-1px);
+}
+
+/* Avatar légèrement ajusté pour alignement */
+.profile-icon {
+  width: 42px;
+  height: 42px;
+}
+
+/* =========================
+   Responsive Option A (≤ 900px) : menu en dessous
+   ========================= */
+@media (max-width: 900px) {
+  .header-inner {
+    max-width: 1400px;
+    width: calc(100% - 32px);
+    flex-wrap: wrap;
+    height: auto;
+    padding: 10px 0;
+    gap: 12px;
+  }
+
+  .main-nav {
+    order: 3;
+    flex: 0 0 100%;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1.2rem;
+    padding-bottom: 6px;
+  }
+
+  .logo-img { height: 70px; }
+}
+
+/* Mobile : on compacte un peu la zone droite mais on garde Déconnexion visible */
+@media (max-width: 768px) {
+  .logo-img { height: 55px; }
+  .profile-icon { width: 36px; height: 36px; }
+
+  .profile-greeting { display: none; }
+
+  .logout-link,
+  #bouton-dalto {
+    height: 30px;
+    padding: 0 10px;
+    font-size: 0.65rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .header-inner { width: calc(100% - 20px); }
+  .main-nav { gap: 0.9rem; }
+  .nav-link { font-size: 0.75rem; letter-spacing: 0.08em; }
 }

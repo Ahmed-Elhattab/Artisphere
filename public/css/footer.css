@@ -22,3 +22,49 @@ body {
     font-size: 0.8rem;
     color: #3c2b20;
 }
+
+/* --- Responsive footer --- */
+
+/* Tablette */
+@media (max-width: 900px) {
+  .site-footer {
+    padding: 0.9rem 0;
+  }
+
+  .footer-inner {
+    gap: 2rem;
+    padding: 0 20px;
+    flex-wrap: wrap;           /* autorise le retour à la ligne */
+  }
+
+  .footer-link {
+    font-size: 0.75rem;
+  }
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  .site-footer {
+    padding: 0.8rem 0;
+  }
+
+  .footer-inner {
+    flex-direction: column;    /* empile les liens */
+    align-items: center;
+    gap: 0.8rem;
+    padding: 0 16px;
+    text-align: center;
+  }
+
+  .footer-link {
+    font-size: 0.8rem;         /* légèrement plus lisible sur mobile */
+  }
+}
+
+/* Petit mobile */
+@media (max-width: 360px) {
+  .footer-link {
+    font-size: 0.75rem;
+    letter-spacing: 0.06em;
+  }
+}

@@ -333,30 +333,107 @@
   display: block;
 }
 
+/* =========================
+   Responsive fiche produit
+   ========================= */
 
-
-/* Responsive */
+/* Tablette et moins */
 @media (max-width: 820px) {
   #page-fiche-produit {
     padding: 18px;
+    min-height: auto; /* évite des calculs bizarres sur mobile */
   }
 
+  /* 1 colonne */
   #page-fiche-produit form {
     grid-template-columns: 1fr;
+    gap: 14px;
   }
 
-  #page-fiche-produit .imagerond {
-    grid-column: 1 / -1;
-    justify-self: start;
-  }
-
+  /* IMPORTANT : on annule les placements en colonnes */
+  #page-fiche-produit .para_produit,
+  #page-fiche-produit .nom_produit,
+  #page-fiche-produit .para_catégorie,
+  #page-fiche-produit .choixcategorie,
+  #page-fiche-produit .para_quantités,
+  #page-fiche-produit .Quantités,
+  #page-fiche-produit .para_matériaux,
+  #page-fiche-produit .Matériaux,
+  #page-fiche-produit .para_prix,
+  #page-fiche-produit .Prix,
+  #page-fiche-produit .para_description,
+  #page-fiche-produit .Description,
   #page-fiche-produit .bouton-enregistrer {
     grid-column: 1 / -1;
-    justify-self: start;
+    justify-self: stretch;
   }
 
+  /* Bouton full width (plus confortable mobile) */
+  #page-fiche-produit .bouton-enregistrer {
+    width: 100%;
+    min-width: 0;
+  }
+
+  /* Champs qui avaient un max-width */
   #page-fiche-produit .Quantités,
   #page-fiche-produit .Prix {
     max-width: 100%;
+  }
+
+  /* Bloc photo : passe en colonne */
+  .product-photo-block {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    margin: 12px 0 10px;
+  }
+
+  /* Avatar : évite les min-width trop grands */
+  .product-avatar {
+    width: 120px !important;
+    height: 120px !important;
+    min-width: 0;
+    min-height: 0;
+  }
+
+  /* Miniatures : un peu plus compact */
+  .thumb {
+    width: 48px;
+    height: 48px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  #page-fiche-produit {
+    padding: 14px;
+  }
+
+  #page-fiche-produit .titre-produit {
+    font-size: 1.2rem;
+  }
+
+  #page-fiche-produit input[type="text"],
+  #page-fiche-produit input[type="number"],
+  #page-fiche-produit select,
+  #page-fiche-produit textarea {
+    padding: 11px 12px;
+    border-radius: 16px;
+  }
+
+  .product-avatar {
+    width: 104px !important;
+    height: 104px !important;
+  }
+
+  .preview-thumb {
+    width: 38px;
+    height: 38px;
+  }
+
+  .form-success-box,
+  .form-error-box {
+    margin: 16px auto;
+    padding: 14px 16px;
   }
 }

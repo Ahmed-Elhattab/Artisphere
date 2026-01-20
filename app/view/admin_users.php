@@ -42,13 +42,13 @@
               <td class="actions-col">
 
                 <?php if ($u['role'] !== 'admin'): ?>
-                  <form method="post" action="/artisphere/?controller=admin_users&action=promote" class="inline">
+                  <!--<form method="post" action="/artisphere/?controller=admin_users&action=promote" class="inline">
                     <input type="hidden" name="csrf" value="<?= htmlspecialchars($csrf, ENT_QUOTES, 'UTF-8') ?>">
                     <input type="hidden" name="id" value="<?= (int)$u['id_personne'] ?>">
                     <input type="hidden" name="q" value="<?= htmlspecialchars($q ?? '', ENT_QUOTES, 'UTF-8') ?>">
                     <input type="hidden" name="page" value="<?= (int)$page ?>">
                     <button class="btn-outline" type="submit">Promouvoir</button>
-                  </form>
+                  </form>-->
                 <?php endif; ?>
 
                 <?php if ((int)$_SESSION['user']['id'] !== (int)$u['id_personne']): ?>

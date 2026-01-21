@@ -28,8 +28,13 @@ public function nouveau(): void
     public function envoyer(): void
     {
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            $email_dest = htmlspecialchars($_POST['email'] ?? '');
+            $email_dest = htmlspecialchars($_POST['email'] ?? '');  
 
+        // --- ÉTAPE CRUCIALE : Trouver l'utilisateur pour avoir son ID ---
+        $user = PersonneModel::findByPseudoOrEmail($email_dest);
+
+        if ($user) {
+            $userId = $user['id_personne']; // On récupère l'ID
             
             require __DIR__ . '/../../libs/PHPMailer/Exception.php';
             require __DIR__ . '/../../libs/PHPMailer/PHPMailer.php';
@@ -54,8 +59,8 @@ public function nouveau(): void
                 // Contenu
                 $mail->isHTML(true);
                 $mail->Subject = 'Reinitialisation de votre mot de passe';
-                $mail->Body    = "Cliquez ici pour changer votre mot de passe : <a href='http://localhost/artisphere/?controller=mot_de_passe_oublie&action=nouveau'>Lien de réinitialisation</a>";
-
+                $lien = "http://localhost/artisphere/?controller=mot_de_passe_oublie&action=nouveau&id=" . $userId;
+                $mail->Body = "Cliquez ici pour changer votre mot de passe : <a href='$lien'>Lien de réinitialisation</a>";
                 $mail->send();
             } catch (Exception $e) {
                 
@@ -64,6 +69,30 @@ public function nouveau(): void
             // Redirection vers la page de connexion 
             header("Location: ?controller=connexion&action=index&status=success");
             exit();
+        }
+    }
+    }
+
+    public function update(): void
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $userId = $_POST['user_id'] ?? null;
+            $newPassword = $_POST['new-password'] ?? '';
+            $confirmPassword = $_POST['confirm-password'] ?? '';
+
+            if ($userId && $newPassword === $confirmPassword && !empty($newPassword)) {
+                // On hache le mot de passe
+                $hash = password_hash($newPassword, PASSWORD_DEFAULT);
+
+                // On appelle la fonction de ton modèle (qui est correcte !)
+                if (PersonneModel::updatePassword((int)$userId, $hash)) {
+                    // Succès : on redirige vers la connexion
+                    header("Location: /artisphere/?controller=connexion&action=index&msg=success_pwd");
+                    exit();
+                }
+            }
+            // Si ça échoue
+            die("Erreur : Les mots de passe ne correspondent pas ou l'ID est invalide.");
         }
     }
 

@@ -1,4 +1,3 @@
-
 <main class="auth-page">
 
   <!-- Bouton retour -->

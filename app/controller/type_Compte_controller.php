@@ -5,7 +5,7 @@ class type_Compte_controller extends BaseController
     {
         $this->render('type_Compte.php', [
             'title' => 'Artisphere – Choisir son profil',
-            'pageCss' => 'type_Compte-style.css'
+            'pageCss' => 'type_Compte2-style.css'
         ]);
     }
 

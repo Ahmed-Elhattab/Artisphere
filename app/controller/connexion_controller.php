@@ -42,7 +42,7 @@ class connexion_controller extends BaseController
         if (!empty($errors)) {
             $this->render('connexion.php', [
                 'title'   => 'Artisphere – Connexion',
-                'pageCss' => 'connexion-style.css',
+                'pageCss' => 'connexion2-style.css',
                 'errors'  => $errors
             ]);
             return;

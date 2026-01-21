@@ -79,7 +79,7 @@ class profil_controller extends BaseController
             // Réaffiche profil avec erreurs
             $this->render('profil.php', [
                 'title' => 'Artisphere – Connexion',
-                'pageCss' => 'connexion-style.css',
+                'pageCss' => 'connexion2-style.css',
                 'errors'  => $errors,
             ]);
             return;
@@ -102,7 +102,7 @@ class profil_controller extends BaseController
         if (!move_uploaded_file($_FILES['avatar']['tmp_name'], $destPath)) {
             $this->render('profil.php', [
                 'title' => 'Artisphere – Connexion',
-                'pageCss' => 'connexion-style.css',
+                'pageCss' => 'connexion2-style.css',
                 'errors'  => ["Erreur lors de l'enregistrement du fichier."],
             ]);
             return;

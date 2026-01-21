@@ -26,7 +26,7 @@ body {
 /* --- Responsive footer --- */
 
 /* Tablette */
-@media (max-width: 900px) {
+@media (max-width: 992px) {
   .site-footer {
     padding: 0.9rem 0;
   }

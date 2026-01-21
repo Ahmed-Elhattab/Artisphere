@@ -159,120 +159,97 @@ header{
     text-decoration: underline;
 }
 
-@media (max-width: 900px) {
 
-    .header-inner {
-        padding: 0 20px;
-        gap: 20px;
-    }
 
-    .main-nav {
-        gap: 1.5rem;
-    }
+/* =========================
+   TABLET (≤ 992px)
+   ========================= */
+@media (max-width: 992px) {
 
-    .nav-link {
-        font-size: 0.8rem;
-    }
-
-    .logo-img {
-        height: 70px;
-    }
-
-}
-
-@media (max-width: 768px) {
-
-    /* Header plus petit */
-    .header-inner {
-        height: 70px;
-        padding: 0 15px;
-    }
-
-    /* Logo réduit */
-    .logo-img {
-        height: 55px;
-    }
-
-    /* Profil plus compact */
-    .profile-icon {
-        width: 36px;
-        height: 36px;
-        font-size: 1.1rem;
-    }
-
-    .profile-greeting {
-        display: none; /* cache le pseudo */
-    }
-
-    .logout-link {
-        display: none;
-    }
-
-    /* Bouton accessibilité */
-    #bouton-dalto {
-        padding: 6px 14px;
-        font-size: 0.65rem;
-        margin-left: 10px;
-    }
-
-}
-
-@media (max-width: 480px) {
-
-    .header-inner {
-        padding: 0 10px;
-    }
-
-    #bouton-dalto {
-        padding: 5px 12px;
-        font-size: 0.6rem;
-    }
-
-}
-
-@media (max-width: 900px) {
   .header-inner{
-    flex-wrap: wrap;          /* autorise le retour à la ligne */
-    height: auto;             /* plus de hauteur fixe */
-    padding: 10px 20px;
-    gap: 12px;
+    max-width: 100%;
+    padding: 0 20px;
+    gap: 14px;
+  }
+
+  .main-nav{
+    gap: 1.4rem;
+    flex-wrap: wrap;
+  }
+
+  .logo-img{
+    height: 70px;
+  }
+
+  .profile-zone{
+    gap: 10px;
+  }
+
+  #bouton-dalto{
+    margin-left: 10px;
+    padding: 7px 14px;
+    font-size: 0.72rem;
+  }
+}
+
+
+/* =========================
+   MOBILE (≤ 600px)
+   ========================= */
+@media (max-width: 600px) {
+
+  .header-inner{
+    max-width: 100%;
+    height: auto;
+    padding: 10px 12px;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: space-between;
   }
 
   .logo-zone{
     flex: 0 0 auto;
   }
 
+  .logo-img{
+    height: 54px;
+  }
+
   .profile-zone{
     flex: 0 0 auto;
-    margin-left: auto;        /* reste à droite sur la 1ère ligne */
+    margin-left: auto;
+    gap: 8px;
   }
 
-  .main-nav{
-    order: 3;                 /* le menu passe en dessous */
-    flex: 0 0 100%;           /* prend toute la largeur */
-    justify-content: center;
-    flex-wrap: wrap;          /* les liens peuvent revenir à la ligne */
-    gap: 1.2rem;
-    padding-bottom: 6px;
+  .profile-greeting,
+  .logout-link{
+    display: none;
   }
 
-  .nav-link{
-    font-size: 0.8rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .main-nav{
-    gap: 0.9rem;
-  }
-  .nav-link{
-    font-size: 0.75rem;
-    letter-spacing: 0.08em;
+  .profile-icon{
+    width: 34px;
+    height: 34px;
+    font-size: 1.05rem;
   }
 
-  /* optionnel : bouton accessibilité plus compact */
   #bouton-dalto{
-    padding: 6px 12px;
-    font-size: 0.65rem;
+    margin-left: 0;
+    padding: 6px 10px;
+    font-size: 0.62rem;
+  }
+
+  .main-nav{
+    order: 3;
+    flex: 0 0 100%;
+    width: 100%;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.9rem;
+    padding: 6px 0 2px;
+  }
+
+  .nav-link{
+    font-size: 0.76rem;
+    letter-spacing: 0.08em;
   }
 }

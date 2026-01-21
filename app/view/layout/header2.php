@@ -54,9 +54,9 @@
         // Construction de l’URL avatar (si existant)
         $avatarUrl = null;
         if ($isLogged && $avatarFile) {
-            $diskPath = rtrim($_SERVER['DOCUMENT_ROOT'], '/\\') . '../images/avatars/' . $avatarFile;
+            $diskPath = rtrim($_SERVER['DOCUMENT_ROOT'], '/\\') . 'images/avatars/' . $avatarFile;
             if (is_file($diskPath)) {
-                $avatarUrl = '../images/avatars/' . $avatarFile;
+                $avatarUrl = 'images/avatars/' . $avatarFile;
             }
         }
         ?>

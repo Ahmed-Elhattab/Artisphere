@@ -48,9 +48,6 @@ class connexion_controller extends BaseController
             return;
         }
 
-        // connexion réussie = démarrage de la session
-        session_start();
-
         $_SESSION['user'] = [
             'id'     => $user['id_personne'],
             'pseudo' => $user['pseudo'],
@@ -69,7 +66,18 @@ class connexion_controller extends BaseController
     #deconnexion de l'utilisateur
     public function logout(): void
     {
-        session_start();
+
+        $_SESSION = []; // vide la session
+
+        // optionnel mais recommandé : supprimer le cookie
+        if (ini_get("session.use_cookies")) {
+            $params = session_get_cookie_params();
+            setcookie(session_name(), '', time() - 42000,
+                $params["path"], $params["domain"],
+                $params["secure"], $params["httponly"]
+            );
+        }
+
         session_destroy();
 
         header('Location: /artisphere/?controller=index&action=index');

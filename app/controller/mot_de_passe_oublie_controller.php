@@ -30,55 +30,52 @@ public function nouveau(): void
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $email_dest = htmlspecialchars($_POST['email'] ?? '');  
 
-        // --- ÉTAPE CRUCIALE : Trouver l'utilisateur pour avoir son ID ---
-        $user = PersonneModel::findByPseudoOrEmail($email_dest);
+            // --- ÉTAPE CRUCIALE : Trouver l'utilisateur pour avoir son ID ---
+            $user = PersonneModel::findByPseudoOrEmail($email_dest);
 
-        if ($user) {
-            $userId = $user['id_personne']; // On récupère l'ID
-            
-            require __DIR__ . '/../../libs/PHPMailer/Exception.php';
-            require __DIR__ . '/../../libs/PHPMailer/PHPMailer.php';
-            require __DIR__ . '/../../libs/PHPMailer/SMTP.php';
-
-            $mail = new PHPMailer(true);
-
-            try {
-                // Configuration Mailtrap
-                $mail->isSMTP();
-                $mail->Host       = 'smtp.gmail.com';
-                $mail->SMTPAuth   = true;
-                $mail->Port       = 587;
-                $mail->Username   = 'thushjan9@gmail.com'; 
-                $mail->Password   = 'acik kzjw daik sqdb'; 
-                $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-
-                // Destinataires
-                $mail->setFrom('thushjan9@gmail.com', 'Artisphere');
-                $mail->addAddress($email_dest);
-
-                // Contenu
-                $mail->isHTML(true);
-                $mail->Subject = 'Reinitialisation de votre mot de passe';
-                $lien = "http://localhost/artisphere/?controller=mot_de_passe_oublie&action=nouveau&id=" . $userId;
-                $mail->Body = "Cliquez ici pour changer votre mot de passe : <a href='$lien'>Lien de réinitialisation</a>";
-                $mail->send();
-            } catch (Exception $e) {
+            if ($user) {
+                $userId = $user['id_personne']; // On récupère l'ID
                 
+                require __DIR__ . '/../../libs/PHPMailer/Exception.php';
+                require __DIR__ . '/../../libs/PHPMailer/PHPMailer.php';
+                require __DIR__ . '/../../libs/PHPMailer/SMTP.php';
+
+                $mail = new PHPMailer(true);
+
+                try {
+                    // Configuration Mailtrap
+                    $mail->isSMTP();
+                    $mail->Host       = 'smtp.gmail.com';
+                    $mail->SMTPAuth   = true;
+                    $mail->Port       = 587;
+                    $mail->Username   = 'thushjan9@gmail.com'; 
+                    $mail->Password   = 'acik kzjw daik sqdb'; 
+                    $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+
+                    // Destinataires
+                    $mail->setFrom('thushjan9@gmail.com', 'Artisphere');
+                    $mail->addAddress($email_dest);
+
+                    // Contenu
+                    $mail->isHTML(true);
+                    $mail->Subject = 'Reinitialisation de votre mot de passe';
+                    $lien = "http://localhost/artisphere/?controller=mot_de_passe_oublie&action=nouveau&id=" . $userId;
+                    $mail->Body = "Cliquez ici pour changer votre mot de passe : <a href='$lien'>Lien de réinitialisation</a>";
+                    $mail->send();
+                } catch (Exception $e) {
+                    
+                }
+
+                // Redirection vers la page de connexion 
+                header("Location: ?controller=connexion&action=index&status=success");
+                exit();
+            }
+            else {
+                header("Location: ?controller=mot_de_passe_oublie&action=index&status=notfound");
+                exit();
             }
 
-            // Redirection vers la page de connexion 
-            header("Location: ?controller=connexion&action=index&status=success");
-            exit();
         }
-        else {
-            // Si l'email n'existe pas, on peut afficher un message d'erreur ou rediriger
-            $this->render('Mot_de_passe_oublie.php', [
-                'title' => 'Artisphere – Mot_de_passe_oublie',
-                'pageCss' => 'styles_Thushjan.css',
-                'error' => 'l\'Adresse email spécifiée n\'est reliée à aucun compte.'
-            ]);
-        }
-    }
     }
 
     public function update(): void

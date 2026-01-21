@@ -11,6 +11,14 @@
 
 <body id="Mot-de-passe-oublie">
 
+
+<?php if (isset($_GET['status']) && $_GET['status'] === 'notfound'): ?>
+<script>
+  alert("Aucun compte trouvé avec cet email, merci de spécifier un email en lien avec un compte.");
+</script>
+<?php endif; ?>
+
+
 <!--- CONTENU --->
 
 <div class="container">

@@ -8,7 +8,7 @@ class connexion_controller extends BaseController
     {
         $this->render('connexion.php', [
             'title' => 'Artisphere – Connexion',
-            'pageCss' => 'connexion-style.css'
+            'pageCss' => 'connexion2-style.css'
         ]);
     }
 

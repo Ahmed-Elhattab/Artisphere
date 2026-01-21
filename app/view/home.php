@@ -178,7 +178,7 @@
     align-items: flex-start;
     padding: 90px 40px 60px;
     overflow: hidden;
-    background: url("../images/home.png") center/cover no-repeat;
+    background: url("../images/Home.png") center/cover no-repeat;
   }
   .home .home-hero__overlay{
     position: absolute;

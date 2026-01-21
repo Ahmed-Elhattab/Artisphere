@@ -11,7 +11,7 @@
     align-items: flex-start;
     padding: 90px 40px 60px;
     overflow: hidden;
-    background: url("../images/home.png") center/cover no-repeat; /* artisphere */
+    background: url("../images/Home.png") center/cover no-repeat; /* artisphere */
   }
   .home .home-hero__overlay{
     position:absolute; inset:0;

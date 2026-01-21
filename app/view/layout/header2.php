@@ -12,13 +12,16 @@
     ?>
     <base href="<?= htmlspecialchars($base . '/', ENT_QUOTES, 'UTF-8') ?>">
 
-    <link rel="stylesheet" href="css/header2.css">
-    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="<?= htmlspecialchars($base, ENT_QUOTES, 'UTF-8') ?>/css/header2.css">
+    <link rel="stylesheet" href="<?= htmlspecialchars($base, ENT_QUOTES, 'UTF-8') ?>/css/footer.css">
     <!-- <link rel="stylesheet" href="css/styles_Thushjan.css"> -->
 
     <?php if (!empty($pageCss)): ?>
-        <link rel="stylesheet" href="css/<?= htmlspecialchars($pageCss, ENT_QUOTES, 'UTF-8') ?>">
+        <link rel="stylesheet" href="<?= htmlspecialchars($base, ENT_QUOTES, 'UTF-8') ?>/css/<?= htmlspecialchars($pageCss, ENT_QUOTES, 'UTF-8') ?>">
     <?php endif; ?>
+
+    <?php /* DEBUG TEMPORAIRE */ ?>
+<!-- pageCss = <?= htmlspecialchars(is_array($pageCss ?? null) ? json_encode($pageCss) : ($pageCss ?? 'NULL'), ENT_QUOTES, 'UTF-8') ?> -->
 </head>
 
 <header class="site-header">

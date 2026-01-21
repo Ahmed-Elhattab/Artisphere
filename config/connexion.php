@@ -3,7 +3,7 @@ function getPDO(): PDO
 {
     
     //Recupération des informations de connexion à la BD
-    $env = parse_ini_file(__DIR__ . '/.env');
+    //remettre si pas connecter hangar garage : $env = parse_ini_file(__DIR__ . '/.env');
 
     $db_host = $env['DB_HOST'] ?? 'localhost';
     $db_name = $env['DB_NAME'] ?? '';

@@ -1,7 +1,7 @@
 <?php
 $oldRating = (int)($old['rating'] ?? 5);
 $oldMsg = (string)($old['message'] ?? '');
-$img = !empty($artisan['avatar']) ? 'images/avatars/' . $artisan['avatar'] : null;
+$img = !empty($artisan['avatar']) ? '/public/images/avatars/' . $artisan['avatar'] : null;
 ?>
 
 <main class="container">

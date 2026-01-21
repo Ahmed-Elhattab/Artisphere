@@ -1,7 +1,7 @@
 <?php 
 // Avatar
 $avatarFile = $artisan['avatar'] ?? null;
-$avatarDir  = 'images/avatars/';
+$avatarDir  = '/public/images/avatars/';
 $avatarUrl  = null;
 
 if ($avatarFile) {

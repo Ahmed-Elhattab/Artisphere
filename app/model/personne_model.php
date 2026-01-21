@@ -216,3 +216,17 @@ class PersonneModel
         return $u ?: null;
     }
 }
+
+// Met à jour le mot de passe d'un utilisateur
+public static function updatePassword(int $id, string $hashedPassword): bool
+{
+    $pdo = Database::getConnection();
+
+    $sql = "UPDATE personne SET mdp = :mdp WHERE id_personne = :id";
+    $stmt = $pdo->prepare($sql);
+
+    return $stmt->execute([
+        ':mdp' => $hashedPassword,
+        ':id'  => $id,
+    ]);
+}

@@ -32,14 +32,14 @@
             <?php
             
             $avatarFile = $_SESSION['user']['avatar'] ?? null; // chemin de l'avatar stocké dans la session
-            $avatarDir  = '/public/images/avatars/'; //chemin dans projet visual code
+            $avatarDir  = 'images/avatars/'; //chemin dans projet visual code
             $avatarUrl  = null;
 
             //verif si le fichier n'a pas été supprimmé
             if ($avatarFile) {
                 $fullPath = $avatarDir . $avatarFile;
                 if (is_file($fullPath)) {
-                    $avatarUrl = '/public/images/avatars/' . $avatarFile;
+                    $avatarUrl = 'images/avatars/' . $avatarFile;
                 }
             }
             ?>

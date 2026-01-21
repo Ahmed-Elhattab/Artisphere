@@ -70,6 +70,14 @@ public function nouveau(): void
             header("Location: ?controller=connexion&action=index&status=success");
             exit();
         }
+        else {
+            // Si l'email n'existe pas, on peut afficher un message d'erreur ou rediriger
+            $this->render('Mot_de_passe_oublie.php', [
+                'title' => 'Artisphere – Mot_de_passe_oublie',
+                'pageCss' => 'styles_Thushjan.css',
+                'error' => 'l\'Adresse email spécifiée n\'est reliée à aucun compte.'
+            ]);
+        }
     }
     }
 

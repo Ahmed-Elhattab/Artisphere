@@ -39,7 +39,7 @@ const realIndex = topics.indexOf(t);
     list.innerHTML += `
       <div class="topic">
         <div class="topic-title">
-          <a href="/artisphere/?controller=forum_contenu_sujet&id=${realIndex}" style="text-decoration:none; color:inherit; font-weight:bold;">
+          <a href="/artisphere/?controller=Forum_contenu_sujet&id=${realIndex}" style="text-decoration:none; color:inherit; font-weight:bold;">
             ${t.title}
           </a>
         </div>

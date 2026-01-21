@@ -76,7 +76,7 @@
       <button id="submit-btn" type="submit" class="primary-btn">Créer le compte</button>
 
 
-      <a href="/artisphere/?controller=faq&action=index" class="help-link">Besoin d’aide ?</a>
+      <a href="/artisphere/?controller=FAQ&action=index" class="help-link">Besoin d’aide ?</a>
 
     </form>
 

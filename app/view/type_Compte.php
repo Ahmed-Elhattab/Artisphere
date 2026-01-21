@@ -17,7 +17,7 @@
       <a href="/artisphere/?controller=inscription_Artisans&action=index" class="choice-btn">Compte artisan</a>
       <a href="/artisphere/?controller=inscription_Admin&action=index" class="choice-btn">Compte administrateur</a>
 
-      <a  href="/artisphere/?controller=faq&action=index" class="help-link">Besoin d’aide ?</a>
+      <a  href="/artisphere/?controller=FAQ&action=index" class="help-link">Besoin d’aide ?</a>
 
     </div>
 

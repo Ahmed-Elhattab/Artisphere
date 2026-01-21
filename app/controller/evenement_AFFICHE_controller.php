@@ -8,7 +8,7 @@ class evenement_AFFICHE_controller extends BaseController
     public function index(): void
     {
         // number of events to show on one page
-        $limit = 8;
+        $limit = 3;
 
         // current events page, for example: ?p_evt=2
         $pEvt = isset($_GET['p_evt']) ? (int)$_GET['p_evt'] : 1;

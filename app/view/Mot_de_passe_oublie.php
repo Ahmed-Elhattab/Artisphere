@@ -11,7 +11,7 @@
 
 <body id="Mot-de-passe-oublie">
 
-<!-- CONTENU -->
+<!--- CONTENU --->
 
 <div class="container">
         <header class="form-header">

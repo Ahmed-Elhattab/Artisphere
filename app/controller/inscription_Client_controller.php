@@ -8,7 +8,7 @@ class inscription_Client_controller extends BaseController
     {
         $this->render('inscription_Client.php', [
             'title' => 'Artisphere – Création de compte client',
-            'pageCss' => 'inscription_Client-style.css',
+            'pageCss' => 'inscription_Client2-style.css',
             'pageJs'  => 'password_rules.js'
         ]);
     }
@@ -67,7 +67,7 @@ class inscription_Client_controller extends BaseController
         if (!empty($errors)) {
             $this->render('inscription_Client.php', [
                 'title'   => 'Artisphere – Création de compte client',
-                'pageCss' => 'inscription_Client-style.css',
+                'pageCss' => 'inscription_Client2-style.css',
                 'pageJs'  => 'password_rules.js',
                 'errors'  => $errors,
                 'old'     => compact('pseudo','prenom','nom','email')

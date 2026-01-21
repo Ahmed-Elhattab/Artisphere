@@ -72,15 +72,15 @@
             <?php foreach ($produits as $p): ?>
             <?php
                 $img = !empty($p['image'])
-                ? '/artisphere/images/produits/' . $p['image']
-                : '/artisphere/images/produit.png';
+                ? '../images/produits/' . $p['image']
+                : '../images/produit.png';
             ?>
 
             <a class="product-card"
                 href="/artisphere/?controller=produit_show&action=show&id=<?= (int)$p['id_produit'] ?>">
                 <img src="<?= htmlspecialchars($img, ENT_QUOTES, 'UTF-8') ?>"
                     alt="<?= htmlspecialchars($p['nom'], ENT_QUOTES, 'UTF-8') ?>"
-                    onerror="this.onerror=null; this.src='/artisphere/images/produit.png';">
+                    onerror="this.onerror=null; this.src='../images/produit.png';">
 
                 <div class="price-tag">
                 <?= htmlspecialchars($p['nom'], ENT_QUOTES, 'UTF-8') ?>

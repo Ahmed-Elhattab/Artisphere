@@ -8,7 +8,7 @@ class inscription_Artisans_controller extends BaseController
     {
         $this->render('inscription_Artisans.php', [
             'title' => 'Artisphere – Création de compte artisan',
-            'pageCss' => 'inscription_Artisans-style.css',
+            'pageCss' => 'inscription_Artisans2-style.css',
             'pageJs'  => 'password_rules.js'
         ]);
     }
@@ -68,7 +68,7 @@ class inscription_Artisans_controller extends BaseController
         if (!empty($errors)) {
             $this->render('inscription_Artisans.php', [
                 'title'   => 'Artisphere – Création de compte artisan',
-                'pageCss' => 'inscription_Artisans-style.css',
+                'pageCss' => 'inscription_Artisans2-style.css',
                 'pageJs'  => 'password_rules.js',
                 'errors'  => $errors,
                 'old'     => compact('pseudo','prenom','nom','email','adresse')

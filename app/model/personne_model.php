@@ -215,7 +215,6 @@ class PersonneModel
         $u = $stmt->fetch(PDO::FETCH_ASSOC);
         return $u ?: null;
     }
-}
 
 // Met à jour le mot de passe d'un utilisateur
 public static function updatePassword(int $id, string $hashedPassword): bool
@@ -229,4 +228,5 @@ public static function updatePassword(int $id, string $hashedPassword): bool
         ':mdp' => $hashedPassword,
         ':id'  => $id,
     ]);
+}
 }

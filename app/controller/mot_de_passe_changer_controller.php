@@ -12,33 +12,32 @@ class mot_de_passe_changer_controller extends BaseController
         ]);
     }
 
-public function update(): void
-    {
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $newPassword = $_POST['new-password'];
-            $confirmPassword = $_POST['confirm-password'];
+public function update(): void {
+    if (session_status() === PHP_SESSION_NONE) session_start();
+    
+    $userId = $_SESSION['user_id'] ?? null;
 
-            // 1. Vérification de correspondance
-            if ($newPassword !== $confirmPassword) {
-                die("Erreur : Les mots de passe ne correspondent pas.");
-            }
+    if (!$userId) {
+        // Test : affiche l'erreur session pour vérifier
+        die("Erreur : Vous n'êtes pas connecté (Session vide).");
+    }
 
-            // 2. Récupération de l'ID utilisateur (via la session)
-            if (session_status() === PHP_SESSION_NONE) session_start();
-            $userId = $_SESSION['user_id'] ?? null;
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $newPassword = $_POST['new-password'];
+        $confirmPassword = $_POST['confirm-password'];
 
-            if ($userId) {
-                // 3. Hachage du mot de passe
-                $hash = password_hash($newPassword, PASSWORD_DEFAULT);
+        if ($newPassword !== $confirmPassword) {
+            die("Erreur : Les mots de passe ne correspondent pas.");
+        }
 
-                // 4. Mise à jour via le modèle
-                if (PersonneModel::updatePassword($userId, $hash)) {
-                    // Redirection avec succès
-                    header("Location: /artisphere/?controller=profil&action=index&success=1");
-                    exit();
-                }
-            }
-            die("Erreur lors de la mise à jour.");
+        $hash = password_hash($newPassword, PASSWORD_DEFAULT);
+
+        if (PersonneModel::updatePassword($userId, $hash)) {
+            header("Location: /artisphere/?controller=profil&action=index&success=1");
+            exit();
+        } else {
+            die("Erreur : La base de données a refusé la mise à jour.");
         }
     }
+}
 }

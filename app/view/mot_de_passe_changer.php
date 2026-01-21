@@ -19,7 +19,8 @@
         <h1>CHOISIR UN NOUVEAU MOT DE PASSE</h1>
     </header>
 
-    <form action="/artisphere/?controller=mot_de_passe_changer&action=update" method="POST">
+    <form action="/artisphere/?controller=mot_de_passe_oublie&action=update" method="POST">
+        <input type="hidden" name="user_id" value="<?= $_GET['id'] ?? $userId ?>">
         <p class="instruction">Veuillez saisir votre nouveau mot de passe ci-dessous.</p>
 
         <div class="input-group">

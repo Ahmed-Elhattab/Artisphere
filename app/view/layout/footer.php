@@ -8,7 +8,7 @@
     <!--rajoute un fichier js si il y en a un de spécifier dans le controleur-->
     <?php if (!empty($pageJs)): ?>
         <?php foreach ((array)$pageJs as $js): ?>
-            <script src="/artisphere/js/<?= htmlspecialchars($js) ?>"></script>
+            <script src="<?= htmlspecialchars($base, ENT_QUOTES, 'UTF-8') ?>/js/<?= htmlspecialchars($js) ?>"></script>
         <?php endforeach; ?>
     <?php endif; ?>
 </footer>

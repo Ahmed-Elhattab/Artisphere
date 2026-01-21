@@ -91,7 +91,7 @@ class profil_controller extends BaseController
         $newName = 'u' . (int)$_SESSION['user']['id'] . '_' . bin2hex(random_bytes(8)) . '.' . $ext;
 
         //dossier images (dans public)
-        $destDir = dirname(__DIR__, 2) . 'images/avatars/';
+        $destDir = dirname(__DIR__, 2) . '../images/avatars/';
         if (!is_dir($destDir)) {
             mkdir($destDir, 0775, true);
         }

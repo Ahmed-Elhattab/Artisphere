@@ -79,14 +79,14 @@
           <?php foreach ($produits as $p): ?>
             <?php
               $img = !empty($p['image'])
-                ? "../images/produits/" . $p['image']
-                : "../images/produit.png";
+                ? "images/produits/" . $p['image']
+                : "images/produit.png";
             ?>
             <article class="tile" role="listitem">
               <img class="tile__img"
                    src="<?= htmlspecialchars($img, ENT_QUOTES, 'UTF-8') ?>"
                    alt="<?= htmlspecialchars($p['nom'] ?? 'Produit', ENT_QUOTES, 'UTF-8') ?>"
-                   onerror="this.onerror=null; this.src='../images/produit.png';">
+                   onerror="this.onerror=null; this.src='images/produit.png';">
 
               <div class="tile__body">
                 <div class="tile__title">
@@ -124,14 +124,14 @@
           <?php foreach ($evenements as $e): ?>
             <?php
               $img = !empty($e['image'])
-                ? "../images/evenements/" . $e['image']
-                : "../images/image-photo.jpg";
+                ? "images/evenements/" . $e['image']
+                : "images/image-photo.jpg";
             ?>
             <article class="tile tile--event" role="listitem">
               <img class="tile__img"
                    src="<?= htmlspecialchars($img, ENT_QUOTES, 'UTF-8') ?>"
                    alt="<?= htmlspecialchars($e['nom'] ?? 'Événement', ENT_QUOTES, 'UTF-8') ?>"
-                   onerror="this.onerror=null; this.src='../images/image-photo.jpg';">
+                   onerror="this.onerror=null; this.src='images/image-photo.jpg';">
 
               <div class="tile__body">
                 <div class="tile__title">
@@ -178,7 +178,7 @@
     align-items: flex-start;
     padding: 90px 40px 60px;
     overflow: hidden;
-    background: url("../images/Home.png") center/cover no-repeat;
+    background: url("images/Home.png") center/cover no-repeat;
   }
   .home .home-hero__overlay{
     position: absolute;

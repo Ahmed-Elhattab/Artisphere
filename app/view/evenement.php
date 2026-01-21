@@ -81,8 +81,8 @@
           <?php foreach ($events as $e): ?>
             <?php
               $img = !empty($e['image'])
-                ? '../images/evenements/' . $e['image']
-                : '../images/image-photo.jpg';
+                ? 'images/evenements/' . $e['image']
+                : 'images/image-photo.jpg';
 
               $isFree = ((float)($e['prix'] ?? 0) <= 0);
               $places = (int)($e['nombre_place'] ?? 0);
@@ -99,7 +99,7 @@
               <img class="event-img"
                    src="<?= htmlspecialchars($img, ENT_QUOTES, 'UTF-8') ?>"
                    alt="<?= htmlspecialchars($e['nom'] ?? '', ENT_QUOTES, 'UTF-8') ?>"
-                   onerror="this.onerror=null; this.src='../images/image-photo.jpg';">
+                   onerror="this.onerror=null; this.src='images/image-photo.jpg';">
 
               <span class="event-tag <?= htmlspecialchars($tagClass, ENT_QUOTES, 'UTF-8') ?>">
                 <?= htmlspecialchars($typeNom !== '' ? $typeNom : 'Type', ENT_QUOTES, 'UTF-8') ?>

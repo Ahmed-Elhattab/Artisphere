@@ -10,10 +10,10 @@ class Database
             $envPath = dirname(__DIR__, 2) . '/.env';
             $env = parse_ini_file($envPath);
 
-            $host = $env('DB_HOST') ?? 'localhost';
-            $name = $env('DB_NAME') ?? '';
-            $user = $env('DB_USER') ?? '';
-            $pass = $env('DB_PASS') ?? '';
+            $host = $env['DB_HOST'] ?? 'localhost';
+            $name = $env['DB_NAME'] ?? '';
+            $user = $env['DB_USER'] ?? '';
+            $pass = $env['DB_PASS'] ?? '';
 
             $dsn = "mysql:host=$host;dbname=$name;charset=utf8";
 

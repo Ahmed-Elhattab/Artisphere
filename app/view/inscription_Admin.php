@@ -32,7 +32,7 @@
       </div>
     <?php endif; ?>
 
-    <form class="auth-form" action="/artisphere/?controller=inscription_admin&action=submit" method="post">
+    <form class="auth-form" action="/artisphere/?controller=inscription_Admin&action=submit" method="post">
 
       <label class="field">
         <input type="text" name="username" placeholder="Identifiant" required />

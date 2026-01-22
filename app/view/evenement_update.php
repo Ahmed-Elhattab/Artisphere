@@ -4,7 +4,6 @@ $main = $event['image'] ?? null;
 
 function h($s) { return htmlspecialchars((string)$s, ENT_QUOTES, 'UTF-8'); }
 
-// fallback si main vide
 $filenames = array_values(array_filter(array_map(fn($im) => $im['filename'] ?? '', $images)));
 if (!$main && !empty($filenames)) $main = $filenames[0];
 ?>
@@ -24,6 +23,7 @@ if (!$main && !empty($filenames)) $main = $filenames[0];
       </div>
     <?php endif; ?>
 
+    <!-- FORM UPDATE -->
     <form method="post"
           action="/artisphere/?controller=evenement_update&action=submit"
           enctype="multipart/form-data"
@@ -34,7 +34,6 @@ if (!$main && !empty($filenames)) $main = $filenames[0];
 
       <div id="deletedImages"></div>
 
-      <!-- ================== GALERIE PHOTOS ================== -->
       <section class="gallery">
         <h2>Photos</h2>
 
@@ -87,7 +86,6 @@ if (!$main && !empty($filenames)) $main = $filenames[0];
         </div>
       </section>
 
-      <!-- ================== INFOS EVENT ================== -->
       <div class="grid">
         <div class="form-row">
           <label>Nom</label>
@@ -140,9 +138,30 @@ if (!$main && !empty($filenames)) $main = $filenames[0];
 
       <div class="actions">
         <button class="btn-primary" type="submit">Enregistrer</button>
-        <a class="btn-outline" href="/artisphere/?controller=evenement_show&action=show&id=<?= (int)($event['id_event'] ?? 0) ?>">Annuler</a>
+
+        <a class="btn-outline"
+           href="/artisphere/?controller=evenement_show&action=show&id=<?= (int)($event['id_event'] ?? 0) ?>">
+          Annuler
+        </a>
+
+        <!-- bouton supprimer aligné (form séparé) -->
+        <button type="submit"
+                form="deleteEventForm"
+                class="btn-danger btn-danger--ghost">
+          Supprimer l’évènement
+        </button>
       </div>
     </form>
+
+    <!-- FORM DELETE (séparé, non imbriqué) -->
+    <form id="deleteEventForm"
+          method="post"
+          action="/artisphere/?controller=evenement_update&action=delete"
+          onsubmit="return confirm('Supprimer définitivement cet évènement ? Cette action est irréversible.');">
+      <input type="hidden" name="csrf" value="<?= h($csrf ?? '') ?>">
+      <input type="hidden" name="id_event" value="<?= (int)($event['id_event'] ?? 0) ?>">
+    </form>
+
   </section>
 </main>
 

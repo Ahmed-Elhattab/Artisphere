@@ -189,4 +189,19 @@ class EvenementModel
         $stmt->execute([':id' => $idArtisan]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    public static function deleteEvent(int $idEvent, int $idCreateur): bool
+    {
+        $pdo = Database::getConnection();
+
+        // sécurité : supprime seulement si c'est bien le créateur
+        $stmt = $pdo->prepare("DELETE FROM pevent WHERE id_event = :id AND id_createur = :uid");
+        $stmt->execute([
+            ':id'  => $idEvent,
+            ':uid' => $idCreateur,
+        ]);
+
+        return $stmt->rowCount() > 0;
+    }
+
 }

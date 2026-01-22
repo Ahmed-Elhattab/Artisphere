@@ -68,8 +68,8 @@
           <?php
             // avatar
             $avatarUrl = null;
-            if (!empty($a['avatar']) && is_file('../images/avatars/' . $a['avatar'])) {
-              $avatarUrl = '../images/avatars/' . $a['avatar'];
+            if (!empty($a['avatar']) && is_file('images/avatars/' . $a['avatar'])) {
+              $avatarUrl = 'images/avatars/' . $a['avatar'];
             }
 
             $initials = mb_strtoupper(mb_substr($a['prenom'] ?? '', 0, 1) . mb_substr($a['nom'] ?? '', 0, 1));

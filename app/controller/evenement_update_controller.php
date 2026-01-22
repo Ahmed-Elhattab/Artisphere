@@ -236,4 +236,84 @@ class evenement_update_controller extends BaseController
             return;
         }
     }
+
+    public function delete(): void
+    {
+        $this->requireLogin();
+
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            header('Location: /artisphere/?controller=index&action=index');
+            exit;
+        }
+        $this->checkCsrf();
+
+        $id = (int)($_POST['id_event'] ?? 0);
+        if ($id <= 0) {
+            header('Location: /artisphere/?controller=index&action=index');
+            exit;
+        }
+
+        $event = EvenementModel::findById($id);
+        if (!$event) {
+            header('Location: /artisphere/?controller=index&action=index');
+            exit;
+        }
+
+        $userId = (int)($_SESSION['user']['id'] ?? $_SESSION['user']['id_personne'] ?? 0);
+        if ($userId <= 0 || (int)$event['id_createur'] !== $userId) {
+            http_response_code(403);
+            exit("Accès refusé.");
+        }
+
+        $pdo = Database::getConnection();
+
+        // dossier fichiers
+        $destDir = dirname(__DIR__, 2) . '/public/images/evenements/';
+
+        try {
+            $pdo->beginTransaction();
+
+            // 1) supprimer les réservations si ta DB n'a pas ON DELETE CASCADE
+            // (adapte le nom de table si besoin)
+            $pdo->prepare("DELETE FROM reservation_event WHERE id_event = ?")->execute([$id]);
+
+            // 2) récupérer les images liées + supprimer en DB
+            $imgs = EventImageModel::listForEvent($id);
+            if (!empty($imgs)) {
+                $ids = array_values(array_filter(array_map(fn($r) => (int)($r['id_image'] ?? 0), $imgs)));
+                if (!empty($ids)) {
+                    EventImageModel::deleteManyForEvent($id, $ids);
+                }
+            }
+
+            // 3) supprimer l'évènement
+            $ok = EvenementModel::deleteEvent($id, $userId);
+            if (!$ok) {
+                throw new RuntimeException("Suppression refusée ou évènement introuvable.");
+            }
+
+            $pdo->commit();
+
+            // 4) supprimer les fichiers (après commit)
+            foreach ($imgs as $im) {
+                $fn = $im['filename'] ?? '';
+                if ($fn) @unlink($destDir . $fn);
+            }
+
+            // si tu as aussi une image principale stockée dans pevent.image,
+            // et qu'elle existe en fichier (selon ton usage), tu peux aussi la supprimer :
+            if (!empty($event['image'])) {
+                @unlink($destDir . $event['image']);
+            }
+
+            header('Location: /artisphere/?controller=mes_creations&action=index&deleted=1');
+            exit;
+
+        } catch (Throwable $e) {
+            if ($pdo->inTransaction()) $pdo->rollBack();
+            http_response_code(500);
+            exit("Erreur suppression : " . $e->getMessage());
+        }
+    }
+
 }

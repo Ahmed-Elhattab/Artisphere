@@ -238,4 +238,75 @@ class produit_update_controller extends BaseController
             return;
         }
     }
+
+    public function delete(): void
+    {
+        $this->requireLogin();
+
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            header('Location: /artisphere/?controller=index&action=index');
+            exit;
+        }
+
+        $this->checkCsrf();
+
+        $idProduit = (int)($_POST['id_produit'] ?? 0);
+        if ($idProduit <= 0) {
+            header('Location: /artisphere/?controller=index&action=index');
+            exit;
+        }
+
+        $produit = ProduitModel::findById($idProduit);
+        if (!$produit) {
+            header('Location: /artisphere/?controller=index&action=index');
+            exit;
+        }
+
+        $userId = (int)($_SESSION['user']['id'] ?? $_SESSION['user']['id_personne'] ?? 0);
+        if ($userId !== (int)$produit['id_createur']) {
+            header('Location: /artisphere/?controller=produit_show&action=show&id=' . $idProduit);
+            exit;
+        }
+
+        $pdo = Database::getConnection();
+        $destDir = dirname(__DIR__, 2) . '/public/images/produits/';
+
+        try {
+            $pdo->beginTransaction();
+
+            // 1) récupérer toutes les images (table enfant)
+            $images = ProduitImageModel::listForProduit($idProduit);
+
+            // 2) supprimer en DB les images enfants
+            $ids = array_values(array_filter(array_map(fn($im) => (int)($im['id_image'] ?? 0), $images)));
+            if (!empty($ids)) {
+                ProduitImageModel::deleteManyForProduit($idProduit, $ids);
+            }
+
+            // 3) supprimer le produit
+            ProduitModel::deleteProduit($idProduit, $userId);
+
+            $pdo->commit();
+
+            // 4) supprimer les fichiers après commit
+            foreach ($images as $im) {
+                $fn = (string)($im['filename'] ?? '');
+                if ($fn !== '') @unlink($destDir . $fn);
+            }
+
+            // + image principale si elle existe (au cas où elle n'est pas dans produit_image)
+            if (!empty($produit['image'])) {
+                @unlink($destDir . $produit['image']);
+            }
+
+            header('Location: /artisphere/?controller=mes_creations&action=index&deleted=1');
+            exit;
+
+        } catch (Throwable $e) {
+            if ($pdo->inTransaction()) $pdo->rollBack();
+            header('Location: /artisphere/?controller=produit_update&action=edit&id=' . $idProduit . '&deleted=0');
+            exit;
+        }
+    }
+
 }

@@ -168,4 +168,18 @@ class ProduitModel
         $stmt->execute([':id' => $idArtisan]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+    public static function deleteProduit(int $idProduit, int $idCreateur): bool
+    {
+        $pdo = Database::getConnection();
+
+        // sécurité : supprime seulement si c'est le créateur
+        $stmt = $pdo->prepare("DELETE FROM pproduit WHERE id_produit = :id AND id_createur = :c");
+        $stmt->execute([
+            ':id' => $idProduit,
+            ':c'  => $idCreateur,
+        ]);
+
+        return $stmt->rowCount() > 0;
+    }
+
 }

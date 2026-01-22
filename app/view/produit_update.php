@@ -27,6 +27,7 @@ if (!$main && !empty($filenames)) $main = $filenames[0];
       </div>
     <?php endif; ?>
 
+    <!-- ======= FORM UPDATE (UNIQUE) ======= -->
     <form method="post"
           action="/artisphere/?controller=produit_update&action=update"
           enctype="multipart/form-data"
@@ -144,8 +145,27 @@ if (!$main && !empty($filenames)) $main = $filenames[0];
            href="/artisphere/?controller=produit_show&action=show&id=<?= (int)$produit['id_produit'] ?>">
           Annuler
         </a>
+
+        <!-- bouton supprimer (dans le même alignement) -->
+        <button type="submit"
+                form="deleteProductForm"
+                class="btn-danger btn-danger--ghost">
+          Supprimer le produit
+        </button>
       </div>
+
     </form>
+    <!-- ======= FIN FORM UPDATE ======= -->
+
+    <!-- ======= FORM DELETE (SÉPARÉ, NON IMBRIQUÉ) ======= -->
+    <form id="deleteProductForm"
+          method="post"
+          action="/artisphere/?controller=produit_update&action=delete"
+          onsubmit="return confirm('Supprimer définitivement ce produit ? Cette action est irréversible.');">
+      <input type="hidden" name="csrf" value="<?= h($csrf ?? '') ?>">
+      <input type="hidden" name="id_produit" value="<?= (int)$produit['id_produit'] ?>">
+    </form>
+
   </section>
 </main>
 
@@ -153,7 +173,6 @@ if (!$main && !empty($filenames)) $main = $filenames[0];
 <script>
 document.addEventListener("DOMContentLoaded", () => {
   const deletedBox = document.getElementById("deletedImages");
-  const grid = document.getElementById("galleryGrid");
   const form = document.getElementById("productEditForm");
 
   if (!deletedBox || !form) return;
@@ -184,15 +203,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
       // Si on supprime l'image principale, on bascule sur une autre
       const main = getMainRadio();
+      const card = btn.closest("[data-img-id]");
+
+      if (card) card.remove();
+
       if (main && main.value === filename) {
-        // on retire le bloc, puis on choisit la première radio restante
-        const card = btn.closest("[data-img-id]");
-        if (card) card.remove();
         selectFirstAvailableAsMain();
-      } else {
-        // sinon on retire juste le bloc
-        const card = btn.closest("[data-img-id]");
-        if (card) card.remove();
       }
     });
   });

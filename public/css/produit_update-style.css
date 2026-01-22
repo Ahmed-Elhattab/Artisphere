@@ -197,6 +197,23 @@
   display: block;
 }
 
+.delete-form{
+  margin-top: 14px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.btn-danger--ghost{
+  background: transparent;
+  color: #8b2e23;
+  border: 2px solid #8b2e23;
+}
+
+.btn-danger--ghost:hover{
+  background: #8b2e23;
+  color: #fff;
+}
+
 @media (max-width: 920px){
   .container{ padding: 0 16px; }
 }

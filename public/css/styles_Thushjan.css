@@ -1388,6 +1388,296 @@ body#Forum_contenu_sujet {
   margin-bottom: 25px;
 }
 
+
+/* =========================
+   FORUM - PAGE CONTENU SUJET
+   Scopé via .forum-topic-page
+   ========================= */
+
+.forum-topic-page{
+  width: min(920px, calc(100% - 32px));
+  margin: 28px auto 60px;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+}
+
+/* Bouton retour */
+.forum-topic-page > a[href*="controller=forum"]{
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  border-radius: 999px;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  color: #111;
+  text-decoration: none;
+  font-weight: 650;
+  font-size: 13px;
+  margin-bottom: 18px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+}
+
+.forum-topic-page > a[href*="controller=forum"]:hover{
+  transform: translateY(-1px);
+}
+
+/* Cartes */
+.forum-topic-page .boite-sujet,
+.forum-topic-page .commentaires{
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  padding: 22px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+}
+
+.forum-topic-page .boite-sujet{
+  margin-bottom: 16px;
+}
+
+.forum-topic-page .boite-sujet h1{
+  margin: 0 0 10px;
+  font-size: 26px;
+  line-height: 1.15;
+  color: #111827;
+}
+
+.forum-topic-page #message{
+  margin: 0;
+  color: #4b5563;
+  line-height: 1.6;
+  font-size: 15px;
+}
+
+/* Réponses */
+.forum-topic-page .commentaires h3{
+  margin: 0 0 14px;
+  font-size: 16px;
+  color: #111827;
+}
+
+.forum-topic-page #liste-reponses{
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+/* Si ton JS ajoute .reponse-affichee */
+.forum-topic-page .reponse-affichee{
+  background: #f8fafc;
+  border: 1px solid #e5e7eb;
+  border-left: 5px solid #8B5E3C;
+  padding: 14px;
+  border-radius: 12px;
+}
+
+/* Champ */
+.forum-topic-page #comm-texte{
+  width: 100%;
+  min-height: 120px;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 12px 14px;
+  font-size: 14px;
+  resize: vertical;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.forum-topic-page #comm-texte:focus{
+  box-shadow: 0 0 0 3px rgba(139,94,60,0.18);
+  border-color: rgba(139,94,60,0.45);
+}
+
+/* Bouton répondre */
+.forum-topic-page .commentaires > button{
+  margin-top: 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 16px;
+  border-radius: 999px;
+  border: 1px solid rgba(0,0,0,0.12);
+  background: #111827;
+  color: #fff;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.forum-topic-page .commentaires > button:hover{
+  filter: brightness(1.05);
+}
+
+
+/* =========================
+   FORUM - PAGE CONTENU SUJET
+   (intégration propre dans le layout global)
+   ========================= */
+
+#Forum.forum-topic-page{
+  /* prend toute la largeur dispo du site */
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 28px 0 60px;
+
+  /* n'hérite pas d'un layout "bizarre" */
+  display: block;
+  box-sizing: border-box;
+}
+
+
+
+/* Bouton retour */
+#Forum.forum-topic-page > a[href*="controller=forum"]{
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  border-radius: 999px;
+  background: #fff;
+  border: 1px solid rgba(0,0,0,0.10);
+  color: #111;
+  text-decoration: none;
+  font-weight: 650;
+  font-size: 13px;
+  margin-bottom: 18px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+}
+
+#Forum.forum-topic-page > a[href*="controller=forum"]:hover{
+  transform: translateY(-1px);
+}
+
+/* Cartes */
+#Forum.forum-topic-page .boite-sujet,
+#Forum.forum-topic-page .commentaires{
+  background: #fff;
+  border: 1px solid rgba(0,0,0,0.08);
+  border-radius: 16px;
+  padding: 22px;
+  box-shadow: 0 10px 24px rgba(0,0,0,0.07);
+}
+
+#Forum.forum-topic-page .boite-sujet{
+  margin-bottom: 16px;
+}
+
+#Forum.forum-topic-page .boite-sujet h1{
+  margin: 0 0 10px;
+  font-size: 26px;
+  line-height: 1.15;
+  color: #111827;
+}
+
+#Forum.forum-topic-page #message{
+  margin: 0;
+  color: #4b5563;
+  line-height: 1.6;
+  font-size: 15px;
+}
+
+/* Réponses */
+#Forum.forum-topic-page .commentaires h3{
+  margin: 0 0 14px;
+  font-size: 16px;
+  color: #111827;
+}
+
+/* liste réponses */
+#Forum.forum-topic-page #liste-reponses{
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+/* Si ton JS injecte .reponse-affichee */
+#Forum.forum-topic-page .reponse-affichee{
+  background: #f8fafc;
+  border: 1px solid rgba(0,0,0,0.08);
+  border-left: 5px solid #8B5E3C;
+  padding: 14px;
+  border-radius: 12px;
+}
+
+/* champ */
+#Forum.forum-topic-page #comm-texte{
+  width: 100%;
+  min-height: 120px;
+  border: 1px solid rgba(0,0,0,0.12);
+  border-radius: 12px;
+  padding: 12px 14px;
+  font-size: 14px;
+  resize: vertical;
+  outline: none;
+  box-sizing: border-box;
+}
+
+#Forum.forum-topic-page #comm-texte:focus{
+  box-shadow: 0 0 0 3px rgba(139,94,60,0.18);
+  border-color: rgba(139,94,60,0.45);
+}
+
+/* bouton répondre */
+#Forum.forum-topic-page .commentaires > button{
+  margin-top: 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 16px;
+  border-radius: 999px;
+  border: 1px solid rgba(0,0,0,0.12);
+  background: #111827;
+  color: #fff;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+#Forum.forum-topic-page .commentaires > button:hover{
+  filter: brightness(1.05);
+}
+
+/* Responsive */
+@media (max-width: 480px){
+  #Forum.forum-topic-page{
+    padding: 18px 0 48px;
+  }
+
+  #Forum.forum-topic-page > a,
+  #Forum.forum-topic-page .boite-sujet,
+  #Forum.forum-topic-page .commentaires{
+    width: calc(100% - 24px);
+  }
+
+  #Forum.forum-topic-page .boite-sujet,
+  #Forum.forum-topic-page .commentaires{
+    padding: 16px;
+  }
+
+  #Forum.forum-topic-page .boite-sujet h1{
+    font-size: 20px;
+  }
+}
+
+
+/* Responsive */
+@media (max-width: 480px){
+  .forum-topic-page{
+    width: calc(100% - 24px);
+    margin: 18px auto 48px;
+  }
+  .forum-topic-page .boite-sujet,
+  .forum-topic-page .commentaires{
+    padding: 16px;
+  }
+  .forum-topic-page .boite-sujet h1{
+    font-size: 20px;
+  }
+}
+
+
 /* =========================
    Responsive forum (scopé)
    ========================= */

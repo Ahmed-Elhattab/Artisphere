@@ -1,5 +1,6 @@
 <?php
 require_once __DIR__ . '/../model/evenement_model.php';
+
 require_once __DIR__ . '/../model/event_image_model.php';
 
 class evenement_update_controller extends BaseController

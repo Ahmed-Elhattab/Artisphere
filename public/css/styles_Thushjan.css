@@ -5,25 +5,27 @@
     flex-direction: column;
 }*/
 
-/* MODE DALTO */
+/* MODE DALTO - Nettoyé et corrigé */
 
-/*Change le fond de la page et la couleur du texte global */
 body.dalto-mode {
-    background-color: #222222 !important;
-    color: #ffffff !important;         
+    /* On change le fond en rouge */
+    background-color: #FF0000 !important; 
+    color: #ffffff !important;
 }
 
-/*Change la couleur de des boutons*/
+/* On s'assure que les sections enfants n'écrasent pas le fond */
+body.dalto-mode main, 
+body.dalto-mode section, 
+body.dalto-mode .container {
+    background-color: transparent !important;
+}
+
+/* Boutons en mode Dalto */
+body.dalto-mode button:not(#bouton-dalto),
 body.dalto-mode .bouton-enregistrerV2 {
-    background-color: #E69F00 !important; 
-    color: #000000 !important;         
-    border-color: #ffffff !important;
-}
-
-body.dalto-mode button:not(#bouton-dalto) {
-    background-color: #E69F00 !important; 
-    color: #000000 !important;         
-    border-color: #ffffff !important;
+    background-color: #E69F00 !important;
+    color: #000000 !important;
+    border: 2px solid #ffffff !important;
 }
 
 /*Change la couleur du header en mode accessibilité */
@@ -1201,26 +1203,7 @@ display: table;
    ========================= */
 html, body { height: 100%; margin: 0; }
 
-/* =========================
-   DALTO MODE - safe (ne cible pas header global)
-   ========================= */
-body.dalto-mode {
-  background-color: #222222 !important;
-  color: #ffffff !important;
-}
 
-body.dalto-mode button:not(#bouton-dalto),
-body.dalto-mode .bouton-enregistrerV2 {
-  background-color: #E69F00 !important;
-  color: #000000 !important;
-  border-color: #ffffff !important;
-}
-
-/* Si tu veux un header “dalto” UNIQUEMENT sur les pages forum : */
-body#Forum.dalto-mode .top,
-body#Forum_contenu_sujet.dalto-mode #Forum {
-  filter: none; /* placeholder, tu peux l’enlever */
-}
 
 /* =========================
    FORUM (scopé, n’impacte pas le site entier)

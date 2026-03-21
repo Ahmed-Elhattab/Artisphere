@@ -19,5 +19,14 @@ This project was developed as part of a team project.
 I contributed to backend development, database integration, and feature implementation.
 
 ## How to run
+
 - Run locally using a PHP server (XAMPP / WAMP)
-- Configure database in config files
+- Download the `artisphere.sql` database file shared via Microsoft Teams
+- Import the database locally
+- Configure database credentials in the config files
+
+Example credentials:
+- Host: `localhost`
+- Database: `artisphere`
+- Username: `your_user`
+- Password: `your_password`
